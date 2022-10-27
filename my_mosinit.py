@@ -57,6 +57,7 @@ if __name__ == "__main__":
 
     #access weight: print(net.pyr_bas_NM[i].weight[0])  (connection i)
     #access voltage: net.pyr.cell[j].Adend3_volt[4000]  (cell j, 4000ms)
+    #need to capture spike with stdp learning rule
         ###################################################
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
