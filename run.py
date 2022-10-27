@@ -59,6 +59,13 @@ def setwash():
 	h.cvode.event(washinT,"nrnpython(\"dowashin()\")")
 	h.cvode.event(washoutT,"nrnpython(\"dowashout()\")")
 
+####################################################
+#my event:
+def myevent_eventcallingfunction():
+    h.CVode().event(0.7,my_event)
+def my_event():
+   	print("hi from",h.t)
+
 # example to do washin/washout, after loading sim:
 # import run
 # h.tstop=100

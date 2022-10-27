@@ -39,13 +39,41 @@ if __name__ == "__main__":
     Run.washoutT = 2e2  #2e3
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
+#todo:
+    # access weights: print(net.pyr_bas_NM[i].weight[0])
+    # access pre and postsynaptic activity for weight
 
+
+####################################################
+#my event:
+    Run.mystuff = h.FInitializeHandler(1,myevent_eventcallingfunction)
+    ####################################################
+    #my event:
+    def myevent_eventcallingfunction():
+        h.CVode().event(0.7,my_event)
+    def my_event():
+        print("hi from",h.t)
+        #(see run)
+
+    #access weight: print(net.pyr_bas_NM[i].weight[0])  (connection i)
+    #access voltage: net.pyr.cell[j].Adend3_volt[4000]  (cell j, 4000ms)
+        ###################################################
+    #my advance:
+    h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
+    def myadvance():
+        print('my advance, h.t = {}'.format(h.t))
+        print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
+        h.fadvance()
+
+
+###################################################
     h.tstop = 4e2   #3e3
     h.run()
     net.rasterplot()
     net.calc_lfp()
     myg = h.Graph()
     net.vlfp.plot(myg,h.dt)
+
     
     #import numpy as np
     #lfpar=net.lfp
