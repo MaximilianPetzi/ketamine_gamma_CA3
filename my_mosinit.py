@@ -68,14 +68,33 @@ if __name__ == "__main__":
 
 
 ###################################################
-    h.tstop = 4e2   #3e3
+    h.tstop = 5e2   #3e3
     h.run()
-    net.rasterplot()
-    net.calc_lfp()
+    #net.rasterplot()
+    #from matplotlib import pyplot as plt
     myg = h.Graph()
+    net.calc_lfp()
     net.vlfp.plot(myg,h.dt)
 
+    myg2 = h.Graph()
+    net.calc_myvolt()
+    net.vmyvolt.plot(myg2,h.dt)
+
+    myg3 = h.Graph()
+    net.calc_myvolt3()
+    net.vmyvolt3.plot(myg3,h.dt)
+
     
+
+myg = h.Graph()
+net.calc_lfp()
+net.vlfp.plot(myg,h.dt)
+#myg.color(3) 
+#net.calc_myvolt()
+#net.vmyvolt.plot(myg,h.dt)
+
+
+
     #import numpy as np
     #lfpar=net.lfp
     
