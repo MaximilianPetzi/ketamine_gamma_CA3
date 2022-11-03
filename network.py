@@ -464,20 +464,17 @@ class Network:
 
 	def calc_myvolt(self): ##mine
 		cellidx=2
-		self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
+		vmyvolt_array=[]
+		myvolt_array=[]
+		for (cellidx,cell) in ##for index, user in enumerate(users):
+			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
 
-		self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)
-		self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
-		
-		self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
-	def calc_myvolt3(self): ##mine
-		cellidx=3
-		self.vmyvolt3 = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
-
-		self.vmyvolt3.add(self.pyr.cell[cellidx].Adend3_volt)
-		self.vmyvolt3.sub(self.pyr.cell[cellidx].Bdend_volt)
-		
-		self.myvolt3=numpy.array(self.vmyvolt3.to_python()) # convert to python array (so can do PSD)
+			self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)
+			self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
+			
+			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
+			myvolt_array.append(self.myvolt)
+			vmyvolt_array.append(self.vmyvolt)
 
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()
