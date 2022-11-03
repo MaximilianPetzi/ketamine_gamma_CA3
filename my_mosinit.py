@@ -73,13 +73,17 @@ if __name__ == "__main__":
     h.run()
     #net.rasterplot()
     #from matplotlib import pyplot as plt
-    myg = h.Graph()
+    
     net.calc_lfp()
-    net.vlfp.plot(myg,h.dt)
-    myg2=h.Graph()
-    myg.color(3) 
     net.calc_myvolt()
-    net.vmyvolt_array[5].plot(myg,h.dt)
+
+    myg = h.Graph()
+    myg2=h.Graph()
+    
+    net.vmyvolt_array[6].plot(myg,h.dt)
+    myg2.color(3) 
+    net.vmyvolt_array[7].plot(myg2,h.dt)
+    net.vmyvolt_array[8].plot(myg2,h.dt)
         
 
 ##ctr+K+C/U
