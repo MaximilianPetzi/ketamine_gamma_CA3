@@ -94,9 +94,9 @@ class Network:
 	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1234,UseNetStim=True,wseed=4321,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
-		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
+		self.pyr = Population(cell_type=PyrAdr,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)#here		
 		self.bas = Population(cell_type=Bwb,   n=int(math.ceil(200*scale)), x=10, y=0, z=0, dx=50, amp=     0, dur=  0, delay=2*h.dt)
-		self.olm = Population(cell_type=Ow,   n=int(math.ceil(200*scale)), x=20, y=0, z=0, dx=50, amp=-25e-3, dur=1e9, delay=2*h.dt)
+		self.olm = Population(cell_type=Ow,   n=1, x=20, y=0, z=0, dx=50, amp=-25e-3, dur=1e9, delay=2*h.dt)#here
 		
 		# psr = sensor cell to estimate the E->E connections
 		self.psr = Population(cell_type=PyrAdr,n=1,   x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt) 
@@ -304,29 +304,29 @@ class Network:
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
 		print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
-		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)
-		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
-		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
+		#self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)
+		#self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
+		#self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
 
 		print "PYR -> X , AMPA"
-		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)
-		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)
-		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
+		#self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)
+		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)	#here
+		#self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 			
 		print "BAS -> X , GABA"
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#new 1
-		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#new 2
-		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#new 1
+		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#new 2
+		#self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#new 1
 
 		print "OLM -> PYR , GABA"
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
-		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#new weight value
+		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#new weight value
 
 	        #pyramidal to PSR cell -- for testing only
 		print "PYR -> PSR, AMPA/NMDA"
-		self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)
-		self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)
+		#self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)
+		#self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 
 
 	def set_conn_weight(self, conn, weight):
@@ -463,10 +463,11 @@ class Network:
 		self.lfp=numpy.array(self.vlfp.to_python()) # convert to python array (so can do PSD)
 
 	def calc_myvolt(self): ##mine
-		cellidx=2
-		vmyvolt_array=[]
-		myvolt_array=[]
-		for (cellidx,cell) in ##for index, user in enumerate(users):
+		
+		self.vmyvolt_array=[]
+		self.myvolt_array=[]
+		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
+			print(cellidx)
 			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
 
 			self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)

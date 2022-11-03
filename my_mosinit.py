@@ -76,23 +76,20 @@ if __name__ == "__main__":
     myg = h.Graph()
     net.calc_lfp()
     net.vlfp.plot(myg,h.dt)
-
-    myg2 = h.Graph()
+    myg2=h.Graph()
+    myg.color(3) 
     net.calc_myvolt()
-    net.vmyvolt.plot(myg2,h.dt)
+    net.vmyvolt_array[5].plot(myg,h.dt)
+        
 
-    myg3 = h.Graph()
-    net.calc_myvolt3()
-    net.vmyvolt3.plot(myg3,h.dt)
-
-    
-
-myg = h.Graph()
-net.calc_lfp()
-net.vlfp.plot(myg,h.dt)
-#myg.color(3) 
-#net.calc_myvolt()
-#net.vmyvolt.plot(myg,h.dt)
+##ctr+K+C/U
+# myg = h.Graph()
+# net.calc_lfp()
+# net.vlfp.plot(myg,h.dt)
+# myg2=h.Graph()
+# myg.color(3) 
+# net.calc_myvolt()
+# net.vmyvolt_array[5].plot(myg,h.dt)
 
 
 
