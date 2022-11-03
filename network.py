@@ -474,8 +474,8 @@ class Network:
 			self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
 			
 			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
-			myvolt_array.append(self.myvolt)
-			vmyvolt_array.append(self.vmyvolt)
+			self.myvolt_array.append(self.myvolt)
+			self.vmyvolt_array.append(self.vmyvolt)
 
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()
