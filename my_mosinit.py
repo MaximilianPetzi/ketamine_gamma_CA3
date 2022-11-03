@@ -1,5 +1,4 @@
-#just a git test
-#master branch
+#experiment branch
 if __name__ == "__main__":
     import sys
     import os
@@ -64,7 +63,7 @@ if __name__ == "__main__":
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
     def myadvance():
         print('my advance, h.t = {}'.format(h.t))
-        print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
+        #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         h.fadvance()
 
 
@@ -75,15 +74,15 @@ if __name__ == "__main__":
     #from matplotlib import pyplot as plt
     
     net.calc_lfp()
-    net.calc_myvolt()
+    net.calc_myvolt_pyr()
+    net.calc_myvolt_test()   #soma testen und mit pyr spikes vergleichen
 
     myg = h.Graph()
-    myg2=h.Graph()
+    myg2= h.Graph()
     
-    net.vmyvolt_array[6].plot(myg,h.dt)
+    net.vmyvolt_array_pyr[0].plot(myg,h.dt)
     myg2.color(3) 
-    net.vmyvolt_array[7].plot(myg2,h.dt)
-    net.vmyvolt_array[8].plot(myg2,h.dt)
+    net.vmyvolt_array_olm[0].plot(myg2,h.dt)
         
 
 ##ctr+K+C/U
