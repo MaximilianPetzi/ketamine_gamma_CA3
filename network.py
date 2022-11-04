@@ -249,19 +249,21 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
-		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
-		#rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		pyrfac=40
+		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		#rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=pyrfac*6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
 		print "to BAS"			
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
-		olmfac=15000
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.0625e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaGABAf",   w=olmfac*0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
+		olmfac=4
+		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.0625e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		
+		#rdtmp=self.make_NetStims(po=self.olm, syn="somaGABAf",   w=0*0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		#setup medial septal inputs to OLM and BASKET cells, note that MSGain can be 0 == no effect
 		ns = h.NetStim()
 		ns.interval = 150
