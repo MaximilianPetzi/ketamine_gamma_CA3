@@ -75,15 +75,15 @@ if __name__ == "__main__":
     
     net.calc_lfp()
     net.calc_myvolt_pyr()
-    net.calc_myvolt_test()   #soma testen und mit pyr spikes vergleichen
+    net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen
 
     myg = h.Graph()
     myg2= h.Graph()
-    
+    #myg2.color(2)
     net.vmyvolt_array_pyr[0].plot(myg,h.dt)
-    myg2.color(3) 
     net.vmyvolt_array_olm[0].plot(myg2,h.dt)
-        
+    
+    #myg2.label(80, 30, "g2")
 
 ##ctr+K+C/U
 # myg = h.Graph()

@@ -272,7 +272,7 @@ class Network:
 		for i in range(self.olm.n): # MS inputs to OLM cells
 			nc = h.NetCon(ns,self.olm.cell[i].__dict__["somaGABAss"].syn)
 			nc.delay = 2*h.dt
-			nc.weight[0] = 1.6e-3 * self.MSGain
+			nc.weight[0] = 0*1.6e-3 * self.MSGain
 			self.ncl.append(nc)
 		
 	def make_all_noise(self,simdur,rdmseed): # create noise for simdur milliseconds
@@ -467,41 +467,42 @@ class Network:
 		self.myvolt_array_pyr=[]
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
 			print(cellidx)
-			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
+			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
 
-			self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)
-			self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
+			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)
+			###self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
 			
 			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
 			self.myvolt_array_pyr.append(self.myvolt)
 			self.vmyvolt_array_pyr.append(self.vmyvolt)
 	
-	def calc_myvolt_test(self): ##mine test soma hier
+	def calc_myvolt_olm(self): ##mine
+		self.vmyvolt_array_olm=[]
+		self.myvolt_array_olm=[]
+		for (cellidx,cell) in enumerate(self.olm.cell):##for index, user in enumerate(users)
+			print(cellidx)
+			self.vmyvolt = h.Vector(self.olm.cell[0].soma_volt.size()) 
+
+			self.vmyvolt.add(self.olm.cell[cellidx].soma_volt)
+			
+			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
+			self.myvolt_array_olm.append(self.myvolt)
+			self.vmyvolt_array_olm.append(self.vmyvolt)
+
+	def calc_myvolt_test(self): ##mine test
 		self.vmyvolt_array_test=[]
 		self.myvolt_array_test=[]
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
 			print(cellidx)
 			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
 
-			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)
-			
+			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)###soma
+
 			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
 			self.myvolt_array_test.append(self.myvolt)
 			self.vmyvolt_array_test.append(self.vmyvolt)
-	
-	def calc_myvolt_olm(self): ##mine
-		self.vmyvolt_array_olm=[]
-		self.myvolt_array_olm=[]
-		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
-			print(cellidx)
-			self.vmyvolt = h.Vector(self.olm.cell[0].Adend3_volt.size()) 
 
-			self.vmyvolt.add(self.olm.cell[cellidx].Adend3_volt)
-			self.vmyvolt.sub(self.olm.cell[cellidx].Bdend_volt)
-			
-			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
-			self.myvolt_array_olm.append(self.myvolt)
-			self.vmyvolt_array_olm.append(self.vmyvolt)
+		
 
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()

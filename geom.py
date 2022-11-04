@@ -154,8 +154,8 @@ class PyrAdr(Cell):
 
 	def set_morphology(self):
 		self.add_comp('Bdend',True)
-		self.add_comp('Adend1',False)
-		self.add_comp('Adend2',False)
+		self.add_comp('Adend1',True)
+		self.add_comp('Adend2',True)
 		self.add_comp('Adend3',True)
 
 		h.pt3dclear(sec=self.soma)
