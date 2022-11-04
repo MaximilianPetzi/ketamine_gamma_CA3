@@ -96,7 +96,7 @@ class Network:
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)	
 		self.bas = Population(cell_type=Bwb,   n=int(math.ceil(200*scale)), x=10, y=0, z=0, dx=50, amp=     0, dur=  0, delay=2*h.dt)
-		self.olm = Population(cell_type=Ow,   n=1, x=20, y=0, z=0, dx=50, amp=-25e-3, dur=1e9, delay=2*h.dt)
+		self.olm = Population(cell_type=PyrAdr,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
 		
 		# psr = sensor cell to estimate the E->E connections
 		self.psr = Population(cell_type=PyrAdr,n=1,   x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt) 
@@ -275,11 +275,11 @@ class Network:
 			nc.delay = 2*h.dt
 			nc.weight[0] = 1.6e-3 * self.MSGain
 			self.ncl.append(nc)
-		for i in range(self.olm.n): # MS inputs to OLM cells
-			nc = h.NetCon(ns,self.olm.cell[i].__dict__["somaGABAss"].syn)
-			nc.delay = 2*h.dt
-			nc.weight[0] = 0*1.6e-3 * self.MSGain
-			self.ncl.append(nc)
+		#for i in range(self.olm.n): # MS inputs to OLM cells
+		#	nc = h.NetCon(ns,self.olm.cell[i].__dict__["somaGABAss"].syn)
+		#	nc.delay = 2*h.dt
+		#	nc.weight[0] = 0*1.6e-3 * self.MSGain
+		#	self.ncl.append(nc)
 		
 	def make_all_noise(self,simdur,rdmseed): # create noise for simdur milliseconds
 		numpy.random.seed(rdmseed) # initialize random # generator

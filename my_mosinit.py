@@ -35,8 +35,8 @@ if __name__ == "__main__":
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 1e2  #default 1e3
-    Run.washoutT = 2e2  #2e3
+    Run.washinT  = 1e50  #default 1e3
+    Run.washoutT = 2e50  #2e3
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
 #todo:
