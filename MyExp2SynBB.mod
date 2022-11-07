@@ -1,4 +1,5 @@
 : swapped
+
 COMMENT
 .mod file from link (desktop)
 Implementation of the model of short-term facilitation and depression described in
@@ -37,8 +38,9 @@ by the more efficient cnexp method.
 ENDCOMMENT
 
 NEURON {
-	POINT_PROCESS FDSExp2Syn
-	RANGE tau1, tau2, e, i
+	
+	POINT_PROCESS MyExp2SynBB
+	RANGE tau1, tau2, e, i, g, Vwt, gmax
 	NONSPECIFIC_CURRENT i
 
 	RANGE g
@@ -49,7 +51,7 @@ NEURON {
 UNITS {
 	(nA) = (nanoamp)
 	(mV) = (millivolt)
-	(umho) = (micromho)
+	(uS) = (microsiemens)
 }
 
 PARAMETER {
@@ -64,23 +66,27 @@ PARAMETER {
         tau_D1 = 380 (ms) < 1e-9, 1e9 >
         d2 = 0.975 (1) < 0, 1 >     : slow depression
         tau_D2 = 9200 (ms) < 1e-9, 1e9 >
+	gmax = 1e9 (uS)
+	Vwt   = 0 : weight for inputs coming in from vector
 }
 
 ASSIGNED {
 	v (mV)
 	i (nA)
-	g (umho)
+	g (uS)
 	factor
-	total (umho)
+	total (uS)
+	etime (ms)
 }
 
 STATE {
-	A (umho)
-	B (umho)
+	A (uS)
+	B (uS)
 }
 
 INITIAL {
 	LOCAL tp
+	Vwt = 0    : testing
 	total = 0
 	if (tau1/tau2 > 0.9999) {
 		tau1 = 0.9999*tau2
@@ -95,6 +101,7 @@ INITIAL {
 BREAKPOINT { : Lines in BREAKPOINT: The SOLVE ... METHOD line is ignored. All lines after SOLVE are executed. With a printf() statement, you would see two calls. However, one of the calls does not actually set any state variables. It is used to compute the derivatives.
 	SOLVE state METHOD cnexp
 	g = B - A
+	if (g>gmax) {g=gmax}: saturation
 	i = g*(v - e)
 }
 
@@ -103,7 +110,7 @@ DERIVATIVE state { : Finally, the DERIVATIVE block: The values for the derivativ
 	B' = -B/tau2
 }
 
-NET_RECEIVE(weight (umho), F, D1, D2, tsyn (ms)) { : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
+NET_RECEIVE(weight (uS), F, D1, D2, tsyn (ms)) { : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
 INITIAL {
 : these are in NET_RECEIVE to be per-stream
         F = 1
