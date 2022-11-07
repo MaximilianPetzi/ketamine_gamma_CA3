@@ -172,7 +172,7 @@ class Network:
 			nc.delay = h.dt * 2 # 0
 			nc.weight[0] = w
 
-			rds = h.Random()
+			rds = h.Random()	
 			rds.negexp(1)            # set random # generator using negexp(1) - avg interval in NetStim
 			rds.MCellRan4(sead,sead) # seeds are in order, shouldn't matter			
 			ns.noiseFromRandom(rds)  # use random # generator for this NetStim
@@ -249,7 +249,7 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
-		pyrfac=40
+		pyrfac=.5
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -259,11 +259,11 @@ class Network:
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
-		olmfac=4
-		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.0625e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		olmfac=.5
+		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3AMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		
-		#rdtmp=self.make_NetStims(po=self.olm, syn="somaGABAf",   w=0*0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3NMDA",  w=olmfac*6.5e-3,   ISI=100,  time_limit=simdur, sead=rdtmp)
 		#setup medial septal inputs to OLM and BASKET cells, note that MSGain can be 0 == no effect
 		ns = h.NetStim()
 		ns.interval = 150
@@ -343,7 +343,7 @@ class Network:
 		conn = self.make_conn(src.n,trg.n,conv)
 		nc = []
 		for post_id, all_pre in enumerate(conn):
-			for j, pre_id in enumerate(all_pre):
+			for j, pre_id in enumerate(all_pre):## 3rd NetCon argument is threshold for passing a spike as an event
 				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))	
 		if self.SaveConn:
 			try:

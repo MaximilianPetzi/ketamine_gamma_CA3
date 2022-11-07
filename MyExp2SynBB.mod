@@ -10,6 +10,7 @@ UNITS {
   (nA) = (nanoamp)
   (mV) = (millivolt)
   (uS) = (microsiemens)
+
 }
 
 PARAMETER {
@@ -59,6 +60,9 @@ DERIVATIVE state {
   A' = -A/tau1
   B' = -B/tau2
 }
+
+
+
 
 NET_RECEIVE(w (uS)) {LOCAL ww
   ww=w
