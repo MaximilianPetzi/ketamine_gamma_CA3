@@ -1,3 +1,5 @@
+: from template
+
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
 :  THREADSAFE
@@ -61,11 +63,46 @@ DERIVATIVE state {
   B' = -B/tau2
 }
 
-
-
-
-NET_RECEIVE(w (uS)) {LOCAL ww
-  ww=w
-  A = A + ww*factor
-  B = B + ww*factor
+NET_RECEIVE(weight (umho), F, D1, D2, tsyn (ms)) { : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
+INITIAL {
+: these are in NET_RECEIVE to be per-stream
+        F = 1
+        D1 = 1
+        D2 = 1
+        tsyn = t
+: this header will appear once per stream
+: printf("t\t t-tsyn\t F\t D1\t D2\t amp\t newF\t newD1\t newD2\n")
 }
+
+        F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)
+        D1 = 1 - (1-D1)*exp(-(t - tsyn)/tau_D1)
+        D2 = 1 - (1-D2)*exp(-(t - tsyn)/tau_D2)
+: printf("%g\t%g\t%g\t%g\t%g\t%g", t, t-tsyn, F, D1, D2, weight*F*D1*D2)
+        tsyn = t
+
+	state_discontinuity(A, A + weight*factor*F*D1*D2)    : assigns A=A+... once per timestep
+	state_discontinuity(B, B + weight*factor*F*D1*D2)
+	total = total+weight*F*D1*D2
+
+        F = F + f
+        D1 = D1 * d1
+        D2 = D2 * d2
+: printf("\t%g\t%g\t%g\n", F, D1, D2)
+
+
+: NET_RECEIVE(w (uS)) {LOCAL ww
+:   ww=w
+:   A = A + ww*factor
+:   B = B + ww*factor
+: }
+
+
+
+
+
+
+
+
+
+
+
