@@ -43,8 +43,7 @@ NEURON {
 	RANGE tau1, tau2, e, i, g, Vwt, gmax
 	NONSPECIFIC_CURRENT i
 
-	RANGE g
-	GLOBAL total
+	GLOBAL total:::: variables too global?name collision? mby change all names
         RANGE f, tau_F, d1, tau_D1, d2, tau_D2
 }
 
