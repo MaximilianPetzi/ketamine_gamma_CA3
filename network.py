@@ -249,7 +249,7 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
-		pyrfac=.5
+		pyrfac=1
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -259,7 +259,7 @@ class Network:
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
-		olmfac=.5
+		olmfac=.0
 		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3AMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		

@@ -5,7 +5,13 @@ from pyinit import *
 class Synapse:
 	def __init__(self, sect, loc, tau1, tau2, e):
 		self.syn		= h.MyExp2SynBB(loc, sec=sect)
-#		self.syn		= h.MyExp2SynBB_ltp(loc, sec=sect)
+		self.syn.tau1	= tau1
+		self.syn.tau2	= tau2
+		self.syn.e		= e 
+
+class SynapseLTP:
+	def __init__(self, sect, loc, tau1, tau2, e):
+		self.syn		= h.MyExp2SynBB_ltp(loc, sec=sect)
 		self.syn.tau1	= tau1
 		self.syn.tau2	= tau2
 		self.syn.e		= e 
@@ -219,7 +225,7 @@ class PyrAdr(Cell):
 
 	def set_synapses(self):
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80)
-		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
+		self.somaAMPAf 	 = SynapseLTP(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
 		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0)
 		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80)

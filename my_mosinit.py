@@ -1,4 +1,7 @@
 #experiment branch
+
+#ltp notes: somaAMPAf synapses are also used for noise it seems, synapse changes change presynaptic neuron spikes too
+#ltp happens in NMDA, not in AMPA, i think, check where im supposed to include it
 #
 if __name__ == "__main__":
     import sys

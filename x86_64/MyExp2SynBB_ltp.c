@@ -371,7 +371,7 @@ static void initmodel(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt
    B = 0.0 ;
    _ltp = ( tau1 * tau2 ) / ( tau2 - tau1 ) * log ( tau2 / tau1 ) ;
    factor = - exp ( - _ltp / tau1 ) + exp ( - _ltp / tau2 ) ;
-   factor = 1.0 / factor ;
+   factor = 1.0 / factor / 20.0 ;
    }
  
 }
@@ -568,7 +568,7 @@ static const char* nmodl_file_text =
   "  B = 0\n"
   "  tp = (tau1*tau2)/(tau2 - tau1) * log(tau2/tau1)\n"
   "  factor = -exp(-tp/tau1) + exp(-tp/tau2)\n"
-  "  factor = 1/factor\n"
+  "  factor = 1/factor/20\n"
   "}\n"
   "\n"
   "BREAKPOINT {\n"
