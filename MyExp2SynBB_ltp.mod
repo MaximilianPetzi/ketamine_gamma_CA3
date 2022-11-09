@@ -1,9 +1,7 @@
-: swapped
-
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
-
-  POINT_PROCESS MyExp2SynBB
+:  THREADSAFE
+  POINT_PROCESS MyExp2SynBB_ltp
   RANGE tau1, tau2, e, i, g, Vwt, gmax
   NONSPECIFIC_CURRENT i
 }
