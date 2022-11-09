@@ -67,4 +67,3 @@ NET_RECEIVE(w (uS)) {LOCAL ww
   A = A + ww*factor
   B = B + ww*factor
 }
-
