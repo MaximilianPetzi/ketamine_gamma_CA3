@@ -43,8 +43,8 @@ NEURON {
 	RANGE tau1, tau2, e, i, g, Vwt, gmax
 	NONSPECIFIC_CURRENT i
 
-	GLOBAL total:::: variables too global?name collision? mby change all names
-        RANGE f, tau_F, d1, tau_D1, d2, tau_D2
+	GLOBAL total123:::: variables too global?name collision? mby change all names
+        RANGE f123, tau_F123, d1123, tau_D1123, d2123, tau_D2123
 }
 
 UNITS {
@@ -59,12 +59,12 @@ PARAMETER {
 	e = 0	(mV)
         : these values are from Fig.3 in Varela et al. 1997
 	: the (1) is needed for the range limits to be effective
-        f = 0.917 (1) < 0, 1e9 >    : facilitation
-        tau_F = 94 (ms) < 1e-9, 1e9 >
-        d1 = 0.416 (1) < 0, 1 >     : fast depression
-        tau_D1 = 380 (ms) < 1e-9, 1e9 >
-        d2 = 0.975 (1) < 0, 1 >     : slow depression
-        tau_D2 = 9200 (ms) < 1e-9, 1e9 >
+        f123 = 0.917 (1) < 0, 1e9 >    : facilitation
+        tau_F123 = 94 (ms) < 1e-9, 1e9 >
+        d1123 = 0.416 (1) < 0, 1 >     : fast depression
+        tau_D1123 = 380 (ms) < 1e-9, 1e9 >
+        d2123 = 0.975 (1) < 0, 1 >     : slow depression
+        tau_D2123 = 9200 (ms) < 1e-9, 1e9 >
 	gmax = 1e9 (uS)
 	Vwt   = 0 : weight for inputs coming in from vector
 }
@@ -74,7 +74,7 @@ ASSIGNED {
 	i (nA)
 	g (uS)
 	factor
-	total (uS)
+	total123 (uS)
 	etime (ms)
 }
 
@@ -86,7 +86,7 @@ STATE {
 INITIAL {
 	LOCAL tp
 	Vwt = 0    : testing
-	total = 0
+	total123 = 0
 	if (tau1/tau2 > 0.9999) {
 		tau1 = 0.9999*tau2
 	}
@@ -109,31 +109,31 @@ DERIVATIVE state { : Finally, the DERIVATIVE block: The values for the derivativ
 	B' = -B/tau2
 }
 
-NET_RECEIVE(weight (uS), F, D1, D2, tsyn (ms)) { : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
+NET_RECEIVE(weight123 (uS), F123, D1123, D2123, tsyn123 (ms)) { : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
 INITIAL {
 : these are in NET_RECEIVE to be per-stream
-        F = 1
-        D1 = 1
-        D2 = 1
-        tsyn = t
+        F123 = 1
+        D1123 = 1
+        D2123 = 1
+        tsyn123 = t
 : this header will appear once per stream
 : printf("t\t t-tsyn\t F\t D1\t D2\t amp\t newF\t newD1\t newD2\n")
 }
 
-        F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)
-        D1 = 1 - (1-D1)*exp(-(t - tsyn)/tau_D1)
-        D2 = 1 - (1-D2)*exp(-(t - tsyn)/tau_D2)
+        F123 = 1 + (F123-1)*exp(-(t - tsyn123)/tau_F123)
+        D1123 = 1 - (1-D1123)*exp(-(t - tsyn123)/tau_D1123)
+        D2123 = 1 - (1-D2123)*exp(-(t - tsyn123)/tau_D2123)
 : printf("%g\t%g\t%g\t%g\t%g\t%g", t, t-tsyn, F, D1, D2, weight*F*D1*D2)
-        tsyn = t
+        tsyn123 = t
 
-	state_discontinuity(A, A + weight*factor*F*D1*D2)    : assigns A=A+... once per timestep
-	state_discontinuity(B, B + weight*factor*F*D1*D2)
-	total = total+weight*F*D1*D2
+	state_discontinuity(A, A + weight123*factor*F123*D1123*D2123)    : assigns A=A+... once per timestep
+	state_discontinuity(B, B + weight123*factor*F123*D1123*D2123)
+	total123 = total123+weight123*F123*D1123*D2123
 
-        F = F + f
-        D1 = D1 * d1
-        D2 = D2 * d2
-: printf("\t%g\t%g\t%g\n", F, D1, D2)
+        F123 = F123 + f123
+        D1123 = D1123 * d1123
+        D2123 = D2123 * d2123
+: printf("\t%g\t%g\t%g\n", F123, D1123, D2123)
 }
 
 
