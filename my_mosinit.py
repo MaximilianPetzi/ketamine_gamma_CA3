@@ -56,27 +56,32 @@ if __name__ == "__main__":
     def myevent_eventcallingfunction():
         h.CVode().event(0.7,my_event)
     def my_event():
-        print("hi from",h.t)
+        #print("hi from",h.t)
         #(see run)
-
+        pass
     #access weight: print(net.pyr_bas_NM[i].weight[0])  (connection i)
     #access voltage: net.pyr.cell[j].Adend3_volt[4000]  (cell j, 4000ms)
     #need to capture spike with stdp learning rule
         ###################################################
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
+    Frec=[]
     def myadvance():
         print('my advance, h.t = {}'.format(h.t))
+        print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
+        Frec.append(net.pyr.cell[0].somaAMPAf.syn.F)
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         h.fadvance()
 
 
 ###################################################
-    h.tstop = 5e2   #3e3
+    h.tstop = 10e2   #3e3
     h.run()
     #net.rasterplot()
-    #from matplotlib import pyplot as plt
-    
+    from matplotlib import pyplot as plt
+    plt.plot(Frec)
+    plt.title("Frec")
+    plt.show()
     net.calc_lfp()
     net.calc_myvolt_pyr()
     net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen

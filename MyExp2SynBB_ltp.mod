@@ -1,11 +1,10 @@
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
-:  THREADSAFE
+  : THREADSAFE
   POINT_PROCESS MyExp2SynBB_ltp
   RANGE tau1, tau2, e, i, g, Vwt, gmax
   NONSPECIFIC_CURRENT i
-  GLOBAL total123
-  : RANGE f, tau_F, d1, tau_D1, d2, tau_D2
+  RANGE f, tau_F, F : , d1, tau_D1, d2, tau_D2
 }
 
 UNITS {
@@ -20,6 +19,9 @@ PARAMETER {
   e=0	(mV)
   gmax = 1e9 (uS)
   Vwt   = 0 : weight for inputs coming in from vector
+  f = 1 (1) < 0, 1e9 >    : facilitation
+  tau_F = 94 (ms) < 1e-9, 1e9 >
+  F=990
 }
 
 ASSIGNED {
@@ -28,7 +30,6 @@ ASSIGNED {
   g (uS)
   factor
   etime (ms)
-  total123 (umho)
 }
 
 STATE {
@@ -38,7 +39,6 @@ STATE {
 
 INITIAL {
   LOCAL tp
-  total123 = 0
 
 
   Vwt = 0    : testing
@@ -65,8 +65,24 @@ DERIVATIVE state {
   B' = -B/tau2
 }
 
-NET_RECEIVE(w (uS)) {LOCAL ww
+NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   ww=w
-  A = A + ww*factor
-  B = B + ww*factor
+  INITIAL {:called 3 times in the beginning, then never again
+    F = 1
+    tsyn = t
+    :printf("start %g %g %g\n", t, t-tsyn, tsyn)
+    
+    
+}
+  F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)
+
+  printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
+
+  tsyn = t
+  A= A + ww*factor
+  B=B + ww*factor
+  :state_discontinuity(A, A + ww*factor)
+  :state_discontinuity(B, B + ww*factor)
+  F = F + f
+  printf("F=F+1=%g\n", F)
 }
