@@ -4,6 +4,8 @@ NEURON {
   POINT_PROCESS MyExp2SynBB_ltp
   RANGE tau1, tau2, e, i, g, Vwt, gmax
   NONSPECIFIC_CURRENT i
+  GLOBAL total123
+  : RANGE f, tau_F, d1, tau_D1, d2, tau_D2
 }
 
 UNITS {
@@ -26,6 +28,7 @@ ASSIGNED {
   g (uS)
   factor
   etime (ms)
+  total123 (umho)
 }
 
 STATE {
@@ -35,6 +38,8 @@ STATE {
 
 INITIAL {
   LOCAL tp
+  total123 = 0
+
 
   Vwt = 0    : testing
 
