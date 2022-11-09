@@ -122,7 +122,7 @@ INITIAL {
 	state_discontinuity(B, B + weight*factor*F*D1*D2)
 	total = total+weight*F*D1*D2
 
-        F = F + f
+		F = F + f
         D1 = D1 * d1
         D2 = D2 * d2
 : printf("\t%g\t%g\t%g\n", F, D1, D2)
