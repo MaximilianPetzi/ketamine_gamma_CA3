@@ -33,7 +33,7 @@ class Population:
 			self.cell[-1].somaInj.amp   = amp
 			self.cell[-1].somaInj.dur   = dur
 			self.cell[-1].somaInj.delay = delay
-			self.nc.append(h.NetCon(self.cell[-1].soma(0.5)._ref_v, None, sec=self.cell[-1].soma))
+			self.nc.append(h.NetCon(self.cell[-1].soma(0.5)._ref_v, None, sec=self.cell[-1].soma))#egal
 			self.ltimevec.append(h.Vector()) #NB: each NetCon gets own Vectors for recording. needed to avoid multithreading crash
 			self.lidvec.append(h.Vector())
 			self.nc[-1].record(self.ltimevec[-1],self.lidvec[-1],gGID) # record cell spikes with gGID
@@ -116,8 +116,6 @@ class Network:
 
 
 	def set_noise_inputs(self,simdur): #simdur only used for make_all_noise
-		assert(self.DoMakeNoise==True)
-		assert(self.UseNetStim==True)
 		if self.DoMakeNoise:##thats true
 			if self.UseNetStim:
 				self.make_all_NetStims(simdur,self.iseed)
@@ -130,17 +128,17 @@ class Network:
 	def load_all_noise(self): #load noise from data files
 		print "Loading Noise"		
 		print "to PYR"
-		self.b_pyr_somaAMPAf=self.load_spikes("spike_noise_pyr_800_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.pyr,"somaAMPAf",0.05e-3)
+		#self.b_pyr_somaAMPAf=self.load_spikes("spike_noise_pyr_800_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.pyr,"somaAMPAf",0.05e-3)
 		self.b_pyr_Adend3AMPAf=self.load_spikes("spike_noise_pyr_800_Adend3_AMPA_ISI_1_N_10000_noise_1.npy",self.pyr,"Adend3AMPAf",0.05e-3)
 		self.b_pyr_somaGABAf=self.load_spikes("spike_noise_pyr_800_soma_GABA_ISI_1_N_10000_noise_1.npy",self.pyr,"somaGABAf",0.012e-3)
 		self.b_pyr_Adend3GABAf=self.load_spikes("spike_noise_pyr_800_Adend3_GABA_ISI_1_N_10000_noise_1.npy",self.pyr,"Adend3GABAf",0.012e-3)
 		self.b_pyr_Adend3NMDA=self.load_spikes("spike_noise_pyr_800_Adend3_NMDA_ISI_100_N_100_noise_1.npy", self.pyr,"Adend3NMDA",6.5e-3)
 		print "to BAS"
-		self.b_bas_somaAMPAf=self.load_spikes("spike_noise_bas_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.bas,"somaAMPAf",w=0.02e-3)
+		#self.b_bas_somaAMPAf=self.load_spikes("spike_noise_bas_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.bas,"somaAMPAf",w=0.02e-3)
 		self.b_bas_somaGABA=self.load_spikes("spike_noise_bas_200_soma_GABA_ISI_1_N_10000_noise_1.npy",self.bas,"somaGABAf",w=0.2e-3)
 		self.b_bas_somaGABAf=self.load_spikes("spike_noise_bas_200_soma_GABAf_ISI_150_N_65_noise_0.npy",self.bas,"somaGABAss",w=1.6e-3)
 		print "to OLM"
-		self.b_olm_somaAMPAf=self.load_spikes("spike_noise_olm_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.olm,"somaAMPAf",w=0.02e-3)
+		#self.b_olm_somaAMPAf=self.load_spikes("spike_noise_olm_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.olm,"somaAMPAf",w=0.02e-3)
 		self.b_olm_somaGABAf=self.load_spikes("spike_noise_olm_200_soma_GABA_ISI_1_N_10000_noise_1.npy",self.olm,"somaGABAf",w=0.2e-3)
 		self.b_olm_somaGABAss=self.load_spikes("spike_noise_olm_200_soma_GABAss_ISI_150_N_65_noise_0.npy",self.olm,"somaGABAss",w=1.6e-3)
 
@@ -249,8 +247,8 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
-		pyrfac=0
-		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
+		pyrfac=.5
+		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -259,8 +257,8 @@ class Network:
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
-		olmfac=.0
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		olmfac=.5
+		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3AMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		
 		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3NMDA",  w=olmfac*6.5e-3,   ISI=100,  time_limit=simdur, sead=rdtmp)
@@ -272,7 +270,7 @@ class Network:
 		ns.number = (1e3 / 150.0) * simdur
 		self.nsl.append(ns)
 		for i in range(self.bas.n): # MS inputs to BASKET cells
-			nc = h.NetCon(ns,self.bas.cell[i].__dict__["somaGABAss"].syn)
+			nc = h.NetCon(ns,self.bas.cell[i].__dict__["somaGABAss"].syn)#egal
 			nc.delay = 2*h.dt
 			nc.weight[0] = 1.6e-3 * self.MSGain
 			self.ncl.append(nc)
@@ -345,7 +343,7 @@ class Network:
 		nc = []
 		for post_id, all_pre in enumerate(conn):
 			for j, pre_id in enumerate(all_pre):
-				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))	
+				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))#wichtig
 		if self.SaveConn:
 			try:
 				print self.nqcon.size()
@@ -475,7 +473,8 @@ class Network:
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
 			print(cellidx)
 			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
-
+			
+			#self.vmyvolt.add(self.pyr.cell[cellidx].soma(0.5)._ref_v)
 			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)
 			###self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
 			

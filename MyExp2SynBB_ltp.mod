@@ -72,7 +72,7 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   INITIAL {:called 3 times in the beginning, then never again
     F = 1
     tsyn = t
-    printf("start %g %g %g\n", t, t-tsyn, tsyn)
+    printf("start(initial) %g %g %g\n", t, t-tsyn, tsyn)
     
     
 }

@@ -318,11 +318,11 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t; {
    double _lww ;
  _lww = _args[0] ;
+   myt = t ;
+   mytsyn = _args[1] ;
    F = 1.0 + ( F - 1.0 ) * exp ( - ( t - _args[1] ) / tau_F ) ;
    printf ( "start %g %g %g, F=%g\n" , t , t - _args[1] , _args[1] , F ) ;
    _args[1] = t ;
-   myt = t ;
-   mytsyn = _args[1] ;
      if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
@@ -615,18 +615,18 @@ static const char* nmodl_file_text =
   "  factor = 1/factor\n"
   "}\n"
   "\n"
-  "BREAKPOINT {\n"
+  "BREAKPOINT { : Lines in BREAKPOINT: The SOLVE ... METHOD line is ignored. All lines after SOLVE are executed. With a printf() statement, you would see two calls. However, one of the calls does not actually set any state variables. It is used to compute the derivatives.\n"
   "  SOLVE state METHOD cnexp\n"
   "  g = B - A\n"
   "  if (g>gmax) {g=gmax}: saturation\n"
   "  i = g*(v - e)\n"
   "}\n"
   "\n"
-  "DERIVATIVE state {\n"
+  "DERIVATIVE state { : Finally, the DERIVATIVE block: The values for the derivatives (X' = ...) are computed'. Keep in mind, to get the value by which the state variable actually changes, multiply by dt.\n"
   "  A' = -A/tau1\n"
   "  B' = -B/tau2\n"
   "}\n"
-  "\n"
+  ": NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.\n"
   "NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms\n"
   "  ww=w\n"
   "  INITIAL {:called 3 times in the beginning, then never again\n"
@@ -636,14 +636,15 @@ static const char* nmodl_file_text =
   "    \n"
   "    \n"
   "}\n"
+  "  myt=t\n"
+  "  mytsyn=tsyn\n"
   "  F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)\n"
   "\n"
   "  \n"
   "  printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
   "\n"
   "  tsyn = t\n"
-  "  myt=t\n"
-  "  mytsyn=tsyn\n"
+  "  \n"
   "  A= A + ww*factor\n"
   "  B=B + ww*factor\n"
   "  :state_discontinuity(A, A + ww*factor)\n"
@@ -651,5 +652,6 @@ static const char* nmodl_file_text =
   "  F = F + f\n"
   "  :printf(\"F=F+1=%g\\n\", F)\n"
   "}\n"
+  "\n"
   ;
 #endif

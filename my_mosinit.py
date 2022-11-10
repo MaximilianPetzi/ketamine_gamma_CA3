@@ -2,7 +2,9 @@
 
 #ltp notes: somaAMPAf synapses are also used for noise it seems, synapse changes change presynaptic neuron spikes too
 #ltp happens in NMDA, not in AMPA, i think, check where im supposed to include it
-#
+
+#noise sends events to somaAMPAf mechanisms. to prevent LTP, manage the events accordingly
+#read netcon documentation and think about the LTP rule and when events should be triggered
 if __name__ == "__main__":
     import sys
     import os
