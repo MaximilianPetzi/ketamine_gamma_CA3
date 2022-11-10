@@ -52,17 +52,19 @@ extern double hoc_Exp(double);
 #define f _p[5]
 #define tau_F _p[6]
 #define F _p[7]
-#define i _p[8]
-#define g _p[9]
-#define A _p[10]
-#define B _p[11]
-#define factor _p[12]
-#define etime _p[13]
-#define DA _p[14]
-#define DB _p[15]
-#define v _p[16]
-#define _g _p[17]
-#define _tsav _p[18]
+#define myt _p[8]
+#define mytsyn _p[9]
+#define i _p[10]
+#define g _p[11]
+#define A _p[12]
+#define B _p[13]
+#define factor _p[14]
+#define etime _p[15]
+#define DA _p[16]
+#define DB _p[17]
+#define v _p[18]
+#define _g _p[19]
+#define _tsav _p[20]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -192,6 +194,8 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "f",
  "tau_F",
  "F",
+ "myt",
+ "mytsyn",
  0,
  "i",
  "g",
@@ -211,7 +215,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 19, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 21, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -220,10 +224,12 @@ static void nrn_alloc(Prop* _prop) {
  	Vwt = 0;
  	f = 1;
  	tau_F = 94;
- 	F = 990;
+ 	F = 1;
+ 	myt = 0;
+ 	mytsyn = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 19;
+ 	_prop->param_size = 21;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 3, _prop);
   }
@@ -258,7 +264,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 19, 3);
+  hoc_register_prop_size(_mechtype, 21, 3);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "cvodeieq");
@@ -315,6 +321,8 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
    F = 1.0 + ( F - 1.0 ) * exp ( - ( t - _args[1] ) / tau_F ) ;
    printf ( "start %g %g %g, F=%g\n" , t , t - _args[1] , _args[1] , F ) ;
    _args[1] = t ;
+   myt = t ;
+   mytsyn = _args[1] ;
      if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
@@ -334,7 +342,6 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  B = B + _lww * factor ;
      }
  F = F + f ;
-   printf ( "F=F+1=%g\n" , F ) ;
    } }
  
 static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
@@ -344,6 +351,7 @@ static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
     _NrnThread* _nt = (_NrnThread*)_pnt->_vnt;
  F = 1.0 ;
    _args[1] = t ;
+   printf ( "start %g %g %g\n" , t , t - _args[1] , _args[1] ) ;
    }
  
 static int _ode_count(int _type){ return 2;}
@@ -556,7 +564,7 @@ static const char* nmodl_file_text =
   "  POINT_PROCESS MyExp2SynBB_ltp\n"
   "  RANGE tau1, tau2, e, i, g, Vwt, gmax\n"
   "  NONSPECIFIC_CURRENT i\n"
-  "  RANGE f, tau_F, F : , d1, tau_D1, d2, tau_D2\n"
+  "  RANGE f, tau_F, F, myt, mytsyn: , d1, tau_D1, d2, tau_D2\n"
   "}\n"
   "\n"
   "UNITS {\n"
@@ -573,7 +581,9 @@ static const char* nmodl_file_text =
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "  f = 1 (1) < 0, 1e9 >    : facilitation\n"
   "  tau_F = 94 (ms) < 1e-9, 1e9 >\n"
-  "  F=990\n"
+  "  F=1\n"
+  "  myt=0\n"
+  "  mytsyn=0\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -622,21 +632,24 @@ static const char* nmodl_file_text =
   "  INITIAL {:called 3 times in the beginning, then never again\n"
   "    F = 1\n"
   "    tsyn = t\n"
-  "    :printf(\"start %g %g %g\\n\", t, t-tsyn, tsyn)\n"
+  "    printf(\"start %g %g %g\\n\", t, t-tsyn, tsyn)\n"
   "    \n"
   "    \n"
   "}\n"
   "  F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)\n"
   "\n"
+  "  \n"
   "  printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
   "\n"
   "  tsyn = t\n"
+  "  myt=t\n"
+  "  mytsyn=tsyn\n"
   "  A= A + ww*factor\n"
   "  B=B + ww*factor\n"
   "  :state_discontinuity(A, A + ww*factor)\n"
   "  :state_discontinuity(B, B + ww*factor)\n"
   "  F = F + f\n"
-  "  printf(\"F=F+1=%g\\n\", F)\n"
+  "  :printf(\"F=F+1=%g\\n\", F)\n"
   "}\n"
   ;
 #endif

@@ -65,12 +65,18 @@ if __name__ == "__main__":
         ###################################################
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
-    Frec=[]
+
+    recvars=["F","mytsyn","myt"]
+    myrec=[]
+    for recvar in recvars:
+        myrec.append([])
     def myadvance():
-        print('my advance, h.t = {}'.format(h.t))
-        print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
-        Frec.append(net.pyr.cell[0].somaAMPAf.syn.F)
+        #print('my advance, h.t = {}, myt= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.myt))
+        #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
+        for irec,recvar in enumerate(recvars):
+            myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar))
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
+        
         h.fadvance()
 
 
@@ -79,8 +85,11 @@ if __name__ == "__main__":
     h.run()
     #net.rasterplot()
     from matplotlib import pyplot as plt
-    plt.plot(Frec)
-    plt.title("Frec")
+    import numpy as np
+    myrec=np.array(myrec)
+    #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
+    plt.plot(myrec[0],color="green")
+    plt.title("record")
     plt.show()
     net.calc_lfp()
     net.calc_myvolt_pyr()

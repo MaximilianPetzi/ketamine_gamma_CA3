@@ -4,7 +4,7 @@ NEURON {
   POINT_PROCESS MyExp2SynBB_ltp
   RANGE tau1, tau2, e, i, g, Vwt, gmax
   NONSPECIFIC_CURRENT i
-  RANGE f, tau_F, F : , d1, tau_D1, d2, tau_D2
+  RANGE f, tau_F, F, myt, mytsyn: , d1, tau_D1, d2, tau_D2
 }
 
 UNITS {
@@ -21,7 +21,9 @@ PARAMETER {
   Vwt   = 0 : weight for inputs coming in from vector
   f = 1 (1) < 0, 1e9 >    : facilitation
   tau_F = 94 (ms) < 1e-9, 1e9 >
-  F=990
+  F=1
+  myt=0
+  mytsyn=0
 }
 
 ASSIGNED {
@@ -70,19 +72,23 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   INITIAL {:called 3 times in the beginning, then never again
     F = 1
     tsyn = t
-    :printf("start %g %g %g\n", t, t-tsyn, tsyn)
+    printf("start %g %g %g\n", t, t-tsyn, tsyn)
     
     
 }
+  myt=t
+  mytsyn=tsyn
   F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)
 
+  
   printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
 
   tsyn = t
+  
   A= A + ww*factor
   B=B + ww*factor
   :state_discontinuity(A, A + ww*factor)
   :state_discontinuity(B, B + ww*factor)
   F = F + f
-  printf("F=F+1=%g\n", F)
+  :printf("F=F+1=%g\n", F)
 }
