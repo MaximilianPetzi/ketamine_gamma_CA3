@@ -93,22 +93,3 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   :printf("F=F+1=%g\n", F)
 }
 
-
-
-BREAKPOINT {: Lines in BREAKPOINT: The SOLVE ... METHOD line is ignored. All lines after SOLVE are executed. With a printf() statement, you would see two calls. However, one of the calls does not actually set any state variables. It is used to compute the derivatives.
-  SOLVE state METHOD cnexp
-  g = B - A
-  if (g>gmax) {g=gmax}: saturation
-  i = g*(v - e)
-}
-
-DERIVATIVE state {: Finally, the DERIVATIVE block: The values for the derivatives (X' = ...) are computed'. Keep in mind, to get the value by which the state variable actually changes, multiply by dt.
-  A' = -A/tau1
-  B' = -B/tau2
-}
-
-NET_RECEIVE(w (uS)) {LOCAL ww  : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
-  ww=w
-  A = A + ww*factor
-  B = B + ww*factor
-}
