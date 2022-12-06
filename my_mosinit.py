@@ -68,13 +68,13 @@ if __name__ == "__main__":
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=[]#"rec_k","rec_k1"] #"F","mytsyn","myt"]
+    recvars=["rec_k","rec_k1"] #"F","mytsyn","myt"]
     myrec=[]
     for recvar in recvars:
         myrec.append([])
     #myrec2=[]
     def myadvance():
-        #print('my advance, h.t = {}, myt= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.myt))
+        #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
             myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
@@ -97,8 +97,8 @@ if __name__ == "__main__":
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
     
-    #plt.plot(myrec[0],color="red")
-    #plt.plot(myrec[1],color="blue")
+    plt.plot(myrec[0],color="red")
+    plt.plot(myrec[1],color="blue")
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)

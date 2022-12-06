@@ -34,6 +34,7 @@ ASSIGNED {
   fact
   etime (ms)
   tpost (ms)
+  countinputs
 }
 
 STATE {
@@ -57,6 +58,7 @@ INITIAL {
 
 
   tpost = -1e9
+  countinputs=-1
   net_send(0, 1)
 }
 
@@ -85,9 +87,9 @@ FUNCTION factor(Dt (ms)) { : Dt is interval between most recent presynaptic spik
   }
 }
 
-NET_RECEIVE(w (uS), k, tpre (ms), countinputs) {
+NET_RECEIVE(w (uS), k, tpre (ms)) {
   
-  INITIAL { k = 1  tpre = -1e9  countinputs=0}
+  INITIAL { k = 1  tpre = -1e9}
   
   if (flag == 0) { : presynaptic spike (after last post so depress)
 printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
@@ -104,13 +106,13 @@ printf("  new k %g, tpre %g\n", k, tpre)
   
   else if (flag == 2) { : postsynaptic spike (after last pre so potentiate)
 printf("Postsyn spike--entry flag=%g t=%g tpost=%g\n", flag, t, tpost)
-    
     tpost = t
     countinputs=0
-    FOR_NETCONS(w1, k1, tp, countinputs) { : also can hide NET_RECEIVE args
-printf("entry FOR_NETCONS w1=%g k1=%g tp=%g\n", w1, k1, tp)
+    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args
+    printf("entry FOR_NETCONS w1=%g k1=%g tp=%g\n", w1, k1, tp)
       k1 = k1*factor(t - tp) :k1 is plasticity factor for the weight
       countinputs=countinputs+1
+
       if (countinputs>1){
         printf("MORE THAN ONE INPUT?? o_O")
       }
