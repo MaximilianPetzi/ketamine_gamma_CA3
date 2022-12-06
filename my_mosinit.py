@@ -72,6 +72,7 @@ if __name__ == "__main__":
     myrec=[]
     for recvar in recvars:
         myrec.append([])
+    #myrec2=[]
     def myadvance():
         #print('my advance, h.t = {}, myt= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.myt))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
@@ -79,6 +80,9 @@ if __name__ == "__main__":
             myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar))
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
+        #myrec2.append([])  #for later , here , 
+        #for iw in range(10):
+        #    myrec2[-1].append(net.pyr_olm_AM[iw].weight[0])
         h.fadvance()
 
 
@@ -90,8 +94,11 @@ if __name__ == "__main__":
     import numpy as np
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
+    plt.figure(1)
     plt.plot(myrec[0],color="green")
     plt.title("record")
+    #plt.figure(2)
+    #plt.plot(myrec2)
     plt.show()
     net.calc_lfp()
     net.calc_myvolt_pyr()

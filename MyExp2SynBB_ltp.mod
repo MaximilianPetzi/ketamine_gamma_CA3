@@ -4,7 +4,7 @@ NEURON {
   POINT_PROCESS MyExp2SynBB_ltp
   RANGE tau1, tau2, e, i, g, Vwt, gmax
   NONSPECIFIC_CURRENT i
-  RANGE f, tau_F, F, myt, mytsyn: , d1, tau_D1, d2, tau_D2
+  RANGE f, tau_T, F, T, myt, mytsyn: , d1, tau_D1, d2, tau_D2
 }
 
 UNITS {
@@ -20,8 +20,9 @@ PARAMETER {
   gmax = 1e9 (uS)
   Vwt   = 0 : weight for inputs coming in from vector
   f = 1 (1) < 0, 1e9 >    : facilitation
-  tau_F = 94 (ms) < 1e-9, 1e9 >
+  tau_T = 94 (ms) < 1e-9, 1e9 >
   F=1
+  T=1
   myt=0
   mytsyn=0
 }
@@ -66,19 +67,22 @@ DERIVATIVE state { : Finally, the DERIVATIVE block: The values for the derivativ
   A' = -A/tau1
   B' = -B/tau2
 }
+
 : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
 NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   ww=w
   INITIAL {:called 3 times in the beginning, then never again
     F = 1
+    T=1
     tsyn = t
     printf("start(initial) %g %g %g\n", t, t-tsyn, tsyn)
     
     
 }
-  myt=t
-  mytsyn=tsyn
-  F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)
+printf("entry flag=%g \n", flag)
+  myt=t ::
+  mytsyn=tsyn ::
+  T = T*exp(-(t - tsyn)/tau_T)
 
   
   printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
@@ -89,7 +93,6 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
   B=B + ww*factor
   :state_discontinuity(A, A + ww*factor)
   :state_discontinuity(B, B + ww*factor)
-  F = F + f
-  :printf("F=F+1=%g\n", F)
+  T = T + f
 }
 

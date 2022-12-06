@@ -50,21 +50,22 @@ extern double hoc_Exp(double);
 #define gmax _p[3]
 #define Vwt _p[4]
 #define f _p[5]
-#define tau_F _p[6]
+#define tau_T _p[6]
 #define F _p[7]
-#define myt _p[8]
-#define mytsyn _p[9]
-#define i _p[10]
-#define g _p[11]
-#define A _p[12]
-#define B _p[13]
-#define factor _p[14]
-#define etime _p[15]
-#define DA _p[16]
-#define DB _p[17]
-#define v _p[18]
-#define _g _p[19]
-#define _tsav _p[20]
+#define T _p[8]
+#define myt _p[9]
+#define mytsyn _p[10]
+#define i _p[11]
+#define g _p[12]
+#define A _p[13]
+#define B _p[14]
+#define factor _p[15]
+#define etime _p[16]
+#define DA _p[17]
+#define DB _p[18]
+#define v _p[19]
+#define _g _p[20]
+#define _tsav _p[21]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -137,7 +138,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
  "f", 0, 1e+09,
- "tau_F", 1e-09, 1e+09,
+ "tau_T", 1e-09, 1e+09,
  "tau2", 1e-09, 1e+09,
  "tau1", 1e-09, 1e+09,
  0,0,0
@@ -148,7 +149,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "e", "mV",
  "gmax", "uS",
  "f", "1",
- "tau_F", "ms",
+ "tau_T", "ms",
  "A", "uS",
  "B", "uS",
  "i", "nA",
@@ -192,8 +193,9 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "gmax",
  "Vwt",
  "f",
- "tau_F",
+ "tau_T",
  "F",
+ "T",
  "myt",
  "mytsyn",
  0,
@@ -215,7 +217,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 21, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 22, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -223,13 +225,14 @@ static void nrn_alloc(Prop* _prop) {
  	gmax = 1e+09;
  	Vwt = 0;
  	f = 1;
- 	tau_F = 94;
+ 	tau_T = 94;
  	F = 1;
+ 	T = 1;
  	myt = 0;
  	mytsyn = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 21;
+ 	_prop->param_size = 22;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 3, _prop);
   }
@@ -264,7 +267,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 21, 3);
+  hoc_register_prop_size(_mechtype, 22, 3);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "cvodeieq");
@@ -318,9 +321,10 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t; {
    double _lww ;
  _lww = _args[0] ;
+   printf ( "entry flag=%g \n" , _lflag ) ;
    myt = t ;
    mytsyn = _args[1] ;
-   F = 1.0 + ( F - 1.0 ) * exp ( - ( t - _args[1] ) / tau_F ) ;
+   T = T * exp ( - ( t - _args[1] ) / tau_T ) ;
    printf ( "start %g %g %g, F=%g\n" , t , t - _args[1] , _args[1] , F ) ;
    _args[1] = t ;
      if (nrn_netrec_state_adjust && !cvode_active_){
@@ -341,7 +345,7 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
   } else {
  B = B + _lww * factor ;
      }
- F = F + f ;
+ T = T + f ;
    } }
  
 static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
@@ -350,8 +354,9 @@ static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
     Datum* _thread = (Datum*)0;
     _NrnThread* _nt = (_NrnThread*)_pnt->_vnt;
  F = 1.0 ;
+   T = 1.0 ;
    _args[1] = t ;
-   printf ( "start %g %g %g\n" , t , t - _args[1] , _args[1] ) ;
+   printf ( "start(initial) %g %g %g\n" , t , t - _args[1] , _args[1] ) ;
    }
  
 static int _ode_count(int _type){ return 2;}
@@ -564,7 +569,7 @@ static const char* nmodl_file_text =
   "  POINT_PROCESS MyExp2SynBB_ltp\n"
   "  RANGE tau1, tau2, e, i, g, Vwt, gmax\n"
   "  NONSPECIFIC_CURRENT i\n"
-  "  RANGE f, tau_F, F, myt, mytsyn: , d1, tau_D1, d2, tau_D2\n"
+  "  RANGE f, tau_T, F, T, myt, mytsyn: , d1, tau_D1, d2, tau_D2\n"
   "}\n"
   "\n"
   "UNITS {\n"
@@ -580,8 +585,9 @@ static const char* nmodl_file_text =
   "  gmax = 1e9 (uS)\n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "  f = 1 (1) < 0, 1e9 >    : facilitation\n"
-  "  tau_F = 94 (ms) < 1e-9, 1e9 >\n"
+  "  tau_T = 94 (ms) < 1e-9, 1e9 >\n"
   "  F=1\n"
+  "  T=1\n"
   "  myt=0\n"
   "  mytsyn=0\n"
   "}\n"
@@ -626,19 +632,22 @@ static const char* nmodl_file_text =
   "  A' = -A/tau1\n"
   "  B' = -B/tau2\n"
   "}\n"
+  "\n"
   ": NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.\n"
   "NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms\n"
   "  ww=w\n"
   "  INITIAL {:called 3 times in the beginning, then never again\n"
   "    F = 1\n"
+  "    T=1\n"
   "    tsyn = t\n"
-  "    printf(\"start %g %g %g\\n\", t, t-tsyn, tsyn)\n"
+  "    printf(\"start(initial) %g %g %g\\n\", t, t-tsyn, tsyn)\n"
   "    \n"
   "    \n"
   "}\n"
-  "  myt=t\n"
-  "  mytsyn=tsyn\n"
-  "  F = 1 + (F-1)*exp(-(t - tsyn)/tau_F)\n"
+  "printf(\"entry flag=%g \\n\", flag)\n"
+  "  myt=t ::\n"
+  "  mytsyn=tsyn ::\n"
+  "  T = T*exp(-(t - tsyn)/tau_T)\n"
   "\n"
   "  \n"
   "  printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
@@ -649,8 +658,7 @@ static const char* nmodl_file_text =
   "  B=B + ww*factor\n"
   "  :state_discontinuity(A, A + ww*factor)\n"
   "  :state_discontinuity(B, B + ww*factor)\n"
-  "  F = F + f\n"
-  "  :printf(\"F=F+1=%g\\n\", F)\n"
+  "  T = T + f\n"
   "}\n"
   "\n"
   ;
