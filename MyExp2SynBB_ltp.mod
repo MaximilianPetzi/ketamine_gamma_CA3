@@ -69,7 +69,7 @@ DERIVATIVE state { : Finally, the DERIVATIVE block: The values for the derivativ
 }
 
 : NET_RECEIVE: If there is net_send() an event that targets this mechanism, lines here are executed first. Skipped otherwise.
-NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
+NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww
   ww=w
   INITIAL {:called 3 times in the beginning, then never again
     F = 1

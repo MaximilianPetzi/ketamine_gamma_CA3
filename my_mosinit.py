@@ -68,7 +68,7 @@ if __name__ == "__main__":
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=[] #"F","mytsyn","myt"]
+    recvars=[]#"rec_k","rec_k1"] #"F","mytsyn","myt"]
     myrec=[]
     for recvar in recvars:
         myrec.append([])
@@ -77,7 +77,7 @@ if __name__ == "__main__":
         #print('my advance, h.t = {}, myt= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.myt))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
-            myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar))
+            myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
         #myrec2.append([])  #for later , here , 
@@ -91,11 +91,14 @@ if __name__ == "__main__":
     h.run()
     #net.rasterplot()
     from matplotlib import pyplot as plt
+    plt.style.use("seaborn-darkgrid")
     import numpy as np
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
-    #plt.plot(myrec[0],color="green")
+    
+    #plt.plot(myrec[0],color="red")
+    #plt.plot(myrec[1],color="blue")
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)

@@ -53,18 +53,20 @@ extern double hoc_Exp(double);
 #define p _p[6]
 #define taud _p[7]
 #define taup _p[8]
-#define i _p[9]
-#define g _p[10]
-#define A _p[11]
-#define B _p[12]
-#define fact _p[13]
-#define etime _p[14]
-#define tpost _p[15]
-#define DA _p[16]
-#define DB _p[17]
-#define v _p[18]
-#define _g _p[19]
-#define _tsav _p[20]
+#define rec_k _p[9]
+#define rec_k1 _p[10]
+#define i _p[11]
+#define g _p[12]
+#define A _p[13]
+#define B _p[14]
+#define fact _p[15]
+#define etime _p[16]
+#define tpost _p[17]
+#define DA _p[18]
+#define DB _p[19]
+#define v _p[20]
+#define _g _p[21]
+#define _tsav _p[22]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -206,6 +208,8 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "p",
  "taud",
  "taup",
+ "rec_k",
+ "rec_k1",
  0,
  "i",
  "g",
@@ -225,7 +229,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 21, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 23, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -236,9 +240,11 @@ static void nrn_alloc(Prop* _prop) {
  	p = 0.0096;
  	taud = 34;
  	taup = 16.8;
+ 	rec_k = -1;
+ 	rec_k1 = -1;
   }
  	_prop->param = _p;
- 	_prop->param_size = 21;
+ 	_prop->param_size = 23;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
@@ -276,7 +282,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 21, 7);
+  hoc_register_prop_size(_mechtype, 23, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "netsend");
@@ -288,7 +294,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  pnt_receive[_mechtype] = _net_receive;
  pnt_receive_init[_mechtype] = _net_init;
- pnt_receive_size[_mechtype] = 3;
+ pnt_receive_size[_mechtype] = 4;
  add_nrn_fornetcons(_mechtype, _fnc_index);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
  	ivoc_help("help ?1 MyExp2SynBBheb /home/maximilian/Desktop/work/neymotin/my_neymotin/MyExp2SynBBheb.mod\n");
@@ -370,6 +376,7 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t;   if (_lflag == 1. ) {*(_tqitem) = 0;}
  {
    if ( _lflag  == 0.0 ) {
+     printf ( "Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n" , _lflag , t , _args[0] , _args[1] , _args[2] , tpost ) ;
        if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
@@ -391,19 +398,31 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  g = g + _args[0] * _args[1] ;
      _args[2] = t ;
      _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
+     rec_k = _args[1] ;
+     printf ( "  new k %g, tpre %g\n" , _args[1] , _args[2] ) ;
      }
    else if ( _lflag  == 2.0 ) {
+     printf ( "Postsyn spike--entry flag=%g t=%g tpost=%g\n" , _lflag , t , tpost ) ;
      tpost = t ;
+     _args[3] = 0.0 ;
      {int _ifn1, _nfn1; double* _fnargs1, **_fnargslist1;
 	_nfn1 = _nrn_netcon_args(_ppvar[_fnc_index]._pvoid, &_fnargslist1);
 	for (_ifn1 = 0; _ifn1 < _nfn1; ++_ifn1) {
  	 _fnargs1 = _fnargslist1[_ifn1];
  {
+       printf ( "entry FOR_NETCONS w1=%g k1=%g tp=%g\n" , _fnargs1[0] , _fnargs1[1] , _fnargs1[2] ) ;
        _fnargs1[1] = _fnargs1[1] * factor ( _threadargscomma_ t - _fnargs1[2] ) ;
+       _fnargs1[3] = _fnargs1[3] + 1.0 ;
+       if ( _fnargs1[3] > 1.0 ) {
+         printf ( "MORE THAN ONE INPUT?? o_O" ) ;
+         }
+       rec_k1 = _fnargs1[1] ;
+       printf ( "  new k1 %g\n" , _fnargs1[1] ) ;
        }
      	}}
  }
    else {
+     printf ( "entry flag=%g t=%g\n" , _lflag , t ) ;
        _nrn_watch_activate(_watch_array, _watch1_cond, 1, _pnt, _watch_rm++, 2.0);
  }
    } }
@@ -415,6 +434,7 @@ static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
     _NrnThread* _nt = (_NrnThread*)_pnt->_vnt;
  _args[1] = 1.0 ;
    _args[2] = - 1e9 ;
+   _args[3] = 0.0 ;
    }
  
 static int _ode_count(int _type){ return 2;}
@@ -627,7 +647,7 @@ static const char* nmodl_file_text =
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
   "  POINT_PROCESS MyExp2SynBBheb\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -648,6 +668,8 @@ static const char* nmodl_file_text =
   "  p = 0.0096 <0, 1e9>: potentiation factor\n"
   "  taud = 34 (ms) : depression effectiveness time constant\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
+  "  rec_k=-1\n"
+  "  rec_k1=-1\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -708,12 +730,12 @@ static const char* nmodl_file_text =
   "  }\n"
   "}\n"
   "\n"
-  "NET_RECEIVE(w (uS), k, tpre (ms)) {\n"
+  "NET_RECEIVE(w (uS), k, tpre (ms), countinputs) {\n"
   "  \n"
-  "  INITIAL { k = 1  tpre = -1e9 }\n"
+  "  INITIAL { k = 1  tpre = -1e9  countinputs=0}\n"
   "  \n"
   "  if (flag == 0) { : presynaptic spike (after last post so depress)\n"
-  ": printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
+  "printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
   "    \n"
   "    A = A + w*fact\n"
   "    B = B + w*fact   :for double exp rise and decay\n"
@@ -721,21 +743,30 @@ static const char* nmodl_file_text =
   "    g = g + w*k\n"
   "    tpre = t\n"
   "    k = k * factor(tpost - t)\n"
-  ": printf(\"  new k %g, tpre %g\\n\", k, tpre)\n"
+  "    rec_k=k\n"
+  "printf(\"  new k %g, tpre %g\\n\", k, tpre)\n"
   "  }\n"
   "  \n"
   "  else if (flag == 2) { : postsynaptic spike (after last pre so potentiate)\n"
-  ": printf(\"Postsyn spike--entry flag=%g t=%g tpost=%g\\n\", flag, t, tpost)\n"
+  "printf(\"Postsyn spike--entry flag=%g t=%g tpost=%g\\n\", flag, t, tpost)\n"
+  "    \n"
   "    tpost = t\n"
-  "    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args\n"
-  ": printf(\"entry FOR_NETCONS w1=%g k1=%g tp=%g\\n\", w1, k1, tp)\n"
+  "    countinputs=0\n"
+  "    FOR_NETCONS(w1, k1, tp, countinputs) { : also can hide NET_RECEIVE args\n"
+  "printf(\"entry FOR_NETCONS w1=%g k1=%g tp=%g\\n\", w1, k1, tp)\n"
   "      k1 = k1*factor(t - tp) :k1 is plasticity factor for the weight\n"
-  ": printf(\"  new k1 %g\\n\", k1)\n"
+  "      countinputs=countinputs+1\n"
+  "      if (countinputs>1){\n"
+  "        printf(\"MORE THAN ONE INPUT?? o_O\")\n"
+  "      }\n"
+  "      rec_k1=k1\n"
+  "printf(\"  new k1 %g\\n\", k1)\n"
+  "\n"
   "    }\n"
   "  }\n"
   "  \n"
   "   else { : flag == 1 from INITIAL block\n"
-  ": printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
+  "printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
   "    WATCH (v > -20) 2\n"
   "  }\n"
   "}\n"
