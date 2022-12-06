@@ -79,7 +79,9 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww :called multiple times per ms
     
     
 }
+
 printf("entry flag=%g \n", flag)
+
   myt=t ::
   mytsyn=tsyn ::
   T = T*exp(-(t - tsyn)/tau_T)

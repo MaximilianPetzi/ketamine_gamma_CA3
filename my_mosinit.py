@@ -68,7 +68,7 @@ if __name__ == "__main__":
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=["F","mytsyn","myt"]
+    recvars=[] #"F","mytsyn","myt"]
     myrec=[]
     for recvar in recvars:
         myrec.append([])
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
-    plt.plot(myrec[0],color="green")
+    #plt.plot(myrec[0],color="green")
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)
