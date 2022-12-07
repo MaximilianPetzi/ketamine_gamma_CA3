@@ -84,8 +84,8 @@ printf("entry flag=%g \n", flag)
   myt=t ::
   mytsyn=tsyn ::
   T = T*exp(-(t - tsyn)/tau_T)
-
-  
+  printf("set F=20")
+  F=20
   printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
 
   tsyn = t

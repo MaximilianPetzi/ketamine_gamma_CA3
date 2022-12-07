@@ -321,11 +321,12 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t; {
    double _lww ;
  _lww = _args[0] ;
-   F = 2.0 ;
    printf ( "entry flag=%g \n" , _lflag ) ;
    myt = t ;
    mytsyn = _args[1] ;
    T = T * exp ( - ( t - _args[1] ) / tau_T ) ;
+   printf ( "set F=20" ) ;
+   F = 20.0 ;
    printf ( "start %g %g %g, F=%g\n" , t , t - _args[1] , _args[1] , F ) ;
    _args[1] = t ;
      if (nrn_netrec_state_adjust && !cvode_active_){
@@ -645,14 +646,13 @@ static const char* nmodl_file_text =
   "    \n"
   "    \n"
   "}\n"
-  "F=2\n"
   "printf(\"entry flag=%g \\n\", flag)\n"
   "\n"
   "  myt=t ::\n"
   "  mytsyn=tsyn ::\n"
   "  T = T*exp(-(t - tsyn)/tau_T)\n"
-  "\n"
-  "  \n"
+  "  printf(\"set F=20\")\n"
+  "  F=20\n"
   "  printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
   "\n"
   "  tsyn = t\n"
