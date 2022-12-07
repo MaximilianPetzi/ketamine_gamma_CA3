@@ -114,11 +114,21 @@ class Network:
 			print "Setting Connections"
 			self.set_all_conns()
 
+		
+		
+
+		#e = h.Electrode([0,0], sec=self.pyr.cell[0].soma)#section
+		#remember that neuron can vary the current and plot stuff
+		#e.IClamp()#switch electrode to IClamp
+		#e.amp(3)#amplitude in nA (ca 1-2)
+		#e.del(100)#starting time of stim in ms
+		#e.dur(10000)#duration in ms
+
 
 	def set_noise_inputs(self,simdur): #simdur only used for make_all_noise
 		if self.DoMakeNoise:##thats true
 			if self.UseNetStim:
-				self.make_all_NetStims(simdur,self.iseed)
+				self.make_all_NetStims(simdur,self.iseed) #it seems like this has to happen (to initiate net.nrl)
 			else:
 				self.make_all_noise(simdur,self.iseed)
 		else:
@@ -247,7 +257,7 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
-		pyrfac=.5
+		pyrfac=.0
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=pyrfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -257,7 +267,7 @@ class Network:
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
-		olmfac=.5
+		olmfac=.0
 		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3AMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		
@@ -482,6 +492,21 @@ class Network:
 			self.myvolt_array_pyr.append(self.myvolt)
 			self.vmyvolt_array_pyr.append(self.vmyvolt)
 	
+	def calc_spikes_pyr(self):
+		self.vmyspike_array_pyr=[]
+		self.myspike_array_pyr=[]
+		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
+			print(cellidx)
+			self.vmyspike = h.Vector(self.pyr.cell[0].soma_spikerecvec.size()) 
+
+			self.vmyspike.add(self.pyr.cell[cellidx].soma_spikerecvec)
+			print("here",numpy.array(self.pyr.cell[cellidx].soma_spikerecvec.to_python()))
+			print("here",self.pyr.cell[cellidx].soma_spikerecvec)
+			self.myspike=numpy.array(self.vmyspike.to_python()) # convert to python array (so can do PSD)
+			self.myspike_array_pyr.append(self.myspike)
+			self.vmyspike_array_pyr.append(self.vmyspike)
+
+
 	def calc_myvolt_olm(self): ##mine
 		self.vmyvolt_array_olm=[]
 		self.myvolt_array_olm=[]

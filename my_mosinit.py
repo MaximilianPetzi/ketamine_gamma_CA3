@@ -1,7 +1,6 @@
-#experiment branch
+
 
 #ltp notes: somaAMPAf synapses are also used for noise it seems, synapse changes change presynaptic neuron spikes too
-#ltp happens in NMDA, not in AMPA, i think, check where im supposed to include it
 
 #noise sends events to somaAMPAf mechanisms. to prevent LTP, manage the events accordingly
 #read netcon documentation and think about the LTP rule and when events should be triggered
@@ -87,12 +86,17 @@ if __name__ == "__main__":
 
 
 ###################################################
-    h.tstop = 10e2   #3e3
-    h.run()
-    #net.rasterplot()
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
+    h.tstop = 10e2   #3e3
+    stim = h.IClamp(net.pyr.cell[0].soma(.5))
+    stim.delay = 100
+    stim.dur = 500
+    stim.amp = .1
+    h.run()
+    #net.rasterplot()
+    
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
@@ -102,16 +106,37 @@ if __name__ == "__main__":
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)
-    plt.show()
+    #plt.show()
     net.calc_lfp()
+
     net.calc_myvolt_pyr()
     net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen
 
+    net.calc_spikes_pyr()
+
+
     myg = h.Graph()
-    myg2= h.Graph()
+    #myg2= h.Graph()
     #myg2.color(2)
+    print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
+    
+    Fvalue=5.8
+    data=np.load("recfolder/FI.npy")
+    data=np.append(data,Fvalue)
+    np.save("recfolder/FI",data)
+    #os.System("touch recfolder/recFI")
     net.vmyvolt_array_pyr[0].plot(myg,h.dt)
-    net.vmyvolt_array_olm[0].plot(myg2,h.dt)
+    #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
+    #myg.exec_menu("New Axis")
+    #stim.amp = .4
+    #h.run()
+    #net.calc_myvolt_pyr()
+    #net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen
+    #myg = h.Graph()
+    #myg2= h.Graph()
+    #myg2.color(2)
+    #net.vmyvolt_array_pyr[0].plot(myg,h.dt)
+    #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
     
     #myg2.label(80, 30, "g2")
 

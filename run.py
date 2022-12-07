@@ -7,8 +7,9 @@ from params import *
 import sys
 
 # sets up external inputs
-if net.noise:
+if net.noise: 
 	net.set_noise_inputs(h.tstop) #h.tstop sets duration of inpus for make noise case
+
 
 # handler for printing out time during simulation run
 def fi():

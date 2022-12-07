@@ -73,7 +73,11 @@ class Cell:
 		if rec:
 			self.__dict__[name+"_volt"] = h.Vector(int(h.tstop/h.dt)+1)
 			self.__dict__[name+"_volt"].record(self.__dict__[name](0.5)._ref_v)
-	
+		#NetCon into nothing for recording
+		self.__dict__[name+"_spikereccon"] = h.NetCon(self.soma(.5)._ref_v, None, sec=self.soma) 
+		self.__dict__[name+"_spikerecvec"] = h.Vector()
+		self.__dict__[name+"_spikereccon"].record(self.__dict__[name+"_spikerecvec"])	
+		
 	def plot_volt(self, name, fig=1):
 		figure(fig)
 		volt = self.__dict__[name+"_volt"].to_python()
@@ -232,7 +236,7 @@ class PyrAdr(Cell):
 
 	def set_synapses(self):
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80)
-		self.somaAMPAf 	 = SynapseLTP(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
+		self.somaAMPAf 	 = SynapseHeb(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
 		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0)
 		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80)
