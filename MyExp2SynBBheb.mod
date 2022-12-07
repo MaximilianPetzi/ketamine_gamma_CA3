@@ -101,11 +101,11 @@ printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t,
     tpre = t
     k = k * factor(tpost - t)
     rec_k=k
-printf("  new k %g, tpre %g\n", k, tpre)
+printf("  new k %g, tpre=t= %g, tpost %g, rec_k %g\n", k, tpre, tpost, rec_k)
   }
   
   else if (flag == 2) { : postsynaptic spike (after last pre so potentiate)
-printf("Postsyn spike--entry flag=%g t=%g tpost=%g\n", flag, t, tpost)
+printf("Postsyn spike--entry flag=%g t=%g\n", flag, t)
     tpost = t
     countinputs=0
     FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args
@@ -122,9 +122,9 @@ printf("  new k1 %g\n", k1)
     }
   }
   
-   else { : flag == 1 from INITIAL block
+   else { : flag == 1 from INITIAL block :only called in the beginning
 printf("entry flag=%g t=%g\n", flag, t)
-    WATCH (v > -20) 2
+    WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons
   }
 }
 

@@ -321,6 +321,7 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t; {
    double _lww ;
  _lww = _args[0] ;
+   F = 2.0 ;
    printf ( "entry flag=%g \n" , _lflag ) ;
    myt = t ;
    mytsyn = _args[1] ;
@@ -644,7 +645,7 @@ static const char* nmodl_file_text =
   "    \n"
   "    \n"
   "}\n"
-  "\n"
+  "F=2\n"
   "printf(\"entry flag=%g \\n\", flag)\n"
   "\n"
   "  myt=t ::\n"

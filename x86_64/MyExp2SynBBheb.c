@@ -400,10 +400,10 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
      _args[2] = t ;
      _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
      rec_k = _args[1] ;
-     printf ( "  new k %g, tpre %g\n" , _args[1] , _args[2] ) ;
+     printf ( "  new k %g, tpre=t= %g, tpost %g, rec_k %g\n" , _args[1] , _args[2] , tpost , rec_k ) ;
      }
    else if ( _lflag  == 2.0 ) {
-     printf ( "Postsyn spike--entry flag=%g t=%g tpost=%g\n" , _lflag , t , tpost ) ;
+     printf ( "Postsyn spike--entry flag=%g t=%g\n" , _lflag , t ) ;
      tpost = t ;
      countinputs = 0.0 ;
      {int _ifn1, _nfn1; double* _fnargs1, **_fnargslist1;
@@ -747,11 +747,11 @@ static const char* nmodl_file_text =
   "    tpre = t\n"
   "    k = k * factor(tpost - t)\n"
   "    rec_k=k\n"
-  "printf(\"  new k %g, tpre %g\\n\", k, tpre)\n"
+  "printf(\"  new k %g, tpre=t= %g, tpost %g, rec_k %g\\n\", k, tpre, tpost, rec_k)\n"
   "  }\n"
   "  \n"
   "  else if (flag == 2) { : postsynaptic spike (after last pre so potentiate)\n"
-  "printf(\"Postsyn spike--entry flag=%g t=%g tpost=%g\\n\", flag, t, tpost)\n"
+  "printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"
   "    tpost = t\n"
   "    countinputs=0\n"
   "    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args\n"
@@ -768,9 +768,9 @@ static const char* nmodl_file_text =
   "    }\n"
   "  }\n"
   "  \n"
-  "   else { : flag == 1 from INITIAL block\n"
+  "   else { : flag == 1 from INITIAL block :only called in the beginning\n"
   "printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
-  "    WATCH (v > -20) 2\n"
+  "    WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons\n"
   "  }\n"
   "}\n"
   "\n"
