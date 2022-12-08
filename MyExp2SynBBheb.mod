@@ -67,6 +67,7 @@ BREAKPOINT {
   g = B - A
   if (g>gmax) {g=gmax}: saturation
   i = g*(v - e)
+  printf("rec_k in BREAKOPINT: %g\n",rec_k)
 }
 
 DERIVATIVE state {

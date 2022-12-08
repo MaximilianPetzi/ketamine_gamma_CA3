@@ -531,6 +531,7 @@ static double _nrn_current(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread
      g = gmax ;
      }
    i = g * ( v - e ) ;
+   printf ( "rec_k in BREAKOPINT: %g\n" , rec_k ) ;
    }
  _current += i;
 
@@ -713,6 +714,7 @@ static const char* nmodl_file_text =
   "  g = B - A\n"
   "  if (g>gmax) {g=gmax}: saturation\n"
   "  i = g*(v - e)\n"
+  "  printf(\"rec_k in BREAKOPINT: %g\\n\",rec_k)\n"
   "}\n"
   "\n"
   "DERIVATIVE state {\n"
