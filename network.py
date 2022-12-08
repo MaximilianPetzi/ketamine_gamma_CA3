@@ -500,7 +500,8 @@ class Network:
 			self.vmyspike = h.Vector(self.pyr.cell[0].soma_spikerecvec.size()) 
 
 			self.vmyspike.add(self.pyr.cell[cellidx].soma_spikerecvec)
-			print("here",numpy.array(self.pyr.cell[cellidx].soma_spikerecvec.to_python()))
+			testvec=numpy.array(self.pyr.cell[cellidx].soma_spikerecvec.to_python())
+			print("here",testvec)
 			print("here",self.pyr.cell[cellidx].soma_spikerecvec)
 			self.myspike=numpy.array(self.vmyspike.to_python()) # convert to python array (so can do PSD)
 			self.myspike_array_pyr.append(self.myspike)
