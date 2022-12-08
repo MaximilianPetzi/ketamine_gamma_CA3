@@ -68,7 +68,8 @@ if __name__ == "__main__":
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=["rec_k","rec_k1"] #"F","mytsyn","myt"]
+    recvars=["thek"] #"F","mytsyn","myt"]
+    #net.pyr_olm_AM[0].weight[1]
     myrec=[]
     for recvar in recvars:
         myrec.append([])
@@ -77,7 +78,10 @@ if __name__ == "__main__":
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
-            myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
+            if recvar!="thek":
+                myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
+            if recvar=="thek":
+                myrec[irec].append(net.pyr_olm_AM[0].weight[1])
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
         #myrec2.append([])  #for later , here , 
@@ -88,6 +92,20 @@ if __name__ == "__main__":
 
 ###################################################
     h.tstop = 10e2   #3e3
+    stimp=[]
+    for i in range(5):
+        stimp.append(h.IClamp(net.pyr.cell[0].soma(.5)))
+        stimp[i].delay = 100+100*i
+        stimp[i].dur = 3
+        stimp[i].amp = .2
+    stimo=[]
+    for i in range(5):
+        stimo.append(h.IClamp(net.olm.cell[0].soma(.5)))
+        stimo[i].delay = 100+100*i+50
+        stimo[i].dur = 3
+        stimo[i].amp = .2
+
+
     h.run()
     #net.rasterplot()
     from matplotlib import pyplot as plt
@@ -96,9 +114,9 @@ if __name__ == "__main__":
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
-    
-    plt.plot(myrec[0],color="red")
-    plt.plot(myrec[1],color="blue")
+    for i in range(len(recvars)):
+        plt.plot(myrec[i],label=recvars[i])
+    plt.legend()
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)

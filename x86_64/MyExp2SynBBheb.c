@@ -47,27 +47,28 @@ extern double hoc_Exp(double);
 #define tau1 _p[0]
 #define tau2 _p[1]
 #define e _p[2]
-#define gmax _p[3]
-#define Vwt _p[4]
-#define d _p[5]
-#define p _p[6]
-#define taud _p[7]
-#define taup _p[8]
-#define rec_k _p[9]
-#define rec_k1 _p[10]
-#define i _p[11]
-#define g _p[12]
-#define A _p[13]
-#define B _p[14]
-#define fact _p[15]
-#define etime _p[16]
-#define tpost _p[17]
-#define countinputs _p[18]
-#define DA _p[19]
-#define DB _p[20]
-#define v _p[21]
-#define _g _p[22]
-#define _tsav _p[23]
+#define F _p[3]
+#define gmax _p[4]
+#define Vwt _p[5]
+#define d _p[6]
+#define p _p[7]
+#define taud _p[8]
+#define taup _p[9]
+#define rec_k _p[10]
+#define rec_k1 _p[11]
+#define i _p[12]
+#define g _p[13]
+#define A _p[14]
+#define B _p[15]
+#define fact _p[16]
+#define etime _p[17]
+#define tpost _p[18]
+#define countinputs _p[19]
+#define DA _p[20]
+#define DB _p[21]
+#define v _p[22]
+#define _g _p[23]
+#define _tsav _p[24]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -141,6 +142,8 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 #define factor factor_MyExp2SynBBheb
  extern double factor( _threadargsprotocomma_ double );
  /* declare global and static user variables */
+#define speed speed_MyExp2SynBBheb
+ double speed = 1;
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
  "d", 0, 1,
@@ -167,6 +170,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  static double delta_t = 0.01;
  /* connect global user variables to hoc */
  static DoubScal hoc_scdoub[] = {
+ "speed_MyExp2SynBBheb", &speed_MyExp2SynBBheb,
  0,0
 };
  static DoubVec hoc_vdoub[] = {
@@ -203,6 +207,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "tau1",
  "tau2",
  "e",
+ "F",
  "gmax",
  "Vwt",
  "d",
@@ -230,22 +235,23 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 24, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 25, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
  	e = 0;
+ 	F = 0;
  	gmax = 1e+09;
  	Vwt = 0;
  	d = 0.0053;
  	p = 0.0096;
  	taud = 34;
- 	taup = 16.8;
- 	rec_k = -1;
- 	rec_k1 = -1;
+ 	taup = 34;
+ 	rec_k = 0;
+ 	rec_k1 = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 24;
+ 	_prop->param_size = 25;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
@@ -283,7 +289,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 24, 7);
+  hoc_register_prop_size(_mechtype, 25, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "netsend");
@@ -338,14 +344,15 @@ static int _ode_spec1(_threadargsproto_);
 double factor ( _threadargsprotocomma_ double _lDt ) {
    double _lfactor;
  if ( _lDt > 0.0 ) {
-     _lfactor = 1.0 + p * exp ( - _lDt / taup ) ;
+     _lfactor = 1.0 + speed * p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor = 1.0 - d * exp ( _lDt / taud ) ;
+     _lfactor = 1.0 - speed * d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor = 1.0 ;
      }
+   _lfactor = _lfactor ;
    
 return _lfactor;
  }
@@ -376,33 +383,37 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
   if (_tsav > t){ extern char* hoc_object_name(); hoc_execerror(hoc_object_name(_pnt->ob), ":Event arrived out of order. Must call ParallelContext.set_maxstep AFTER assigning minimum NetCon.delay");}
  _tsav = t;   if (_lflag == 1. ) {*(_tqitem) = 0;}
  {
+   printf ( "\nA REC rec=%g, rec_1=%g outside flags" , rec_k , rec_k1 ) ;
    if ( _lflag  == 0.0 ) {
+     F = F + 1.0 ;
+     printf ( "\nB F: %g" , F ) ;
      printf ( "Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n" , _lflag , t , _args[0] , _args[1] , _args[2] , tpost ) ;
        if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
-    double __primary = (A + _args[0] * fact) - __state;
+    double __primary = (A + _args[0] * fact * _args[1]) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau1 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau1 ) - __primary );
     A += __primary;
   } else {
- A = A + _args[0] * fact ;
+ A = A + _args[0] * fact * _args[1] ;
        }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = B;
-    double __primary = (B + _args[0] * fact) - __state;
+    double __primary = (B + _args[0] * fact * _args[1]) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau2 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau2 ) - __primary );
     B += __primary;
   } else {
- B = B + _args[0] * fact ;
+ B = B + _args[0] * fact * _args[1] ;
        }
- g = g + _args[0] * _args[1] ;
-     _args[2] = t ;
+ _args[2] = t ;
      _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
      rec_k = _args[1] ;
      printf ( "  new k %g, tpre=t= %g, tpost %g, rec_k %g\n" , _args[1] , _args[2] , tpost , rec_k ) ;
      }
    else if ( _lflag  == 2.0 ) {
+     F = F - 0.9 ;
+     printf ( "\nC F: %g" , F ) ;
      printf ( "Postsyn spike--entry flag=%g t=%g\n" , _lflag , t ) ;
      tpost = t ;
      countinputs = 0.0 ;
@@ -531,7 +542,6 @@ static double _nrn_current(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread
      g = gmax ;
      }
    i = g * ( v - e ) ;
-   printf ( "rec_k in BREAKOPINT: %g\n" , rec_k ) ;
    }
  _current += i;
 
@@ -649,7 +659,7 @@ static const char* nmodl_file_text =
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
   "  POINT_PROCESS MyExp2SynBBheb\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -663,15 +673,17 @@ static const char* nmodl_file_text =
   "  tau1=.1 (ms) <1e-9,1e9>\n"
   "  tau2 = 10 (ms) <1e-9,1e9>\n"
   "  e=0	(mV)\n"
+  "  F=0\n"
   "  gmax = 1e9 (uS)\n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "\n"
   "  d = 0.0053 <0,1>: depression factor\n"
   "  p = 0.0096 <0, 1e9>: potentiation factor\n"
   "  taud = 34 (ms) : depression effectiveness time constant\n"
-  "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
-  "  rec_k=-1\n"
-  "  rec_k1=-1\n"
+  "  taup = 34 (ms) : Bi & Poo (1998, 2001)\n"
+  "  rec_k=0\n"
+  "  rec_k1=0\n"
+  "  speed=1\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -714,7 +726,7 @@ static const char* nmodl_file_text =
   "  g = B - A\n"
   "  if (g>gmax) {g=gmax}: saturation\n"
   "  i = g*(v - e)\n"
-  "  printf(\"rec_k in BREAKOPINT: %g\\n\",rec_k)\n"
+  "  :printf(\"rec_k in BREAKOPINT: %g\\n\",rec_k)\n"
   "}\n"
   "\n"
   "DERIVATIVE state {\n"
@@ -727,32 +739,35 @@ static const char* nmodl_file_text =
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  if (Dt>0) {\n"
-  "    factor = 1 + p*exp(-Dt/taup) : potentiation\n"
+  "    factor = 1 + speed*p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor = 1 - d*exp(Dt/taud) : depression\n"
+  "    factor = 1 - speed*d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor = 1 : no change if pre and post are simultaneous\n"
   "  }\n"
+  "  factor=factor\n"
   "}\n"
   "\n"
   "NET_RECEIVE(w (uS), k, tpre (ms)) {\n"
   "  \n"
-  "  INITIAL { k = 1  tpre = -1e9}\n"
+  "  INITIAL { k = 1  tpre = -1e9 }\n"
   "  \n"
-  "  if (flag == 0) { : presynaptic spike (after last post so depress)\n"
+  "  \n"
+  "  printf(\"\\nA REC rec=%g, rec_1=%g outside flags\",rec_k,rec_k1)\n"
+  "  if (flag == 0) { F=F+1 printf(\"\\nB F: %g\",F):rec_k=rec_k+1 printf(\"\\nB REC rec=%g, rec_1=%g\",rec_k,rec_k1) : presynaptic spike (after last post so depress)\n"
   "printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
   "    \n"
-  "    A = A + w*fact\n"
-  "    B = B + w*fact   :for double exp rise and decay\n"
+  "    A = A + w*fact*k\n"
+  "    B = B + w*fact*k   :for double exp rise and decay\n"
   "    \n"
-  "    g = g + w*k\n"
+  "    : g = g + w*k\n"
   "    tpre = t\n"
   "    k = k * factor(tpost - t)\n"
   "    rec_k=k\n"
   "printf(\"  new k %g, tpre=t= %g, tpost %g, rec_k %g\\n\", k, tpre, tpost, rec_k)\n"
   "  }\n"
   "  \n"
-  "  else if (flag == 2) { : postsynaptic spike (after last pre so potentiate)\n"
+  "  else if (flag == 2) { F=F-0.9 printf(\"\\nC F: %g\",F):rec_k=rec_k-0.9 printf(\"\\nC REC rec=%g, rec_1=%g\",rec_k,rec_k1) : postsynaptic spike (after last pre so potentiate)\n"
   "printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"
   "    tpost = t\n"
   "    countinputs=0\n"
@@ -765,12 +780,13 @@ static const char* nmodl_file_text =
   "        printf(\"MORE THAN ONE INPUT?? o_O\")\n"
   "      }\n"
   "      rec_k1=k1\n"
+  "\n"
   "printf(\"  new k1 %g\\n\", k1)\n"
   "\n"
   "    }\n"
   "  }\n"
   "  \n"
-  "   else { : flag == 1 from INITIAL block :only called in the beginning\n"
+  "   else {: flag == 1 from INITIAL block :only called in the beginning\n"
   "printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
   "    WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons\n"
   "  }\n"
