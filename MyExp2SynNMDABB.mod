@@ -93,6 +93,7 @@ DERIVATIVE state {
 NET_RECEIVE(w (uS)) {LOCAL ww
   ww=w
   :printf("NMDA Spike: %g\n", t)
+  :r=0
   if(r>=0){ : if r>=0, g = AMPA + NMDA*r
     A  = A  + factor *ww
     B  = B  + factor *ww

@@ -289,7 +289,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  pnt_receive[_mechtype] = _net_receive;
  pnt_receive_size[_mechtype] = 1;
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynNMDABB /home/maximilian/Desktop/work/neymotin/139421-master/MyExp2SynNMDABB.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynNMDABB /home/maximilian/Desktop/work/neymotin/my_neymotin/MyExp2SynNMDABB.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -622,7 +622,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/139421-master/MyExp2SynNMDABB.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/my_neymotin/MyExp2SynNMDABB.mod";
 static const char* nmodl_file_text = 
   ": $Id: MyExp2SynNMDABB.mod,v 1.4 2010/12/13 21:28:02 samn Exp $ \n"
   "NEURON {\n"
@@ -719,6 +719,7 @@ static const char* nmodl_file_text =
   "NET_RECEIVE(w (uS)) {LOCAL ww\n"
   "  ww=w\n"
   "  :printf(\"NMDA Spike: %g\\n\", t)\n"
+  "  :r=0\n"
   "  if(r>=0){ : if r>=0, g = AMPA + NMDA*r\n"
   "    A  = A  + factor *ww\n"
   "    B  = B  + factor *ww\n"

@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
 
 ###################################################
-    h.tstop = 300   #3e3
+    h.tstop = 500   #3e3
     stimp=[]#Pyramidal 
     for i in range(5):
         stimp.append(h.IClamp(net.pyr.cell[0].soma(.5)))
@@ -101,8 +101,8 @@ if __name__ == "__main__":
 
     stimp0=h.IClamp(net.pyr.cell[0].soma(.5))
     stimp0.delay = 100
-    stimp0.dur = 50
-    stimp0.amp = .1
+    stimp0.dur = 100
+    stimp0.amp = .5
 
     stimo=[]#OLM
     for i in range(5):

@@ -246,7 +246,7 @@ static void nrn_alloc(Prop* _prop) {
  	d = 0.0053;
  	p = 0.0096;
  	taud = 34;
- 	taup = 34;
+ 	taup = 16.8;
  	rec_k = 0;
  	rec_k1 = 0;
   }
@@ -347,7 +347,7 @@ double factor ( _threadargsprotocomma_ double _lDt ) {
      _lfactor = 1.0 + speed * p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor = 1.0 - speed * d * exp ( _lDt / taud ) ;
+     _lfactor = 1.0 + speed * d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor = 1.0 ;
@@ -680,7 +680,7 @@ static const char* nmodl_file_text =
   "  d = 0.0053 <0,1>: depression factor\n"
   "  p = 0.0096 <0, 1e9>: potentiation factor\n"
   "  taud = 34 (ms) : depression effectiveness time constant\n"
-  "  taup = 34 (ms) : Bi & Poo (1998, 2001)\n"
+  "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  rec_k=0\n"
   "  rec_k1=0\n"
   "  speed=1\n"
@@ -741,7 +741,7 @@ static const char* nmodl_file_text =
   "  if (Dt>0) {\n"
   "    factor = 1 + speed*p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor = 1 - speed*d*exp(Dt/taud) : depression\n"
+  "    factor = 1 + speed*d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor = 1 : no change if pre and post are simultaneous\n"
   "  }\n"
@@ -758,7 +758,7 @@ static const char* nmodl_file_text =
   "printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
   "    \n"
   "    A = A + w*fact*k\n"
-  "    B = B + w*fact*k   :for double exp rise and decay\n"
+  "    B = B + w*fact*k  :for double exp rise and decay\n"
   "    \n"
   "    : g = g + w*k\n"
   "    tpre = t\n"

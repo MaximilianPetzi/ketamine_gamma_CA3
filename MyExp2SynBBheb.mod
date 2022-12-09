@@ -84,7 +84,7 @@ FUNCTION factor(Dt (ms)) { : Dt is interval between most recent presynaptic spik
   if (Dt>0) {
     factor = 1 + speed*p*exp(-Dt/taup) : potentiation
   } else if (Dt<0) {
-    factor = 1 - speed*d*exp(Dt/taud) : depression
+    factor = 1 + speed*d*exp(Dt/taud) : depression
   } else {
     factor = 1 : no change if pre and post are simultaneous
   }
@@ -101,7 +101,7 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
 printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
     
     A = A + w*fact*k
-    B = B + w*fact*k   :for double exp rise and decay
+    B = B + w*fact*k  :for double exp rise and decay
     
     : g = g + w*k
     tpre = t

@@ -310,7 +310,7 @@ class Network:
 		random.seed(self.wseed) # initialize random # generator for wiring
 		print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
 		#self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)  ##here
-		#self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
+		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "BdendNMDA", 2, 1.0*0.7e-3, 1)
 		#self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
 
 		print "PYR -> X , AMPA"
