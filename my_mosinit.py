@@ -91,20 +91,25 @@ if __name__ == "__main__":
 
 
 ###################################################
-    h.tstop = 10e2   #3e3
-    stimp=[]
+    h.tstop = 300   #3e3
+    stimp=[]#Pyramidal 
     for i in range(5):
         stimp.append(h.IClamp(net.pyr.cell[0].soma(.5)))
-        stimp[i].delay = 100+100*i
+        stimp[i].delay = 100+4*i
         stimp[i].dur = 3
-        stimp[i].amp = .2
-    stimo=[]
+        stimp[i].amp = 0
+
+    stimp0=h.IClamp(net.pyr.cell[0].soma(.5))
+    stimp0.delay = 100
+    stimp0.dur = 50
+    stimp0.amp = .1
+
+    stimo=[]#OLM
     for i in range(5):
         stimo.append(h.IClamp(net.olm.cell[0].soma(.5)))
-        stimo[i].delay = 100+100*i+50
+        stimo[i].delay = 100+10*i+50
         stimo[i].dur = 3
-        stimo[i].amp = .2
-
+        stimo[i].amp = 0
 
     h.run()
     #net.rasterplot()
