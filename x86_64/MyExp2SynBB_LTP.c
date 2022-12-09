@@ -248,7 +248,7 @@ static void nrn_alloc(Prop* _prop) {
  	taup = 16.8;
  	rec_k = 0;
  	rec_k1 = 0;
- 	pf = 0;
+ 	pf = 1;
   }
  	_prop->param = _p;
  	_prop->param_size = 26;
@@ -344,10 +344,10 @@ static int _ode_spec1(_threadargsproto_);
 double factor ( _threadargsprotocomma_ double _lDt ) {
    double _lfactor;
  if ( _lDt > 0.0 ) {
-     _lfactor = 1.0 + pf * p * exp ( - _lDt / taup ) ;
+     _lfactor = 1.0 + 1.0 * p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor = 1.0 + pf * d * exp ( _lDt / taud ) ;
+     _lfactor = 1.0 + 1.0 * d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor = 1.0 ;
@@ -673,7 +673,7 @@ static const char* nmodl_file_text =
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  rec_k=0\n"
   "  rec_k1=0\n"
-  "  pf = 0\n"
+  "  pf = 1\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -729,9 +729,9 @@ static const char* nmodl_file_text =
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  if (Dt>0) {\n"
-  "    factor = 1 + pf*p*exp(-Dt/taup) : potentiation\n"
+  "    factor = 1 + 1*p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor = 1 + pf*d*exp(Dt/taud) : depression\n"
+  "    factor = 1 + 1*d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor = 1 : no change if pre and post are simultaneous\n"
   "  }\n"
@@ -754,8 +754,7 @@ static const char* nmodl_file_text =
   "    tpre = t\n"
   "    k = k * factor(tpost - t)\n"
   "    rec_k=k\n"
-  ":printf(\"  new k %g, tpre=t= %g, tpost %g, rec_k %g\\n\", k, tpre, tpost, rec_k)\n"
-  "  }\n"
+  "    }\n"
   "  \n"
   "  else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)\n"
   ":printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"

@@ -26,7 +26,7 @@ PARAMETER {
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   rec_k=0
   rec_k1=0
-  pf = 0
+  pf = 1
 }
 
 ASSIGNED {
@@ -107,8 +107,7 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     tpre = t
     k = k * factor(tpost - t)
     rec_k=k
-:printf("  new k %g, tpre=t= %g, tpost %g, rec_k %g\n", k, tpre, tpost, rec_k)
-  }
+    }
   
   else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)
 :printf("Postsyn spike--entry flag=%g t=%g\n", flag, t)

@@ -39,9 +39,48 @@ if __name__ == "__main__":
     Run.washoutT = 2e2  #2e3
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
+    #my advance:
+    h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
+
+    recvars=["thek"] #"F","mytsyn","myt"]
+    #net.pyr_olm_AM[0].weight[1]
+    myrec=[]
+    for recvar in recvars:
+        myrec.append([])
+    #myrec2=[]
+
+    def myadvance():
+        #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
+        #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
+        for irec,recvar in enumerate(recvars):
+            if recvar=="w":
+                myrec[irec].append(net.pyr_olm_AM[0].weight[0]) #getattr acts like ...syn.recvar
+            if recvar=="thek":
+                myrec[irec].append(net.pyr_olm_AM[0].weight[1])
+        #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
+        
+        #myrec2.append([])  #for later , here , 
+        #for iw in range(10):
+        #    myrec2[-1].append(net.pyr_olm_AM[iw].weight[0])
+        h.fadvance()
 
     h.tstop = 4e2   #3e3
     h.run()
+
+    from matplotlib import pyplot as plt
+    plt.style.use("seaborn-darkgrid")
+    import numpy as np
+    myrec=np.array(myrec)
+    #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
+    plt.figure(1)
+    for i in range(len(recvars)):
+        plt.plot(myrec[i],label=recvars[i])
+    plt.legend()
+    plt.title("record")
+    #plt.figure(2)
+    #plt.plot(myrec2)
+    plt.show()
+
     net.rasterplot()
     net.calc_lfp()
     myg = h.Graph()
