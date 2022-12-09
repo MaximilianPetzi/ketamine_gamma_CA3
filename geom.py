@@ -3,11 +3,13 @@
 from pyinit import *
 
 class Synapse:
-	def __init__(self, sect, loc, tau1, tau2, e):
-		self.syn		= h.MyExp2SynBB(loc, sec=sect)
+	def __init__(self, sect, loc, tau1, tau2, e, pf):
+		self.syn		= h.MyExp2SynBB_LTP(loc, sec=sect)
 		self.syn.tau1	= tau1
 		self.syn.tau2	= tau2
 		self.syn.e		= e 
+		self.syn.pf		= pf #plasticity factor
+
 		
 class SynapseNMDA:
 	def __init__(self, sect, loc, tau1, tau2, tau1NMDA, tau2NMDA, r, e):
@@ -101,9 +103,9 @@ class Bwb(Cell):
 		self.soma.insert('Kdrbwb')
 	   
 	def set_synapses(self):
-		self.somaAMPAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0)
-		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80)
-		self.somaGABAss	= Synapse(sect=self.soma, loc=0.5, tau1=20,   tau2=40, e=-80)#only for septal input
+		self.somaAMPAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0, pf=0)
+		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80, pf=0)
+		self.somaGABAss	= Synapse(sect=self.soma, loc=0.5, tau1=20,   tau2=40, e=-80, pf=0)#only for septal input
 		self.somaNMDA 	= SynapseNMDA(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		
 ###############################################################################
@@ -139,9 +141,9 @@ class Ow(Cell):
 		self.soma.insert('KCaolmw')
 
 	def set_synapses(self):
-		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80)
-		self.somaAMPAf 	= Synapse(    sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0)
-		self.somaGABAss	= Synapse(    sect=self.soma, loc=0.5, tau1=20,	  tau2=40, e=-80)#only for septal input
+		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80, pf=0)
+		self.somaAMPAf 	= Synapse(    sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0, pf=1)
+		self.somaGABAss	= Synapse(    sect=self.soma, loc=0.5, tau1=20,	  tau2=40, e=-80, pf=0)#only for septal input
 		self.somaNMDA 	= SynapseNMDA(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		
 ###############################################################################
@@ -217,12 +219,12 @@ class PyrAdr(Cell):
 		self.Bdend(0.5).nacurrent.ki  = 1
 
 	def set_synapses(self):
-		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80)
-		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
-		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0)
+		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80, pf=0)
+		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0, pf=0)
+		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0, pf=0)
 		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
-		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80)
-		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,   e=-80)
-		self.Adend3AMPAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,    e=0)
+		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80, pf=0)
+		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,   e=-80, pf=0)
+		self.Adend3AMPAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,    e=0, pf=0)
 		self.Adend3NMDA  = SynapseNMDA(sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 

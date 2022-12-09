@@ -22,14 +22,14 @@ extern int _method3;
 extern double hoc_Exp(double);
 #endif
  
-#define nrn_init _nrn_init__MyExp2SynBB
-#define _nrn_initial _nrn_initial__MyExp2SynBB
-#define nrn_cur _nrn_cur__MyExp2SynBB
-#define _nrn_current _nrn_current__MyExp2SynBB
-#define nrn_jacob _nrn_jacob__MyExp2SynBB
-#define nrn_state _nrn_state__MyExp2SynBB
-#define _net_receive _net_receive__MyExp2SynBB 
-#define state state__MyExp2SynBB 
+#define nrn_init _nrn_init__MyExp2SynBB_LTP
+#define _nrn_initial _nrn_initial__MyExp2SynBB_LTP
+#define nrn_cur _nrn_cur__MyExp2SynBB_LTP
+#define _nrn_current _nrn_current__MyExp2SynBB_LTP
+#define nrn_jacob _nrn_jacob__MyExp2SynBB_LTP
+#define nrn_state _nrn_state__MyExp2SynBB_LTP
+#define _net_receive _net_receive__MyExp2SynBB_LTP 
+#define state state__MyExp2SynBB_LTP 
  
 #define _threadargscomma_ _p, _ppvar, _thread, _nt,
 #define _threadargsprotocomma_ double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt,
@@ -47,19 +47,29 @@ extern double hoc_Exp(double);
 #define tau1 _p[0]
 #define tau2 _p[1]
 #define e _p[2]
-#define gmax _p[3]
-#define Vwt _p[4]
-#define i _p[5]
-#define g _p[6]
-#define A _p[7]
-#define B _p[8]
-#define factor _p[9]
-#define etime _p[10]
-#define DA _p[11]
-#define DB _p[12]
-#define v _p[13]
-#define _g _p[14]
-#define _tsav _p[15]
+#define F _p[3]
+#define gmax _p[4]
+#define Vwt _p[5]
+#define d _p[6]
+#define p _p[7]
+#define taud _p[8]
+#define taup _p[9]
+#define rec_k _p[10]
+#define rec_k1 _p[11]
+#define pf _p[12]
+#define i _p[13]
+#define g _p[14]
+#define A _p[15]
+#define B _p[16]
+#define fact _p[17]
+#define etime _p[18]
+#define tpost _p[19]
+#define countinputs _p[20]
+#define DA _p[21]
+#define DB _p[22]
+#define v _p[23]
+#define _g _p[24]
+#define _tsav _p[25]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -79,6 +89,7 @@ extern "C" {
  static Prop* _extcall_prop;
  /* external NEURON variables */
  /* declaration of user functions */
+ static double _hoc_factor();
  static int _mechtype;
 extern void _nrn_cacheloop_reg(int, int);
 extern void hoc_register_prop_size(int, int, int);
@@ -126,11 +137,16 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "loc", _hoc_loc_pnt,
  "has_loc", _hoc_has_loc,
  "get_loc", _hoc_get_loc_pnt,
+ "factor", _hoc_factor,
  0, 0
 };
+#define factor factor_MyExp2SynBB_LTP
+ extern double factor( _threadargsprotocomma_ double );
  /* declare global and static user variables */
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
+ "d", 0, 1,
+ "p", 0, 1e+09,
  "tau2", 1e-09, 1e+09,
  "tau1", 1e-09, 1e+09,
  0,0,0
@@ -140,6 +156,8 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "tau2", "ms",
  "e", "mV",
  "gmax", "uS",
+ "taud", "ms",
+ "taup", "ms",
  "A", "uS",
  "B", "uS",
  "i", "nA",
@@ -162,7 +180,14 @@ static void  nrn_init(_NrnThread*, _Memb_list*, int);
 static void nrn_state(_NrnThread*, _Memb_list*, int);
  static void nrn_cur(_NrnThread*, _Memb_list*, int);
 static void  nrn_jacob(_NrnThread*, _Memb_list*, int);
+ 
+#define _watch_array _ppvar + 3 
+ 
+#define _fnc_index 5
  static void _hoc_destroy_pnt(_vptr) void* _vptr; {
+   Prop* _prop = ((Point_process*)_vptr)->_prop;
+   if (_prop) { _nrn_free_watch(_prop->dparam, 3, 2);}
+   if (_prop) { _nrn_free_fornetcon(&(_prop->dparam[_fnc_index]._pvoid));}
    destroy_point_process(_vptr);
 }
  
@@ -171,17 +196,25 @@ static void _ode_map(int, double**, double**, double*, Datum*, double*, int);
 static void _ode_spec(_NrnThread*, _Memb_list*, int);
 static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  
-#define _cvode_ieq _ppvar[2]._i
+#define _cvode_ieq _ppvar[6]._i
  static void _ode_matsol_instance1(_threadargsproto_);
  /* connect range variables in _p that hoc is supposed to know about */
  static const char *_mechanism[] = {
  "7.7.0",
-"MyExp2SynBB",
+"MyExp2SynBB_LTP",
  "tau1",
  "tau2",
  "e",
+ "F",
  "gmax",
  "Vwt",
+ "d",
+ "p",
+ "taud",
+ "taup",
+ "rec_k",
+ "rec_k1",
+ "pf",
  0,
  "i",
  "g",
@@ -201,18 +234,26 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 16, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 26, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
  	e = 0;
+ 	F = 0;
  	gmax = 1e+09;
  	Vwt = 0;
+ 	d = 0.0096;
+ 	p = 0.0096;
+ 	taud = 16.8;
+ 	taup = 16.8;
+ 	rec_k = 0;
+ 	rec_k1 = 0;
+ 	pf = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 16;
+ 	_prop->param_size = 26;
   if (!nrn_point_prop_) {
- 	_ppvar = nrn_prop_datum_alloc(_mechtype, 3, _prop);
+ 	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
  	_prop->dparam = _ppvar;
  	/*connect ionic variables to this model*/
@@ -224,14 +265,18 @@ static void nrn_alloc(Prop* _prop) {
  static HocStateTolerance _hoc_state_tol[] = {
  0,0
 };
+ 
+#define _tqitem &(_ppvar[2]._pvoid)
  static void _net_receive(Point_process*, double*, double);
+ extern int _nrn_netcon_args(void*, double***);
+ static void _net_init(Point_process*, double*, double);
  extern Symbol* hoc_lookup(const char*);
 extern void _nrn_thread_reg(int, int, void(*)(Datum*));
 extern void _nrn_thread_table_reg(int, void(*)(double*, Datum*, Datum*, _NrnThread*, int));
 extern void hoc_register_tolerance(int, HocStateTolerance*, Symbol***);
 extern void _cvode_abstol( Symbol**, double*, int);
 
- void _MyExp2SynBB_reg() {
+ void _MyExp2SynBB_LTP_reg() {
 	int _vectorized = 1;
   _initlists();
  	_pointtype = point_register_mech(_mechanism,
@@ -244,16 +289,22 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 16, 3);
+  hoc_register_prop_size(_mechtype, 26, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
-  hoc_register_dparam_semantics(_mechtype, 2, "cvodeieq");
+  hoc_register_dparam_semantics(_mechtype, 2, "netsend");
+  hoc_register_dparam_semantics(_mechtype, 3, "watch");
+  hoc_register_dparam_semantics(_mechtype, 4, "watch");
+  hoc_register_dparam_semantics(_mechtype, 5, "fornetcon");
+  hoc_register_dparam_semantics(_mechtype, 6, "cvodeieq");
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  pnt_receive[_mechtype] = _net_receive;
- pnt_receive_size[_mechtype] = 1;
+ pnt_receive_init[_mechtype] = _net_init;
+ pnt_receive_size[_mechtype] = 3;
+ add_nrn_fornetcons(_mechtype, _fnc_index);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynBB /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynBB_LTP /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTP.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -290,32 +341,102 @@ static int _ode_spec1(_threadargsproto_);
   return 0;
 }
  
+double factor ( _threadargsprotocomma_ double _lDt ) {
+   double _lfactor;
+ if ( _lDt > 0.0 ) {
+     _lfactor = 1.0 + pf * p * exp ( - _lDt / taup ) ;
+     }
+   else if ( _lDt < 0.0 ) {
+     _lfactor = 1.0 + pf * d * exp ( _lDt / taud ) ;
+     }
+   else {
+     _lfactor = 1.0 ;
+     }
+   _lfactor = _lfactor ;
+   
+return _lfactor;
+ }
+ 
+static double _hoc_factor(void* _vptr) {
+ double _r;
+   double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
+   _p = ((Point_process*)_vptr)->_prop->param;
+  _ppvar = ((Point_process*)_vptr)->_prop->dparam;
+  _thread = _extcall_thread;
+  _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
+ _r =  factor ( _p, _ppvar, _thread, _nt, *getarg(1) );
+ return(_r);
+}
+ 
+static double _watch1_cond(_pnt) Point_process* _pnt; {
+ 	double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
+	_thread= (Datum*)0; _nt = (_NrnThread*)_pnt->_vnt;
+ 	_p = _pnt->_prop->param; _ppvar = _pnt->_prop->dparam;
+	v = NODEV(_pnt->node);
+	return  ( v ) - ( - 20.0 ) ;
+}
+ 
 static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _args; double _lflag; 
 {  double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
+   int _watch_rm = 0;
    _thread = (Datum*)0; _nt = (_NrnThread*)_pnt->_vnt;   _p = _pnt->_prop->param; _ppvar = _pnt->_prop->dparam;
   if (_tsav > t){ extern char* hoc_object_name(); hoc_execerror(hoc_object_name(_pnt->ob), ":Event arrived out of order. Must call ParallelContext.set_maxstep AFTER assigning minimum NetCon.delay");}
- _tsav = t; {
-   double _lww ;
- _lww = _args[0] ;
-     if (nrn_netrec_state_adjust && !cvode_active_){
+ _tsav = t;   if (_lflag == 1. ) {*(_tqitem) = 0;}
+ {
+   if ( _lflag  == 0.0 ) {
+     F = F + 1.0 ;
+       if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
-    double __primary = (A + _lww * factor) - __state;
+    double __primary = (A + _args[0] * fact * _args[1]) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau1 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau1 ) - __primary );
     A += __primary;
   } else {
- A = A + _lww * factor ;
-     }
+ A = A + _args[0] * fact * _args[1] ;
+       }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = B;
-    double __primary = (B + _lww * factor) - __state;
+    double __primary = (B + _args[0] * fact * _args[1]) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau2 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau2 ) - __primary );
     B += __primary;
   } else {
- B = B + _lww * factor ;
+ B = B + _args[0] * fact * _args[1] ;
+       }
+ _args[2] = t ;
+     _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
+     rec_k = _args[1] ;
      }
- } }
+   else if ( _lflag  == 2.0 ) {
+     F = F - 0.9 ;
+     tpost = t ;
+     countinputs = 0.0 ;
+     {int _ifn1, _nfn1; double* _fnargs1, **_fnargslist1;
+	_nfn1 = _nrn_netcon_args(_ppvar[_fnc_index]._pvoid, &_fnargslist1);
+	for (_ifn1 = 0; _ifn1 < _nfn1; ++_ifn1) {
+ 	 _fnargs1 = _fnargslist1[_ifn1];
+ {
+       _fnargs1[1] = _fnargs1[1] * factor ( _threadargscomma_ t - _fnargs1[2] ) ;
+       countinputs = countinputs + 1.0 ;
+       if ( countinputs > 1.0 ) {
+         }
+       rec_k1 = _fnargs1[1] ;
+       }
+     	}}
+ }
+   else {
+       _nrn_watch_activate(_watch_array, _watch1_cond, 1, _pnt, _watch_rm++, 2.0);
+ }
+   } }
+ 
+static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
+       double* _p = _pnt->_prop->param;
+    Datum* _ppvar = _pnt->_prop->dparam;
+    Datum* _thread = (Datum*)0;
+    _NrnThread* _nt = (_NrnThread*)_pnt->_vnt;
+ _args[1] = 1.0 ;
+   _args[2] = - 1e9 ;
+   }
  
 static int _ode_count(int _type){ return 2;}
  
@@ -362,16 +483,19 @@ static void initmodel(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt
   A = A0;
   B = B0;
  {
-   double _ltp ;
+   double _lt_p ;
  Vwt = 0.0 ;
    if ( tau1 / tau2 > .9999 ) {
      tau1 = .9999 * tau2 ;
      }
    A = 0.0 ;
    B = 0.0 ;
-   _ltp = ( tau1 * tau2 ) / ( tau2 - tau1 ) * log ( tau2 / tau1 ) ;
-   factor = - exp ( - _ltp / tau1 ) + exp ( - _ltp / tau2 ) ;
-   factor = 1.0 / factor ;
+   _lt_p = ( tau1 * tau2 ) / ( tau2 - tau1 ) * log ( tau2 / tau1 ) ;
+   fact = - exp ( - _lt_p / tau1 ) + exp ( - _lt_p / tau2 ) ;
+   fact = 1.0 / fact ;
+   tpost = - 1e9 ;
+   countinputs = - 1.0 ;
+   net_send ( _tqitem, (double*)0, _ppvar[1]._pvoid, t +  0.0 , 1.0 ) ;
    }
  
 }
@@ -519,13 +643,13 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTP.mod";
 static const char* nmodl_file_text = 
+  ": check if g is supposed to be STATE or ASSIGNED\n"
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
-  ":  THREADSAFE\n"
-  "  POINT_PROCESS MyExp2SynBB\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax\n"
+  "  POINT_PROCESS MyExp2SynBB_LTP\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -539,16 +663,27 @@ static const char* nmodl_file_text =
   "  tau1=.1 (ms) <1e-9,1e9>\n"
   "  tau2 = 10 (ms) <1e-9,1e9>\n"
   "  e=0	(mV)\n"
+  "  F=0\n"
   "  gmax = 1e9 (uS)\n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
+  "\n"
+  "  d = 0.0096 <0,1>: depression(-1) factor\n"
+  "  p = 0.0096 <0, 1e9>: potentiation factor\n"
+  "  taud = 16.8 (ms) : depression effectiveness time constant\n"
+  "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
+  "  rec_k=0\n"
+  "  rec_k1=0\n"
+  "  pf = 0\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
   "  v (mV)\n"
   "  i (nA)\n"
   "  g (uS)\n"
-  "  factor\n"
+  "  fact\n"
   "  etime (ms)\n"
+  "  tpost (ms)\n"
+  "  countinputs\n"
   "}\n"
   "\n"
   "STATE {\n"
@@ -557,7 +692,7 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "INITIAL {\n"
-  "  LOCAL tp\n"
+  "  LOCAL t_p :for double exp decay\n"
   "\n"
   "  Vwt = 0    : testing\n"
   "\n"
@@ -566,9 +701,14 @@ static const char* nmodl_file_text =
   "  }\n"
   "  A = 0\n"
   "  B = 0\n"
-  "  tp = (tau1*tau2)/(tau2 - tau1) * log(tau2/tau1)\n"
-  "  factor = -exp(-tp/tau1) + exp(-tp/tau2)\n"
-  "  factor = 1/factor\n"
+  "  t_p = (tau1*tau2)/(tau2 - tau1) * log(tau2/tau1)\n"
+  "  fact = -exp(-t_p/tau1) + exp(-t_p/tau2)\n"
+  "  fact = 1/fact\n"
+  "\n"
+  "\n"
+  "  tpost = -1e9\n"
+  "  countinputs=-1\n"
+  "  net_send(0, 1)\n"
   "}\n"
   "\n"
   "BREAKPOINT {\n"
@@ -576,6 +716,7 @@ static const char* nmodl_file_text =
   "  g = B - A\n"
   "  if (g>gmax) {g=gmax}: saturation\n"
   "  i = g*(v - e)\n"
+  "  :printf(\"rec_k in BREAKOPINT: %g\\n\",rec_k)\n"
   "}\n"
   "\n"
   "DERIVATIVE state {\n"
@@ -583,10 +724,64 @@ static const char* nmodl_file_text =
   "  B' = -B/tau2\n"
   "}\n"
   "\n"
-  "NET_RECEIVE(w (uS)) {LOCAL ww\n"
-  "  ww=w\n"
-  "  A = A + ww*factor\n"
-  "  B = B + ww*factor\n"
+  "FUNCTION factor(Dt (ms)) { : Dt is interval between most recent presynaptic spike\n"
+  "    : and most recent postsynaptic spike\n"
+  "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
+  "  : the following rule is the one described by Bi & Poo\n"
+  "  if (Dt>0) {\n"
+  "    factor = 1 + pf*p*exp(-Dt/taup) : potentiation\n"
+  "  } else if (Dt<0) {\n"
+  "    factor = 1 + pf*d*exp(Dt/taud) : depression\n"
+  "  } else {\n"
+  "    factor = 1 : no change if pre and post are simultaneous\n"
+  "  }\n"
+  "  factor=factor\n"
   "}\n"
+  "\n"
+  "NET_RECEIVE(w (uS), k, tpre (ms)) {\n"
+  "  \n"
+  "  INITIAL { k = 1  tpre = -1e9 }\n"
+  "  \n"
+  "  \n"
+  "  :printf(\"\\nA REC rec=%g, rec_1=%g outside flags\",rec_k,rec_k1)\n"
+  "  if (flag == 0) { F=F+1 :presynaptic spike (after last post so depress)\n"
+  ":printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
+  "    \n"
+  "    A = A + w*fact*k\n"
+  "    B = B + w*fact*k  :for double exp rise and decay\n"
+  "    \n"
+  "    : g = g + w*k\n"
+  "    tpre = t\n"
+  "    k = k * factor(tpost - t)\n"
+  "    rec_k=k\n"
+  ":printf(\"  new k %g, tpre=t= %g, tpost %g, rec_k %g\\n\", k, tpre, tpost, rec_k)\n"
+  "  }\n"
+  "  \n"
+  "  else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)\n"
+  ":printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"
+  "    tpost = t\n"
+  "    countinputs=0\n"
+  "    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args\n"
+  "    :printf(\"entry FOR_NETCONS w1=%g k1=%g tp=%g\\n\", w1, k1, tp)\n"
+  "      k1 = k1*factor(t - tp) :k1 is plasticity factor for the weight\n"
+  "      countinputs=countinputs+1\n"
+  "\n"
+  "      if (countinputs>1){\n"
+  "        :printf(\"MORE THAN ONE INPUT?? o_O\")\n"
+  "      }\n"
+  "      rec_k1=k1\n"
+  "\n"
+  ":printf(\"  new k1 %g\\n\", k1)\n"
+  "\n"
+  "    }\n"
+  "  }\n"
+  "  \n"
+  "   else {: flag == 1 from INITIAL block :only called in the beginning\n"
+  ":printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
+  "    WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "\n"
   ;
 #endif
