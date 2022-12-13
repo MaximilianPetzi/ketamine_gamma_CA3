@@ -35,8 +35,8 @@ if __name__ == "__main__":
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 1e2  #default 1e3
-    Run.washoutT = 2e2  #2e3
+    Run.washinT  = 0e55  #default 1e3
+    Run.washoutT = 2e55  #2e3
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
     #my advance:
@@ -54,17 +54,18 @@ if __name__ == "__main__":
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
             if recvar=="w":
-                myrec[irec].append(net.pyr_olm_AM[0].weight[0]) #getattr acts like ...syn.recvar
+                myrec[irec].append(net.pyr_pyr_AM[0].weight[0]) #getattr acts like ...syn.recvar
             if recvar=="thek":
-                myrec[irec].append(net.pyr_olm_AM[0].weight[1])
+                myrec[irec].append(net.pyr_pyr_AM[0].weight[1])
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
         #myrec2.append([])  #for later , here , 
         #for iw in range(10):
         #    myrec2[-1].append(net.pyr_olm_AM[iw].weight[0])
         h.fadvance()
-
-    h.tstop = 4e2   #3e3
+    
+    seconds=6
+    h.tstop = seconds*1000   #3e3
     h.run()
 
     from matplotlib import pyplot as plt
@@ -74,15 +75,24 @@ if __name__ == "__main__":
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
     for i in range(len(recvars)):
-        plt.plot(myrec[i],label=recvars[i])
+        pass
+        #plt.plot(myrec[i],label=recvars[i])
     plt.legend()
     plt.title("record")
     #plt.figure(2)
     #plt.plot(myrec2)
-    plt.show()
+    #plt.show()
 
     net.rasterplot()
     net.calc_lfp()
+    from scipy import signal
+    times=np.arange(seconds*1e4)/1e4   
+    data=net.vlfp.to_python() 
+    sin1=np.sin(2*np.pi*10*times) 
+    f,p=signal.welch(data,1e4,nperseg=4000) 
+    plt.plot(f,p);plt.show()
+    #spectral power
+
     myg = h.Graph()
     net.vlfp.plot(myg,h.dt)
     

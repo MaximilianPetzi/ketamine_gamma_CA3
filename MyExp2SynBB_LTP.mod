@@ -2,7 +2,7 @@
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
   POINT_PROCESS MyExp2SynBB_LTP
-  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf
+  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww
   NONSPECIFIC_CURRENT i
 }
 
@@ -15,6 +15,7 @@ UNITS {
 PARAMETER {
   tau1=.1 (ms) <1e-9,1e9>
   tau2 = 10 (ms) <1e-9,1e9>
+  pww=1
   e=0	(mV)
   F=0
   gmax = 1e9 (uS)
@@ -100,12 +101,13 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
   if (flag == 0) { F=F+1 :presynaptic spike (after last post so depress)
 :printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
     
-    A = A + w*fact*k
-    B = B + w*fact*k  :for double exp rise and decay
+    A = A + w*fact*k*pww
+    B = B + w*fact*k*pww  :for double exp rise and decay
     
     : g = g + w*k
     tpre = t
     k = k * factor(tpost - t)
+    
     rec_k=k
     }
   

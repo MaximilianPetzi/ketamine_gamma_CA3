@@ -46,30 +46,31 @@ extern double hoc_Exp(double);
 #define dt _nt->_dt
 #define tau1 _p[0]
 #define tau2 _p[1]
-#define e _p[2]
-#define F _p[3]
-#define gmax _p[4]
-#define Vwt _p[5]
-#define d _p[6]
-#define p _p[7]
-#define taud _p[8]
-#define taup _p[9]
-#define rec_k _p[10]
-#define rec_k1 _p[11]
-#define pf _p[12]
-#define i _p[13]
-#define g _p[14]
-#define A _p[15]
-#define B _p[16]
-#define fact _p[17]
-#define etime _p[18]
-#define tpost _p[19]
-#define countinputs _p[20]
-#define DA _p[21]
-#define DB _p[22]
-#define v _p[23]
-#define _g _p[24]
-#define _tsav _p[25]
+#define pww _p[2]
+#define e _p[3]
+#define F _p[4]
+#define gmax _p[5]
+#define Vwt _p[6]
+#define d _p[7]
+#define p _p[8]
+#define taud _p[9]
+#define taup _p[10]
+#define rec_k _p[11]
+#define rec_k1 _p[12]
+#define pf _p[13]
+#define i _p[14]
+#define g _p[15]
+#define A _p[16]
+#define B _p[17]
+#define fact _p[18]
+#define etime _p[19]
+#define tpost _p[20]
+#define countinputs _p[21]
+#define DA _p[22]
+#define DB _p[23]
+#define v _p[24]
+#define _g _p[25]
+#define _tsav _p[26]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -204,6 +205,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
 "MyExp2SynBB_LTP",
  "tau1",
  "tau2",
+ "pww",
  "e",
  "F",
  "gmax",
@@ -234,10 +236,11 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 26, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 27, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
+ 	pww = 1;
  	e = 0;
  	F = 0;
  	gmax = 1e+09;
@@ -251,7 +254,7 @@ static void nrn_alloc(Prop* _prop) {
  	pf = 1;
   }
  	_prop->param = _p;
- 	_prop->param_size = 26;
+ 	_prop->param_size = 27;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
@@ -289,7 +292,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 26, 7);
+  hoc_register_prop_size(_mechtype, 27, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "netsend");
@@ -344,10 +347,10 @@ static int _ode_spec1(_threadargsproto_);
 double factor ( _threadargsprotocomma_ double _lDt ) {
    double _lfactor;
  if ( _lDt > 0.0 ) {
-     _lfactor = 1.0 + 1.0 * p * exp ( - _lDt / taup ) ;
+     _lfactor = 1.0 + pf * p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor = 1.0 + 1.0 * d * exp ( _lDt / taud ) ;
+     _lfactor = 1.0 + pf * d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor = 1.0 ;
@@ -388,20 +391,20 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
        if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
-    double __primary = (A + _args[0] * fact * _args[1]) - __state;
+    double __primary = (A + _args[0] * fact * _args[1] * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau1 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau1 ) - __primary );
     A += __primary;
   } else {
- A = A + _args[0] * fact * _args[1] ;
+ A = A + _args[0] * fact * _args[1] * pww ;
        }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = B;
-    double __primary = (B + _args[0] * fact * _args[1]) - __state;
+    double __primary = (B + _args[0] * fact * _args[1] * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau2 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau2 ) - __primary );
     B += __primary;
   } else {
- B = B + _args[0] * fact * _args[1] ;
+ B = B + _args[0] * fact * _args[1] * pww ;
        }
  _args[2] = t ;
      _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
@@ -649,7 +652,7 @@ static const char* nmodl_file_text =
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
   "  POINT_PROCESS MyExp2SynBB_LTP\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -662,6 +665,7 @@ static const char* nmodl_file_text =
   "PARAMETER {\n"
   "  tau1=.1 (ms) <1e-9,1e9>\n"
   "  tau2 = 10 (ms) <1e-9,1e9>\n"
+  "  pww=1\n"
   "  e=0	(mV)\n"
   "  F=0\n"
   "  gmax = 1e9 (uS)\n"
@@ -729,9 +733,9 @@ static const char* nmodl_file_text =
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  if (Dt>0) {\n"
-  "    factor = 1 + 1*p*exp(-Dt/taup) : potentiation\n"
+  "    factor = 1 + pf*p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor = 1 + 1*d*exp(Dt/taud) : depression\n"
+  "    factor = 1 + pf*d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor = 1 : no change if pre and post are simultaneous\n"
   "  }\n"
@@ -747,8 +751,8 @@ static const char* nmodl_file_text =
   "  if (flag == 0) { F=F+1 :presynaptic spike (after last post so depress)\n"
   ":printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
   "    \n"
-  "    A = A + w*fact*k\n"
-  "    B = B + w*fact*k  :for double exp rise and decay\n"
+  "    A = A + w*fact*k*pww\n"
+  "    B = B + w*fact*k*pww  :for double exp rise and decay\n"
   "    \n"
   "    : g = g + w*k\n"
   "    tpre = t\n"

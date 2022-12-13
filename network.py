@@ -116,8 +116,8 @@ class Network:
 
 
 	def set_noise_inputs(self,simdur): #simdur only used for make_all_noise
-		if self.DoMakeNoise:
-			if self.UseNetStim:
+		if self.DoMakeNoise:#true
+			if self.UseNetStim:#true
 				self.make_all_NetStims(simdur,self.iseed)
 			else:
 				self.make_all_noise(simdur,self.iseed)
@@ -247,7 +247,7 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
