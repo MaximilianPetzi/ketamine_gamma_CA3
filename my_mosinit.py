@@ -93,7 +93,8 @@ if __name__ == "__main__":
     stim = h.IClamp(net.pyr.cell[0].soma(.5))
     stim.delay = 100
     stim.dur = 500
-    stim.amp = .1
+    print(sys.argv[1])
+    stim.amp = float(sys.argv[1])
     h.run()
     #net.rasterplot()
     
@@ -119,8 +120,12 @@ if __name__ == "__main__":
     #myg2= h.Graph()
     #myg2.color(2)
     print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
-    
-    Fvalue=5.8
+    spiketimes=np.array(net.vmyspike_array_pyr[0].to_python())
+    if len(spiketimes)>1:
+        Fvalue=len(spiketimes)/(spiketimes[-1]-spiketimes[0])
+    else:   Fvalue=0
+    if len(spiketimes)==1: Fvalue=-1
+
     data=np.load("recfolder/FI.npy")
     data=np.append(data,Fvalue)
     np.save("recfolder/FI",data)

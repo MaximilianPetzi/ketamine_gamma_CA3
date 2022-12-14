@@ -75,7 +75,7 @@ class Cell:
 			self.__dict__[name+"_volt"].record(self.__dict__[name](0.5)._ref_v)
 		#NetCon into nothing for recording
 		self.__dict__[name+"_spikereccon"] = h.NetCon(self.soma(.5)._ref_v, None, sec=self.soma) 
-		self.__dict__[name+"_spikerecvec"] = h.Vector()
+		self.__dict__[name+"_spikerecvec"] = h.Vector()	#not sure in how far this vector is needed
 		self.__dict__[name+"_spikereccon"].record(self.__dict__[name+"_spikerecvec"])	
 		
 	def plot_volt(self, name, fig=1):

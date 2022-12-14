@@ -14,4 +14,4 @@ if test "" = "yes" ; then
 else
     NRNIV="${NRNBIN}/nrniv"
 fi
-"${NRNIV}" -dll "/home/maximilian/Desktop/work/neymotin/original_neymotin/my_neymotin/x86_64/.libs/libnrnmech.so" "$@"
+"${NRNIV}" -dll "/home/maximilian/Desktop/work/neymotin/measure_neymotin/x86_64/.libs/libnrnmech.so" "$@"
