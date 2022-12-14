@@ -75,18 +75,18 @@ NET_RECEIVE(w (uS), tsyn (ms)) {LOCAL ww
     F = 1
     T=1
     tsyn = t
-    printf("start(initial) %g %g %g\n", t, t-tsyn, tsyn)
+    :printf("start(initial) %g %g %g\n", t, t-tsyn, tsyn)
     
     
 }
-printf("entry flag=%g \n", flag)
+:printf("entry flag=%g \n", flag)
 
   myt=t ::
   mytsyn=tsyn ::
   T = T*exp(-(t - tsyn)/tau_T)
   printf("set F=20")
   F=20
-  printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
+  :printf("start %g %g %g, F=%g\n", t, t-tsyn, tsyn,F)
 
   tsyn = t
   
