@@ -277,7 +277,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  pnt_receive_init[_mechtype] = _net_init;
  pnt_receive_size[_mechtype] = 2;
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynBB_ltp /home/maximilian/Desktop/work/neymotin/my_neymotin/MyExp2SynBB_ltp.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynBB_ltp /home/maximilian/Desktop/work/neymotin/measure_neymotin/MyExp2SynBB_ltp.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -321,13 +321,11 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t; {
    double _lww ;
  _lww = _args[0] ;
-   printf ( "entry flag=%g \n" , _lflag ) ;
    myt = t ;
    mytsyn = _args[1] ;
    T = T * exp ( - ( t - _args[1] ) / tau_T ) ;
    printf ( "set F=20" ) ;
    F = 20.0 ;
-   printf ( "start %g %g %g, F=%g\n" , t , t - _args[1] , _args[1] , F ) ;
    _args[1] = t ;
      if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
@@ -358,7 +356,6 @@ static void _net_init(Point_process* _pnt, double* _args, double _lflag) {
  F = 1.0 ;
    T = 1.0 ;
    _args[1] = t ;
-   printf ( "start(initial) %g %g %g\n" , t , t - _args[1] , _args[1] ) ;
    }
  
 static int _ode_count(int _type){ return 2;}
@@ -563,7 +560,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/my_neymotin/MyExp2SynBB_ltp.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/measure_neymotin/MyExp2SynBB_ltp.mod";
 static const char* nmodl_file_text = 
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
@@ -642,18 +639,18 @@ static const char* nmodl_file_text =
   "    F = 1\n"
   "    T=1\n"
   "    tsyn = t\n"
-  "    printf(\"start(initial) %g %g %g\\n\", t, t-tsyn, tsyn)\n"
+  "    :printf(\"start(initial) %g %g %g\\n\", t, t-tsyn, tsyn)\n"
   "    \n"
   "    \n"
   "}\n"
-  "printf(\"entry flag=%g \\n\", flag)\n"
+  ":printf(\"entry flag=%g \\n\", flag)\n"
   "\n"
   "  myt=t ::\n"
   "  mytsyn=tsyn ::\n"
   "  T = T*exp(-(t - tsyn)/tau_T)\n"
   "  printf(\"set F=20\")\n"
   "  F=20\n"
-  "  printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
+  "  :printf(\"start %g %g %g, F=%g\\n\", t, t-tsyn, tsyn,F)\n"
   "\n"
   "  tsyn = t\n"
   "  \n"

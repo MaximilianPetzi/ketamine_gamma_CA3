@@ -76,7 +76,7 @@ if __name__ == "__main__":
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
-            myrec[irec].append(getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
+            myrec[irec].append(99)#getattr(net.pyr.cell[0].somaAMPAf.syn,recvar)) #getattr acts like ...syn.recvar
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
         #myrec2.append([])  #for later , here , 
@@ -121,13 +121,14 @@ if __name__ == "__main__":
     #myg2.color(2)
     print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
     spiketimes=np.array(net.vmyspike_array_pyr[0].to_python())
-    if len(spiketimes)>1:
-        Fvalue=len(spiketimes)/(spiketimes[-1]-spiketimes[0])
-    else:   Fvalue=0
-    if len(spiketimes)==1: Fvalue=-1
-
+    
     data=np.load("recfolder/FI.npy")
-    data=np.append(data,Fvalue)
+    print("data",data)
+    ii=0
+    for i in range(len(data)):
+        if data[i]==0:break   #find next index to write
+        ii+=1
+    data[ii]=spiketimes
     np.save("recfolder/FI",data)
     #os.System("touch recfolder/recFI")
     net.vmyvolt_array_pyr[0].plot(myg,h.dt)

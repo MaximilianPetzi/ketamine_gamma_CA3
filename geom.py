@@ -236,7 +236,7 @@ class PyrAdr(Cell):
 
 	def set_synapses(self):
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80)
-		self.somaAMPAf 	 = SynapseHeb(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
+		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0)
 		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0)
 		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80)
