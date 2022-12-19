@@ -91,8 +91,9 @@ if __name__ == "__main__":
     plt.style.use("seaborn-darkgrid")
     import numpy as np
     celltype=sys.argv[2]
+    net.celltype=celltype
     h.tstop = 10e2   #3e3
-    stim = h.IClamp(net.pyr.cell[0].soma(.5))
+    stim = h.IClamp(getattr(net,celltype).cell[0].soma(.5))
     stim.delay = 100
     stim.dur = 500
     
@@ -117,14 +118,22 @@ if __name__ == "__main__":
     #print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
     spiketimes=np.array(net.vmyspike_array[0].to_python())
     
-    data=np.load("recfolder/FI.npy", allow_pickle=True)
-    #print("data",data)
+    Data=np.load("recfolder/FI.npy", allow_pickle=True)
+    celldict={"pyr":0,"bas":1,"olm":2}
+    
+    data=Data[celldict[celltype]]
+    print("here")
+    print(Data)
+    print(data)
+    print(celldict[celltype])
     ii=0
     for i in range(data.size):
         if data[i] is 0:break   #find next index to write
         ii+=1
     data[ii]=spiketimes
-    np.save("recfolder/FI",data)
+    Data[celldict[celltype]]=data
+    
+    np.save("recfolder/FI",Data)
     #os.System("touch recfolder/recFI")
     myg = h.Graph()
     net.calc_myvolt_pyr()
