@@ -105,6 +105,10 @@ if __name__ == "__main__":
     h.run()
     #net.rasterplot()
     
+    myg = h.Graph()
+    net.calc_myvolt_olm()
+    net.vmyvolt_array_olm[0].plot(myg,h.dt)
+
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
     plt.figure(1)
@@ -137,9 +141,7 @@ if __name__ == "__main__":
     
     np.save("recfolder/FI",Data)
     #os.System("touch recfolder/recFI")
-    myg = h.Graph()
-    net.calc_myvolt_pyr()
-    net.vmyvolt_array_pyr[0].plot(myg,h.dt)
+    
     #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
     #myg.exec_menu("New Axis")
     #stim.amp = .4
