@@ -4,6 +4,7 @@
 
 #noise sends events to somaAMPAf mechanisms. to prevent LTP, manage the events accordingly
 #read netcon documentation and think about the LTP rule and when events should be triggered
+
 if __name__ == "__main__":
     
     import os
@@ -90,7 +91,8 @@ if __name__ == "__main__":
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
-    celltype=sys.argv[2]
+    stimamp=0.75#float(sys.argv[1])
+    celltype="olm"#sys.argv[2]
     net.celltype=celltype
     h.tstop = 10e2   #3e3
     stim = h.IClamp(getattr(net,celltype).cell[0].soma(.5))
@@ -98,7 +100,7 @@ if __name__ == "__main__":
     stim.dur = 500
     
     #print(sys.argv[1])
-    stim.amp = float(sys.argv[1])
+    stim.amp = stimamp
 
     h.run()
     #net.rasterplot()

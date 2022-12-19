@@ -498,10 +498,12 @@ class Network:
 		self.myspike_array=[]
 		#for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
 			#print(cellidx)
-		localrecvec=self.pyr.cell[0].soma_spikereccon.get_recordvec()
-		self.vmyspike = h.Vector(localrecvec.size()) 
-			
+		#print("celltype",self.celltype)
+		localrecvec=getattr(self,self.celltype).cell[0].soma_spikereccon.get_recordvec()
+		
+		self.vmyspike = h.Vector(localrecvec.size()) 	
 		self.vmyspike.add(localrecvec)
+
 		testvec=numpy.array(localrecvec.to_python())
 		self.myspike=numpy.array(self.vmyspike.to_python()) # convert to python array (so can do PSD)
 		self.myspike_array.append(self.myspike)
