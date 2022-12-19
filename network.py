@@ -93,10 +93,10 @@ class Network:
 
 	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1234,UseNetStim=True,wseed=4321,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
-		print "Setting Cells"
+		#print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)	
-		self.bas = Population(cell_type=Bwb,   n=int(math.ceil(200*scale)), x=10, y=0, z=0, dx=50, amp=     0, dur=  0, delay=2*h.dt)
-		self.olm = Population(cell_type=PyrAdr,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
+		self.bas = Population(cell_type=Bwb,   n=1, x=10, y=0, z=0, dx=50, amp=     0, dur=  0, delay=2*h.dt)
+		self.olm = Population(cell_type=Ow,n=1, x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
 		
 		# psr = sensor cell to estimate the E->E connections
 		self.psr = Population(cell_type=PyrAdr,n=1,   x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt) 
@@ -111,7 +111,7 @@ class Network:
 		self.SaveConn = SaveConn
 		
 		if connections:
-			print "Setting Connections"
+			#print "Setting Connections"
 			self.set_all_conns()
 
 		
@@ -133,21 +133,21 @@ class Network:
 				self.make_all_noise(simdur,self.iseed)
 		else:
 			self.load_all_noise()
-		print "Done!"
+		#print "Done!"
 
 	def load_all_noise(self): #load noise from data files
-		print "Loading Noise"		
-		print "to PYR"
+		#print "Loafding Noise"		
+		#print "to PYR"
 		#self.b_pyr_somaAMPAf=self.load_spikes("spike_noise_pyr_800_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.pyr,"somaAMPAf",0.05e-3)
 		self.b_pyr_Adend3AMPAf=self.load_spikes("spike_noise_pyr_800_Adend3_AMPA_ISI_1_N_10000_noise_1.npy",self.pyr,"Adend3AMPAf",0.05e-3)
 		self.b_pyr_somaGABAf=self.load_spikes("spike_noise_pyr_800_soma_GABA_ISI_1_N_10000_noise_1.npy",self.pyr,"somaGABAf",0.012e-3)
 		self.b_pyr_Adend3GABAf=self.load_spikes("spike_noise_pyr_800_Adend3_GABA_ISI_1_N_10000_noise_1.npy",self.pyr,"Adend3GABAf",0.012e-3)
 		self.b_pyr_Adend3NMDA=self.load_spikes("spike_noise_pyr_800_Adend3_NMDA_ISI_100_N_100_noise_1.npy", self.pyr,"Adend3NMDA",6.5e-3)
-		print "to BAS"
+		#print "to BAS"
 		#self.b_bas_somaAMPAf=self.load_spikes("spike_noise_bas_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.bas,"somaAMPAf",w=0.02e-3)
 		self.b_bas_somaGABA=self.load_spikes("spike_noise_bas_200_soma_GABA_ISI_1_N_10000_noise_1.npy",self.bas,"somaGABAf",w=0.2e-3)
 		self.b_bas_somaGABAf=self.load_spikes("spike_noise_bas_200_soma_GABAf_ISI_150_N_65_noise_0.npy",self.bas,"somaGABAss",w=1.6e-3)
-		print "to OLM"
+		#print "to OLM"
 		#self.b_olm_somaAMPAf=self.load_spikes("spike_noise_olm_200_soma_AMPA_ISI_1_N_10000_noise_1.npy",self.olm,"somaAMPAf",w=0.02e-3)
 		self.b_olm_somaGABAf=self.load_spikes("spike_noise_olm_200_soma_GABA_ISI_1_N_10000_noise_1.npy",self.olm,"somaGABAf",w=0.2e-3)
 		self.b_olm_somaGABAss=self.load_spikes("spike_noise_olm_200_soma_GABAss_ISI_150_N_65_noise_0.npy",self.olm,"somaGABAss",w=1.6e-3)
@@ -246,15 +246,15 @@ class Network:
 		snq.verbose=1
 
 	def make_all_NetStims(self,simdur,rdmseed):
-		print "Making NetStims"
+		#print "Making NetStims"
 		# h.mcell_ran4_init(self.iseed)
 		self.nsl = [] #NetStim List
 		self.ncl = [] #NetCon List
 		self.nrl = [] #Random List for NetStims
 		self.nrlsead = [] #List of seeds for NetStim randoms
 		# numpy.random.seed(rdmseed) # initialize random # generator
-		print "Making Noise"
-		print "to PYR"
+		#print "Making Noise"
+		#print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		
 		pyrfac=.0
@@ -263,15 +263,15 @@ class Network:
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=pyrfac*6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
-		print "to BAS"			
+		#print "to BAS"			
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		#rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
-		print "to OLM"
+		#print "to OLM"
 		olmfac=.0
 		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=olmfac*0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3AMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf", w=olmfac*0.0525e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		
-		rdtmp=self.make_NetStims(po=self.olm, syn="Adend3NMDA",  w=olmfac*6.5e-3,   ISI=100,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",  w=olmfac*6.5e-3,   ISI=100,  time_limit=simdur, sead=rdtmp)
 		
 		#setup medial septal inputs to OLM and BASKET cells, note that MSGain can be 0 == no effect
 		ns = h.NetStim()
@@ -293,19 +293,19 @@ class Network:
 	def make_all_noise(self,simdur,rdmseed): # create noise for simdur milliseconds
 		numpy.random.seed(rdmseed) # initialize random # generator
 		import math
-		print "Making Noise"
+		#print "Making Noise"
 		fctr = (simdur+simdur/2) / 10000.0		
-		print "to PYR"
+		#print "to PYR"
 		#self.b_pyr_somaAMPAf=self.make_spikes(self.pyr,"somaAMPAf",0.05e-3,self.pyr.n,"soma",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_pyr_Adend3AMPAf=self.make_spikes(self.pyr,"Adend3AMPAf",0.05e-3,self.pyr.n,"Adend3",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_pyr_somaGABAf=self.make_spikes(self.pyr,"somaGABAf",0.012e-3,self.pyr.n,"soma",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_pyr_Adend3GABAf=self.make_spikes(self.pyr,"Adend3GABAf",0.012e-3,self.pyr.n,"Adend3",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_pyr_Adend3NMDA=self.make_spikes(self.pyr,"Adend3NMDA",6.5e-3,self.pyr.n,"Adend3",100,math.ceil(100*fctr),1,simdur)
-		print "to BAS"			
+		#print "to BAS"			
 		#self.b_bas_somaAMPAf=self.make_spikes(self.bas,"somaAMPAf",0.02e-3,self.bas.n,"soma",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_bas_somaGABA=self.make_spikes(self.bas,"somaGABAf",0.2e-3,self.bas.n,"soma",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_bas_somaGABAf=self.make_spikes(self.bas,"somaGABAss",1.6e-3,self.bas.n,"soma",150,math.ceil(65*fctr),0,simdur)
-		print "to OLM"
+		#print "to OLM"
 		#self.b_olm_somaAMPAf=self.make_spikes(self.olm,"somaAMPAf",0.02e-3,self.olm.n,"soma",1,math.ceil(10000*fctr),1,simdur)
 		#self.b_olm_somaGABAf=self.make_spikes(self.olm,"somaGABAf",0.2e-3,self.olm.n,"soma",1,math.ceil(10000*fctr),1,simdur)	
 		#self.b_olm_somaGABAss=self.make_spikes(self.olm,"somaGABAss",1.6e-3,self.olm.n,"soma",150,math.ceil(65*fctr),0,simdur)		
@@ -318,28 +318,28 @@ class Network:
 
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
-		print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
+		#print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
 		#self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)  ##here
 		#self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
 		#self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
 
-		print "PYR -> X , AMPA"
+		#print "PYR -> X , AMPA"
 		#self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)
-		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  1)	
+		#self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  1)	
 		#self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 			
-		print "BAS -> X , GABA"
+		#print "BAS -> X , GABA"
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#new 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#new 2
 		#self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#new 1
 
-		print "OLM -> PYR , GABA"
+		#print "OLM -> PYR , GABA"
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#new weight value
 
 	        #pyramidal to PSR cell -- for testing only
-		print "PYR -> PSR, AMPA/NMDA"
+		#print "PYR -> PSR, AMPA/NMDA"
 		#self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)
 		#self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 
@@ -356,7 +356,8 @@ class Network:
 				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))#wichtig
 		if self.SaveConn:
 			try:
-				print self.nqcon.size()
+				pass
+				#print self.nqcon.size()
 			except:
 				self.nqcon = h.NQS("id1","id2","w","syn")
 				self.nqcon.strdec("syn")
@@ -369,13 +370,13 @@ class Network:
 	def load_spikes(self,fn,po,syn,w,time_limit=10000):
 		fn = os.path.join("data",fn)
 		events = numpy.load(fn)
-		print "Begin setting events...", po
-		print events.shape
+		#print "Begin setting events...", po
+		#print events.shape
 		for i,ii in enumerate(events):
 			ii=ii[ii<=time_limit]
 			po.cell[i].__dict__[syn].append(ii)
 			po.cell[i].__dict__[syn].syn.Vwt = w
-		print "End setting events"
+		#print "End setting events"
 		return events
 
 	def make_spikes(self,po,syn,w,cellN,comp,ISI,eventN,noise,time_limit):
@@ -481,7 +482,7 @@ class Network:
 		self.vmyvolt_array_pyr=[]
 		self.myvolt_array_pyr=[]
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
-			print(cellidx)
+			#print(cellidx)
 			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
 			
 			#self.vmyvolt.add(self.pyr.cell[cellidx].soma(0.5)._ref_v)
@@ -492,26 +493,26 @@ class Network:
 			self.myvolt_array_pyr.append(self.myvolt)
 			self.vmyvolt_array_pyr.append(self.vmyvolt)
 	
-	def calc_spikes_pyr(self):
-		self.vmyspike_array_pyr=[]
-		self.myspike_array_pyr=[]
-		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
-			print(cellidx)
-			localrecvec=self.pyr.cell[0].soma_spikereccon.get_recordvec()
-			self.vmyspike = h.Vector(localrecvec.size()) 
-
-			self.vmyspike.add(localrecvec)
-			testvec=numpy.array(localrecvec.to_python())
-			self.myspike=numpy.array(self.vmyspike.to_python()) # convert to python array (so can do PSD)
-			self.myspike_array_pyr.append(self.myspike)
-			self.vmyspike_array_pyr.append(self.vmyspike)
+	def calc_spikes(self):
+		self.vmyspike_array=[]
+		self.myspike_array=[]
+		#for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
+			#print(cellidx)
+		localrecvec=self.pyr.cell[0].soma_spikereccon.get_recordvec()
+		self.vmyspike = h.Vector(localrecvec.size()) 
+			
+		self.vmyspike.add(localrecvec)
+		testvec=numpy.array(localrecvec.to_python())
+		self.myspike=numpy.array(self.vmyspike.to_python()) # convert to python array (so can do PSD)
+		self.myspike_array.append(self.myspike)
+		self.vmyspike_array.append(self.vmyspike)
 
 
 	def calc_myvolt_olm(self): ##mine
 		self.vmyvolt_array_olm=[]
 		self.myvolt_array_olm=[]
 		for (cellidx,cell) in enumerate(self.olm.cell):##for index, user in enumerate(users)
-			print(cellidx)
+			#print(cellidx)
 			self.vmyvolt = h.Vector(self.olm.cell[0].soma_volt.size()) 
 
 			self.vmyvolt.add(self.olm.cell[cellidx].soma_volt)
@@ -524,7 +525,7 @@ class Network:
 		self.vmyvolt_array_test=[]
 		self.myvolt_array_test=[]
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
-			print(cellidx)
+			#print(cellidx)
 			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
 
 			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)###soma
@@ -594,10 +595,10 @@ try:
 	fp.close()
         #create the network
 	net = Network(noise=True,connections=True,DoMakeNoise=True,iseed=ISEED,UseNetStim=True,wseed=WSEED,scale=1.0,MSGain=MSG) 
-	print "set network from rseed.txt : iseed=",ISEED,", WSEED=",WSEED,", MSG = ",MSG
+	#print "set network from rseed.txt : iseed=",ISEED,", WSEED=",WSEED,", MSG = ",MSG
 except:
 	net = Network()
-	print "set network from default constructor"
+	#print "set network from default constructor"
 
 #setup some variables in hoc
 def sethocix():

@@ -19,7 +19,7 @@ pyrBdendNMDA=1
 pyrAdend3NMDA=1
 
 def gSetNMDA(net):
-    net.olm.set_r("BdendNMDA",olmSomaNMDA)
+    net.olm.set_r("somaNMDA",olmSomaNMDA)
     net.bas.set_r("somaNMDA",bassomaNMDA)
     net.pyr.set_r("BdendNMDA",pyrBdendNMDA)
     net.pyr.set_r("Adend3NMDA",pyrAdend3NMDA)

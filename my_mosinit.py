@@ -5,7 +5,7 @@
 #noise sends events to somaAMPAf mechanisms. to prevent LTP, manage the events accordingly
 #read netcon documentation and think about the LTP rule and when events should be triggered
 if __name__ == "__main__":
-    import sys
+    
     import os
     import string
 
@@ -55,7 +55,8 @@ if __name__ == "__main__":
     ####################################################
     #my event:
     def myevent_eventcallingfunction():
-        h.CVode().event(0.7,my_event)
+        pass
+        #h.CVode().event(0.7,my_event)
     def my_event():
         #print("hi from",h.t)
         #(see run)
@@ -89,12 +90,15 @@ if __name__ == "__main__":
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
+    celltype=sys.argv[2]
     h.tstop = 10e2   #3e3
     stim = h.IClamp(net.pyr.cell[0].soma(.5))
     stim.delay = 100
     stim.dur = 500
-    print(sys.argv[1])
+    
+    #print(sys.argv[1])
     stim.amp = float(sys.argv[1])
+
     h.run()
     #net.rasterplot()
     
@@ -105,32 +109,25 @@ if __name__ == "__main__":
     plt.plot(myrec[0],color="red")
     plt.plot(myrec[1],color="blue")
     plt.title("record")
-    #plt.figure(2)
-    #plt.plot(myrec2)
-    #plt.show()
-    net.calc_lfp()
 
-    net.calc_myvolt_pyr()
-    net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen
+    net.calc_spikes()
 
-    net.calc_spikes_pyr()
-
-
-    myg = h.Graph()
     #myg2= h.Graph()
     #myg2.color(2)
-    print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
-    spiketimes=np.array(net.vmyspike_array_pyr[0].to_python())
+    #print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
+    spiketimes=np.array(net.vmyspike_array[0].to_python())
     
-    data=np.load("recfolder/FI.npy")
-    print("data",data)
+    data=np.load("recfolder/FI.npy", allow_pickle=True)
+    #print("data",data)
     ii=0
-    for i in range(len(data)):
-        if data[i]==0:break   #find next index to write
+    for i in range(data.size):
+        if data[i] is 0:break   #find next index to write
         ii+=1
     data[ii]=spiketimes
     np.save("recfolder/FI",data)
     #os.System("touch recfolder/recFI")
+    myg = h.Graph()
+    net.calc_myvolt_pyr()
     net.vmyvolt_array_pyr[0].plot(myg,h.dt)
     #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
     #myg.exec_menu("New Axis")
