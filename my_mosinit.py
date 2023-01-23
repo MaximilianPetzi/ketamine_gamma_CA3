@@ -1,5 +1,12 @@
-#let's start
-if __name__ == "__main__":
+import numpy as np
+import sys
+myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+myparams[0]=True
+if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
+    myparams[0]=False
+np.save("recfolder/myparams.npy", myparams)
+
+if True:
     import sys
     import os
     import string
@@ -26,6 +33,7 @@ if __name__ == "__main__":
     from pyinit import *
     from geom import *
     from network import *
+    
     from params import *
     from run import *
 
@@ -35,8 +43,14 @@ if __name__ == "__main__":
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 0e55  #default 1e3
-    Run.washoutT = 2e55  #2e3
+    Run.washinT  = 0e3  #default 1e3
+    myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+    if myparams[0]:
+        Run.washoutT = 1000*0  #2e3
+    else:
+        #that means that a myparams file exists and this is part of a seedavg simulation
+        Run.washoutT = 1000*float(myparams[3])  #2e3
+
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
     #my advance:
@@ -48,6 +62,8 @@ if __name__ == "__main__":
     for recvar in recvars:
         myrec.append([])
     #myrec2=[]
+    Karr=[]
+    net.nnn=0
 
     def myadvance():
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
@@ -55,8 +71,12 @@ if __name__ == "__main__":
         for irec,recvar in enumerate(recvars):
             if recvar=="w":
                 myrec[irec].append(net.pyr_pyr_AM[0].weight[0]) #getattr acts like ...syn.recvar
+                #net.pyr_pyr_AM[0].weight[0]
             if recvar=="thek":
                 myrec[irec].append(net.pyr_pyr_AM[0].weight[1])
+        if net.nnn%100==0:
+            Karr.append(np.average(whist()))
+        net.nnn=net.nnn+1
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         
         #myrec2.append([])  #for later , here , 
@@ -64,53 +84,60 @@ if __name__ == "__main__":
         #    myrec2[-1].append(net.pyr_olm_AM[iw].weight[0])
         h.fadvance()
     
-    seconds=6
-    h.tstop = seconds*1000   #3e3
-    h.run()
-
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
+
+    def whist(bins=200):#number of connections (multiply convergence nr with number of cells)
+        ar=[]; 
+        for i in range(20000):
+            ar.append(net.pyr_pyr_AM[i].weight[1])
+        #plt.hist(ar,bins=bins)
+        #plt.show()
+        return ar
+
+
+    seconds=1
+    h.tstop = seconds*100   #3e3
+    h.run()
     myrec=np.array(myrec)
-    #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
-    plt.figure(1)
-    for i in range(len(recvars)):
-        pass
-        #plt.plot(myrec[i],label=recvars[i])
-    plt.legend()
-    plt.title("record")
-    #plt.figure(2)
-    #plt.plot(myrec2)
-    #plt.show()
+    print("args: ",sys.argv)
+    myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+    if myparams[0]: #if name==main
+        #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
+        plt.figure(1)
+        for i in range(len(recvars)):
+            plt.plot(myrec[i],label=recvars[i])
+        plt.legend()
+        plt.xlabel("timestep")
+        plt.title("records")
+        plt.figure(2)
+        #plt.plot(myrec2)
+        #plt.show()
 
-    net.rasterplot()
-    net.calc_lfp()
-    from scipy import signal
-    times=np.arange(seconds*1e4)/1e4   
-    data=net.vlfp.to_python() 
-    sin1=np.sin(2*np.pi*10*times) 
-    f,p=signal.welch(data,1e4,nperseg=4000) 
-    plt.plot(f,p);plt.show()
-    #spectral power
+        net.rasterplot()
+        net.calc_lfp()
+        from scipy import signal
+        times=np.arange(seconds*1e4)/1e4   
+        data=net.vlfp.to_python() 
+        sin1=np.sin(2*np.pi*10*times) 
+        f,p=signal.welch(data,1e4,nperseg=4000) 
+        plt.plot(f,p)
+        plt.title("spectral power of lfp")
+        plt.show()
+        #spectral power
 
-    myg = h.Graph()
-    net.vlfp.plot(myg,h.dt)
-    
-    #import numpy as np
-    #lfpar=net.lfp
-    
-    #def movavg(inputar,kernellen):
-    #    outputar=[]
-    #    for i in range(len(inputar)-kernellen):
-    #        outputar.append(np.average(inputar[i:i+kernellen]))
-    #    return outputar
-
-    #print np.average(lfpar[10000:50000])
-    #print np.average(lfpar[50000:60000])
-    #print np.average(lfpar[60000:70000])
-    #print np.average(lfpar[70000:100000])
-    #from matplotlib import pyplot as plt
-    #plt.plot(movavg(lfpar,4500))
-    #plt.show()
-    myg.exec_menu("View = plot")
-    myg.exec_menu("New Axis")
+        myg = h.Graph()
+        net.vlfp.plot(myg,h.dt)
+        myg.exec_menu("View = plot")
+        myg.exec_menu("New Axis")
+    else:
+        Data=np.load("recfolder/Data.npy",allow_pickle=True)
+        print(myparams)
+        print(myparams[1],myparams[2])
+        print(Data)
+        print(Data[myparams[1],myparams[2]])
+        
+        Data[myparams[1],myparams[2]]=Karr
+        np.save("recfolder/Data.npy",Data)
+        

@@ -221,13 +221,18 @@ class PyrAdr(Cell):
 
 	def set_synapses(self):
 		pww=1
-		pf=15
-		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1, 	  e=-80, pf=0)
-		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3, 	   e=0, pf=0)
-		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,     e=0, pf=pf, pww=pww)
-		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
-		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,   e=-80, pf=0)
-		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,   e=-80, pf=0)
-		self.Adend3AMPAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,    e=0, pf=pf, pww=pww)
-		self.Adend3NMDA  = SynapseNMDA(sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+		pf=60
+		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
+		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=0) #this one probably too
+		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)
+		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1.0, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,e=-80, 	pf=0)
+		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
+		self.Adend3AMPAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)
+		self.Adend3NMDA  = SynapseNMDA(sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+
+
+
+
+
 

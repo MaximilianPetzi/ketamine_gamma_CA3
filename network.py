@@ -1,8 +1,9 @@
 # $Id: network.py,v 1.125 2011/06/10 15:10:05 samn Exp $ 
-
+import numpy as np
 from pyinit import *
 from geom import *
 import random
+import sys
 
 gGID = 0 # global ID for cells
 
@@ -90,7 +91,6 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:
-
 	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1234,UseNetStim=True,wseed=4321,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
@@ -523,8 +523,13 @@ try:
 	net = Network(noise=True,connections=True,DoMakeNoise=True,iseed=ISEED,UseNetStim=True,wseed=WSEED,scale=1.0,MSGain=MSG) 
 	print "set network from rseed.txt : iseed=",ISEED,", WSEED=",WSEED,", MSG = ",MSG
 except:
-	net = Network()
-	print "set network from default constructor"
+	myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+	if myparams[0]:#if name (mymosinit) ==main
+		net = Network()
+	else: 
+		import numpy as np
+		net = Network(iseed=int(myparams[4]),wseed=int(myparams[4]))
+		print "we are in a simulation"
 
 #setup some variables in hoc
 def sethocix():

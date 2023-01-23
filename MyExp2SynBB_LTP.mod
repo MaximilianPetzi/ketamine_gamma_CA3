@@ -2,7 +2,7 @@
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
   POINT_PROCESS MyExp2SynBB_LTP
-  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww
+  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax
   NONSPECIFIC_CURRENT i
 }
 
@@ -19,6 +19,7 @@ PARAMETER {
   e=0	(mV)
   F=0
   gmax = 1e9 (uS)
+  kmax=20
   Vwt   = 0 : weight for inputs coming in from vector
 
   d = 0.0096 <0,1>: depression(-1) factor
@@ -83,9 +84,9 @@ FUNCTION factor(Dt (ms)) { : Dt is interval between most recent presynaptic spik
     : calculated as tpost - tpre (i.e. > 0 if pre happens before post)
   : the following rule is the one described by Bi & Poo
   if (Dt>0) {
-    factor = 1 + pf*p*exp(-Dt/taup) : potentiation
+    factor = 1+pf*p*exp(-Dt/taup) : potentiation
   } else if (Dt<0) {
-    factor = 1 + pf*d*exp(Dt/taud) : depression
+    factor = 1+pf*d*exp(Dt/taud) : depression
   } else {
     factor = 1 : no change if pre and post are simultaneous
   }
@@ -106,8 +107,8 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     
     : g = g + w*k
     tpre = t
-    k = k * factor(tpost - t)
-    
+    k = k + factor(tpost - t)-1
+    if (k>kmax) {k=kmax}: saturation
     rec_k=k
     }
   
@@ -117,7 +118,8 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     countinputs=0
     FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args
     :printf("entry FOR_NETCONS w1=%g k1=%g tp=%g\n", w1, k1, tp)
-      k1 = k1*factor(t - tp) :k1 is plasticity factor for the weight
+      k1 = k1+factor(t - tp)-1 :k1 is plasticity factor for the weight
+      if (k1>kmax) {k1=kmax}: saturation
       countinputs=countinputs+1
 
       if (countinputs>1){

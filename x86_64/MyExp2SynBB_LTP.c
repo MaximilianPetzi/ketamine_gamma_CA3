@@ -50,27 +50,28 @@ extern double hoc_Exp(double);
 #define e _p[3]
 #define F _p[4]
 #define gmax _p[5]
-#define Vwt _p[6]
-#define d _p[7]
-#define p _p[8]
-#define taud _p[9]
-#define taup _p[10]
-#define rec_k _p[11]
-#define rec_k1 _p[12]
-#define pf _p[13]
-#define i _p[14]
-#define g _p[15]
-#define A _p[16]
-#define B _p[17]
-#define fact _p[18]
-#define etime _p[19]
-#define tpost _p[20]
-#define countinputs _p[21]
-#define DA _p[22]
-#define DB _p[23]
-#define v _p[24]
-#define _g _p[25]
-#define _tsav _p[26]
+#define kmax _p[6]
+#define Vwt _p[7]
+#define d _p[8]
+#define p _p[9]
+#define taud _p[10]
+#define taup _p[11]
+#define rec_k _p[12]
+#define rec_k1 _p[13]
+#define pf _p[14]
+#define i _p[15]
+#define g _p[16]
+#define A _p[17]
+#define B _p[18]
+#define fact _p[19]
+#define etime _p[20]
+#define tpost _p[21]
+#define countinputs _p[22]
+#define DA _p[23]
+#define DB _p[24]
+#define v _p[25]
+#define _g _p[26]
+#define _tsav _p[27]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -209,6 +210,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "e",
  "F",
  "gmax",
+ "kmax",
  "Vwt",
  "d",
  "p",
@@ -236,7 +238,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 27, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 28, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -244,6 +246,7 @@ static void nrn_alloc(Prop* _prop) {
  	e = 0;
  	F = 0;
  	gmax = 1e+09;
+ 	kmax = 20;
  	Vwt = 0;
  	d = 0.0096;
  	p = 0.0096;
@@ -254,7 +257,7 @@ static void nrn_alloc(Prop* _prop) {
  	pf = 1;
   }
  	_prop->param = _p;
- 	_prop->param_size = 27;
+ 	_prop->param_size = 28;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
@@ -292,7 +295,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 27, 7);
+  hoc_register_prop_size(_mechtype, 28, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "netsend");
@@ -407,7 +410,10 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  B = B + _args[0] * fact * _args[1] * pww ;
        }
  _args[2] = t ;
-     _args[1] = _args[1] * factor ( _threadargscomma_ tpost - t ) ;
+     _args[1] = _args[1] + factor ( _threadargscomma_ tpost - t ) - 1.0 ;
+     if ( _args[1] > kmax ) {
+       _args[1] = kmax ;
+       }
      rec_k = _args[1] ;
      }
    else if ( _lflag  == 2.0 ) {
@@ -419,7 +425,10 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
 	for (_ifn1 = 0; _ifn1 < _nfn1; ++_ifn1) {
  	 _fnargs1 = _fnargslist1[_ifn1];
  {
-       _fnargs1[1] = _fnargs1[1] * factor ( _threadargscomma_ t - _fnargs1[2] ) ;
+       _fnargs1[1] = _fnargs1[1] + factor ( _threadargscomma_ t - _fnargs1[2] ) - 1.0 ;
+       if ( _fnargs1[1] > kmax ) {
+         _fnargs1[1] = kmax ;
+         }
        countinputs = countinputs + 1.0 ;
        if ( countinputs > 1.0 ) {
          }
@@ -652,7 +661,7 @@ static const char* nmodl_file_text =
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
   "  POINT_PROCESS MyExp2SynBB_LTP\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -669,6 +678,7 @@ static const char* nmodl_file_text =
   "  e=0	(mV)\n"
   "  F=0\n"
   "  gmax = 1e9 (uS)\n"
+  "  kmax=20\n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "\n"
   "  d = 0.0096 <0,1>: depression(-1) factor\n"
@@ -733,9 +743,9 @@ static const char* nmodl_file_text =
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  if (Dt>0) {\n"
-  "    factor = 1 + pf*p*exp(-Dt/taup) : potentiation\n"
+  "    factor = 1+pf*p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor = 1 + pf*d*exp(Dt/taud) : depression\n"
+  "    factor = 1+pf*d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor = 1 : no change if pre and post are simultaneous\n"
   "  }\n"
@@ -756,7 +766,8 @@ static const char* nmodl_file_text =
   "    \n"
   "    : g = g + w*k\n"
   "    tpre = t\n"
-  "    k = k * factor(tpost - t)\n"
+  "    k = k + factor(tpost - t)-1\n"
+  "    if (k>kmax) {k=kmax}: saturation\n"
   "    rec_k=k\n"
   "    }\n"
   "  \n"
@@ -766,7 +777,8 @@ static const char* nmodl_file_text =
   "    countinputs=0\n"
   "    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args\n"
   "    :printf(\"entry FOR_NETCONS w1=%g k1=%g tp=%g\\n\", w1, k1, tp)\n"
-  "      k1 = k1*factor(t - tp) :k1 is plasticity factor for the weight\n"
+  "      k1 = k1+factor(t - tp)-1 :k1 is plasticity factor for the weight\n"
+  "      if (k1>kmax) {k1=kmax}: saturation\n"
   "      countinputs=countinputs+1\n"
   "\n"
   "      if (countinputs>1){\n"
