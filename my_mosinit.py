@@ -98,10 +98,9 @@ if True:
 
 
     seconds=1
-    h.tstop = seconds*100   #3e3
+    h.tstop = seconds*5000   #3e3
     h.run()
     myrec=np.array(myrec)
-    print("args: ",sys.argv)
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]: #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
@@ -133,11 +132,12 @@ if True:
         myg.exec_menu("New Axis")
     else:
         Data=np.load("recfolder/Data.npy",allow_pickle=True)
-        print(myparams)
-        print(myparams[1],myparams[2])
-        print(Data)
-        print(Data[myparams[1],myparams[2]])
+        #print(myparams)
+        #print(myparams[1],myparams[2])
+        #print(Data)
+        #print(Data[myparams[1],myparams[2]])
         
         Data[myparams[1],myparams[2]]=Karr
         np.save("recfolder/Data.npy",Data)
+        np.save("recfolder/oldData.npy",Data)#backup for accidental simulation restart
         
