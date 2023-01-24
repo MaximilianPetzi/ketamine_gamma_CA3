@@ -91,8 +91,8 @@ if __name__ == "__main__":
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
-    stimamp=0.75#float(sys.argv[1])
-    celltype="olm"#sys.argv[2]
+    stimamp=float(sys.argv[1])
+    celltype=sys.argv[2]
     net.celltype=celltype
     h.tstop = 10e2   #3e3
     stim = h.IClamp(getattr(net,celltype).cell[0].soma(.5))
@@ -105,9 +105,9 @@ if __name__ == "__main__":
     h.run()
     #net.rasterplot()
     
-    myg = h.Graph()
+    #myg = h.Graph()
     net.calc_myvolt_olm()
-    net.vmyvolt_array_olm[0].plot(myg,h.dt)
+    #net.vmyvolt_array_olm[0].plot(myg,h.dt)
 
     myrec=np.array(myrec)
     #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
@@ -128,9 +128,6 @@ if __name__ == "__main__":
     celldict={"pyr":0,"bas":1,"olm":2}
     
     data=Data[celldict[celltype]]
-    print("here")
-    print(Data)
-    print(data)
     print(celldict[celltype])
     ii=0
     for i in range(data.size):
@@ -183,5 +180,6 @@ if __name__ == "__main__":
     #from matplotlib import pyplot as plt
     #plt.plot(movavg(lfpar,4500))
     #plt.show()
-    myg.exec_menu("View = plot")
-    myg.exec_menu("New Axis")
+    
+    #myg.exec_menu("View = plot")
+    #myg.exec_menu("New Axis")
