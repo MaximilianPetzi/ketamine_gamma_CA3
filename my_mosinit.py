@@ -37,26 +37,32 @@ if True:
     from params import *
     from run import *
 
-    # setup washin,washout
+    # experiment setup
     import run as Run
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
     Run.washinT  = 0e3  #default 1e3
+    Run.LTPonT=0*1000
+    Run.LTPoffT=10*1000
+    
+    
+    h.tstop = 2*1000   #3e3
+
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]:
-        Run.washoutT = 1000*0  #2e3
+        Run.washoutT = h.tstop*0  #2e3
     else:
         #that means that a myparams file exists and this is part of a seedavg simulation
-        Run.washoutT = 1000*float(myparams[3])  #2e3
+        Run.washoutT = h.tstop*float(myparams[3])  #2e3
 
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=["thek"] #"F","mytsyn","myt"]
+    recvars=["thekl"] #"F","mytsyn","myt"]
     #net.pyr_olm_AM[0].weight[1]
     myrec=[]
     for recvar in recvars:
@@ -78,51 +84,68 @@ if True:
             Karr.append(np.average(whist()))
         net.nnn=net.nnn+1
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
-        
         #myrec2.append([])  #for later , here , 
         #for iw in range(10):
         #    myrec2[-1].append(net.pyr_olm_AM[iw].weight[0])
         h.fadvance()
-    
+
+    Run.mystuff = h.FInitializeHandler(1,myevent_eventcallingfunction) #(see run.py, myevent)
+
+
+
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
 
-    def whist(bins=200):#number of connections (multiply convergence nr with number of cells)
+    def whist(bins=200,plot=False):#number of connections (multiply convergence nr with number of cells)
         ar=[]; 
         for i in range(20000):
             ar.append(net.pyr_pyr_AM[i].weight[1])
-        #plt.hist(ar,bins=bins)
-        #plt.show()
+        if plot:
+            plt.hist(ar,bins=bins)
+            plt.show()
         return ar
 
 
-    seconds=1
-    h.tstop = seconds*5000   #3e3
+    import time
+    timea=time.time()
     h.run()
+    timeb=time.time()
+    print("simulation time: ",timeb-timea)
     myrec=np.array(myrec)
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]: #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
-        plt.figure(1)
-        for i in range(len(recvars)):
-            plt.plot(myrec[i],label=recvars[i])
-        plt.legend()
-        plt.xlabel("timestep")
-        plt.title("records")
-        plt.figure(2)
-        #plt.plot(myrec2)
-        #plt.show()
-
+        #plt.figure(1)
+        #for i in range(len(recvars)):
+        #    plt.plot(myrec[i],label=recvars[i])
+        #plt.legend()
+        #plt.xlabel("timestep")
+        #plt.title("records")
+        #plt.figure(2)
         net.rasterplot()
         net.calc_lfp()
         from scipy import signal
-        times=np.arange(seconds*1e4)/1e4   
+
+        #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
-        sin1=np.sin(2*np.pi*10*times) 
-        f,p=signal.welch(data,1e4,nperseg=4000) 
-        plt.plot(f,p)
+        data1=data[:5000]
+        data2=data[10000:]
+        #data1=data[:halflen]
+        #sin1=np.sin(2*np.pi*10*times) 
+        print("signal length is ", len(data))
+        f1,p1=signal.welch(data,1e4,nperseg=len(data)) 
+        #f2,p2=signal.welch(data2,1e4,nperseg=len(data2)) 
+        plt.plot(f1,p1,label="before")
+        #plt.plot(f2,p2,label="after")
+        plt.legend()
+        plt.xlim((0,60))
+        plt.xlabel("f[Hz]")
         plt.title("spectral power of lfp")
+
+        plt.figure(3)
+        plt.plot(Karr)
+        plt.title("avg weight over time")
         plt.show()
         #spectral power
 
