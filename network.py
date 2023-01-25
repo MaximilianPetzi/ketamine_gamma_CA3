@@ -44,6 +44,9 @@ class Population:
 		for c in self.cell:
 			c.__dict__[syn].syn.r = r
 
+	def set_pf(self,syn,pf):
+		for c in self.cell:
+			c.__dict__[syn].syn.pf = pf
 class MSpec: # this class uses matlab to make a spectrogram
 
 	def __init__(self,vlfp,maxfreq,nsamp,dodraw): #make a spectrogram using matlab

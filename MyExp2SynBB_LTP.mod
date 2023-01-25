@@ -2,7 +2,7 @@
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
   POINT_PROCESS MyExp2SynBB_LTP
-  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax
+  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, ltd, sigmaltd, ltdfac
   NONSPECIFIC_CURRENT i
 }
 
@@ -21,14 +21,16 @@ PARAMETER {
   gmax = 1e9 (uS)
   kmax=20
   Vwt   = 0 : weight for inputs coming in from vector
-
-  d = 0.0096 <0,1>: depression(-1) factor
-  p = 0.0096 <0, 1e9>: potentiation factor
-  taud = 16.8 (ms) : depression effectiveness time constant
-  taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   rec_k=0
   rec_k1=0
-  pf = 1
+  pf = 0
+  
+  p = 0.01 <0, 1e9>: potentiation factor :for double gaussian, d==p means area is zero
+  d = 0.016 <0,1>: depression(-1) factor
+  taup = 16.8 (ms) : Bi & Poo (1998, 2001)
+  taud = 16.8 (ms) : depression effectiveness time constant
+  ltd=1  :decides if gaussian, symmetric ltd is used, or not
+  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
 }
 
 ASSIGNED {
@@ -79,19 +81,38 @@ DERIVATIVE state {
   B' = -B/tau2
 }
 
-FUNCTION factor(Dt (ms)) { : Dt is interval between most recent presynaptic spike
+
+FUNCTION factor(Dt (ms)) { 
+  if (ltd==0) {
+    factor=factor1(Dt)
+  }
+  if (ltd==1) {
+    factor=factor2(Dt)
+  }
+  factor=factor
+  }
+
+FUNCTION factor1(Dt (ms)) { : Dt is interval between most recent presynaptic spike
     : and most recent postsynaptic spike
     : calculated as tpost - tpre (i.e. > 0 if pre happens before post)
   : the following rule is the one described by Bi & Poo
+  :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
   if (Dt>0) {
-    factor = 1+pf*p*exp(-Dt/taup) : potentiation
+    factor1 = pf*p*exp(-Dt/taup) : potentiation
   } else if (Dt<0) {
-    factor = 1+pf*d*exp(Dt/taud) : depression
+    factor1 = -pf*d*exp(Dt/taud) : depression
   } else {
-    factor = 1 : no change if pre and post are simultaneous
+    factor1 = 0 : no change if pre and post are simultaneous
   }
-  factor=factor
+  factor1=factor1
 }
+
+FUNCTION factor2(Dt (ms)) {
+  :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
+  factor2=p*2*exp(-Dt*Dt/(2*pow(taup,2)))-d*exp(-Dt*Dt/(2*2*pow(taud,2)))  :p,d,taup,taub used same as in double exp factor
+  factor2=factor2
+}
+
 
 NET_RECEIVE(w (uS), k, tpre (ms)) {
   
@@ -107,7 +128,7 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     
     : g = g + w*k
     tpre = t
-    k = k + factor(tpost - t)-1
+    k = k + factor(tpost - t)
     if (k>kmax) {k=kmax}: saturation
     rec_k=k
     }
@@ -118,7 +139,7 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     countinputs=0
     FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args
     :printf("entry FOR_NETCONS w1=%g k1=%g tp=%g\n", w1, k1, tp)
-      k1 = k1+factor(t - tp)-1 :k1 is plasticity factor for the weight
+      k1 = k1+factor(t - tp) :k1 is plasticity factor for the weight
       if (k1>kmax) {k1=kmax}: saturation
       countinputs=countinputs+1
 

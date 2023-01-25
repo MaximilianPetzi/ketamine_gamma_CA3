@@ -39,6 +39,20 @@ pyrWashA = [0, 0] # ...
 pyrWashB = [0, 0] # ...
 washinT  = 0      # washin time
 washoutT = 0      # washout time
+LTPoffT = 0
+LTPonT = 0
+
+def doLTPon():
+	print "LTP on at ", LTPonT, " = ", h.t
+	net.pyr.set_pf("BdendAMPA",120)
+	net.pyr.set_pf("Adend3AMPAf",120)
+
+def doLTPoff():
+	print "LTP off at ", LTPoffT, " = ", h.t
+	net.pyr.set_pf("BdendAMPA",0)
+	net.pyr.set_pf("Adend3AMPAf",0)
+
+
 
 def dowashin():
 	print "washIN at ", washinT, " = ", h.t , " ", olmWash[0], basWash[0], pyrWashB[0], pyrWashA[0]
@@ -58,6 +72,15 @@ def setwash():
 	print "washinT ", washinT, " washoutT ", washoutT
 	h.cvode.event(washinT,"nrnpython(\"dowashin()\")")
 	h.cvode.event(washoutT,"nrnpython(\"dowashout()\")")
+
+def myevent_eventcallingfunction():
+    h.CVode().event(LTPonT,doLTPon)
+    h.CVode().event(LTPoffT,doLTPoff)
+def my_event():
+   	pass
+	#print("hi from",h.t)
+
+
 
 # example to do washin/washout, after loading sim:
 # import run

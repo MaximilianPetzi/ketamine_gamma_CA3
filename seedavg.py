@@ -1,9 +1,9 @@
 #my_mosinit can also be called directly
 
 nA=2
-nB=20
-stepsizeA=0.5 #Ket
-stepsizeB=1 #Seed
+nB=4
+stepsizeA=1 #Ket
+stepsizeB=12 #Seed
 
 def calcparams(ii,jj):
      return [None,ii,jj,ii*stepsizeA,jj*stepsizeB]  
@@ -27,7 +27,7 @@ if __name__=="__main__":
             np.save("recfolder/myparams",myparams)  #set current params, also pass the indices for saving
             commandstring="python2 my_mosinit.py SIMUL"
             os.system(commandstring)    #do simulation (uses set params) (saves the recordings)
-
+            print("after number ", i,j)
 
 
 
