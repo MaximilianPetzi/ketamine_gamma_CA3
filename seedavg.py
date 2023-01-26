@@ -1,12 +1,12 @@
 #my_mosinit can also be called directly
 
-nA=2
-nB=4
-stepsizeA=1 #Ket
-stepsizeB=12 #Seed
+nA=8
+nB=8
+stepsizeA=.5 #pww
+stepsizeB=101 #Seed
 
 def calcparams(ii,jj):
-     return [None,ii,jj,ii*stepsizeA,jj*stepsizeB]  
+     return [None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  
 
 if __name__=="__main__":
     import numpy as np
@@ -20,9 +20,7 @@ if __name__=="__main__":
     np.save("recfolder/Data",Data)
     for i in range(nA):
         for j in range(nB):
-            myparams2=[None,i,j,stepsizeA*i,stepsizeB*j] 
             myparams=calcparams(i,j) 
-            assert(myparams==myparams2)
 
             np.save("recfolder/myparams",myparams)  #set current params, also pass the indices for saving
             commandstring="python2 my_mosinit.py SIMUL"

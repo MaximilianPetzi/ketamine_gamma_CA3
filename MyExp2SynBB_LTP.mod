@@ -26,7 +26,7 @@ PARAMETER {
   pf = 0
   
   p = 0.01 <0, 1e9>: potentiation factor :for double gaussian, d==p means area is zero
-  d = 0.016 <0,1>: depression(-1) factor
+  d = 0.01 <0,1>: depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
   ltd=1  :decides if gaussian, symmetric ltd is used, or not
@@ -84,10 +84,10 @@ DERIVATIVE state {
 
 FUNCTION factor(Dt (ms)) { 
   if (ltd==0) {
-    factor=factor1(Dt)
+    factor=factor1(Dt)*pf
   }
   if (ltd==1) {
-    factor=factor2(Dt)
+    factor=factor2(Dt)*pf
   }
   factor=factor
   }
@@ -98,9 +98,9 @@ FUNCTION factor1(Dt (ms)) { : Dt is interval between most recent presynaptic spi
   : the following rule is the one described by Bi & Poo
   :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
   if (Dt>0) {
-    factor1 = pf*p*exp(-Dt/taup) : potentiation
+    factor1 = p*exp(-Dt/taup) : potentiation
   } else if (Dt<0) {
-    factor1 = -pf*d*exp(Dt/taud) : depression
+    factor1 = -d*exp(Dt/taud) : depression
   } else {
     factor1 = 0 : no change if pre and post are simultaneous
   }

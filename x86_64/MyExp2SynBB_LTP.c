@@ -262,7 +262,7 @@ static void nrn_alloc(Prop* _prop) {
  	rec_k1 = 0;
  	pf = 0;
  	p = 0.01;
- 	d = 0.016;
+ 	d = 0.01;
  	taup = 16.8;
  	taud = 16.8;
  	ltd = 1;
@@ -361,10 +361,10 @@ static int _ode_spec1(_threadargsproto_);
 double factor ( _threadargsprotocomma_ double _lDt ) {
    double _lfactor;
  if ( ltd  == 0.0 ) {
-     _lfactor = factor1 ( _threadargscomma_ _lDt ) ;
+     _lfactor = factor1 ( _threadargscomma_ _lDt ) * pf ;
      }
    if ( ltd  == 1.0 ) {
-     _lfactor = factor2 ( _threadargscomma_ _lDt ) ;
+     _lfactor = factor2 ( _threadargscomma_ _lDt ) * pf ;
      }
    _lfactor = _lfactor ;
    
@@ -385,10 +385,10 @@ static double _hoc_factor(void* _vptr) {
 double factor1 ( _threadargsprotocomma_ double _lDt ) {
    double _lfactor1;
  if ( _lDt > 0.0 ) {
-     _lfactor1 = pf * p * exp ( - _lDt / taup ) ;
+     _lfactor1 = p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor1 = - pf * d * exp ( _lDt / taud ) ;
+     _lfactor1 = - d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor1 = 0.0 ;
@@ -739,7 +739,7 @@ static const char* nmodl_file_text =
   "  pf = 0\n"
   "  \n"
   "  p = 0.01 <0, 1e9>: potentiation factor :for double gaussian, d==p means area is zero\n"
-  "  d = 0.016 <0,1>: depression(-1) factor\n"
+  "  d = 0.01 <0,1>: depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
   "  ltd=1  :decides if gaussian, symmetric ltd is used, or not\n"
@@ -797,10 +797,10 @@ static const char* nmodl_file_text =
   "\n"
   "FUNCTION factor(Dt (ms)) { \n"
   "  if (ltd==0) {\n"
-  "    factor=factor1(Dt)\n"
+  "    factor=factor1(Dt)*pf\n"
   "  }\n"
   "  if (ltd==1) {\n"
-  "    factor=factor2(Dt)\n"
+  "    factor=factor2(Dt)*pf\n"
   "  }\n"
   "  factor=factor\n"
   "  }\n"
@@ -811,9 +811,9 @@ static const char* nmodl_file_text =
   "  : the following rule is the one described by Bi & Poo\n"
   "  :printf(\"Dt= %g, exp..= %g\\n\",Dt,exp(-Dt*Dt/200))\n"
   "  if (Dt>0) {\n"
-  "    factor1 = pf*p*exp(-Dt/taup) : potentiation\n"
+  "    factor1 = p*exp(-Dt/taup) : potentiation\n"
   "  } else if (Dt<0) {\n"
-  "    factor1 = -pf*d*exp(Dt/taud) : depression\n"
+  "    factor1 = -d*exp(Dt/taud) : depression\n"
   "  } else {\n"
   "    factor1 = 0 : no change if pre and post are simultaneous\n"
   "  }\n"

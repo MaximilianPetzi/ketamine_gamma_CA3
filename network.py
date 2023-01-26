@@ -47,6 +47,12 @@ class Population:
 	def set_pf(self,syn,pf):
 		for c in self.cell:
 			c.__dict__[syn].syn.pf = pf
+
+	def set_pww(self,syn,pww):
+		for c in self.cell:
+			c.__dict__[syn].syn.pww = pww
+
+
 class MSpec: # this class uses matlab to make a spectrogram
 
 	def __init__(self,vlfp,maxfreq,nsamp,dodraw): #make a spectrogram using matlab
@@ -94,7 +100,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1234,UseNetStim=True,wseed=4321,scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=12341,UseNetStim=True,wseed=43211,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
