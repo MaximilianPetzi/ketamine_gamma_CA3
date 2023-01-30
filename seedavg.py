@@ -1,9 +1,9 @@
 #my_mosinit can also be called directly
 
 nA=1
-nB=17
+nB=4
 stepsizeA=.5 #pww
-stepsizeB=107 #Seed
+stepsizeB=108 #Seed
 
 def calcparams(ii,jj):
     pars=[None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  

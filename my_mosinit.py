@@ -41,8 +41,8 @@ if True:
     # experiment setup
     import run as Run
     ltptime=1
-    inittime=2.3
-    measuretime=4
+    inittime=2
+    measuretime=2
     h.tstop = (2*measuretime+ltptime+inittime)*1000   #3e3
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
@@ -53,7 +53,7 @@ if True:
     Run.LTPonT=(inittime+measuretime)*1000
     Run.LTPoffT=(inittime+measuretime+ltptime)*1000
     Run.pfrec=0
-    Run.pfout=100
+    Run.pfout=12
     
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)

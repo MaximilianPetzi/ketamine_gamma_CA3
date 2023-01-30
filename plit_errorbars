@@ -18,7 +18,9 @@ for i in range(len(Data)):
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
 print("difs:")
-print(dat2[0,:,1]-dat2[1,:,1])
+difs=dat2[0,:,1]-dat2[1,:,1]
+print(difs)
+print("gamma change=",np.average(difs),"+-",np.std(difs)/(len(difs)-1)**.5)
 pows=np.average(dat2,axis=1)
 pows_std=np.std(dat2,axis=1)/(len(dat2[0])-1)**.5
 print(pows)
