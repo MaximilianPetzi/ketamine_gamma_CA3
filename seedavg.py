@@ -1,9 +1,9 @@
 #my_mosinit can also be called directly
 
-nA=6
-nB=5
+nA=1
+nB=17
 stepsizeA=.5 #pww
-stepsizeB=102 #Seed
+stepsizeB=107 #Seed
 
 def calcparams(ii,jj):
     pars=[None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  
@@ -17,7 +17,7 @@ if __name__=="__main__":
     if os.path.exists("recfolder/Data.npy"):
             os.remove("recfolder/Data.npy")
 
-    Data=np.zeros((nA,nB),dtype="object")
+    Data=np.ones((nA*2,nB),dtype="object")
     np.save("recfolder/Data",Data)
     for i in range(nA):
         for j in range(nB):

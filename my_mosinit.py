@@ -40,24 +40,27 @@ if True:
 
     # experiment setup
     import run as Run
+    ltptime=1
+    inittime=2.3
+    measuretime=4
+    h.tstop = (2*measuretime+ltptime+inittime)*1000   #3e3
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
     Run.washinT  = 100*1000  #default 1e3
     Run.washoutT = h.tstop  #2e3
-    Run.LTPonT=0.7*1000
-    Run.LTPoffT=2.7*1000
-    Run.pfrec=30
-    Run.pfout=70
-    h.tstop = 2.0*1000   #3e3
+    Run.LTPonT=(inittime+measuretime)*1000
+    Run.LTPoffT=(inittime+measuretime+ltptime)*1000
+    Run.pfrec=0
+    Run.pfout=100
+    
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]:
         pass
     else:
-        Run.pwwrec=float(myparams[3]) 
-        Run.pwwout=1#float(myparams[3]) 
+        pass
     
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
@@ -143,11 +146,13 @@ if True:
         #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
         dataff=np.copy(data)
-        data=data[7000:]
+        #data=data[7000:]
+        data1=data[int(10000*inittime):int(10000*(inittime+measuretime))]
+        data2=data[int((inittime+measuretime+ltptime)*10000):int((inittime+measuretime+ltptime+measuretime)*10000)]
         
-        print("signal length is ", len(data))
         #to test fft accuracy dependent on data length: dataa=dataff[7500:-20000];f,p=signal.welch(dataa,1e4,nperseg=len(dataa));plt.plot(f,p);plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red");plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="red");plt.xlim((0,60));plt.show()
-        f,p=signal.welch(data,1e4,nperseg=len(data))
+        plt.subplot(2,1,1)
+        f,p=signal.welch(data1,1e4,nperseg=len(data1))
         plt.grid(True)
         plt.plot(f,p)
         plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red")
@@ -158,9 +163,20 @@ if True:
         plt.xlim((0,60))
         plt.xlabel("f[Hz]")
         plt.title("spectral power of lfp")
-
+        plt.subplot(2,1,2)
+        f,p=signal.welch(data2,1e4,nperseg=len(data2))
+        plt.grid(True)
+        plt.plot(f,p)
+        plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red")
+        plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="red")
+        
+        plt.legend()
+        
+        plt.xlim((0,60))
+        plt.xlabel("f[Hz]")
+        plt.title("spectral power of lfp")
         plt.figure(3)
-        xKarr=np.arange(len(Karr))*10
+        xKarr=np.arange(len(Karr))*100
         plt.plot(Karr,label='recurrent')
         plt.plot(Karr2,label='outside')
         plt.legend()
@@ -178,14 +194,19 @@ if True:
         #Data[myparams[1],myparams[2]]=Karr
         #np.save("recfolder/Data.npy",Data)
         #np.save("recfolder/oldData.npy",Data)#backup for accidental simulation restart
-
-        Data=np.load("recfolder/Data.npy",allow_pickle=True)
+        
         net.calc_lfp()
         data=net.vlfp.to_python() 
-        data=data[500:]
-        f,p=signal.welch(data,1e4,nperseg=len(data)) 
-        Data[myparams[1],myparams[2]]=[f,p,bandpower(f,p,3,12),bandpower(f,p,30,100)]
-        np.save("recfolder/Data.npy",Data)
-        np.save("recfolder/oldData.npy",Data)#backup for accidental simulation restart
+        data1=data[int(10000*inittime):int(10000*(inittime+measuretime))]
+        data2=data[int((inittime+measuretime+ltptime)*10000):int((inittime+measuretime+ltptime+measuretime)*10000)]
+        f1,p1=signal.welch(data1,1e4,nperseg=len(data1))
+        f2,p2=signal.welch(data2,1e4,nperseg=len(data2)) 
 
+        Data=np.load("recfolder/Data.npy",allow_pickle=True)
+        
+        Data[0,myparams[2]]=[f1,p1,bandpower(f1,p1,3,12),bandpower(f1,p1,30,100)]
+        Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
+        np.save("recfolder/Data.npy",Data)
+        np.save("recfolder/oldData.npy",Data)#keeps the old data until new sim is finished
+        
         
