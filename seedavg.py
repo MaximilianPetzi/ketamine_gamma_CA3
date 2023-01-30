@@ -1,12 +1,13 @@
 #my_mosinit can also be called directly
 
-nA=8
-nB=8
+nA=6
+nB=5
 stepsizeA=.5 #pww
-stepsizeB=101 #Seed
+stepsizeB=102 #Seed
 
 def calcparams(ii,jj):
-     return [None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  
+    pars=[None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  
+    return pars
 
 if __name__=="__main__":
     import numpy as np

@@ -256,16 +256,16 @@ static void nrn_alloc(Prop* _prop) {
  	e = 0;
  	F = 0;
  	gmax = 1e+09;
- 	kmax = 20;
+ 	kmax = 2000;
  	Vwt = 0;
  	rec_k = 0;
  	rec_k1 = 0;
  	pf = 0;
  	p = 0.01;
- 	d = 0.01;
+ 	d = -0.01;
  	taup = 16.8;
  	taud = 16.8;
- 	ltd = 1;
+ 	ltd = 0;
   }
  	_prop->param = _p;
  	_prop->param_size = 29;
@@ -469,6 +469,9 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
        _args[1] = kmax ;
        }
      rec_k = _args[1] ;
+     if ( _args[1] < 0.0 ) {
+       printf ( "plasticity negative, sth went wrong" ) ;
+       }
      }
    else if ( _lflag  == 2.0 ) {
      F = F - 0.9 ;
@@ -732,17 +735,17 @@ static const char* nmodl_file_text =
   "  e=0	(mV)\n"
   "  F=0\n"
   "  gmax = 1e9 (uS)\n"
-  "  kmax=20\n"
+  "  kmax=2000\n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "  rec_k=0\n"
   "  rec_k1=0\n"
   "  pf = 0\n"
   "  \n"
   "  p = 0.01 <0, 1e9>: potentiation factor :for double gaussian, d==p means area is zero\n"
-  "  d = 0.01 <0,1>: depression(-1) factor\n"
+  "  d = -0.01 <0,1>: depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
-  "  ltd=1  :decides if gaussian, symmetric ltd is used, or not\n"
+  "  ltd=0  :decides if gaussian, symmetric ltd is used, or not\n"
   "  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter\n"
   "}\n"
   "\n"
@@ -810,8 +813,10 @@ static const char* nmodl_file_text =
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  :printf(\"Dt= %g, exp..= %g\\n\",Dt,exp(-Dt*Dt/200))\n"
+  "  \n"
   "  if (Dt>0) {\n"
   "    factor1 = p*exp(-Dt/taup) : potentiation\n"
+  "  \n"
   "  } else if (Dt<0) {\n"
   "    factor1 = -d*exp(Dt/taud) : depression\n"
   "  } else {\n"
@@ -844,6 +849,7 @@ static const char* nmodl_file_text =
   "    k = k + factor(tpost - t)\n"
   "    if (k>kmax) {k=kmax}: saturation\n"
   "    rec_k=k\n"
+  "    if (k<0){printf(\"plasticity negative, sth went wrong\")}\n"
   "    }\n"
   "  \n"
   "  else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)\n"

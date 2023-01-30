@@ -41,12 +41,15 @@ washinT  = 0      # washin time
 washoutT = 0      # washout time
 LTPoffT = 0
 LTPonT = 0
-newpww = 1
+pwwrec = 1
+pwwout = 1
+pfrec = 0
+pfout = 0
 
 def doLTPon():
 	print "LTP on at ", LTPonT, " = ", h.t
-	net.pyr.set_pf("BdendAMPA",120)
-	net.pyr.set_pf("Adend3AMPAf",120)
+	net.pyr.set_pf("BdendAMPA",pfrec)
+	net.pyr.set_pf("Adend3AMPAf",pfout)
 
 def doLTPoff():
 	print "LTP off at ", LTPoffT, " = ", h.t
@@ -54,8 +57,8 @@ def doLTPoff():
 	net.pyr.set_pf("Adend3AMPAf",0)
 
 def dopww():
-	net.pyr.set_pww("BdendAMPA", newpww)
-	net.pyr.set_pww("Adend3AMPAf", newpww)
+	net.pyr.set_pww("BdendAMPA", pwwrec)
+	net.pyr.set_pww("Adend3AMPAf", pwwout)
 
 def dowashin():
 	print "washIN at ", washinT, " = ", h.t , " ", olmWash[0], basWash[0], pyrWashB[0], pyrWashA[0]

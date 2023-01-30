@@ -19,17 +19,17 @@ PARAMETER {
   e=0	(mV)
   F=0
   gmax = 1e9 (uS)
-  kmax=20
+  kmax=2000
   Vwt   = 0 : weight for inputs coming in from vector
   rec_k=0
   rec_k1=0
   pf = 0
   
   p = 0.01 <0, 1e9>: potentiation factor :for double gaussian, d==p means area is zero
-  d = 0.01 <0,1>: depression(-1) factor
+  d = -0.01 <0,1>: depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
-  ltd=1  :decides if gaussian, symmetric ltd is used, or not
+  ltd=0  :decides if gaussian, symmetric ltd is used, or not
   :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
 }
 
@@ -97,8 +97,10 @@ FUNCTION factor1(Dt (ms)) { : Dt is interval between most recent presynaptic spi
     : calculated as tpost - tpre (i.e. > 0 if pre happens before post)
   : the following rule is the one described by Bi & Poo
   :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
+  
   if (Dt>0) {
     factor1 = p*exp(-Dt/taup) : potentiation
+  
   } else if (Dt<0) {
     factor1 = -d*exp(Dt/taud) : depression
   } else {
@@ -131,6 +133,7 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
     k = k + factor(tpost - t)
     if (k>kmax) {k=kmax}: saturation
     rec_k=k
+    if (k<0){printf("plasticity negative, sth went wrong")}
     }
   
   else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)

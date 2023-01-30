@@ -44,20 +44,21 @@ if True:
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 10*1000  #default 1e3
-    Run.LTPonT=10*1000
-    Run.LTPoffT=10*1000
-
-    h.tstop = 5*1000   #3e3
+    Run.washinT  = 100*1000  #default 1e3
+    Run.washoutT = h.tstop  #2e3
+    Run.LTPonT=0.7*1000
+    Run.LTPoffT=2.7*1000
+    Run.pfrec=30
+    Run.pfout=70
+    h.tstop = 2.0*1000   #3e3
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]:
-        Run.washoutT = h.tstop  #2e3
-        Run.newpww=8
+        pass
     else:
-        #that means that a myparams file exists and this is part of a seedavg simulation
-        Run.washoutT = h.tstop  #2e3
-        Run.newpww=float(myparams[3]) 
+        Run.pwwrec=float(myparams[3]) 
+        Run.pwwout=1#float(myparams[3]) 
+    
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
     #my advance:
@@ -70,6 +71,7 @@ if True:
         myrec.append([])
     #myrec2=[]
     Karr=[]
+    Karr2=[]
     net.nnn=0
     def myadvance():
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
@@ -81,7 +83,8 @@ if True:
             if recvar=="thek":
                 myrec[irec].append(net.pyr_pyr_AM[0].weight[1])
         if net.nnn%100==0:
-            Karr.append(np.average(whist()))
+            Karr.append(np.average(whist()[0]))
+            Karr2.append(np.average(whist()[1]))
         net.nnn=net.nnn+1
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         #myrec2.append([])  #for later , here , 
@@ -98,13 +101,20 @@ if True:
     import numpy as np
 
     def whist(bins=200,plot=False):#number of connections (multiply convergence nr with number of cells)
-        ar=[]; 
+        ar=[] 
         for i in range(20000):
-            ar.append(net.pyr_pyr_AM[i].weight[1])
+            ar.append(net.pyr_pyr_AM[i].weight[1])  #pyr to pyr
+        start=net.pyr.ncsidx["Adend3AMPAf"]
+        end=net.pyr.nceidx["Adend3AMPAf"]
+        ar2=[]
+        for i in range(start,end):
+            ar2.append(net.ncl[i].weight[1])        #noise to pyr
         if plot:
-            plt.hist(ar,bins=bins)
+            plt.hist(ar,bins=bins,label="recurrent weights")
+            plt.hist(ar2,bins=bins,label="outside to pyr weights")
+            plt.legend()
             plt.show()
-        return ar
+        return ar,ar2
 
     def bandpower(f,p,start, end):# integrates a spectral power (input freqs and powers) from start to end in frequenzy space
         bpow=0
@@ -132,10 +142,12 @@ if True:
         net.calc_lfp()
         #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
-        data=data[5000:]
+        dataff=np.copy(data)
+        data=data[7000:]
         
         print("signal length is ", len(data))
-        f,p=signal.welch(data,1e4,nperseg=len(data)) 
+        #to test fft accuracy dependent on data length: dataa=dataff[7500:-20000];f,p=signal.welch(dataa,1e4,nperseg=len(dataa));plt.plot(f,p);plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red");plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="red");plt.xlim((0,60));plt.show()
+        f,p=signal.welch(data,1e4,nperseg=len(data))
         plt.grid(True)
         plt.plot(f,p)
         plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red")
@@ -148,8 +160,12 @@ if True:
         plt.title("spectral power of lfp")
 
         plt.figure(3)
-        plt.plot(Karr)
-        plt.title("avg weight over time")
+        xKarr=np.arange(len(Karr))*10
+        plt.plot(Karr,label='recurrent')
+        plt.plot(Karr2,label='outside')
+        plt.legend()
+        plt.ylabel("avg weight")
+        plt.xlabel("time[ms")
         plt.show()
         #spectral power
 

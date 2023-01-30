@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import seedavg
 
-x=np.arange(8)/2.+1.
+x=np.arange(6)/2.+1.
 
 Data=np.load("recfolder/oldData.npy",allow_pickle=True)
 DatShape=np.shape(Data)[0],np.shape(Data)[1],len(Data[0,0][0])
@@ -29,13 +29,13 @@ plt.title("spectral power of lfp")
 plt.subplot(1,2,2)
 pows=np.average(dat2,axis=1)
 
-pows_std=np.std(dat2,axis=1)
-plt.plot(x,pows[:,0],label="theta power(3-12 Hz")
+pows_std=np.std(dat2,axis=1)/(len(dat2[0])-1)**.5
+plt.plot(x,pows[:,0],label="theta power(3-12 Hz)")
 plt.errorbar(x=x,y=pows[:,0],yerr=pows_std[:,0],color="grey",fmt='.')
-plt.plot(x,pows[:,1],label="gamma power(30-100 Hz")
+plt.plot(x,pows[:,1],label="gamma power(30-100 Hz)")
 plt.errorbar(x=x,y=pows[:,1],yerr=pows_std[:,1],color="grey",fmt=".")
 plt.legend()
-plt.xlabel("pww value number")
+plt.xlabel("pww")
 
 
 plt.show()
