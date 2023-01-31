@@ -43,8 +43,12 @@ LTPoffT = 0
 LTPonT = 0
 pwwrec = 1
 pwwout = 1
+pwwT = 0
 pfrec = 0
 pfout = 0
+kout = 4
+krec = 1
+kT=400
 
 def doLTPon():
 	print "LTP on at ", LTPonT, " = ", h.t
@@ -59,6 +63,10 @@ def doLTPoff():
 def dopww():
 	net.pyr.set_pww("BdendAMPA", pwwrec)
 	net.pyr.set_pww("Adend3AMPAf", pwwout)
+
+def dok():
+	net.pyr.set_k("BdendAMPA", krec)
+	net.pyr.set_k("Adend3AMPAf", kout)
 
 def dowashin():
 	print "washIN at ", washinT, " = ", h.t , " ", olmWash[0], basWash[0], pyrWashB[0], pyrWashA[0]
@@ -83,7 +91,9 @@ def setwash():
 def myevent_eventcallingfunction():
     h.CVode().event(LTPonT,doLTPon)
     h.CVode().event(LTPoffT,doLTPoff)
-    h.CVode().event(0,dopww)
+    h.CVode().event(pwwT,dopww)
+    h.CVode().event(kT,dok)
+    
 def my_event():
    	pass
 	#print("hi from",h.t)

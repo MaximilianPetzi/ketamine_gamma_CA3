@@ -43,7 +43,7 @@ if True:
     ltptime=1
     inittime=2
     measuretime=2
-    h.tstop = (2*measuretime+ltptime+inittime)*1000   #3e3
+    h.tstop = (inittime+2*measuretime+ltptime)*100   #3e3
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
@@ -51,9 +51,11 @@ if True:
     Run.washinT  = 100*1000  #default 1e3
     Run.washoutT = h.tstop  #2e3
     Run.LTPonT=(inittime+measuretime)*1000
+    Run.pwwout=1.6
+    Run.pwwT=(inittime+measuretime)*100
     Run.LTPoffT=(inittime+measuretime+ltptime)*1000
     Run.pfrec=0
-    Run.pfout=12
+    Run.pfout=0
     
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
@@ -67,7 +69,7 @@ if True:
     #my advance:
     h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
 
-    recvars=["thekl"] #"F","mytsyn","myt"]
+    recvars=["thekiii"] #"F","mytsyn","myt"]
     #net.pyr_olm_AM[0].weight[1]
     myrec=[]
     for recvar in recvars:
@@ -75,6 +77,7 @@ if True:
     #myrec2=[]
     Karr=[]
     Karr2=[]
+    Parr=[]
     net.nnn=0
     def myadvance():
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
@@ -85,9 +88,12 @@ if True:
                 #net.pyr_pyr_AM[0].weight[0]
             if recvar=="thek":
                 myrec[irec].append(net.pyr_pyr_AM[0].weight[1])
+                
         if net.nnn%100==0:
+            Parr.append(np.average(pwwhist()))
             Karr.append(np.average(whist()[0]))
             Karr2.append(np.average(whist()[1]))
+            
         net.nnn=net.nnn+1
         #print('weight={}'.format(net.pyr_bas_NM[1].weight[0]))
         #myrec2.append([])  #for later , here , 
@@ -118,6 +124,16 @@ if True:
             plt.legend()
             plt.show()
         return ar,ar2
+    
+    def pwwhist(bins=200,plot=False):#das kann weg
+        ar=[] 
+        for c in net.pyr.cell:
+            ar.append(-1)#c["Adend3AMPAf"].pww) #noise-pyr
+        if plot:
+            plt.hist(ar,bins=bins,label="outside to pyr weights")
+            plt.legend()
+            plt.show()
+        return ar
 
     def bandpower(f,p,start, end):# integrates a spectral power (input freqs and powers) from start to end in frequenzy space
         bpow=0
@@ -134,13 +150,13 @@ if True:
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]: #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
-        #plt.figure(1)
-        #for i in range(len(recvars)):
-        #    plt.plot(myrec[i],label=recvars[i])
-        #plt.legend()
-        #plt.xlabel("timestep")
-        #plt.title("records")
-        #plt.figure(2)
+        plt.figure(1)
+        for i in range(len(recvars)):
+            plt.plot(myrec[i],label=recvars[i])
+        plt.legend()
+        plt.xlabel("timestep")
+        plt.title("records")
+        plt.figure(2)
         net.rasterplot()
         net.calc_lfp()
         #times=np.arange(seconds*1e4)/1e4   
@@ -179,6 +195,7 @@ if True:
         xKarr=np.arange(len(Karr))*100
         plt.plot(Karr,label='recurrent')
         plt.plot(Karr2,label='outside')
+        plt.plot(Parr,label="pww")
         plt.legend()
         plt.ylabel("avg weight")
         plt.xlabel("time[ms")
