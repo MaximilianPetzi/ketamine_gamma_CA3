@@ -52,13 +52,12 @@ class Population:
 		for c in self.cell:
 			c.__dict__[syn].syn.pww = pww
 
-	def set_k(self,syn,k):
+	def set_k(self):
 		start=net.pyr.ncsidx["Adend3AMPAf"]
 		end=net.pyr.nceidx["Adend3AMPAf"]
-		print(end,start,end-start+1)
-		kar=np.random.normal(3.5,1,end-start+1)
-		for i in range(end-start+1):
-			net.ncl[start+i].weight[1]=kar[i]
+		kar=np.random.normal(13.8,5,end-start+1)
+		for i in range(end-start+1-500):
+			net.ncl[start+i].weight[1]=max(kar[i],0)
 
 
 class MSpec: # this class uses matlab to make a spectrogram
@@ -107,8 +106,8 @@ class MSpec: # this class uses matlab to make a spectrogram
 		h.vjnk.div(self.nqspec.ind.size())
 		return h.vjnk
 
-class Network:
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=137811,UseNetStim=True,wseed=437892,scale=1.0,MSGain=1.0,SaveConn=False):
+class Network:#change seed, theseed
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=3071110,UseNetStim=True,wseed=7801910,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)

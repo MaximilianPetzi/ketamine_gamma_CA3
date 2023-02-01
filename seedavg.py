@@ -1,12 +1,13 @@
 #my_mosinit can also be called directly
+from termcolor import colored
 
-nA=1
-nB=4
-stepsizeA=.5 #pww
-stepsizeB=108 #Seed
+nA=2
+nB=10
+stepsizeA=1 #0 for control, 1 for LTP
+stepsizeB=1002 #Seed
 
 def calcparams(ii,jj):
-    pars=[None,ii,jj,ii*stepsizeA+1,jj*stepsizeB]  
+    pars=[None,ii,jj,ii*stepsizeA,jj*stepsizeB]  
     return pars
 
 if __name__=="__main__":
@@ -17,7 +18,7 @@ if __name__=="__main__":
     if os.path.exists("recfolder/Data.npy"):
             os.remove("recfolder/Data.npy")
 
-    Data=np.ones((nA*2,nB),dtype="object")
+    Data=np.ones((nA,nB),dtype="object")
     np.save("recfolder/Data",Data)
     for i in range(nA):
         for j in range(nB):
@@ -26,7 +27,9 @@ if __name__=="__main__":
             np.save("recfolder/myparams",myparams)  #set current params, also pass the indices for saving
             commandstring="python2 my_mosinit.py SIMUL"
             os.system(commandstring)    #do simulation (uses set params) (saves the recordings)
-            print("after number ", i,j)
-
+            print(colored("after number ","red"))
+            print(i,j)
+    Data=np.load("recfolder/Data.npy",allow_pickle=True)
+    np.save("recfolder/oldData.npy",Data)#keeps the old data until new sim is finished
 
 
