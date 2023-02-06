@@ -31,7 +31,7 @@ plt.errorbar(x=x+0.02,y=pows[:,1],yerr=pows_std[:,1],color="grey",fmt=".")
 plt.plot(x,pows[:,0],label="theta power(3-12 Hz)")
 plt.errorbar(x=x,y=pows[:,0],yerr=pows_std[:,0],color="grey",fmt='.')
 plt.legend()
-plt.title("Control vs. LTP")
+plt.title("weights changed just before measuring vs at time zero")
 
 
 plt.show()

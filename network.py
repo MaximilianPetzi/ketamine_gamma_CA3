@@ -55,8 +55,8 @@ class Population:
 	def set_k(self):
 		start=net.pyr.ncsidx["Adend3AMPAf"]
 		end=net.pyr.nceidx["Adend3AMPAf"]
-		kar=np.random.normal(13.8,5,end-start+1)
-		for i in range(end-start+1-500):
+		kar=np.random.normal(13,5,end-start+1)
+		for i in range(end-start+1-740):
 			net.ncl[start+i].weight[1]=max(kar[i],0)
 
 
@@ -107,7 +107,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:#change seed, theseed
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=3071110,UseNetStim=True,wseed=7801910,scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=16910029,UseNetStim=True,wseed=160019,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
@@ -177,10 +177,10 @@ class Network:#change seed, theseed
 			cel = po.cell[i]
 
 			ns = h.NetStim()
-			ns.interval = ISI
-			ns.noise = 1			
-			ns.number = (1e3 / ISI) * time_limit
-			ns.start = 0
+			ns.interval = ISI #docu:  interval ms (mean) time between spikes
+			ns.noise = 1		
+			ns.number = (1e3 / ISI) * time_limit  #docu: number (average) number of spikes	
+			ns.start = 0  #docu:  start ms (most likely) start time of first spike
 
 			nc = h.NetCon(ns,cel.__dict__[syn].syn)
 			nc.delay = h.dt * 2 # 0
@@ -319,28 +319,27 @@ class Network:#change seed, theseed
 
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
-		print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
 		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)
 		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
 		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
 
-		print "PYR -> X , AMPA"
+		print("PYR -> X , AMPA")
 		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)
 		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 			
-		print "BAS -> X , GABA"
+		print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#new 1
 		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#new 2
 		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#new 1
 
-		print "OLM -> PYR , GABA"
+		print("OLM -> PYR , GABA")
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
 		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#new weight value
 
 	        #pyramidal to PSR cell -- for testing only
-		print "PYR -> PYR, AMPA/NMDA"
+		print("PYR -> PSR, AMPA/NMDA")
 		self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)
 		self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 

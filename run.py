@@ -12,7 +12,7 @@ if net.noise:
 
 # handler for printing out time during simulation run
 def fi():
-	for i in range(0,int(h.tstop),100):
+	for i in range(0,int(h.tstop),1000):
 		h.cvode.event(i, "print " + str(i))
 
 fih = h.FInitializeHandler(1, fi)

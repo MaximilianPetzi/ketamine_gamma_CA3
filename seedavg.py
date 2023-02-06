@@ -2,7 +2,7 @@
 from termcolor import colored
 
 nA=2
-nB=10
+nB=5
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
 

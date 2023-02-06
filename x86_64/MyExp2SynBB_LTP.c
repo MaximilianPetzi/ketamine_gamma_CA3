@@ -59,20 +59,21 @@ extern double hoc_Exp(double);
 #define d _p[12]
 #define taup _p[13]
 #define taud _p[14]
-#define ltd _p[15]
-#define i _p[16]
-#define g _p[17]
-#define A _p[18]
-#define B _p[19]
-#define fact _p[20]
-#define etime _p[21]
-#define tpost _p[22]
-#define countinputs _p[23]
-#define DA _p[24]
-#define DB _p[25]
-#define v _p[26]
-#define _g _p[27]
-#define _tsav _p[28]
+#define version _p[15]
+#define thresh _p[16]
+#define i _p[17]
+#define g _p[18]
+#define A _p[19]
+#define B _p[20]
+#define fact _p[21]
+#define etime _p[22]
+#define tpost _p[23]
+#define countinputs _p[24]
+#define DA _p[25]
+#define DB _p[26]
+#define v _p[27]
+#define _g _p[28]
+#define _tsav _p[29]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -94,6 +95,7 @@ extern "C" {
  /* declaration of user functions */
  static double _hoc_factor2();
  static double _hoc_factor1();
+ static double _hoc_factor0();
  static double _hoc_factor();
  static int _mechtype;
 extern void _nrn_cacheloop_reg(int, int);
@@ -144,15 +146,18 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "get_loc", _hoc_get_loc_pnt,
  "factor2", _hoc_factor2,
  "factor1", _hoc_factor1,
+ "factor0", _hoc_factor0,
  "factor", _hoc_factor,
  0, 0
 };
 #define factor2 factor2_MyExp2SynBB_LTP
 #define factor1 factor1_MyExp2SynBB_LTP
+#define factor0 factor0_MyExp2SynBB_LTP
 #define factor factor_MyExp2SynBB_LTP
- extern double factor2( _threadargsprotocomma_ double );
- extern double factor1( _threadargsprotocomma_ double );
- extern double factor( _threadargsprotocomma_ double );
+ extern double factor2( _threadargsprotocomma_ double , double );
+ extern double factor1( _threadargsprotocomma_ double , double );
+ extern double factor0( _threadargsprotocomma_ double , double );
+ extern double factor( _threadargsprotocomma_ double , double );
  /* declare global and static user variables */
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
@@ -228,7 +233,8 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "d",
  "taup",
  "taud",
- "ltd",
+ "version",
+ "thresh",
  0,
  "i",
  "g",
@@ -248,7 +254,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 29, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 30, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -265,10 +271,11 @@ static void nrn_alloc(Prop* _prop) {
  	d = -0.01;
  	taup = 16.8;
  	taud = 16.8;
- 	ltd = 0;
+ 	version = 2;
+ 	thresh = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 29;
+ 	_prop->param_size = 30;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 7, _prop);
   }
@@ -306,7 +313,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 29, 7);
+  hoc_register_prop_size(_mechtype, 30, 7);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "netsend");
@@ -358,13 +365,16 @@ static int _ode_spec1(_threadargsproto_);
   return 0;
 }
  
-double factor ( _threadargsprotocomma_ double _lDt ) {
+double factor ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
    double _lfactor;
- if ( ltd  == 0.0 ) {
-     _lfactor = factor1 ( _threadargscomma_ _lDt ) * pf ;
+ if ( version  == 0.0 ) {
+     _lfactor = factor0 ( _threadargscomma_ _lDt , _lDt2 ) * pf ;
      }
-   if ( ltd  == 1.0 ) {
-     _lfactor = factor2 ( _threadargscomma_ _lDt ) * pf ;
+   if ( version  == 1.0 ) {
+     _lfactor = factor1 ( _threadargscomma_ _lDt , _lDt2 ) * pf ;
+     }
+   if ( version  == 2.0 ) {
+     _lfactor = factor2 ( _threadargscomma_ _lDt , _lDt2 ) * pf ;
      }
    _lfactor = _lfactor ;
    
@@ -378,21 +388,40 @@ static double _hoc_factor(void* _vptr) {
   _ppvar = ((Point_process*)_vptr)->_prop->dparam;
   _thread = _extcall_thread;
   _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
- _r =  factor ( _p, _ppvar, _thread, _nt, *getarg(1) );
+ _r =  factor ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
  return(_r);
 }
  
-double factor1 ( _threadargsprotocomma_ double _lDt ) {
-   double _lfactor1;
+double factor0 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
+   double _lfactor0;
  if ( _lDt > 0.0 ) {
-     _lfactor1 = p * exp ( - _lDt / taup ) ;
+     _lfactor0 = p * exp ( - _lDt / taup ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor1 = - d * exp ( _lDt / taud ) ;
+     _lfactor0 = - d * exp ( _lDt / taud ) ;
      }
    else {
-     _lfactor1 = 0.0 ;
+     _lfactor0 = 0.0 ;
      }
+   _lfactor0 = _lfactor0 ;
+   
+return _lfactor0;
+ }
+ 
+static double _hoc_factor0(void* _vptr) {
+ double _r;
+   double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
+   _p = ((Point_process*)_vptr)->_prop->param;
+  _ppvar = ((Point_process*)_vptr)->_prop->dparam;
+  _thread = _extcall_thread;
+  _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
+ _r =  factor0 ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
+ return(_r);
+}
+ 
+double factor1 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
+   double _lfactor1;
+ _lfactor1 = p * 2.0 * exp ( - _lDt * _lDt / ( 2.0 * pow ( taup , 2.0 ) ) ) - d * exp ( - _lDt * _lDt / ( 2.0 * 2.0 * pow ( taud , 2.0 ) ) ) ;
    _lfactor1 = _lfactor1 ;
    
 return _lfactor1;
@@ -405,13 +434,21 @@ static double _hoc_factor1(void* _vptr) {
   _ppvar = ((Point_process*)_vptr)->_prop->dparam;
   _thread = _extcall_thread;
   _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
- _r =  factor1 ( _p, _ppvar, _thread, _nt, *getarg(1) );
+ _r =  factor1 ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
  return(_r);
 }
  
-double factor2 ( _threadargsprotocomma_ double _lDt ) {
+double factor2 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
    double _lfactor2;
- _lfactor2 = p * 2.0 * exp ( - _lDt * _lDt / ( 2.0 * pow ( taup , 2.0 ) ) ) - d * exp ( - _lDt * _lDt / ( 2.0 * 2.0 * pow ( taud , 2.0 ) ) ) ;
+ if ( _lDt > 0.0 ) {
+     _lfactor2 = p * exp ( - _lDt / taup ) * ( exp ( - _lDt2 / 2.0 / taup ) - thresh ) ;
+     }
+   else if ( _lDt < 0.0 ) {
+     _lfactor2 = - d * ( exp ( _lDt / taud ) - thresh ) ;
+     }
+   else {
+     _lfactor2 = 0.0 ;
+     }
    _lfactor2 = _lfactor2 ;
    
 return _lfactor2;
@@ -424,7 +461,7 @@ static double _hoc_factor2(void* _vptr) {
   _ppvar = ((Point_process*)_vptr)->_prop->dparam;
   _thread = _extcall_thread;
   _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
- _r =  factor2 ( _p, _ppvar, _thread, _nt, *getarg(1) );
+ _r =  factor2 ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
  return(_r);
 }
  
@@ -444,7 +481,6 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
  _tsav = t;   if (_lflag == 1. ) {*(_tqitem) = 0;}
  {
    if ( _lflag  == 0.0 ) {
-     F = F + 1.0 ;
        if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
@@ -463,32 +499,35 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
   } else {
  B = B + _args[0] * fact * _args[1] * pww ;
        }
- _args[2] = t ;
-     _args[1] = _args[1] + factor ( _threadargscomma_ tpost - t ) ;
+ _args[1] = _args[1] + factor ( _threadargscomma_ tpost - t , t - _args[2] ) ;
      if ( _args[1] > kmax ) {
        _args[1] = kmax ;
        }
      rec_k = _args[1] ;
-     if ( _args[1] < 0.0 ) {
-       printf ( "plasticity negative, sth went wrong" ) ;
+     if ( t - _args[2] < 0.0 ) {
+       printf ( "t-tpre________ negative sth went wrong \n" ) ;
        }
+     _args[2] = t ;
      }
    else if ( _lflag  == 2.0 ) {
      F = F - 0.9 ;
-     tpost = t ;
      countinputs = 0.0 ;
      {int _ifn1, _nfn1; double* _fnargs1, **_fnargslist1;
 	_nfn1 = _nrn_netcon_args(_ppvar[_fnc_index]._pvoid, &_fnargslist1);
 	for (_ifn1 = 0; _ifn1 < _nfn1; ++_ifn1) {
  	 _fnargs1 = _fnargslist1[_ifn1];
  {
-       _fnargs1[1] = _fnargs1[1] + factor ( _threadargscomma_ t - _fnargs1[2] ) ;
+       _fnargs1[1] = _fnargs1[1] + factor ( _threadargscomma_ t - _fnargs1[2] , t - tpost ) ;
        if ( _fnargs1[1] > kmax ) {
          _fnargs1[1] = kmax ;
          }
        countinputs = countinputs + 1.0 ;
        if ( countinputs > 1.0 ) {
          }
+       if ( t - tpost < 0.0 ) {
+         printf ( "%g t-tpost negative, sth went wrong\n" , t - tpost ) ;
+         }
+       tpost = t ;
        rec_k1 = _fnargs1[1] ;
        }
      	}}
@@ -718,7 +757,7 @@ static const char* nmodl_file_text =
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
   "  POINT_PROCESS MyExp2SynBB_LTP\n"
-  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, ltd, sigmaltd, ltdfac\n"
+  "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, version, sigmaltd, ltdfac, thresh\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
   "\n"
@@ -745,8 +784,9 @@ static const char* nmodl_file_text =
   "  d = -0.01 <0,1>: depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
-  "  ltd=0  :decides if gaussian, symmetric ltd is used, or not\n"
+  "  version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule\n"
   "  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter\n"
+  "  thresh=0.0\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -798,36 +838,55 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "\n"
-  "FUNCTION factor(Dt (ms)) { \n"
-  "  if (ltd==0) {\n"
-  "    factor=factor1(Dt)*pf\n"
+  "FUNCTION factor(Dt (ms), Dt2 (ms)) { \n"
+  "  if (version==0) {\n"
+  "    factor=factor0(Dt, Dt2)*pf\n"
   "  }\n"
-  "  if (ltd==1) {\n"
-  "    factor=factor2(Dt)*pf\n"
+  "  if (version==1) {\n"
+  "    factor=factor1(Dt, Dt2)*pf\n"
+  "  }\n"
+  "  if (version==2) {\n"
+  "    factor=factor2(Dt, Dt2)*pf\n"
   "  }\n"
   "  factor=factor\n"
   "  }\n"
   "\n"
-  "FUNCTION factor1(Dt (ms)) { : Dt is interval between most recent presynaptic spike\n"
+  "FUNCTION factor0(Dt (ms), Dt2 (ms)) { :exponential\n"
+  ": Dt is interval between most recent presynaptic spike\n"
   "    : and most recent postsynaptic spike\n"
   "    : calculated as tpost - tpre (i.e. > 0 if pre happens before post)\n"
   "  : the following rule is the one described by Bi & Poo\n"
   "  :printf(\"Dt= %g, exp..= %g\\n\",Dt,exp(-Dt*Dt/200))\n"
   "  \n"
   "  if (Dt>0) {\n"
-  "    factor1 = p*exp(-Dt/taup) : potentiation\n"
+  "    factor0 = p*exp(-Dt/taup) : potentiation\n"
   "  \n"
   "  } else if (Dt<0) {\n"
-  "    factor1 = -d*exp(Dt/taud) : depression\n"
+  "    factor0 = -d*exp(Dt/taud) : depression\n"
   "  } else {\n"
-  "    factor1 = 0 : no change if pre and post are simultaneous\n"
+  "    factor0 = 0 : no change if pre and post are simultaneous\n"
   "  }\n"
+  "  factor0=factor0\n"
+  "}\n"
+  "\n"
+  "FUNCTION factor1(Dt (ms), Dt2 (ms)) { :mexican hat/double gaussian \n"
+  "  :printf(\"Dt= %g, exp..= %g\\n\",Dt,exp(-Dt*Dt/200))\n"
+  "  factor1=p*2*exp(-Dt*Dt/(2*pow(taup,2)))-d*exp(-Dt*Dt/(2*2*pow(taud,2)))  :p,d,taup,taub used same as in double exp factor\n"
   "  factor1=factor1\n"
   "}\n"
   "\n"
-  "FUNCTION factor2(Dt (ms)) {\n"
-  "  :printf(\"Dt= %g, exp..= %g\\n\",Dt,exp(-Dt*Dt/200))\n"
-  "  factor2=p*2*exp(-Dt*Dt/(2*pow(taup,2)))-d*exp(-Dt*Dt/(2*2*pow(taud,2)))  :p,d,taup,taub used same as in double exp factor\n"
+  "FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a threshold subtracted from it\n"
+  "                              :similar to (nearest spike) minimal stdp rule, but symmetric and with thresholds\n"
+  "                              :Dt2 always positive\n"
+  "    :printf(\"Dt= %g /t Dt= %g\\n\",Dt, Dt2)\n"
+  "  if (Dt>0) {\n"
+  "    factor2 = p*exp(-Dt/taup)*(exp(-Dt2/2/taup)-thresh) : potentiation \n"
+  "  \n"
+  "  } else if (Dt<0) {\n"
+  "    factor2 = -d*(exp(Dt/taud)-thresh) : depression\n"
+  "  } else {\n"
+  "    factor2 = 0\n"
+  "  }\n"
   "  factor2=factor2\n"
   "}\n"
   "\n"
@@ -838,46 +897,47 @@ static const char* nmodl_file_text =
   "  \n"
   "  \n"
   "  :printf(\"\\nA REC rec=%g, rec_1=%g outside flags\",rec_k,rec_k1)\n"
-  "  if (flag == 0) { F=F+1 :presynaptic spike (after last post so depress)\n"
-  ":printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
+  "  if (flag == 0) { :presynaptic spike (after last post so depress)\n"
+  "  :printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
   "    \n"
   "    A = A + w*fact*k*pww\n"
   "    B = B + w*fact*k*pww  :for double exp rise and decay\n"
   "    \n"
   "    : g = g + w*k\n"
-  "    tpre = t\n"
-  "    k = k + factor(tpost - t)\n"
+  "    \n"
+  "    k = k + factor(tpost - t, t-tpre)\n"
   "    if (k>kmax) {k=kmax}: saturation\n"
   "    rec_k=k\n"
-  "    if (k<0){printf(\"plasticity negative, sth went wrong\")}\n"
+  "    if (t-tpre<0){printf(\"t-tpre________ negative sth went wrong \\n\")}\n"
+  "    tpre = t\n"
+  "    \n"
+  "    \n"
   "    }\n"
   "  \n"
   "  else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)\n"
-  ":printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"
-  "    tpost = t\n"
+  "  :printf(\"Postsyn spike--entry flag=%g t=%g\\n\", flag, t)\n"
   "    countinputs=0\n"
-  "    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args\n"
+  "    FOR_NETCONS(w1, k1, tp) { : tp is timing of last postsynaptic spike, for all presynaptic connections, \n"
   "    :printf(\"entry FOR_NETCONS w1=%g k1=%g tp=%g\\n\", w1, k1, tp)\n"
-  "      k1 = k1+factor(t - tp) :k1 is plasticity factor for the weight\n"
+  "      k1 = k1+factor(t - tp, t-tpost) :k1 is plasticity factor for the weight\n"
   "      if (k1>kmax) {k1=kmax}: saturation\n"
   "      countinputs=countinputs+1\n"
   "\n"
   "      if (countinputs>1){\n"
   "        :printf(\"MORE THAN ONE INPUT?? o_O\")\n"
   "      }\n"
+  "      if (t-tpost<0){printf(\"%g t-tpost negative, sth went wrong\\n\", t-tpost)}\n"
+  "      tpost = t :do afterwards, such that the second trace is not updated before it is being used in factor(.,.)\n"
   "      rec_k1=k1\n"
-  "\n"
-  ":printf(\"  new k1 %g\\n\", k1)\n"
-  "\n"
-  "    }\n"
+  "      :printf(\"  new k1 %g\\n\", k1)\n"
+  "      }\n"
   "  }\n"
   "  \n"
   "   else {: flag == 1 from INITIAL block :only called in the beginning\n"
-  ":printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
+  "    :printf(\"entry flag=%g t=%g\\n\", flag, t)\n"
   "    WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons\n"
   "  }\n"
   "}\n"
-  "\n"
   "\n"
   ;
 #endif

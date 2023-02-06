@@ -42,10 +42,10 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=2
-    ltptime=2
-    resttime=2
-    measuretime=4
+    inittime=3
+    ltptime=1
+    resttime=0
+    measuretime=1
     second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -55,26 +55,26 @@ if True:
     Run.pyrWashB = [1, 1]
     Run.washinT  = 1000*second  #default 1e3
     Run.washoutT = h.tstop  #2e3
-    
+    #Run.kT=(inittime)*second  
+
     #Run.pwwout=1.6
     #Run.pwwT=(inittime+measuretime)*second
-    Run.LTPoffT=(inittime+ltptime)*second
-    Run.pfout=70
-    Run.kT=h.tstop
+    Run.pfout=30
     Run.LTPonT=(inittime)*second  
+    Run.LTPoffT=(inittime+ltptime)*second
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]:
         print("It's real!")
-        Run.LTPonT=(inittime)*second 
+        #Run.LTPonT=(inittime)*second 
     else:
         print("It's a simulation!")
         if myparams[3]==0:
             print("SETTING TIME TO ",h.tstop)
-            Run.LTPonT=h.tstop #if 0, control, never
+            Run.kT=(inittime+ltptime+resttime)*second #if 0, control, never
         else: 
             print("SETTING TIME TO ",0)
-            Run.LTPonT=(inittime)*second                   #if 1, instantly
+            Run.kT=(0)*second                   #if 1, instantly
 
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
@@ -186,7 +186,7 @@ if True:
         plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red")
         plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="blue")
         plt.legend()
-        plt.xlim((0,60))
+        plt.xlim((0,100))
         plt.xlabel("f[Hz]")
         plt.title("spectral power of lfp")
         

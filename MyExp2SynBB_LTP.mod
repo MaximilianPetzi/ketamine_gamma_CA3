@@ -2,7 +2,7 @@
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
   POINT_PROCESS MyExp2SynBB_LTP
-  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, ltd, sigmaltd, ltdfac
+  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, version, sigmaltd, ltdfac, thresh
   NONSPECIFIC_CURRENT i
 }
 
@@ -29,8 +29,9 @@ PARAMETER {
   d = -0.01 <0,1>: depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
-  ltd=0  :decides if gaussian, symmetric ltd is used, or not
+  version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule
   :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
+  thresh=0.0
 }
 
 ASSIGNED {
@@ -82,36 +83,55 @@ DERIVATIVE state {
 }
 
 
-FUNCTION factor(Dt (ms)) { 
-  if (ltd==0) {
-    factor=factor1(Dt)*pf
+FUNCTION factor(Dt (ms), Dt2 (ms)) { 
+  if (version==0) {
+    factor=factor0(Dt, Dt2)*pf
   }
-  if (ltd==1) {
-    factor=factor2(Dt)*pf
+  if (version==1) {
+    factor=factor1(Dt, Dt2)*pf
+  }
+  if (version==2) {
+    factor=factor2(Dt, Dt2)*pf
   }
   factor=factor
   }
 
-FUNCTION factor1(Dt (ms)) { : Dt is interval between most recent presynaptic spike
+FUNCTION factor0(Dt (ms), Dt2 (ms)) { :exponential
+: Dt is interval between most recent presynaptic spike
     : and most recent postsynaptic spike
     : calculated as tpost - tpre (i.e. > 0 if pre happens before post)
   : the following rule is the one described by Bi & Poo
   :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
   
   if (Dt>0) {
-    factor1 = p*exp(-Dt/taup) : potentiation
+    factor0 = p*exp(-Dt/taup) : potentiation
   
   } else if (Dt<0) {
-    factor1 = -d*exp(Dt/taud) : depression
+    factor0 = -d*exp(Dt/taud) : depression
   } else {
-    factor1 = 0 : no change if pre and post are simultaneous
+    factor0 = 0 : no change if pre and post are simultaneous
   }
+  factor0=factor0
+}
+
+FUNCTION factor1(Dt (ms), Dt2 (ms)) { :mexican hat/double gaussian 
+  :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
+  factor1=p*2*exp(-Dt*Dt/(2*pow(taup,2)))-d*exp(-Dt*Dt/(2*2*pow(taud,2)))  :p,d,taup,taub used same as in double exp factor
   factor1=factor1
 }
 
-FUNCTION factor2(Dt (ms)) {
-  :printf("Dt= %g, exp..= %g\n",Dt,exp(-Dt*Dt/200))
-  factor2=p*2*exp(-Dt*Dt/(2*pow(taup,2)))-d*exp(-Dt*Dt/(2*2*pow(taud,2)))  :p,d,taup,taub used same as in double exp factor
+FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a threshold subtracted from it
+                              :similar to (nearest spike) minimal stdp rule, but symmetric and with thresholds
+                              :Dt2 always positive
+    :printf("Dt= %g /t Dt= %g\n",Dt, Dt2)
+  if (Dt>0) {
+    factor2 = p*exp(-Dt/taup)*(exp(-Dt2/2/taup)-thresh) : potentiation 
+  
+  } else if (Dt<0) {
+    factor2 = -d*(exp(Dt/taud)-thresh) : depression
+  } else {
+    factor2 = 0
+  }
   factor2=factor2
 }
 
@@ -122,44 +142,45 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
   
   
   :printf("\nA REC rec=%g, rec_1=%g outside flags",rec_k,rec_k1)
-  if (flag == 0) { F=F+1 :presynaptic spike (after last post so depress)
-:printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
+  if (flag == 0) { :presynaptic spike (after last post so depress)
+  :printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
     
     A = A + w*fact*k*pww
     B = B + w*fact*k*pww  :for double exp rise and decay
     
     : g = g + w*k
-    tpre = t
-    k = k + factor(tpost - t)
+    
+    k = k + factor(tpost - t, t-tpre)
     if (k>kmax) {k=kmax}: saturation
     rec_k=k
-    if (k<0){printf("plasticity negative, sth went wrong")}
+    if (t-tpre<0){printf("t-tpre________ negative sth went wrong \n")}
+    tpre = t
+    
+    
     }
   
   else if (flag == 2) { F=F-0.9  : postsynaptic spike (after last pre so potentiate)
-:printf("Postsyn spike--entry flag=%g t=%g\n", flag, t)
-    tpost = t
+  :printf("Postsyn spike--entry flag=%g t=%g\n", flag, t)
     countinputs=0
-    FOR_NETCONS(w1, k1, tp) { : also can hide NET_RECEIVE args
+    FOR_NETCONS(w1, k1, tp) { : tp is timing of last postsynaptic spike, for all presynaptic connections, 
     :printf("entry FOR_NETCONS w1=%g k1=%g tp=%g\n", w1, k1, tp)
-      k1 = k1+factor(t - tp) :k1 is plasticity factor for the weight
+      k1 = k1+factor(t - tp, t-tpost) :k1 is plasticity factor for the weight
       if (k1>kmax) {k1=kmax}: saturation
       countinputs=countinputs+1
 
       if (countinputs>1){
         :printf("MORE THAN ONE INPUT?? o_O")
       }
+      if (t-tpost<0){printf("%g t-tpost negative, sth went wrong\n", t-tpost)}
+      tpost = t :do afterwards, such that the second trace is not updated before it is being used in factor(.,.)
       rec_k1=k1
-
-:printf("  new k1 %g\n", k1)
-
-    }
+      :printf("  new k1 %g\n", k1)
+      }
   }
   
    else {: flag == 1 from INITIAL block :only called in the beginning
-:printf("entry flag=%g t=%g\n", flag, t)
+    :printf("entry flag=%g t=%g\n", flag, t)
     WATCH (v > -20) 2 : calls NET_RECEIVE with flag 2, when v>thresh., for all neurons
   }
 }
-
 
