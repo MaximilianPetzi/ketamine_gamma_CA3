@@ -43,9 +43,9 @@ if True:
     import run as Run
     
     inittime=3
-    ltptime=1
+    ltptime=5
     resttime=0
-    measuretime=1
+    measuretime=0
     second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -53,8 +53,8 @@ if True:
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 1000*second  #default 1e3
-    Run.washoutT = h.tstop  #2e3
+    Run.washinT  = 3*second  #default 1e3
+    Run.washoutT = 5*second  #2e3
     #Run.kT=(inittime)*second  
 
     #Run.pwwout=1.6
@@ -192,9 +192,9 @@ if True:
         
         plt.figure(3)
         xKarr=np.arange(len(Karr))*10
-        plt.plot(xKarr,Karr,label='recurrent')
+        #plt.plot(xKarr,Karr,label='recurrent')
         plt.plot(xKarr,Karr2,label='outside')
-        plt.plot(xKarr,Parr,label="pww")
+        #plt.plot(xKarr,Parr,label="pww")
         plt.legend()
         plt.ylabel("avg weight")
         plt.xlabel("time[ms]")

@@ -175,6 +175,14 @@
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
+./MyExp2SynBB_LTPb.c: ../MyExp2SynBB_LTPb.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTPb.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+
+./MyExp2SynBB_LTPb.o: ./MyExp2SynBB_LTPb.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
 ./MyExp2SynBB_LTP.c: ../MyExp2SynBB_LTP.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTP.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")

@@ -22,14 +22,14 @@ extern int _method3;
 extern double hoc_Exp(double);
 #endif
  
-#define nrn_init _nrn_init__MyExp2SynBB_LTP
-#define _nrn_initial _nrn_initial__MyExp2SynBB_LTP
-#define nrn_cur _nrn_cur__MyExp2SynBB_LTP
-#define _nrn_current _nrn_current__MyExp2SynBB_LTP
-#define nrn_jacob _nrn_jacob__MyExp2SynBB_LTP
-#define nrn_state _nrn_state__MyExp2SynBB_LTP
-#define _net_receive _net_receive__MyExp2SynBB_LTP 
-#define state state__MyExp2SynBB_LTP 
+#define nrn_init _nrn_init__MyExp2SynBB_LTPb
+#define _nrn_initial _nrn_initial__MyExp2SynBB_LTPb
+#define nrn_cur _nrn_cur__MyExp2SynBB_LTPb
+#define _nrn_current _nrn_current__MyExp2SynBB_LTPb
+#define nrn_jacob _nrn_jacob__MyExp2SynBB_LTPb
+#define nrn_state _nrn_state__MyExp2SynBB_LTPb
+#define _net_receive _net_receive__MyExp2SynBB_LTPb 
+#define state state__MyExp2SynBB_LTPb 
  
 #define _threadargscomma_ _p, _ppvar, _thread, _nt,
 #define _threadargsprotocomma_ double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt,
@@ -150,10 +150,10 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "factor", _hoc_factor,
  0, 0
 };
-#define factor2 factor2_MyExp2SynBB_LTP
-#define factor1 factor1_MyExp2SynBB_LTP
-#define factor0 factor0_MyExp2SynBB_LTP
-#define factor factor_MyExp2SynBB_LTP
+#define factor2 factor2_MyExp2SynBB_LTPb
+#define factor1 factor1_MyExp2SynBB_LTPb
+#define factor0 factor0_MyExp2SynBB_LTPb
+#define factor factor_MyExp2SynBB_LTPb
  extern double factor2( _threadargsprotocomma_ double , double );
  extern double factor1( _threadargsprotocomma_ double , double );
  extern double factor0( _threadargsprotocomma_ double , double );
@@ -215,7 +215,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  /* connect range variables in _p that hoc is supposed to know about */
  static const char *_mechanism[] = {
  "7.7.0",
-"MyExp2SynBB_LTP",
+"MyExp2SynBB_LTPb",
  "tau1",
  "tau2",
  "pww",
@@ -270,7 +270,7 @@ static void nrn_alloc(Prop* _prop) {
  	taup = 16.8;
  	taud = 16.8;
  	version = 2;
- 	thresh = 0;
+ 	thresh = 0.00045;
   }
  	_prop->param = _p;
  	_prop->param_size = 30;
@@ -298,7 +298,7 @@ extern void _nrn_thread_table_reg(int, void(*)(double*, Datum*, Datum*, _NrnThre
 extern void hoc_register_tolerance(int, HocStateTolerance*, Symbol***);
 extern void _cvode_abstol( Symbol**, double*, int);
 
- void _MyExp2SynBB_LTP_reg() {
+ void _MyExp2SynBB_LTPb_reg() {
 	int _vectorized = 1;
   _initlists();
  	_pointtype = point_register_mech(_mechanism,
@@ -326,7 +326,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  pnt_receive_size[_mechtype] = 3;
  add_nrn_fornetcons(_mechtype, _fnc_index);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynBB_LTP /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTP.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynBB_LTPb /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTPb.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -439,7 +439,7 @@ static double _hoc_factor1(void* _vptr) {
 double factor2 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
    double _lfactor2;
  if ( _lDt > 0.0 ) {
-     _lfactor2 = p * exp ( - _lDt / taup ) ;
+     _lfactor2 = p * exp ( - _lDt / taup ) * ( exp ( - _lDt2 / taup ) - thresh ) ;
      }
    else if ( _lDt < 0.0 ) {
      _lfactor2 = - d * ( exp ( _lDt / taud ) - thresh ) ;
@@ -749,12 +749,12 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTP.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTPb.mod";
 static const char* nmodl_file_text = 
   ": check if g is supposed to be STATE or ASSIGNED\n"
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
   "NEURON {\n"
-  "  POINT_PROCESS MyExp2SynBB_LTP\n"
+  "  POINT_PROCESS MyExp2SynBB_LTPb\n"
   "  RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, version, sigmaltd, ltdfac, thresh\n"
   "  NONSPECIFIC_CURRENT i\n"
   "}\n"
@@ -784,7 +784,7 @@ static const char* nmodl_file_text =
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
   "  version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule\n"
   "  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter\n"
-  "  thresh=0.0\n"
+  "  thresh=0.00045\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
@@ -877,10 +877,13 @@ static const char* nmodl_file_text =
   "                              :similar to (nearest spike) minimal stdp rule, but symmetric and with thresholds\n"
   "                              :Dt2 always positive\n"
   "  if (Dt>0) {\n"
-  "    factor2 = p*exp(-Dt/taup):*(exp(-Dt2/taup)-thresh) : potentiation \n"
+  "    :at the Adend3 synapse, there is a post spike ca every 500ms and a pre spike ca every 1ms\n"
+  "    factor2 = p*exp(-Dt/taup)*(exp(-Dt2/taup)-thresh) : potentiation \n"
+  "    :printf(\"LTP by %g, Dt and Dt2: \\t%g, \\t%g, \\t%g_____\\n\", factor2,Dt, Dt2, exp(Dt2/taud/500))\n"
   "  } else if (Dt<0) {\n"
   "    factor2 = -d*(exp(Dt/taud)-thresh) : depression\n"
-  "  } else {\n"
+  "    :printf(\" LTD by %g, Dt and Dt2: \\t%g, \\t%g\\n\", factor2,Dt, Dt2)\n"
+  "    }else {\n"
   "    factor2 = 0\n"
   "  }\n"
   "  factor2=factor2\n"

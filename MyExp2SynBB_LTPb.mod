@@ -1,7 +1,7 @@
 : check if g is supposed to be STATE or ASSIGNED
 : $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ 
 NEURON {
-  POINT_PROCESS MyExp2SynBB_LTP
+  POINT_PROCESS MyExp2SynBB_LTPb
   RANGE tau1, tau2, e, i, g, Vwt, gmax, d, p, taud, taup, rec_k, rec_k1, F, pf, pww, kmax, version, sigmaltd, ltdfac, thresh
   NONSPECIFIC_CURRENT i
 }
@@ -31,7 +31,7 @@ PARAMETER {
   taud = 16.8 (ms) : depression effectiveness time constant
   version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule
   :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
-  thresh=0.0
+  thresh=0.00045
 }
 
 ASSIGNED {
@@ -124,10 +124,13 @@ FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a 
                               :similar to (nearest spike) minimal stdp rule, but symmetric and with thresholds
                               :Dt2 always positive
   if (Dt>0) {
-    factor2 = p*exp(-Dt/taup):*(exp(-Dt2/taup)-thresh) : potentiation 
+    :at the Adend3 synapse, there is a post spike ca every 500ms and a pre spike ca every 1ms
+    factor2 = p*exp(-Dt/taup)*(exp(-Dt2/taup)-thresh) : potentiation 
+    :printf("LTP by %g, Dt and Dt2: \t%g, \t%g, \t%g_____\n", factor2,Dt, Dt2, exp(Dt2/taud/500))
   } else if (Dt<0) {
     factor2 = -d*(exp(Dt/taud)-thresh) : depression
-  } else {
+    :printf(" LTD by %g, Dt and Dt2: \t%g, \t%g\n", factor2,Dt, Dt2)
+    }else {
     factor2 = 0
   }
   factor2=factor2
