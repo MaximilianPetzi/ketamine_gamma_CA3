@@ -29,7 +29,7 @@ PARAMETER {
   d = -0.01 : depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
-  version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule
+  version=0  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule
   :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
   thresh=0.00045
 }

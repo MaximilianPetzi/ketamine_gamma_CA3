@@ -95,11 +95,15 @@ def myevent_eventcallingfunction():
     h.CVode().event(LTPoffT,doLTPoff)
     h.CVode().event(pwwT,dopww)
     h.CVode().event(kT,dok)
-    
-def my_event():
-   	pass
-	#print("hi from",h.t)
+    #h.CVode().event(3000,my_event)
+    #h.CVode().event(8000,my_event)
 
+def my_event():
+	print("hi from",h.t)
+	car=[]
+	for i in range(800):
+		car.append(len(np.array(net.pyr.lidvec[i].to_python)))
+	print(np.average(car))
 
 
 # example to do washin/washout, after loading sim:

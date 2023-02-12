@@ -269,7 +269,7 @@ static void nrn_alloc(Prop* _prop) {
  	d = -0.01;
  	taup = 16.8;
  	taud = 16.8;
- 	version = 2;
+ 	version = 0;
  	thresh = 0.00045;
   }
  	_prop->param = _p;
@@ -782,7 +782,7 @@ static const char* nmodl_file_text =
   "  d = -0.01 : depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
-  "  version=2  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule\n"
+  "  version=0  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule\n"
   "  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter\n"
   "  thresh=0.00045\n"
   "}\n"
