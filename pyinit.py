@@ -2,6 +2,8 @@
 
 from neuron import *
 
+pyinit_main=None    #used to remember if name==main in my_mosinit
+
 #h.xwindows=1
 #h.show_panel=0
 #h.pwd()

@@ -1,8 +1,9 @@
 # $Id: network.py,v 1.125 2011/06/10 15:10:05 samn Exp $ 
-
+import numpy as np
 from pyinit import *
 from geom import *
 import random
+import sys
 
 gGID = 0 # global ID for cells
 
@@ -42,6 +43,22 @@ class Population:
 	def set_r(self, syn, r):
 		for c in self.cell:
 			c.__dict__[syn].syn.r = r
+
+	def set_pf(self,syn,pf):
+		for c in self.cell:
+			c.__dict__[syn].syn.pf = pf
+
+	def set_pww(self,syn,pww):
+		for c in self.cell:
+			c.__dict__[syn].syn.pww = pww
+
+	def set_k(self):
+		start=net.pyr.ncsidx["Adend3AMPAf"]
+		end=net.pyr.nceidx["Adend3AMPAf"]
+		kar=np.random.normal(13,5,end-start+1)
+		for i in range(end-start+1-740):
+			net.ncl[start+i].weight[1]=max(kar[i],0)
+
 
 class MSpec: # this class uses matlab to make a spectrogram
 
@@ -89,15 +106,14 @@ class MSpec: # this class uses matlab to make a spectrogram
 		h.vjnk.div(self.nqspec.ind.size())
 		return h.vjnk
 
-class Network:
-
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1234,UseNetStim=True,wseed=4321,scale=1.0,MSGain=1.0,SaveConn=False):
+class Network:#change seed, theseed
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=16910029,UseNetStim=True,wseed=160019,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
 		self.bas = Population(cell_type=Bwb,   n=int(math.ceil(200*scale)), x=10, y=0, z=0, dx=50, amp=     0, dur=  0, delay=2*h.dt)
 		self.olm = Population(cell_type=Ow,   n=int(math.ceil(200*scale)), x=20, y=0, z=0, dx=50, amp=-25e-3, dur=1e9, delay=2*h.dt)
-		
+
 		# psr = sensor cell to estimate the E->E connections
 		self.psr = Population(cell_type=PyrAdr,n=1,   x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt) 
 		self.cells = [self.pyr, self.bas, self.olm, self.psr]
@@ -116,8 +132,8 @@ class Network:
 
 
 	def set_noise_inputs(self,simdur): #simdur only used for make_all_noise
-		if self.DoMakeNoise:
-			if self.UseNetStim:
+		if self.DoMakeNoise:#true
+			if self.UseNetStim:#true
 				self.make_all_NetStims(simdur,self.iseed)
 			else:
 				self.make_all_noise(simdur,self.iseed)
@@ -161,10 +177,10 @@ class Network:
 			cel = po.cell[i]
 
 			ns = h.NetStim()
-			ns.interval = ISI
-			ns.noise = 1			
-			ns.number = (1e3 / ISI) * time_limit
-			ns.start = 0
+			ns.interval = ISI #docu:  interval ms (mean) time between spikes
+			ns.noise = 1		
+			ns.number = (1e3 / ISI) * time_limit  #docu: number (average) number of spikes	
+			ns.start = 0  #docu:  start ms (most likely) start time of first spike
 
 			nc = h.NetCon(ns,cel.__dict__[syn].syn)
 			nc.delay = h.dt * 2 # 0
@@ -247,7 +263,7 @@ class Network:
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
@@ -303,30 +319,29 @@ class Network:
 
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
-		print "PYR -> X , NMDA"   # src, trg, syn, delay, weight, conv
-		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)
-		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)
-		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)
+		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100
+		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)#conv nr 10
+		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
 
-		print "PYR -> X , AMPA"
-		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)
-		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)
-		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
+		print("PYR -> X , AMPA")
+		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100
+		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
+		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
 			
-		print "BAS -> X , GABA"
+		print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#new 1
 		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#new 2
 		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#new 1
 
-		print "OLM -> PYR , GABA"
+		print("OLM -> PYR , GABA")
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
 		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#new weight value
 
 	        #pyramidal to PSR cell -- for testing only
-		print "PYR -> PSR, AMPA/NMDA"
-		self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)
-		self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)
+		print("PYR -> PSR, AMPA/NMDA")
+		self.pyr_psr_NM=self.set_connections(self.pyr,self.psr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
+		self.pyr_psr_AM=self.set_connections(self.pyr,self.psr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
 
 
 	def set_conn_weight(self, conn, weight):
@@ -462,20 +477,6 @@ class Network:
 		self.vlfp.div(len(self.pyr.cell)) # normalize lfp by amount of pyr cells
 		self.lfp=numpy.array(self.vlfp.to_python()) # convert to python array (so can do PSD)
 
-	def calc_myvolt(self): ##mine
-		cellidx=2
-		vmyvolt_array=[]
-		myvolt_array=[]
-		for (cellidx,cell) in ##for index, user in enumerate(users):
-			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
-
-			self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)
-			self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
-			
-			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
-			myvolt_array.append(self.myvolt)
-			vmyvolt_array.append(self.vmyvolt)
-
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()
 		if skipms > 0:
@@ -537,8 +538,13 @@ try:
 	net = Network(noise=True,connections=True,DoMakeNoise=True,iseed=ISEED,UseNetStim=True,wseed=WSEED,scale=1.0,MSGain=MSG) 
 	print "set network from rseed.txt : iseed=",ISEED,", WSEED=",WSEED,", MSG = ",MSG
 except:
-	net = Network()
-	print "set network from default constructor"
+	myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+	if myparams[0]:#if name (mymosinit) ==main
+		net = Network()
+	else: 
+		import numpy as np
+		net = Network(iseed=int(myparams[4]),wseed=int(myparams[4]))
+		print "we are in a simulation"
 
 #setup some variables in hoc
 def sethocix():
