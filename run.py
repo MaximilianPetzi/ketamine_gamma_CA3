@@ -12,7 +12,7 @@ if net.noise:
 
 # handler for printing out time during simulation run
 def fi():
-	for i in range(0,int(h.tstop),100):
+	for i in range(0,int(h.tstop),1000):
 		h.cvode.event(i, "print " + str(i))
 
 fih = h.FInitializeHandler(1, fi)
@@ -39,6 +39,36 @@ pyrWashA = [0, 0] # ...
 pyrWashB = [0, 0] # ...
 washinT  = 0      # washin time
 washoutT = 0      # washout time
+LTPoffT = 0
+LTPonT = 1000000000000
+pwwrec = 1
+pwwout = 1
+pwwT = 1000000000
+pfrec = 0
+pfout = 0
+kout = 4
+krec = 1
+kT=100000000
+
+def doLTPon():
+	print "LTP on at ", LTPonT, " = ", h.t, " to ", pfout , "(and rec)", pfrec
+	net.pyr.set_pf("BdendAMPA",pfrec)
+	net.pyr.set_pf("Adend3AMPAf",pfout)
+
+def doLTPoff():
+	print "LTP off at ", LTPoffT, " = ", h.t
+	net.pyr.set_pf("BdendAMPA",0)
+	net.pyr.set_pf("Adend3AMPAf",0)
+
+def dopww():
+	print "pww changed at ", kT, " = ", h.t, " to ", pwwout , "(and rec)", pwwrec 
+	net.pyr.set_pww("BdendAMPA", pwwrec)
+	net.pyr.set_pww("Adend3AMPAf", pwwout)
+
+def dok():
+	print "k changed at ", kT, " = ", h.t, " to ", kout
+	#net.pyr.set_k("BdendAMPA", krec)
+	net.pyr.set_k()
 
 def dowashin():
 	print "washIN at ", washinT, " = ", h.t , " ", olmWash[0], basWash[0], pyrWashB[0], pyrWashA[0]
@@ -59,12 +89,22 @@ def setwash():
 	h.cvode.event(washinT,"nrnpython(\"dowashin()\")")
 	h.cvode.event(washoutT,"nrnpython(\"dowashout()\")")
 
-####################################################
-#my event:
+
 def myevent_eventcallingfunction():
-    h.CVode().event(0.7,my_event)
+    h.CVode().event(LTPonT,doLTPon)
+    h.CVode().event(LTPoffT,doLTPoff)
+    h.CVode().event(pwwT,dopww)
+    h.CVode().event(kT,dok)
+    #h.CVode().event(3000,my_event)
+    #h.CVode().event(8000,my_event)
+
 def my_event():
-   	print("hi from",h.t)
+	print("hi from",h.t)
+	car=[]
+	for i in range(800):
+		car.append(len(np.array(net.pyr.lidvec[i].to_python)))
+	print(np.average(car))
+
 
 # example to do washin/washout, after loading sim:
 # import run
