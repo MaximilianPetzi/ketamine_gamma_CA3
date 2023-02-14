@@ -1,7 +1,7 @@
 
 ./CA1ih.c: ../CA1ih.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ih.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ih.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./CA1ih.o: ./CA1ih.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -9,7 +9,7 @@
 
 ./CA1ika.c: ../CA1ika.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ika.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ika.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./CA1ika.o: ./CA1ika.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -17,7 +17,7 @@
 
 ./CA1ikdr.c: ../CA1ikdr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ikdr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ikdr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./CA1ikdr.o: ./CA1ikdr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -25,15 +25,71 @@
 
 ./CA1ina.c: ../CA1ina.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ina.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ina.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./CA1ina.o: ./CA1ina.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
+./MyExp2Syn.c: ../MyExp2Syn.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2Syn.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2Syn.o: ./MyExp2Syn.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynAlpha.c: ../MyExp2SynAlpha.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynAlpha.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynAlpha.o: ./MyExp2SynAlpha.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynBB.c: ../MyExp2SynBB.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynBB.o: ./MyExp2SynBB.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynBB_LTP.c: ../MyExp2SynBB_LTP.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTP.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynBB_LTP.o: ./MyExp2SynBB_LTP.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynBB_LTPb.c: ../MyExp2SynBB_LTPb.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTPb.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynBB_LTPb.o: ./MyExp2SynBB_LTPb.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynNMDA.c: ../MyExp2SynNMDA.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynNMDA.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynNMDA.o: ./MyExp2SynNMDA.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./MyExp2SynNMDABB.c: ../MyExp2SynNMDABB.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynNMDABB.mod -o "/workspaces/my_neymotin/x86_64")
+
+./MyExp2SynNMDABB.o: ./MyExp2SynNMDABB.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
 ./caolmw.c: ../caolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) caolmw.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) caolmw.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./caolmw.o: ./caolmw.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -41,7 +97,7 @@
 
 ./capr.c: ../capr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) capr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) capr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./capr.o: ./capr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -49,7 +105,7 @@
 
 ./icaolmw.c: ../icaolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icaolmw.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icaolmw.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./icaolmw.o: ./icaolmw.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -57,7 +113,7 @@
 
 ./icapr.c: ../icapr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icapr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icapr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./icapr.o: ./icapr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -65,7 +121,7 @@
 
 ./iholmkop.c: ../iholmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./iholmkop.o: ./iholmkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -73,7 +129,7 @@
 
 ./iholmw.c: ../iholmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmw.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmw.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./iholmw.o: ./iholmw.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -81,7 +137,7 @@
 
 ./ihpyrkop.c: ../ihpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ihpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ihpyrkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./ihpyrkop.o: ./ihpyrkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -89,7 +145,7 @@
 
 ./kahppr.c: ../kahppr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kahppr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kahppr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kahppr.o: ./kahppr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -97,7 +153,7 @@
 
 ./kaolmkop.c: ../kaolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kaolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kaolmkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kaolmkop.o: ./kaolmkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -105,7 +161,7 @@
 
 ./kapyrkop.c: ../kapyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kapyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kapyrkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kapyrkop.o: ./kapyrkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -113,7 +169,7 @@
 
 ./kcaolmw.c: ../kcaolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcaolmw.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcaolmw.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kcaolmw.o: ./kcaolmw.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -121,7 +177,7 @@
 
 ./kcpr.c: ../kcpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcpr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcpr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kcpr.o: ./kcpr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -129,7 +185,7 @@
 
 ./kdrbwb.c: ../kdrbwb.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrbwb.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrbwb.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kdrbwb.o: ./kdrbwb.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -137,7 +193,7 @@
 
 ./kdrolmkop.c: ../kdrolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrolmkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kdrolmkop.o: ./kdrolmkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -145,7 +201,7 @@
 
 ./kdrpr.c: ../kdrpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kdrpr.o: ./kdrpr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -153,79 +209,31 @@
 
 ./kdrpyrkop.c: ../kdrpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpyrkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./kdrpyrkop.o: ./kdrpyrkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
+./ltp_template.c: ../ltp_template.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ltp_template.mod -o "/workspaces/my_neymotin/x86_64")
+
+./ltp_template.o: ./ltp_template.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
 ./misc.c: ../misc.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./misc.o: ./misc.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
-./MyExp2SynAlpha.c: ../MyExp2SynAlpha.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynAlpha.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynAlpha.o: ./MyExp2SynAlpha.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2SynBB_LTPb.c: ../MyExp2SynBB_LTPb.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTPb.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynBB_LTPb.o: ./MyExp2SynBB_LTPb.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2SynBB_LTP.c: ../MyExp2SynBB_LTP.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB_LTP.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynBB_LTP.o: ./MyExp2SynBB_LTP.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2SynBB.c: ../MyExp2SynBB.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynBB.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynBB.o: ./MyExp2SynBB.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2Syn.c: ../MyExp2Syn.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2Syn.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2Syn.o: ./MyExp2Syn.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2SynNMDABB.c: ../MyExp2SynNMDABB.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynNMDABB.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynNMDABB.o: ./MyExp2SynNMDABB.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
-./MyExp2SynNMDA.c: ../MyExp2SynNMDA.mod
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) MyExp2SynNMDA.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
-
-./MyExp2SynNMDA.o: ./MyExp2SynNMDA.c
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
-	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
-
 ./nafbwb.c: ../nafbwb.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafbwb.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafbwb.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./nafbwb.o: ./nafbwb.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -233,7 +241,7 @@
 
 ./nafolmkop.c: ../nafolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafolmkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./nafolmkop.o: ./nafolmkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -241,7 +249,7 @@
 
 ./nafpr.c: ../nafpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpr.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpr.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./nafpr.o: ./nafpr.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -249,7 +257,7 @@
 
 ./nafpyrkop.c: ../nafpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpyrkop.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./nafpyrkop.o: ./nafpyrkop.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -257,7 +265,7 @@
 
 ./stats.c: ../stats.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) stats.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) stats.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./stats.o: ./stats.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -265,7 +273,7 @@
 
 ./vecst.c: ../vecst.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) vecst.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) vecst.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./vecst.o: ./vecst.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -273,7 +281,7 @@
 
 ./wrap.c: ../wrap.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
-	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) wrap.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) wrap.mod -o "/workspaces/my_neymotin/x86_64")
 
 ./wrap.o: ./wrap.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"

@@ -1,3 +1,4 @@
+
 import numpy as np
 from scipy import signal
 from termcolor import colored
@@ -46,7 +47,7 @@ if True:
     ltptime=8
     resttime=0
     measuretime=0
-    second=1000
+    second=10
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
