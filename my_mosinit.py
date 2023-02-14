@@ -70,10 +70,10 @@ if True:
     else:
         print("It's a simulation!")
         if myparams[3]==0:
-            print("SETTING TIME TO ",h.tstop)
+            print(("SETTING TIME TO ",h.tstop))
             Run.kT=(inittime+ltptime+resttime)*second #if 0, control, never
         else: 
-            print("SETTING TIME TO ",0)
+            print(("SETTING TIME TO ",0))
             Run.kT=(0)*second                   #if 1, instantly
 
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
@@ -157,7 +157,7 @@ if True:
     timea=time.time()
     h.run()
     timeb=time.time()
-    print("simulation time: ",timeb-timea)
+    print(("simulation time: ",timeb-timea))
     myrec=np.array(myrec)
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]: #if name==main

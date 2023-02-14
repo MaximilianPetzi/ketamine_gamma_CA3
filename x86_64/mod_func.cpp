@@ -2,6 +2,9 @@
 #include "hocdec.h"
 extern int nrnmpi_myid;
 extern int nrn_nobanner_;
+#if defined(__cplusplus)
+extern "C" {
+#endif
 
 extern void _CA1ih_reg(void);
 extern void _CA1ika_reg(void);
@@ -40,46 +43,45 @@ extern void _stats_reg(void);
 extern void _vecst_reg(void);
 extern void _wrap_reg(void);
 
-void modl_reg(){
+void modl_reg() {
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
-
-    fprintf(stderr," \"CA1ih.mod\"");
-    fprintf(stderr," \"CA1ika.mod\"");
-    fprintf(stderr," \"CA1ikdr.mod\"");
-    fprintf(stderr," \"CA1ina.mod\"");
-    fprintf(stderr," \"MyExp2Syn.mod\"");
-    fprintf(stderr," \"MyExp2SynAlpha.mod\"");
-    fprintf(stderr," \"MyExp2SynBB.mod\"");
-    fprintf(stderr," \"MyExp2SynBB_LTP.mod\"");
-    fprintf(stderr," \"MyExp2SynBB_LTPb.mod\"");
-    fprintf(stderr," \"MyExp2SynNMDA.mod\"");
-    fprintf(stderr," \"MyExp2SynNMDABB.mod\"");
-    fprintf(stderr," \"caolmw.mod\"");
-    fprintf(stderr," \"capr.mod\"");
-    fprintf(stderr," \"icaolmw.mod\"");
-    fprintf(stderr," \"icapr.mod\"");
-    fprintf(stderr," \"iholmkop.mod\"");
-    fprintf(stderr," \"iholmw.mod\"");
-    fprintf(stderr," \"ihpyrkop.mod\"");
-    fprintf(stderr," \"kahppr.mod\"");
-    fprintf(stderr," \"kaolmkop.mod\"");
-    fprintf(stderr," \"kapyrkop.mod\"");
-    fprintf(stderr," \"kcaolmw.mod\"");
-    fprintf(stderr," \"kcpr.mod\"");
-    fprintf(stderr," \"kdrbwb.mod\"");
-    fprintf(stderr," \"kdrolmkop.mod\"");
-    fprintf(stderr," \"kdrpr.mod\"");
-    fprintf(stderr," \"kdrpyrkop.mod\"");
-    fprintf(stderr," \"ltp_template.mod\"");
-    fprintf(stderr," \"misc.mod\"");
-    fprintf(stderr," \"nafbwb.mod\"");
-    fprintf(stderr," \"nafolmkop.mod\"");
-    fprintf(stderr," \"nafpr.mod\"");
-    fprintf(stderr," \"nafpyrkop.mod\"");
-    fprintf(stderr," \"stats.mod\"");
-    fprintf(stderr," \"vecst.mod\"");
-    fprintf(stderr," \"wrap.mod\"");
+    fprintf(stderr, " \"CA1ih.mod\"");
+    fprintf(stderr, " \"CA1ika.mod\"");
+    fprintf(stderr, " \"CA1ikdr.mod\"");
+    fprintf(stderr, " \"CA1ina.mod\"");
+    fprintf(stderr, " \"MyExp2Syn.mod\"");
+    fprintf(stderr, " \"MyExp2SynAlpha.mod\"");
+    fprintf(stderr, " \"MyExp2SynBB.mod\"");
+    fprintf(stderr, " \"MyExp2SynBB_LTP.mod\"");
+    fprintf(stderr, " \"MyExp2SynBB_LTPb.mod\"");
+    fprintf(stderr, " \"MyExp2SynNMDA.mod\"");
+    fprintf(stderr, " \"MyExp2SynNMDABB.mod\"");
+    fprintf(stderr, " \"caolmw.mod\"");
+    fprintf(stderr, " \"capr.mod\"");
+    fprintf(stderr, " \"icaolmw.mod\"");
+    fprintf(stderr, " \"icapr.mod\"");
+    fprintf(stderr, " \"iholmkop.mod\"");
+    fprintf(stderr, " \"iholmw.mod\"");
+    fprintf(stderr, " \"ihpyrkop.mod\"");
+    fprintf(stderr, " \"kahppr.mod\"");
+    fprintf(stderr, " \"kaolmkop.mod\"");
+    fprintf(stderr, " \"kapyrkop.mod\"");
+    fprintf(stderr, " \"kcaolmw.mod\"");
+    fprintf(stderr, " \"kcpr.mod\"");
+    fprintf(stderr, " \"kdrbwb.mod\"");
+    fprintf(stderr, " \"kdrolmkop.mod\"");
+    fprintf(stderr, " \"kdrpr.mod\"");
+    fprintf(stderr, " \"kdrpyrkop.mod\"");
+    fprintf(stderr, " \"ltp_template.mod\"");
+    fprintf(stderr, " \"misc.mod\"");
+    fprintf(stderr, " \"nafbwb.mod\"");
+    fprintf(stderr, " \"nafolmkop.mod\"");
+    fprintf(stderr, " \"nafpr.mod\"");
+    fprintf(stderr, " \"nafpyrkop.mod\"");
+    fprintf(stderr, " \"stats.mod\"");
+    fprintf(stderr, " \"vecst.mod\"");
+    fprintf(stderr, " \"wrap.mod\"");
     fprintf(stderr, "\n");
   }
   _CA1ih_reg();
@@ -119,3 +121,7 @@ void modl_reg(){
   _vecst_reg();
   _wrap_reg();
 }
+
+#if defined(__cplusplus)
+}
+#endif
