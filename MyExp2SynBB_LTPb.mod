@@ -26,7 +26,7 @@ PARAMETER {
   pf = 0
   
   p = 0.01 : potentiation factor :for double gaussian, d==p means area is zero
-  d = 0:-0.01 : depression(-1) factor
+  d = -0.01 : depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
   version=3  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet fake rule, 3 is asym minimal triplet fake rule
@@ -142,10 +142,10 @@ FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a 
 FUNCTION factor3(Dt (ms), Dt2 (ms)) {
   if (Dt>0) {
     
-    factor3 = p*exp(-Dt/taup)*exp(-Dt2/taup) : potentiation 
+    factor3 = p*60*exp(-Dt/taup)*exp(-Dt2/taup/34) : potentiation 
     :printf("LTP by %g, Dt and Dt2: \t%g, \t%g, \t%g_____\n", factor3,Dt, Dt2, exp(Dt2/taud/500))
   } else if (Dt<0) {
-    factor3 = d/12*exp(Dt/taud) : depression
+    factor3 = d*exp(Dt/taud) : depression
     :printf(" LTD by %g, Dt and Dt2: \t%g, \t%g\n", factor3,Dt, Dt2)
     }else {
     factor3 = 0

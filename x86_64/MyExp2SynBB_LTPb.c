@@ -270,7 +270,7 @@ static void nrn_alloc(Prop* _prop) {
  	rec_k1 = 0;
  	pf = 0;
  	p = 0.01;
- 	d = 0;
+ 	d = -0.01;
  	taup = 16.8;
  	taud = 16.8;
  	version = 3;
@@ -473,10 +473,10 @@ static double _hoc_factor2(void* _vptr) {
 double factor3 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
    double _lfactor3;
  if ( _lDt > 0.0 ) {
-     _lfactor3 = p * exp ( - _lDt / taup ) * exp ( - _lDt2 / taup ) ;
+     _lfactor3 = p * 60.0 * exp ( - _lDt / taup ) * exp ( - _lDt2 / taup / 34.0 ) ;
      }
    else if ( _lDt < 0.0 ) {
-     _lfactor3 = d / 12.0 * exp ( _lDt / taud ) ;
+     _lfactor3 = d * exp ( _lDt / taud ) ;
      }
    else {
      _lfactor3 = 0.0 ;
@@ -813,7 +813,7 @@ static const char* nmodl_file_text =
   "  pf = 0\n"
   "  \n"
   "  p = 0.01 : potentiation factor :for double gaussian, d==p means area is zero\n"
-  "  d = 0:-0.01 : depression(-1) factor\n"
+  "  d = -0.01 : depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
   "  version=3  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet fake rule, 3 is asym minimal triplet fake rule\n"
@@ -929,10 +929,10 @@ static const char* nmodl_file_text =
   "FUNCTION factor3(Dt (ms), Dt2 (ms)) {\n"
   "  if (Dt>0) {\n"
   "    \n"
-  "    factor3 = p*exp(-Dt/taup)*exp(-Dt2/taup) : potentiation \n"
+  "    factor3 = p*60*exp(-Dt/taup)*exp(-Dt2/taup/34) : potentiation \n"
   "    :printf(\"LTP by %g, Dt and Dt2: \\t%g, \\t%g, \\t%g_____\\n\", factor3,Dt, Dt2, exp(Dt2/taud/500))\n"
   "  } else if (Dt<0) {\n"
-  "    factor3 = d/12*exp(Dt/taud) : depression\n"
+  "    factor3 = d*exp(Dt/taud) : depression\n"
   "    :printf(\" LTD by %g, Dt and Dt2: \\t%g, \\t%g\\n\", factor3,Dt, Dt2)\n"
   "    }else {\n"
   "    factor3 = 0\n"

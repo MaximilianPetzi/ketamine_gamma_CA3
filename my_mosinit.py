@@ -43,7 +43,7 @@ if True:
     import run as Run
     
     inittime=0
-    ltptime=2
+    ltptime=5
     resttime=0
     measuretime=0
     second=1000
@@ -53,7 +53,7 @@ if True:
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 1000*second  #default 1e3
+    Run.washinT  = 0*second  #default 1e3
     Run.washoutT = 8*second  #2e3
     #Run.kT=(inittime)*second  
 
