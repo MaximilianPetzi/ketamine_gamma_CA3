@@ -26,10 +26,10 @@ PARAMETER {
   pf = 0
   
   p = 0.01 : potentiation factor :for double gaussian, d==p means area is zero
-  d = -0.01 : depression(-1) factor
+  d = 0:-0.01 : depression(-1) factor
   taup = 16.8 (ms) : Bi & Poo (1998, 2001)
   taud = 16.8 (ms) : depression effectiveness time constant
-  version=0  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule
+  version=3  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet fake rule, 3 is asym minimal triplet fake rule
   :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter
   thresh=0.00045
 }
@@ -93,6 +93,9 @@ FUNCTION factor(Dt (ms), Dt2 (ms)) {
   if (version==2) {
     factor=factor2(Dt, Dt2)*pf
   }
+  if (version==3) {
+    factor=factor3(Dt, Dt2)*pf
+  }
   factor=factor
   }
 
@@ -134,6 +137,20 @@ FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a 
     factor2 = 0
   }
   factor2=factor2
+}
+
+FUNCTION factor3(Dt (ms), Dt2 (ms)) {
+  if (Dt>0) {
+    
+    factor3 = p*exp(-Dt/taup)*exp(-Dt2/taup) : potentiation 
+    :printf("LTP by %g, Dt and Dt2: \t%g, \t%g, \t%g_____\n", factor3,Dt, Dt2, exp(Dt2/taud/500))
+  } else if (Dt<0) {
+    factor3 = d/12*exp(Dt/taud) : depression
+    :printf(" LTD by %g, Dt and Dt2: \t%g, \t%g\n", factor3,Dt, Dt2)
+    }else {
+    factor3 = 0
+  }
+  factor3=factor3
 }
 
 

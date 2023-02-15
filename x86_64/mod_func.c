@@ -23,6 +23,7 @@ extern void _kdrbwb_reg(void);
 extern void _kdrolmkop_reg(void);
 extern void _kdrpr_reg(void);
 extern void _kdrpyrkop_reg(void);
+extern void _ltp_template_reg(void);
 extern void _misc_reg(void);
 extern void _MyExp2SynAlpha_reg(void);
 extern void _MyExp2SynBB_LTPb_reg(void);
@@ -63,6 +64,7 @@ void modl_reg(){
     fprintf(stderr," \"kdrolmkop.mod\"");
     fprintf(stderr," \"kdrpr.mod\"");
     fprintf(stderr," \"kdrpyrkop.mod\"");
+    fprintf(stderr," \"ltp_template.mod\"");
     fprintf(stderr," \"misc.mod\"");
     fprintf(stderr," \"MyExp2SynAlpha.mod\"");
     fprintf(stderr," \"MyExp2SynBB_LTPb.mod\"");
@@ -100,6 +102,7 @@ void modl_reg(){
   _kdrolmkop_reg();
   _kdrpr_reg();
   _kdrpyrkop_reg();
+  _ltp_template_reg();
   _misc_reg();
   _MyExp2SynAlpha_reg();
   _MyExp2SynBB_LTPb_reg();

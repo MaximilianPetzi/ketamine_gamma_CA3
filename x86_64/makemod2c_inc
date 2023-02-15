@@ -159,6 +159,14 @@
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
+./ltp_template.c: ../ltp_template.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ltp_template.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")
+
+./ltp_template.o: ./ltp_template.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
 ./misc.c: ../misc.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64")

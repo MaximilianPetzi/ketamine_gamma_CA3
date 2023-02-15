@@ -93,6 +93,7 @@ extern "C" {
  static Prop* _extcall_prop;
  /* external NEURON variables */
  /* declaration of user functions */
+ static double _hoc_factor3();
  static double _hoc_factor2();
  static double _hoc_factor1();
  static double _hoc_factor0();
@@ -144,16 +145,19 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "loc", _hoc_loc_pnt,
  "has_loc", _hoc_has_loc,
  "get_loc", _hoc_get_loc_pnt,
+ "factor3", _hoc_factor3,
  "factor2", _hoc_factor2,
  "factor1", _hoc_factor1,
  "factor0", _hoc_factor0,
  "factor", _hoc_factor,
  0, 0
 };
+#define factor3 factor3_MyExp2SynBB_LTPb
 #define factor2 factor2_MyExp2SynBB_LTPb
 #define factor1 factor1_MyExp2SynBB_LTPb
 #define factor0 factor0_MyExp2SynBB_LTPb
 #define factor factor_MyExp2SynBB_LTPb
+ extern double factor3( _threadargsprotocomma_ double , double );
  extern double factor2( _threadargsprotocomma_ double , double );
  extern double factor1( _threadargsprotocomma_ double , double );
  extern double factor0( _threadargsprotocomma_ double , double );
@@ -266,10 +270,10 @@ static void nrn_alloc(Prop* _prop) {
  	rec_k1 = 0;
  	pf = 0;
  	p = 0.01;
- 	d = -0.01;
+ 	d = 0;
  	taup = 16.8;
  	taud = 16.8;
- 	version = 0;
+ 	version = 3;
  	thresh = 0.00045;
   }
  	_prop->param = _p;
@@ -374,6 +378,9 @@ double factor ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
    if ( version  == 2.0 ) {
      _lfactor = factor2 ( _threadargscomma_ _lDt , _lDt2 ) * pf ;
      }
+   if ( version  == 3.0 ) {
+     _lfactor = factor3 ( _threadargscomma_ _lDt , _lDt2 ) * pf ;
+     }
    _lfactor = _lfactor ;
    
 return _lfactor;
@@ -460,6 +467,33 @@ static double _hoc_factor2(void* _vptr) {
   _thread = _extcall_thread;
   _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
  _r =  factor2 ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
+ return(_r);
+}
+ 
+double factor3 ( _threadargsprotocomma_ double _lDt , double _lDt2 ) {
+   double _lfactor3;
+ if ( _lDt > 0.0 ) {
+     _lfactor3 = p * exp ( - _lDt / taup ) * exp ( - _lDt2 / taup ) ;
+     }
+   else if ( _lDt < 0.0 ) {
+     _lfactor3 = d / 12.0 * exp ( _lDt / taud ) ;
+     }
+   else {
+     _lfactor3 = 0.0 ;
+     }
+   _lfactor3 = _lfactor3 ;
+   
+return _lfactor3;
+ }
+ 
+static double _hoc_factor3(void* _vptr) {
+ double _r;
+   double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
+   _p = ((Point_process*)_vptr)->_prop->param;
+  _ppvar = ((Point_process*)_vptr)->_prop->dparam;
+  _thread = _extcall_thread;
+  _nt = (_NrnThread*)((Point_process*)_vptr)->_vnt;
+ _r =  factor3 ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
  return(_r);
 }
  
@@ -779,10 +813,10 @@ static const char* nmodl_file_text =
   "  pf = 0\n"
   "  \n"
   "  p = 0.01 : potentiation factor :for double gaussian, d==p means area is zero\n"
-  "  d = -0.01 : depression(-1) factor\n"
+  "  d = 0:-0.01 : depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
-  "  version=0  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet rule\n"
+  "  version=3  :0 is double exp, 1 is double gaus, 2 is postsyn threshold triplet fake rule, 3 is asym minimal triplet fake rule\n"
   "  :for double gaussian, p,d,taup,taud are scales, but depressant gaussian is also flatter\n"
   "  thresh=0.00045\n"
   "}\n"
@@ -846,6 +880,9 @@ static const char* nmodl_file_text =
   "  if (version==2) {\n"
   "    factor=factor2(Dt, Dt2)*pf\n"
   "  }\n"
+  "  if (version==3) {\n"
+  "    factor=factor3(Dt, Dt2)*pf\n"
+  "  }\n"
   "  factor=factor\n"
   "  }\n"
   "\n"
@@ -887,6 +924,20 @@ static const char* nmodl_file_text =
   "    factor2 = 0\n"
   "  }\n"
   "  factor2=factor2\n"
+  "}\n"
+  "\n"
+  "FUNCTION factor3(Dt (ms), Dt2 (ms)) {\n"
+  "  if (Dt>0) {\n"
+  "    \n"
+  "    factor3 = p*exp(-Dt/taup)*exp(-Dt2/taup) : potentiation \n"
+  "    :printf(\"LTP by %g, Dt and Dt2: \\t%g, \\t%g, \\t%g_____\\n\", factor3,Dt, Dt2, exp(Dt2/taud/500))\n"
+  "  } else if (Dt<0) {\n"
+  "    factor3 = d/12*exp(Dt/taud) : depression\n"
+  "    :printf(\" LTD by %g, Dt and Dt2: \\t%g, \\t%g\\n\", factor3,Dt, Dt2)\n"
+  "    }else {\n"
+  "    factor3 = 0\n"
+  "  }\n"
+  "  factor3=factor3\n"
   "}\n"
   "\n"
   "\n"
