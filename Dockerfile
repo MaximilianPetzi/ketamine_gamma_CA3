@@ -2,10 +2,8 @@
 FROM python:2.7
 
 #RUN conda install pip
-RUN pip install neuron
-#COPY . .
-
-RUN pip install termcolor
+RUN pip install neuron && pip install termcolor && pip install scipy && pip install matplotlib
+#COPY . . 
 
 
 RUN apt update

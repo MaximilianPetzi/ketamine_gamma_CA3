@@ -43,7 +43,7 @@ if True:
     import run as Run
     
     inittime=0
-    ltptime=5
+    ltptime=3
     resttime=0
     measuretime=0
     second=1000
