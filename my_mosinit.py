@@ -42,11 +42,11 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=3
-    ltptime=1
+    inittime=0
+    ltptime=0
     resttime=0
-    measuretime=0
-    second=100
+    measuretime=2
+    second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
@@ -57,11 +57,11 @@ if True:
     Run.washoutT = 8*second  #2e3
     #Run.kT=(inittime)*second  
 
-    #Run.pwwout=1.6
-    #Run.pwwT=(inittime+measuretime)*second
-    Run.pfout=30
-    Run.LTPonT=(inittime)*second  
-    Run.LTPoffT=(inittime+ltptime)*second
+    Run.pwwext=1
+    Run.pwwT=(inittime)*second
+    #Run.pfout=30
+    #Run.LTPonT=(inittime)*second  
+    #Run.LTPoffT=(inittime+ltptime)*second
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
     if myparams[0]:

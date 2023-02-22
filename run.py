@@ -42,7 +42,7 @@ washoutT = 0      # washout time
 LTPoffT = 0
 LTPonT = 1000000000000
 pwwrec = 1
-pwwout = 1
+pwwext = 1
 pwwT = 1000000000
 pfrec = 0
 pfout = 0
@@ -61,9 +61,9 @@ def doLTPoff():
 	net.pyr.set_pf("Adend3AMPAf",0)
 
 def dopww():
-	print "pww changed at ", kT, " = ", h.t, " to ", pwwout , "(and rec)", pwwrec 
+	print "pww changed at ", kT, " = ", h.t, " to ", pwwext , "(and rec)", pwwrec 
 	net.pyr.set_pww("BdendAMPA", pwwrec)
-	net.pyr.set_pww("Adend3AMPAf", pwwout)
+	net.pyr.set_pww("Adend3AMPAf", pwwext)
 
 def dok():
 	print "k changed at ", kT, " = ", h.t, " to ", kout

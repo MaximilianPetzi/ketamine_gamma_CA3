@@ -4,7 +4,7 @@ from pyinit import *
 
 class Synapse:
 	def __init__(self, sect, loc, tau1, tau2, e, pf, pww=1):
-		self.syn		= h.MyExp2SynBB_LTP(loc, sec=sect)
+		self.syn		= h.MyExp2SynBB_LTPb(loc, sec=sect)
 		self.syn.tau1	= tau1
 		self.syn.tau2	= tau2
 		self.syn.e		= e 

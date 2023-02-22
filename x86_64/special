@@ -1,17 +1,17 @@
 #!/bin/sh
 if test "x${NRNHOME}" = "x" ; then
-    NRNHOME="/usr/local/lib/python2.7/site-packages/neuron/.data"
+    NRNHOME="/home/maximilian/anaconda2/lib/python2.7/site-packages/neuron/.data"
 fi
 if test "${NEURONHOME}" = "" ; then
     NEURONHOME=${NRNHOME}/share/nrn
     export NEURONHOME
 fi
 if test "x${NRNBIN}" = "x" ; then
-    NRNBIN="/usr/local/bin"
+    NRNBIN="/home/maximilian/anaconda2/bin"
 fi
 if test "" = "yes" ; then
     NRNIV="${NRNBIN}/nrniv.app/Contents/MacOS/nrniv"
 else
     NRNIV="${NRNBIN}/nrniv"
 fi
-"${NRNIV}" -dll "/workspaces/LTP_neymotin/x86_64/.libs/libnrnmech.so" "$@"
+"${NRNIV}" -dll "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/x86_64/.libs/libnrnmech.so" "$@"
