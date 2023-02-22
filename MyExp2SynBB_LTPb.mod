@@ -141,8 +141,8 @@ FUNCTION factor2(Dt (ms), Dt2 (ms)) { :homeostatic LTP:postsynaptic trace has a 
 
 FUNCTION factor3(Dt (ms), Dt2 (ms)) {
   if (Dt>0) {
-    
-    factor3 = p*60*exp(-Dt/taup)*exp(-Dt2/taup/34) : potentiation 
+    :currently, ltp happens so rarely that the weights always just decay
+    factor3 = p*245*exp(-Dt/taup)*exp(-Dt2/taup/34) : potentiation 
     :printf("LTP by %g, Dt and Dt2: \t%g, \t%g, \t%g_____\n", factor3,Dt, Dt2, exp(Dt2/taud/500))
   } else if (Dt<0) {
     factor3 = d*exp(Dt/taud) : depression

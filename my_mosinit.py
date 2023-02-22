@@ -42,18 +42,18 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=0
-    ltptime=3
+    inittime=3
+    ltptime=1
     resttime=0
     measuretime=0
-    second=1000
+    second=100
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 0*second  #default 1e3
+    Run.washinT  = 10000*second  #default 1e3
     Run.washoutT = 8*second  #2e3
     #Run.kT=(inittime)*second  
 
