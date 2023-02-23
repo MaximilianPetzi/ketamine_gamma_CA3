@@ -45,7 +45,7 @@ if True:
     inittime=0
     ltptime=0
     resttime=0
-    measuretime=2
+    measuretime=3
     second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
