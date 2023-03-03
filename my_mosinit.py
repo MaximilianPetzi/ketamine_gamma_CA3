@@ -42,8 +42,8 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=0
-    ltptime=0
+    inittime=3
+    ltptime=1
     resttime=0
     measuretime=3
     second=1000
@@ -56,10 +56,7 @@ if True:
     Run.washinT  = 10000*second  #default 1e3
     Run.washoutT = 8*second  #2e3
     #Run.kT=(inittime)*second  
-
-    Run.pwwext=1
-    Run.pwwT=(inittime)*second
-    #Run.pfout=30
+    
     #Run.LTPonT=(inittime)*second  
     #Run.LTPoffT=(inittime+ltptime)*second
 
@@ -69,12 +66,14 @@ if True:
         #Run.LTPonT=(inittime)*second 
     else:
         print("It's a simulation!")
-        if myparams[3]==0:
-            print("SETTING TIME TO ",h.tstop)
-            Run.kT=(inittime+ltptime+resttime)*second #if 0, control, never
-        else: 
-            print("SETTING TIME TO ",0)
-            Run.kT=(0)*second                   #if 1, instantly
+        if myparams[1]==1:#ketamine trial
+            Run.pwwT=(inittime)*second #pww changed after inittime
+            Run.pwwrec=myparams[5+3]
+            Run.pwwext=myparams[5+4]
+            Run.pwwsom=myparams[5+5]  
+            pass
+        else: #control trail
+            pass
 
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
@@ -221,8 +220,7 @@ if True:
         Data=np.load("recfolder/Data.npy",allow_pickle=True)
         
         #print("myparams=",myparams)
-        
-        Data[myparams[1],myparams[2]]=[f1,p1,bandpower(f1,p1,3,12),bandpower(f1,p1,30,100)]
+        Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,bandpower(f1,p1,3,12),bandpower(f1,p1,30,100)]
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)

@@ -55,7 +55,7 @@ class Population:
 	def set_k(self):
 		start=net.pyr.ncsidx["Adend3AMPAf"]
 		end=net.pyr.nceidx["Adend3AMPAf"]
-		kar=np.random.normal(13,5,end-start+1)
+		kar=np.random.normal(13,5,end-start+1) #set k to random distribution
 		for i in range(end-start+1-740):
 			net.ncl[start+i].weight[1]=max(kar[i],0)
 
