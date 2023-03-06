@@ -61,6 +61,7 @@ if True:
     #Run.LTPoffT=(inittime+ltptime)*second
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+    seed
     if myparams[0]:
         print("It's real!")
         #Run.LTPonT=(inittime)*second 
@@ -220,7 +221,7 @@ if True:
         Data=np.load("recfolder/Data.npy",allow_pickle=True)
         
         #print("myparams=",myparams)
-        Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,bandpower(f1,p1,3,12),bandpower(f1,p1,30,100)]
+        Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,bandpower(f1,p1,3,12),bandpower(f1,p1,30,100)]
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)
