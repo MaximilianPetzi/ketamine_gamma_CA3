@@ -2,7 +2,7 @@
 from termcolor import colored
 
 nA=2 #control or not
-nB=5 #seed
+nB=5 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 nC=5#recurrent    
 nD=5#external
 nE=5#soma

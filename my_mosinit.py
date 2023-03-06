@@ -61,7 +61,7 @@ if True:
     #Run.LTPoffT=(inittime+ltptime)*second
 
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
-    seed
+    
     if myparams[0]:
         print("It's real!")
         #Run.LTPonT=(inittime)*second 

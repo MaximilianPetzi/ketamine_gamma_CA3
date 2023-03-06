@@ -543,7 +543,7 @@ except:
 		net = Network()
 	else: 
 		import numpy as np
-		net = Network(iseed=int(myparams[4]),wseed=int(myparams[4]))
+		net = Network(iseed=int(myparams[7]),wseed=int(myparams[7]))
 		print "we are in a simulation"
 
 #setup some variables in hoc
