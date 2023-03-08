@@ -2,10 +2,10 @@
 from termcolor import colored
 
 nA=2 #control or not
-nB=10 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=2 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 nC=3#recurrent    
-nD=3#external
-nE=3#soma
+nD=1#external
+nE=1#soma
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
 stepsizeC=.5
