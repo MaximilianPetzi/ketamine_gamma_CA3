@@ -5,6 +5,8 @@ import seedavg
 
 
 Data=np.load("recfolder/oldData.npy",allow_pickle=True)
+print(np.shape(Data))
+print(Data)
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
 Dat=np.ones(DatShape)*-1      
