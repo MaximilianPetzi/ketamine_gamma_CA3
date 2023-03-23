@@ -54,9 +54,9 @@ if True:
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
     Run.washinT  = 10000*second  #default 1e3
-    Run.washoutT = 8*second  #2e3
+    Run.washoutT = (inittime+ltptime)*second  #2e3
     #Run.kT=(inittime)*second  
-    
+    #Run.kout=2
     #Run.LTPonT=(inittime)*second  
     #Run.LTPoffT=(inittime+ltptime)*second
 
@@ -64,7 +64,7 @@ if True:
     
     if myparams[0]:
         print("It's real!")
-        #Run.LTPonT=(inittime)*second 
+        
     else:
         print("It's a simulation!")
         if myparams[1]==1:#ketamine trial
@@ -184,7 +184,7 @@ if True:
         plt.grid(True)
         plt.plot(f,p)
         plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red")
-        plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="blue")
+        plt.text(40,1.2, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="blue")
         plt.legend()
         plt.xlim((0,100))
         plt.xlabel("f[Hz]")
@@ -206,11 +206,6 @@ if True:
         myg.exec_menu("View = plot")
         myg.exec_menu("New Axis")
     else:
-        #Data=np.load("recfolder/Data.npy",allow_pickle=True)
-        #Data[myparams[1],myparams[2]]=Karr
-        #np.save("recfolder/Data.npy",Data)
-        #np.save("recfolder/oldData.npy",Data)#backup for accidental simulation restart
-        
         net.calc_lfp()
         data=net.vlfp.to_python() 
         data1=data[int(10*second*(inittime+ltptime+resttime)):int(10*second*(inittime+ltptime+resttime+measuretime))]
