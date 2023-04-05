@@ -363,7 +363,6 @@ class Network:#change seed, theseed
 			for post_id, all_pre in enumerate(conn):
 				for j, pre_id in enumerate(all_pre):
 					self.nqcon.append(src.cell[pre_id].id,trg.cell[post_id].id,w,syn)	
-			
 		return nc
 
 	def load_spikes(self,fn,po,syn,w,time_limit=10000):

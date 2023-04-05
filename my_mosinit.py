@@ -43,9 +43,9 @@ if True:
     import run as Run
     
     inittime=3
-    ltptime=1
+    ltptime=0
     resttime=0
-    measuretime=3
+    measuretime=4
     second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -64,17 +64,18 @@ if True:
     
     if myparams[0]:
         print("It's real!")
-        
+        Run.pwwT=0
+        #Run.kT=0
     else:
         print("It's a simulation!")
         if myparams[1]==1:#ketamine trial
-            Run.pwwT=(inittime)*second #pww changed after inittime
-            Run.pwwrec=myparams[5+3]
+            Run.pwwT=0 #pww changed from beginning
+            Run.pwwrec=myparams[5+3]*myparams[5+4] #if both act at once, multiply
             Run.pwwext=myparams[5+4]
-            Run.pwwsom=myparams[5+5]  
+            Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail
-            pass
+            pass #change nothing
 
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
@@ -169,7 +170,7 @@ if True:
         plt.xlabel("timestep")
         plt.title("records")
         plt.figure(2)
-        net.rasterplot()
+        ###net.rasterplot()
         net.calc_lfp()
         #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
@@ -201,10 +202,10 @@ if True:
         plt.show()
         #spectral power
 
-        myg = h.Graph()
-        net.vlfp.plot(myg,h.dt)
-        myg.exec_menu("View = plot")
-        myg.exec_menu("New Axis")
+        #myg = h.Graph()
+        #net.vlfp.plot(myg,h.dt)
+        #myg.exec_menu("View = plot")
+        #myg.exec_menu("New Axis")
     else:
         net.calc_lfp()
         data=net.vlfp.to_python() 

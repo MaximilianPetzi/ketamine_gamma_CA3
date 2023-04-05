@@ -269,7 +269,7 @@ static void nrn_alloc(Prop* _prop) {
  	rec_k = 0;
  	rec_k1 = 0;
  	pf = 0;
- 	p = 0;
+ 	p = 0.01;
  	d = -0.01;
  	taup = 16.8;
  	taud = 16.8;
@@ -330,7 +330,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  pnt_receive_size[_mechtype] = 3;
  add_nrn_fornetcons(_mechtype, _fnc_index);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynBB_LTPb /workspaces/LTP_neymotin/MyExp2SynBB_LTPb.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynBB_LTPb /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTPb.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -783,7 +783,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/workspaces/LTP_neymotin/MyExp2SynBB_LTPb.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynBB_LTPb.mod";
 static const char* nmodl_file_text = 
   ": check if g is supposed to be STATE or ASSIGNED\n"
   ": $Id: MyExp2SynBB.mod,v 1.4 2010/12/13 21:27:51 samn Exp $ \n"
@@ -812,7 +812,7 @@ static const char* nmodl_file_text =
   "  rec_k1=0\n"
   "  pf = 0\n"
   "  \n"
-  "  p = 0:0.01 : potentiation factor :for double gaussian, d==p means area is zero\n"
+  "  p = 0.01 : potentiation factor :for double gaussian, d==p means area is zero\n"
   "  d = -0.01 : depression(-1) factor\n"
   "  taup = 16.8 (ms) : Bi & Poo (1998, 2001)\n"
   "  taud = 16.8 (ms) : depression effectiveness time constant\n"
@@ -928,7 +928,7 @@ static const char* nmodl_file_text =
   "\n"
   "FUNCTION factor3(Dt (ms), Dt2 (ms)) {\n"
   "  if (Dt>0) {\n"
-  "    \n"
+  "    :currently, ltp happens so rarely that the weights always just decay\n"
   "    factor3 = p*245*exp(-Dt/taup)*exp(-Dt2/taup/34) : potentiation \n"
   "    :printf(\"LTP by %g, Dt and Dt2: \\t%g, \\t%g, \\t%g_____\\n\", factor3,Dt, Dt2, exp(Dt2/taud/500))\n"
   "  } else if (Dt<0) {\n"
@@ -945,11 +945,8 @@ static const char* nmodl_file_text =
   "  \n"
   "  INITIAL { k = 1  tpre = -1e9 }\n"
   "  \n"
-  "  \n"
-  "  :printf(\"\\nA REC rec=%g, rec_1=%g outside flags\",rec_k,rec_k1)\n"
   "  if (flag == 0) { :presynaptic spike (after last post so depress)\n"
   "  :printf(\"Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\\n\", flag, t, w, k, tpre, tpost)\n"
-  "    \n"
   "    A = A + w*fact*k*pww\n"
   "    B = B + w*fact*k*pww  :for double exp rise and decay\n"
   "    \n"

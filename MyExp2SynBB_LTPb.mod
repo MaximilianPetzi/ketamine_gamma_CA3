@@ -158,11 +158,8 @@ NET_RECEIVE(w (uS), k, tpre (ms)) {
   
   INITIAL { k = 1  tpre = -1e9 }
   
-  
-  :printf("\nA REC rec=%g, rec_1=%g outside flags",rec_k,rec_k1)
   if (flag == 0) { :presynaptic spike (after last post so depress)
   :printf("Presyn spike--entry flag=%g t=%g w=%g k=%g tpre=%g tpost=%g\n", flag, t, w, k, tpre, tpost)
-    
     A = A + w*fact*k*pww
     B = B + w*fact*k*pww  :for double exp rise and decay
     

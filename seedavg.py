@@ -2,20 +2,22 @@
 from termcolor import colored
 
 nA=2 #control or not
-nB=10 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
-nC=3#recurrent    
-nD=3#external
-nE=3#soma
+nB=16 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nC=4#recurrent    
+nD=4#rec,soma,ext simultaneously
+nE=1#soma
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
-stepsizeC=.5
-stepsizeD=.5
+stepsizeC=.25
+stepsizeD=.25
 stepsizeE=.5
 
 #0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
 def calcparams(aa,bb,cc,dd,ee):    
-    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
+    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
     return pars
+def cpfp(cc,dd,ee):
+    return [1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
 
 if __name__=="__main__":
     import numpy as np

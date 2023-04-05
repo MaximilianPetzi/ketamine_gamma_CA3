@@ -52,8 +52,8 @@ pfrec = 0
 pfext = 0
 pfsom = 0
 
-kout = 4
-krec = 1
+#kout = 4
+#krec = 1
 kT=100000000
 
 def doLTPon():
@@ -68,13 +68,13 @@ def doLTPoff():
 	net.pyr.set_pf("Adend3AMPAf",0)
 
 def dopww():
-	print "pww changed at ", kT, " = ", h.t, " to ", pwwext
+	print "pww changed at ", pwwT, " = ", h.t, " to ", pwwext
 	net.pyr.set_pww("BdendAMPA", pwwrec)
 	net.pyr.set_pww("Adend3AMPAf", pwwext)
-	net.pyr.set_pww("soma", pwwsom)
+	net.pyr.set_pww("somaAMPAf", pwwsom)
 
 def dok():
-	print "k changed at ", kT, " = ", h.t, " to ", kout
+	print "k changed at ", kT, " = ", h.t, " to ?"
 	#net.pyr.set_k("BdendAMPA", krec)
 	net.pyr.set_k()
 
