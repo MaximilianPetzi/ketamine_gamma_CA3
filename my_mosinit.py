@@ -70,7 +70,7 @@ if True:
         print("It's a simulation!")
         if myparams[1]==1:#ketamine trial
             Run.pwwT=0 #pww changed from beginning
-            Run.pwwrec=myparams[5+3]*myparams[5+4] #if both act at once, multiply
+            Run.pwwrec=myparams[5+3]
             Run.pwwext=myparams[5+4]
             Run.pwwsom=myparams[5+4]  
             pass

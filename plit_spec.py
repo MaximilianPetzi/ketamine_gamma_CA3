@@ -4,7 +4,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 
-Data=np.load("recfolder/oldData.npy",allow_pickle=True)
+Data=np.load("recfolder/3sequil4sgamma_16seeds.npy",allow_pickle=True)      #change back to oldData.npy
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
 Dat=np.ones(DatShape)*-1      
@@ -79,6 +79,25 @@ def allplots(boxplot=True):
 
 allplots()
 
+#transform into r readable format (CSV?)
 
+gc=[]
+gk=[]
+rec=[]
+ext=[]
+for b in range(nB):#seed
+    for c in range(nC):#rec
+        for d in range(nD):#ext           check this again, questionable lol
+            gc.append(dat2[0,b,c,d,0][1])
+            gk.append(dat2[1,b,c,d,0][1])
+            rec.append(cpfp(c,d,1)[0])
+            ext.append(cpfp(c,d,1)[1])
 
-
+import pandas as pd
+df=pd.DataFrame({})
+df["gammacontrol"]=gc
+df["gammaketamine"]=gk
+df["deltagamma"]=gk-gc
+df["rec"]=rec
+df["ext"]=ext
+df.to_csv('recfolder/oldData.csv', index=True)
