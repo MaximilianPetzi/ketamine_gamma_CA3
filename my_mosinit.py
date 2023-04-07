@@ -46,7 +46,7 @@ if True:
     ltptime=0
     resttime=0
     measuretime=4
-    second=1000
+    second=10
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
