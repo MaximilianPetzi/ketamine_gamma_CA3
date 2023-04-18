@@ -43,7 +43,7 @@ if __name__=="__main__":
     Data=np.load("recfolder/Data.npy",allow_pickle=True)
     np.save("recfolder/oldData.npy",Data)#keeps the old data until new sim is finished
 
-import os 
-os.system("git add *")
-os.system("git commit -m 'automatic'")
-os.system(r'git push https://MaximilianPetzi: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@github.com/MaximilianPetzi/my_neymotin.git HEAD:master')
+#import os 
+#os.system("git add *")
+#os.system("git commit -m 'automatic'")
+#os.system(r'git push https://MaximilianPetzi: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@github.com/MaximilianPetzi/my_neymotin.git HEAD:master')

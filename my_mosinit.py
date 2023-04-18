@@ -2,6 +2,11 @@ import numpy as np
 from scipy import signal
 from termcolor import colored
 import sys
+import os
+myterminal=open('myterminal.txt', 'a')
+#sys.stdout=myterminal #set std output to file instead of terminal
+#sys.stdout=sys.__stdout__ #set std out to terminal again
+
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 myparams[0]=True
 if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
@@ -45,7 +50,7 @@ if True:
     inittime=3
     ltptime=0
     resttime=0
-    measuretime=4
+    measuretime=3
     second=1000
     #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -64,7 +69,8 @@ if True:
     
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=0
+        Run.pwwT=0 #pww changed from beginning
+        Run.pwwext=1
         #Run.kT=0
     else:
         print("It's a simulation!")
@@ -122,6 +128,35 @@ if True:
     plt.style.use("seaborn-darkgrid")
     import numpy as np
 
+
+    def raster(mypop=net.pyr,maxtick=20):
+        spikets=mypop.spiketimes()
+        for i in range(len(spikets)):
+            if len(spikets)>0:  
+                idxar=np.ones(len(spikets[i]))*i
+                plt.scatter(spikets[i],idxar,s=1,color="red")
+        plt.xlabel("time")
+        plt.ylabel("neuron index")
+        plt.title("my rasterplot")
+        ax = plt.gca()#gets current axis
+        
+        ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
+        # enable the horizontal grid
+        plt.grid(axis='y', linestyle='-')
+
+        plt.show()
+
+    def freq(mypop=net.pyr):
+        spikets=mypop.spiketimes()
+        seconds=float(inittime+ltptime+measuretime+resttime)/1000*second
+        nspikes=np.array([len(spiket) for spiket in spikets])/seconds
+        n=len(spikets)
+        mu=np.mean(nspikes)
+        sys.stdout=myterminal #set std output to file instead of terminal
+        print("avg freq=",mu,"+/-", numpy.std(nspikes)*n/(n-1)/(n)**.5) #gets printed to file
+        sys.stdout=sys.__stdout__ #set std out to terminal again
+        #return nspikes
+
     def whist(bins=200,plot=False):#number of connections (multiply convergence nr with number of cells)
         ar=[] 
         for i in range(20000):
@@ -161,6 +196,8 @@ if True:
     print("simulation time: ",timeb-timea)
     myrec=np.array(myrec)
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+
+
     if myparams[0]: #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
         plt.figure(1)
@@ -170,7 +207,7 @@ if True:
         plt.xlabel("timestep")
         plt.title("records")
         plt.figure(2)
-        ###net.rasterplot()
+        net.rasterplot()
         net.calc_lfp()
         #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
@@ -202,10 +239,10 @@ if True:
         plt.show()
         #spectral power
 
-        #myg = h.Graph()
-        #net.vlfp.plot(myg,h.dt)
-        #myg.exec_menu("View = plot")
-        #myg.exec_menu("New Axis")
+        myg = h.Graph()
+        net.vlfp.plot(myg,h.dt)
+        myg.exec_menu("View = plot")
+        myg.exec_menu("New Axis")
     else:
         net.calc_lfp()
         data=net.vlfp.to_python() 

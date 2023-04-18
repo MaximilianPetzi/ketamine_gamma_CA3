@@ -59,6 +59,14 @@ class Population:
 		for i in range(end-start+1-740):
 			net.ncl[start+i].weight[1]=max(kar[i],0)
 
+	def spiketimes(self):
+		#mean frequencies of this population:
+		spikets=[]
+		for ncs in self.nc:
+			dings=numpy.array(ncs.get_recordvec().to_python())
+			spikets.append(dings)
+		return spikets
+	
 
 class MSpec: # this class uses matlab to make a spectrogram
 
@@ -107,7 +115,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:#change seed, theseed
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1691029,UseNetStim=True,wseed=16009,scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1617129,UseNetStim=True,wseed=1611739,scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
