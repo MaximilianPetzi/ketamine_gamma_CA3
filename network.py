@@ -59,6 +59,13 @@ class Population:
 		for i in range(end-start+1-740):
 			net.ncl[start+i].weight[1]=max(kar[i],0)
 
+#	def embed(self,a,b): #create list of x,y positions, embedding of pyr neurons in 2D space
+#		pos=list(np.zeros((0,2)))
+#		for k in range(self.n):
+#			pos.append([k%a,int(k/a)])
+#		return pos
+
+
 	def spiketimes(self):
 		#mean frequencies of this population:
 		spikets=[]
@@ -335,7 +342,9 @@ class Network:#change seed, theseed
 		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
 		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
-			
+		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
+		
+
 		print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#60
@@ -355,7 +364,25 @@ class Network:#change seed, theseed
 	def set_conn_weight(self, conn, weight):
 		for nc in conn:
 			nc.weight[0] = weight
-			
+	
+	
+	def set_ring_connections(self,src,trg,syn,delay,sigma):
+		conn = self.make_conn(src.n,trg.n,conv)
+		nc = []
+		for post_id, all_pre in enumerate(conn):
+			for j, pre_id in enumerate(all_pre):
+				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))	
+		if self.SaveConn:
+			try:
+				print self.nqcon.size()
+			except:
+				self.nqcon = h.NQS("id1","id2","w","syn")
+				self.nqcon.strdec("syn")
+			for post_id, all_pre in enumerate(conn):
+				for j, pre_id in enumerate(all_pre):
+					self.nqcon.append(src.cell[pre_id].id,trg.cell[post_id].id,w,syn)	
+		return nc
+
 	def set_connections(self,src,trg,syn,delay,w,conv):
 		conn = self.make_conn(src.n,trg.n,conv)
 		nc = []

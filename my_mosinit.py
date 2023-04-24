@@ -70,7 +70,7 @@ if True:
     if myparams[0]:
         print("It's real!")
         Run.pwwT=0 #pww changed from beginning
-        Run.pwwext=1
+        Run.pwwrec=2
         #Run.kT=0
     else:
         print("It's a simulation!")
