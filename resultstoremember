@@ -1,0 +1,12 @@
+results to remember:
+
+Run.pwwT=4000
+Run.pwwT2=8000
+Run.pwwT3=10000
+Run.pwwext=2
+Run.pww2ext=2.7
+Run.pww3ext=3.5
+stepwise increased LFP, gamma and (pyr,bas,olm) freq
+no changes in rasterplot
+no changes with pwwrec=3
+refractory period: max spike freq ca 25ms?

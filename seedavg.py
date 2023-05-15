@@ -1,3 +1,4 @@
+#runs many my_mosinit.py scripts and saves results
 #my_mosinit can also be called directly
 from termcolor import colored
 
@@ -13,10 +14,10 @@ stepsizeD=.25
 stepsizeE=.5
 
 #0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
-def calcparams(aa,bb,cc,dd,ee):    
+def calcparams(aa,bb,cc,dd,ee):#list of parameters calculated from indices
     pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
     return pars
-def cpfp(cc,dd,ee):
+def cpfp(cc,dd,ee):#shorter list of parameters
     return [1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
 
 if __name__=="__main__":
@@ -38,12 +39,13 @@ if __name__=="__main__":
                         np.save("recfolder/myparams",myparams)  #set current params, also pass the indices for saving
                         commandstring="python2 my_mosinit.py SIMUL"
                         os.system(commandstring)    #do simulation (uses set params) (saves the recordings)
-                        print(colored(r"after number ","red"))
+                        print("after number")
                         print(a,b,c,d,e)
     Data=np.load("recfolder/Data.npy",allow_pickle=True)
     np.save("recfolder/oldData.npy",Data)#keeps the old data until new sim is finished
 
+#to automatically push after running the code
 #import os 
 #os.system("git add *")
 #os.system("git commit -m 'automatic'")
-#os.system(r'git push https://MaximilianPetzi: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@github.com/MaximilianPetzi/my_neymotin.git HEAD:master')
+#os.system(r'git push [copy repo link here.....MaximilianPetzi/my_neymotin.git] HEAD:master')

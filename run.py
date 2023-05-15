@@ -45,8 +45,16 @@ LTPonT = 1000000000000
 pwwrec = 1
 pwwext = 1
 pwwsom = 1
+pww2rec = 1
+pww2ext = 1
+pww2som = 1
+pww3rec = 1
+pww3ext = 1
+pww3som = 1
 
-pwwT = 1000000000
+pwwT =10000000000
+pwwT2=10000000000
+pwwT3=10000000000
 
 pfrec = 0
 pfext = 0
@@ -68,10 +76,21 @@ def doLTPoff():
 	net.pyr.set_pf("Adend3AMPAf",0)
 
 def dopww():
-	print "pww changed at ", pwwT, " = ", h.t, " to ", pwwext
+	print "pww changed at ", pwwT, " = ", h.t
 	net.pyr.set_pww("BdendAMPA", pwwrec)
 	net.pyr.set_pww("Adend3AMPAf", pwwext)
 	net.pyr.set_pww("somaAMPAf", pwwsom)
+def dopww2():
+	print "pww changed at ", pwwT2, " = ", h.t
+	net.pyr.set_pww("BdendAMPA", pww2rec)
+	net.pyr.set_pww("Adend3AMPAf", pww2ext)
+	net.pyr.set_pww("somaAMPAf", pww2som)
+def dopww3():
+	print "pww changed at ", pwwT3, " = ", h.t
+	net.pyr.set_pww("BdendAMPA", pww3rec)
+	net.pyr.set_pww("Adend3AMPAf", pww3ext)
+	net.pyr.set_pww("somaAMPAf", pww3som)
+
 
 def dok():
 	print "k changed at ", kT, " = ", h.t, " to ?"
@@ -102,7 +121,11 @@ def myevent_eventcallingfunction():
     h.CVode().event(LTPonT,doLTPon)
     h.CVode().event(LTPoffT,doLTPoff)
     h.CVode().event(pwwT,dopww)
+    h.CVode().event(pwwT2,dopww2)
+    h.CVode().event(pwwT3,dopww3)
     h.CVode().event(kT,dok)
+    
+    
     #h.CVode().event(3000,my_event)
     #h.CVode().event(8000,my_event)
 

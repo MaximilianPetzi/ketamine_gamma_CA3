@@ -1,3 +1,4 @@
+#plots data from seedavg.py simulation
 import numpy as np
 from matplotlib import pyplot as plt
 from seedavg import *
