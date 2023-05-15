@@ -51,7 +51,7 @@ class Population:
 	def set_pww(self,syn,pww):
 		for c in self.cell:
 			c.__dict__[syn].syn.pww = pww
-
+			
 	def set_k(self):
 		start=net.pyr.ncsidx["Adend3AMPAf"]
 		end=net.pyr.nceidx["Adend3AMPAf"]
@@ -67,7 +67,6 @@ class Population:
 
 
 	def spiketimes(self):
-		#mean frequencies of this population:
 		spikets=[]
 		for ncs in self.nc:
 			dings=numpy.array(ncs.get_recordvec().to_python())
@@ -122,7 +121,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:#change seed, theseed
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=1617129,UseNetStim=True,wseed=1611739,scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=np.random.randint(1,10000),UseNetStim=True,wseed=np.random.randint(1,10000),scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
@@ -365,23 +364,6 @@ class Network:#change seed, theseed
 		for nc in conn:
 			nc.weight[0] = weight
 	
-	
-	def set_ring_connections(self,src,trg,syn,delay,sigma):
-		conn = self.make_conn(src.n,trg.n,conv)
-		nc = []
-		for post_id, all_pre in enumerate(conn):
-			for j, pre_id in enumerate(all_pre):
-				nc.append(h.NetCon(src.cell[pre_id].soma(0.5)._ref_v, trg.cell[post_id].__dict__[syn].syn, 0, delay, w, sec=src.cell[pre_id].soma))	
-		if self.SaveConn:
-			try:
-				print self.nqcon.size()
-			except:
-				self.nqcon = h.NQS("id1","id2","w","syn")
-				self.nqcon.strdec("syn")
-			for post_id, all_pre in enumerate(conn):
-				for j, pre_id in enumerate(all_pre):
-					self.nqcon.append(src.cell[pre_id].id,trg.cell[post_id].id,w,syn)	
-		return nc
 
 	def set_connections(self,src,trg,syn,delay,w,conv):
 		conn = self.make_conn(src.n,trg.n,conv)
@@ -510,6 +492,7 @@ class Network:#change seed, theseed
 			self.vlfp.sub(cell.Bdend_volt)
 		self.vlfp.div(len(self.pyr.cell)) # normalize lfp by amount of pyr cells
 		self.lfp=numpy.array(self.vlfp.to_python()) # convert to python array (so can do PSD)
+
 
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()
