@@ -9,4 +9,17 @@ Run.pww3ext=3.5
 stepwise increased LFP, gamma and (pyr,bas,olm) freq
 no changes in rasterplot
 no changes with pwwrec=3
-refractory period: max spike freq ca 25ms?
+
+refractory period: max spike freq ca 220Hz according to FI curves
+
+why does ksoma not have an effect? (i think it didnt):
+estimated influence of pyr.soma small in comparison to pyr.dendrite: (tau*g*freq)
+>>> s=5.3*.05*1000-9.1*0.012*1000
+>>> d=5.3*.05*1000+150*6.5*10-9.1*.012*1000
+>>> s
+155.8
+>>> d
+9905.8
+
+
+

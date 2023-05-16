@@ -51,7 +51,7 @@ if True:
     inittime=3.
     ltptime=0
     resttime=0
-    measuretime=13.
+    measuretime=4. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     #h.tstop = (inittime+2*measuretime+ltptime)*second
@@ -74,7 +74,7 @@ if True:
         Run.pwwT=7000
         #Run.pwwT2=8000
         #Run.pwwT3=10000
-        Run.pwwrec=3
+        Run.pwwext=1
         #Run.pww2ext=2.7
         #Run.pww3ext=3.5
     else:
