@@ -88,7 +88,7 @@ rec=[]
 ext=[]
 for b in range(nB):#seed
     for c in range(nC):#rec
-        for d in range(nD):#ext           check this again, questionable lol
+        for d in range(nD):#ext           check this again, questionable
             gc.append(dat2[0,b,c,d,0][1])
             gk.append(dat2[1,b,c,d,0][1])
             rec.append(cpfp(c,d,1)[0])

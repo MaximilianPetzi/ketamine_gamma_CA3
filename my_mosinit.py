@@ -1,3 +1,6 @@
+import seedavg
+withspec=seedavg.withspec #with or without saving f and p for full spectrum
+
 import numpy as np
 from scipy import signal
 from termcolor import colored
@@ -79,7 +82,7 @@ if True:
         #Run.pww3ext=3.5
     else:
         print("It's a simulation!")
-        if myparams[1]==1:#ketamine trial
+        if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
             Run.pwwrec=myparams[5+3]
             Run.pwwext=myparams[5+4]
@@ -349,11 +352,14 @@ if True:
         #data2=data[int((inittime+measuretime+ltptime)*10*second):int((inittime+measuretime+ltptime+measuretime)*10*second)]
         f1,p1=signal.welch(data1,1e4,nperseg=len(data1))
         #f2,p2=signal.welch(data2,1e4,nperseg=len(data2)) 
-
         Data=np.load("recfolder/Data.npy",allow_pickle=True)
         
         #print("myparams=",myparams)
-        Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
+        if withspec:
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
+            print("da sepp!")
+        else:
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)

@@ -22,4 +22,9 @@ estimated influence of pyr.soma small in comparison to pyr.dendrite: (tau*g*freq
 9905.8
 
 
+also, i am pretty sure the ca3 net has no separate ING oscillations according to averaged power spectra
+
+in linearized wc model, having pyr connected to olm and b just shifts the frequency instead of producing theta modulated gamma. 
+could explain higher ING shifting PING upwards instead of producing both ING and PING frequency
+
 
