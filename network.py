@@ -286,11 +286,11 @@ class Network:
 		ns.noise = 0 # NO randomness for the MS inputs
 		ns.number = (1e3 / 150.0) * simdur
 		self.nsl.append(ns)
-		for i in range(self.bas.n): # MS inputs to BASKET cells
-			nc = h.NetCon(ns,self.bas.cell[i].__dict__["somaGABAss"].syn)#egal
-			nc.delay = 2*h.dt
-			nc.weight[0] = 1.6e-3 * self.MSGain
-			self.ncl.append(nc)
+		#for i in range(self.bas.n): # MS inputs to BASKET cells
+		#	nc = h.NetCon(ns,self.bas.cell[i].__dict__["somaGABAss"].syn)#egal
+		#	nc.delay = 2*h.dt
+		#	nc.weight[0] = 1.6e-3 * self.MSGain
+		#	self.ncl.append(nc)
 		#for i in range(self.olm.n): # MS inputs to OLM cells
 		#	nc = h.NetCon(ns,self.olm.cell[i].__dict__["somaGABAss"].syn)
 		#	nc.delay = 2*h.dt

@@ -57,7 +57,10 @@ if __name__ == "__main__":
             volts = h.Vector(pop.cell[i].soma_volt.size())
             volts.add(getattr(pop.cell[i],comp+"_volt"))
             voltage_trace=numpy.array(volts.to_python())
-            if plot:plt.plot(voltage_trace);plt.show()
+            if plot:plt.plot(np.arange(len(voltage_trace))/10.,voltage_trace)
+            plt.ylabel("voltage")
+            plt.xlabel("t[ms]")
+            plt.show()
             return voltage_trace
                 
         def count(self,pop=net.pyr,t1=0.,t2=9999999999.,idx=None):
@@ -132,7 +135,7 @@ if __name__ == "__main__":
     h.run()
     
     if solo:
-        a.volt(plot=True)
+        a.volt(pop=getattr(net,celltype),plot=True)
     else:
         Data=np.load("recfolder/FI.npy")
         Data[cellidx,stimidx]=a.count(pop=getattr(net,celltype))
