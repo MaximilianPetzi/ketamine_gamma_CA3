@@ -5,11 +5,17 @@
 #noise sends events to somaAMPAf mechanisms. to prevent LTP, manage the events accordingly
 #read netcon documentation and think about the LTP rule and when events should be triggered
 
+solo=True
+
+##############################################################################################
+stimdur=150 
+stepsize=.05 #stepsize of stimulus amplitudes
+celltypes=["pyr","pyr","pyr","pyr","pyr","bas","olm"]
+comps=["soma","Adend1","Adend2","Adend3","Bdend","soma","soma"]
 if __name__ == "__main__":
-    
     import os
     import string
-
+    import sys
     from neuron import *
     h("strdef simname, allfiles, simfiles, output_file, datestr, uname, osname, comment")
     h.simname=simname = "mtlhpc"
@@ -45,13 +51,30 @@ if __name__ == "__main__":
     Run.washoutT = 2e50  #2e3
     Run.fiwash = h.FInitializeHandler(1,Run.setwash)
 
-#todo:
-    # access weights: print(net.pyr_bas_NM[i].weight[0])
-    # access pre and postsynaptic activity for weight
+    class A:
+        def volt(self,pop=net.pyr,comp="soma",plot=False,i=0):#trace of population average membrane potential at specific compartment. not sure if useful, but hey
+            #returns voltage trace to plot with matplotlib
+            volts = h.Vector(pop.cell[i].soma_volt.size())
+            volts.add(getattr(pop.cell[i],comp+"_volt"))
+            voltage_trace=numpy.array(volts.to_python())
+            if plot:plt.plot(voltage_trace);plt.show()
+            return voltage_trace
+                
+        def count(self,pop=net.pyr,t1=0.,t2=9999999999.,idx=None):
+            spts=pop.spiketimes()
+            second=1000.
+            count=0
+            for i in range(len(spts)):#neuron i
+                for j in range(len(spts[i])):
+                    if len(spts[i])>0:#if the neuron spikes
+                        if spts[i][j]>int(second*t1) and spts[i][j]<int(second*t2):  #count only spikes with time after t1 and before t2
+                            if idx==None or i==idx:
+                                count+=1
+            return count
 
-
-####################################################
-#my event:
+    a=A()#creates analysis instance
+    ####################################################
+    #my event:
     Run.mystuff = h.FInitializeHandler(1,myevent_eventcallingfunction)
     ####################################################
     #my event:
@@ -62,13 +85,8 @@ if __name__ == "__main__":
         #print("hi from",h.t)
         #(see run)
         pass
-    #access weight: print(net.pyr_bas_NM[i].weight[0])  (connection i)
-    #access voltage: net.pyr.cell[j].Adend3_volt[4000]  (cell j, 4000ms)
-    #need to capture spike with stdp learning rule
-        ###################################################
-    #my advance:
-    h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
-
+    #h('proc advance() {nrnpython("myadvance()")}') #overwrite the advancefunction
+ 
     recvars=["rec_k","rec_k1"] #"F","mytsyn","myt"]
     myrec=[]
     for recvar in recvars:
@@ -87,99 +105,37 @@ if __name__ == "__main__":
         h.fadvance()
 
 
-###################################################
+    ###################################################
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
     import numpy as np
-    stimamp=float(sys.argv[1])
-    celltype=sys.argv[2]
-    net.celltype=celltype
-    h.tstop = 10e2   #3e3
-    stim = h.IClamp(getattr(net,celltype).cell[0].soma(.5))
-    stim.delay = 100
-    stim.dur = 500
+    if solo:
+        stimamp=20.
+        celltype="olm"
+        comp="soma"
     
-    #print(sys.argv[1])
+    else: #if simulation
+        stimidx=int(sys.argv[1])
+        stimamp=stimidx*stepsize
+        cellidx=int(sys.argv[2])
+        celltype=celltypes[cellidx]
+        comp=comps[cellidx]
+    
+    net.celltype=celltype
+    
+    stim = h.IClamp(getattr(getattr(net,celltype).cell[0],comp)(.5)) #PAY ATTENTION TO WHERE IN THE SEGMENT YOU INJECT (.5??)
+    stim.delay = 50
+    stim.dur = stimdur
+    h.tstop = stim.dur+stim.delay+50
     stim.amp = stimamp
 
     h.run()
-    #net.rasterplot()
     
-    #myg = h.Graph()
-    net.calc_myvolt_olm()
-    #net.vmyvolt_array_olm[0].plot(myg,h.dt)
-
-    myrec=np.array(myrec)
-    #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
-    plt.figure(1)
-    
-    plt.plot(myrec[0],color="red")
-    plt.plot(myrec[1],color="blue")
-    plt.title("record")
-
-    net.calc_spikes()
-
-    #myg2= h.Graph()
-    #myg2.color(2)
-    #print("spikerec=",numpy.array(net.vmyspike_array_pyr[0].to_python()))
-    spiketimes=np.array(net.vmyspike_array[0].to_python())
-    
-    Data=np.load("recfolder/FI.npy", allow_pickle=True)
-    celldict={"pyr":0,"bas":1,"olm":2}
-    
-    data=Data[celldict[celltype]]
-    print(celldict[celltype])
-    ii=0
-    for i in range(data.size):
-        if data[i] is 0:break   #find next index to write
-        ii+=1
-    data[ii]=spiketimes
-    Data[celldict[celltype]]=data
-    
-    np.save("recfolder/FI",Data)
-    #os.System("touch recfolder/recFI")
-    
-    #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
-    #myg.exec_menu("New Axis")
-    #stim.amp = .4
-    #h.run()
-    #net.calc_myvolt_pyr()
-    #net.calc_myvolt_olm()   #soma testen und mit pyr spikes vergleichen
-    #myg = h.Graph()
-    #myg2= h.Graph()
-    #myg2.color(2)
-    #net.vmyvolt_array_pyr[0].plot(myg,h.dt)
-    #net.vmyvolt_array_olm[0].plot(myg2,h.dt)
-    
-    #myg2.label(80, 30, "g2")
-
-##ctr+K+C/U
-# myg = h.Graph()
-# net.calc_lfp()
-# net.vlfp.plot(myg,h.dt)
-# myg2=h.Graph()
-# myg.color(3) 
-# net.calc_myvolt()
-# net.vmyvolt_array[5].plot(myg,h.dt)
+    if solo:
+        a.volt(plot=True)
+    else:
+        Data=np.load("recfolder/FI.npy")
+        Data[cellidx,stimidx]=a.count(pop=getattr(net,celltype))
+        np.save("recfolder/FI",Data)
 
 
-
-    #import numpy as np
-    #lfpar=net.lfp
-    
-    #def movavg(inputar,kernellen):
-    #    outputar=[]
-    #    for i in range(len(inputar)-kernellen):
-    #        outputar.append(np.average(inputar[i:i+kernellen]))
-    #    return outputar
-
-    #print np.average(lfpar[10000:50000])
-    #print np.average(lfpar[50000:60000])
-    #print np.average(lfpar[60000:70000])
-    #print np.average(lfpar[70000:100000])
-    #from matplotlib import pyplot as plt
-    #plt.plot(movavg(lfpar,4500))
-    #plt.show()
-    
-    #myg.exec_menu("View = plot")
-    #myg.exec_menu("New Axis")

@@ -38,10 +38,17 @@ class Population:
 			self.lidvec.append(h.Vector())
 			self.nc[-1].record(self.ltimevec[-1],self.lidvec[-1],gGID) # record cell spikes with gGID
 			gGID = gGID + 1 # inc global cell ID
-			
+	
 	def set_r(self, syn, r):
 		for c in self.cell:
 			c.__dict__[syn].syn.r = r
+
+	def spiketimes(self):
+		spikets=[]
+		for ncs in self.nc:
+			dings=numpy.array(ncs.get_recordvec().to_python())
+			spikets.append(dings)
+		return spikets
 
 class MSpec: # this class uses matlab to make a spectrogram
 
@@ -481,17 +488,43 @@ class Network:
 	def calc_myvolt_pyr(self): ##mine
 		self.vmyvolt_array_pyr=[]
 		self.myvolt_array_pyr=[]
+		for (cellidx,cell) in enumerate(self.pyr.cell):
+			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
+			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)
+			
+			self.myvolt=numpy.array(self.vmyvolt.to_python())
+			self.myvolt_array_pyr.append(self.myvolt)
+			self.vmyvolt_array_pyr.append(self.vmyvolt)
+
+	def calc_myvolt_pyr_Adend3(self): ##mine
+		self.vmyvolt_array_pyr_Adend3=[]
+		self.myvolt_array_pyr_Adend3=[]
 		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
 			#print(cellidx)
-			self.vmyvolt = h.Vector(self.pyr.cell[0].soma_volt.size()) 
+			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend3_volt.size()) 
 			
 			#self.vmyvolt.add(self.pyr.cell[cellidx].soma(0.5)._ref_v)
-			self.vmyvolt.add(self.pyr.cell[cellidx].soma_volt)
+			self.vmyvolt.add(self.pyr.cell[cellidx].Adend3_volt)
 			###self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
 			
 			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
-			self.myvolt_array_pyr.append(self.myvolt)
-			self.vmyvolt_array_pyr.append(self.vmyvolt)
+			self.myvolt_array_pyr_Adend3.append(self.myvolt)
+			self.vmyvolt_array_pyr_Adend3.append(self.vmyvolt)
+	
+	def calc_myvolt_pyr_Adend1(self): ##mine
+		self.vmyvolt_array_pyr_Adend1=[]
+		self.myvolt_array_pyr_Adend1=[]
+		for (cellidx,cell) in enumerate(self.pyr.cell):##for index, user in enumerate(users)
+			#print(cellidx)
+			self.vmyvolt = h.Vector(self.pyr.cell[0].Adend1_volt.size()) 
+			
+			#self.vmyvolt.add(self.pyr.cell[cellidx].soma(0.5)._ref_v)
+			self.vmyvolt.add(self.pyr.cell[cellidx].Adend1_volt)
+			###self.vmyvolt.sub(self.pyr.cell[cellidx].Bdend_volt)
+			
+			self.myvolt=numpy.array(self.vmyvolt.to_python()) # convert to python array (so can do PSD)
+			self.myvolt_array_pyr_Adend1.append(self.myvolt)
+			self.vmyvolt_array_pyr_Adend1.append(self.vmyvolt)
 	
 	def calc_spikes(self):
 		self.vmyspike_array=[]

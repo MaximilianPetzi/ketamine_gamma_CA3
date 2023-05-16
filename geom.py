@@ -2,21 +2,21 @@
 
 from pyinit import *
 
-class Synapse:
+class Synapse:#plastic
 	def __init__(self, sect, loc, tau1, tau2, e):
 		self.syn		= h.MyExp2SynBB(loc, sec=sect)
 		self.syn.tau1	= tau1
 		self.syn.tau2	= tau2
 		self.syn.e		= e 
 
-class SynapseLTP:
+class SynapseLTP:#not used
 	def __init__(self, sect, loc, tau1, tau2, e):
 		self.syn		= h.MyExp2SynBB_ltp(loc, sec=sect)
 		self.syn.tau1	= tau1
 		self.syn.tau2	= tau2
 		self.syn.e		= e 
 
-class SynapseHeb:
+class SynapseHeb:#not used
 	def __init__(self, sect, loc, tau1, tau2, e):
 		self.syn		= h.MyExp2SynBBheb(loc, sec=sect)
 		self.syn.tau1	= tau1
