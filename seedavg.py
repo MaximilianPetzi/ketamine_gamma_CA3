@@ -3,13 +3,13 @@
 withspec=True
 
 nA=1 #control or not
-nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
-nC=1#REC    
+nB=32 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nC=2#REC    
 nD=2#EXT and SOMA
 nE=1#soma
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
-stepsizeC=.25
+stepsizeC=1.
 stepsizeD=1.
 stepsizeE=.5
 
