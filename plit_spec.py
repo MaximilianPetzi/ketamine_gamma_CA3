@@ -5,7 +5,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 
-Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/3sequil4sgamma_16seeds.npy",allow_pickle=True)      #change back to oldData.npy
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
 Dat=np.ones(DatShape)*-1      

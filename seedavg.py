@@ -13,15 +13,15 @@ stepsizeC=1.
 stepsizeD=1.
 stepsizeE=.5
 
-if __name__=="__main__":
-    #0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
-    def calcparams(aa,bb,cc,dd,ee):#list of parameters calculated from indices
-        pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
-        return pars
-    def cpfp(cc,dd,ee):#shorter list of parameters
-        return [1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
 
-    if __name__=="__main__":
+#0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
+def calcparams(aa,bb,cc,dd,ee):#list of parameters calculated from indices
+    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
+    return pars
+def cpfp(cc,dd,ee):#shorter list of parameters
+    return [1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
+if __name__=="__main__":
+    if True:
         import numpy as np
         import os
         import sys

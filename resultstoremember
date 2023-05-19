@@ -27,4 +27,10 @@ also, i am pretty sure the ca3 net has no separate ING oscillations according to
 in linearized wc model, having pyr connected to olm and b just shifts the frequency instead of producing theta modulated gamma. 
 could explain higher ING shifting PING upwards instead of producing both ING and PING frequency
 
+kext increases gamma power in 34Hz range
 
+averages of whole power spectra seem to behave like gamma power, effect relatively only half as big
+[[0.00137574, 0.0016154 ],
+[0.00133759, 0.00158353]]
+where left column is kext=1, right is kext=2
+        top is krec=1 bottom is krec=2

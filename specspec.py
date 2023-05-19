@@ -42,6 +42,7 @@ def bandpower(i,start, end):#give function the specific frequency array you want
         if start<f[i] and f[i]<end: bpow+=p[i]*(f[1]-f[0])
     return bpow 
 
+
 def avgspec():
     specs=np.average(dat[:,:,:,:,:,1,:],axis=1) #avg(p,axis=samples)
     specs_std=np.std(dat,axis=1)/(len(dat[0])-1)**.5 #sample error estimate or whatever
@@ -53,6 +54,7 @@ def avgspec():
         ax[k].set_ylim([0,5])
     fig.legend()
     plt.show()
+    return specs
 
 def difs():
     dif2=dat2[1]-dat2[0]
