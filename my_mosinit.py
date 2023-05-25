@@ -12,6 +12,14 @@ myterminal=open('myterminal.txt', 'a')
 #sys.stdout=sys.__stdout__ #set std out to terminal again
 
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+
+
+myterminal=open('myterminal.txt', 'a')
+sys.stdout=myterminal
+print("\nI my_mosinit.py: params is ",myparams)
+sys.stdout=sys.__stdout__
+myterminal.close()
+
 myparams[0]=True
 if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
     myparams[0]=False
@@ -51,10 +59,10 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=3.
+    inittime=3. #back to 3
     ltptime=0
     resttime=0
-    measuretime=4. #should be fine ca
+    measuretime=3. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     #h.tstop = (inittime+2*measuretime+ltptime)*second
@@ -74,10 +82,11 @@ if True:
     
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=7000
+        Run.pwwT=0
         #Run.pwwT2=8000
         #Run.pwwT3=10000
         Run.pwwext=1
+        Run.pwwrec=1
         #Run.pww2ext=2.7
         #Run.pww3ext=3.5
     else:
@@ -86,7 +95,7 @@ if True:
             Run.pwwT=0 #pww changed from beginning
             Run.pwwrec=myparams[5+3]
             Run.pwwext=myparams[5+4]
-            Run.pwwsom=myparams[5+4]  
+            #Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail
             pass #change nothing

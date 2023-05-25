@@ -5,7 +5,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 
-Data=np.load("recfolder/3sequil4sgamma_16seeds.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
 Dat=np.ones(DatShape)*-1      
@@ -49,17 +49,17 @@ def difs():
     plt.show()
 
 def allplots(boxplot=True):
-    difs=0
+
     pows=np.average(dat2,axis=1)
     pows_std=np.std(dat2,axis=1)/(len(dat2[0])-1)**.5 #sample error estimate or whatever
     x=np.arange(len(pows))/1.
-    for k in range(kmax):#rec, each a different figure
+    for k in range(kmax):#rec, each a different figure #E
         fig, ax = plt.subplots(nrows=4, ncols=4, figsize=(10, 10))
         for nn in range(4):
             ax[3,nn].set_xlabel('control vs. ketamine')
             ax[nn,0].set_ylabel('gamma power')
-        for j in range(jmax):#all
-            for i in range(imax):#rec
+        for j in range(jmax):#all #D
+            for i in range(imax):#rec #C
                 #plt.subplot(imax,jmax,1+i+imax*j)
                 if boxplot==False:
                     ax[i,j].plot(x,pows[:,i,j,k,1],label="gamma power(30-100 Hz)", color="black")#first index=0 means control trial, last index=1 means gamma

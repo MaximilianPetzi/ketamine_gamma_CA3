@@ -34,3 +34,10 @@ averages of whole power spectra seem to behave like gamma power, effect relative
 [0.00133759, 0.00158353]]
 where left column is kext=1, right is kext=2
         top is krec=1 bottom is krec=2
+
+
+as tau_2 5ms and the frequency is 1000Hz at P.Adend3.AMPA, input current should be almost constant. 
+so I expect the location not to matter, 
+so either strength or connectivity is left as potential reasons for krec vs. kext problem
+
+kext=10 makes very sharp, thin gamma peaks. barely any spikes during theta through
