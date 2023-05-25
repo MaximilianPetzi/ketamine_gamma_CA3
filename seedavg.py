@@ -1,30 +1,41 @@
 #runs many my_mosinit.py scripts and saves results
 #my_mosinit can also be called directly
-withspec=True
+
+
+withspec=False
 
 nA=1 #control or not
-nB=32 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
-nC=2#REC    
-nD=2#EXT and SOMA
-nE=1#soma
+nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nC=4#REC    
+nD=1#EXT and SOMA
+nE=4#Loc etc
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
-stepsizeC=1.
+stepsizeC=2.
 stepsizeD=1.
-stepsizeE=.5
+stepsizeE=-.5 
+#Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
 
 
 #0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
 def calcparams(aa,bb,cc,dd,ee):#list of parameters calculated from indices
-    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
+    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 ,1.75+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE ]  
     return pars
 def cpfp(cc,dd,ee):#shorter list of parameters
-    return [1+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
+    return [1.75+cc*stepsizeC ,1+dd*stepsizeD ,1+ee*stepsizeE]
 if __name__=="__main__":
     if True:
+
         import numpy as np
         import os
         import sys
+
+        myterminal=open('myterminal.txt', 'a')
+        sys.stdout=myterminal
+        print("\nI seedavg.py: ______________new simulation___________________________________")
+        sys.stdout=sys.__stdout__
+        myterminal.close()
+
 
         if os.path.exists("recfolder/Data.npy"):
                 os.remove("recfolder/Data.npy")
