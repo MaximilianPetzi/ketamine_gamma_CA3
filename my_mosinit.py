@@ -1,7 +1,9 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 
+multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 import numpy as np
+
 from scipy import signal
 from termcolor import colored
 import pywt
@@ -14,22 +16,12 @@ myterminal=open('myterminal.txt', 'a')
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 
 
-myterminal=open('myterminal.txt', 'a')
-sys.stdout=myterminal
-print("\nI my_mosinit.py: params is ",myparams)
-sys.stdout=sys.__stdout__
-myterminal.close()
-
 myparams[0]=True
 if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
     myparams[0]=False
 np.save("recfolder/myparams.npy", myparams)
 
 if True:
-    import sys
-    import os
-    import string
-
     from neuron import *
     h("strdef simname, allfiles, simfiles, output_file, datestr, uname, osname, comment")
     h.simname=simname = "mtlhpc"
@@ -86,7 +78,7 @@ if True:
         #Run.pwwT2=8000
         #Run.pwwT3=10000
         Run.pwwext=1
-        Run.pwwrec=1
+        Run.pwwrec=38.5          #25 normal, 28 seizure   38: breaks 20% of the time- 39: breaks always
         #Run.pww2ext=2.7
         #Run.pww3ext=3.5
     else:
@@ -298,7 +290,6 @@ if True:
             f,p=signal.welch(datac,1e4,nperseg=len(datac))
             return a.bandpower(f,p,f1,f2)
     a=A()#creates analysis instance
-    
     import time
     timea=time.time()
     h.run()
@@ -307,6 +298,8 @@ if True:
     myrec=np.array(myrec)
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 
+    #uncomment for multiplesims.py:
+    
 
     if myparams[0]: #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
@@ -329,6 +322,17 @@ if True:
         
         #to test fft accuracy dependent on data length: dataa=dataff[7500:-20000];f,p=signal.welch(dataa,1e4,nperseg=len(dataa));plt.plot(f,p);plt.text(10,1, r'theta power(3-12 Hz)='+str(round(bandpower(f,p,3,12),3)), color="red");plt.text(40,1, r'gamma power(30-100 Hz)='+str(round(bandpower(f,p,30,100),3)),color="red");plt.xlim((0,60));plt.show()
         
+        
+        if multiplesims:#print to file
+            myfreq=a.freq(3,6)
+            mygamma=a.power(3,6)
+            myterminal=open('myterminal.txt', 'a')
+            sys.stdout=myterminal
+            print(myfreq,mygamma)
+            myterminal.close()
+            sys.stdout=sys.__stdout__
+            sys.exit()
+
         f,p=signal.welch(data1,1e4,nperseg=len(data1))
         plt.grid(True)
         plt.plot(f,p)
@@ -366,7 +370,6 @@ if True:
         #print("myparams=",myparams)
         if withspec:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
-            print("da sepp!")
         else:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         #print("now dataij became",Data[myparams[1],myparams[2]])

@@ -5,21 +5,6 @@ import numpy as np
 import sys
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 
-Taufac=1. #if real
-Loc=.5 #if real
-if not myparams[0]:#its a simulation
-	Loc=myparams[10] 
-	Taufac=1.
-	myterminal=open('myterminal.txt', 'a')
-	sys.stdout=myterminal
-	print("\nI am geom.py and Loc is ",Loc)
-	if Loc<0.:
-		Loc=0.
-		Taufac=4.
-		print("\nI am geom.py and Taufac is four")
-	sys.stdout=sys.__stdout__
-	myterminal.close()
-
 class Synapse:
 	def __init__(self, sect, loc, tau1, tau2, e, pf, pww=1):
 		self.syn		= h.MyExp2SynBB_LTPb(loc, sec=sect)
@@ -249,12 +234,10 @@ class PyrAdr(Cell):
 		pww=1
 		pf=0#60
 		#default Loc is 1.0
-		global Loc
-		global Taufac
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
 		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=0) #this one maybe too
-		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=Loc, tau1=0.05/Taufac, tau2=5.3/Taufac,e=0, 		pf=pf, pww=pww)
-		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=Loc, tau1=0.05/Taufac, tau2=5.3/Taufac,tau1NMDA=15/Taufac, tau2NMDA=150/Taufac, r=1, e=0)
+		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)
+		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,e=-80, 	pf=0)
 		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
 		self.Adend3AMPAf = Synapseb(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)#likely, LTP happens here
