@@ -3,10 +3,9 @@ withspec=seedavg.withspec #with or without saving f and p for full spectrum
 
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 import numpy as np
-
+from PyCausality.TransferEntropy import TransferEntropy
+import pandas as pd
 from scipy import signal
-from termcolor import colored
-import pywt
 import sys
 import os
 myterminal=open('myterminal.txt', 'a')
@@ -51,10 +50,10 @@ if True:
     # experiment setup
     import run as Run
     
-    inittime=3. #back to 3
+    inittime=1. #back to 3
     ltptime=0
     resttime=0
-    measuretime=3. #should be fine ca
+    measuretime=1. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     #h.tstop = (inittime+2*measuretime+ltptime)*second
@@ -78,15 +77,21 @@ if True:
         #Run.pwwT2=8000
         #Run.pwwT3=10000
         Run.pwwext=1
-        Run.pwwrec=38.5          #25 normal, 28 seizure   38: breaks 20% of the time- 39: breaks always
+        Run.pwwsom=1
+        Run.pwwrec=1         #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2ext=2.7
         #Run.pww3ext=3.5
     else:
         print("It's a simulation!")
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
-            Run.pwwrec=myparams[5+3]
-            Run.pwwext=myparams[5+4]
+            if myparams[5+5]==1:
+                Run.pwwrec=myparams[5+3]
+                Run.pwwext=1
+            if myparams[5+5]==2: #if D=2: change ext instead of rec
+                Run.pwwext=myparams[5+3]
+                Run.pwwrec=1 
+             
             #Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail
@@ -213,7 +218,7 @@ if True:
             n=len(spikets)
             mu=np.mean(nspikes)
             #sys.stdout=myterminal #set std output to file instead of terminal
-            print("avg freq=",mu,"+/-", numpy.std(nspikes)*n/(n-1)/(n)**.5) #gets printed to file
+            #print("avg freq=",mu,"+/-", numpy.std(nspikes)*n/(n-1)/(n)**.5) #gets printed to file
             #sys.stdout=sys.__stdout__ #set std out to terminal again
             #return nspikes
             return mu
@@ -282,13 +287,94 @@ if True:
             #plt.xlabel('Time [sec]')
             #plt.show()
 
-        def power(self,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,f1=30,f2=100):#calculates band power of pyr population
-            #default: gamma power during measuretime
+        #lfp-type variable here:
+        def power(self,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,f1=30,f2=100,location="difference"):
+            #calculates band power of pyr population 
+            #default: gamma power of Adend3-Bdend lfp during measuretime
+            #location="soma" to use only soma potential instead of difference
             #t1,t2: start and end time of LFP
             #f1,f2: frequency limit of power spectrum integration
-            datac=data[int(10*second*t1):int(10*second*t2)]
+            if location=="difference":
+                ddata=data    
+            if location=="soma":
+                ddata=datasoma
+            datac=ddata[int(10*second*t1):int(10*second*t2)]
             f,p=signal.welch(datac,1e4,nperseg=len(datac))
             return a.bandpower(f,p,f1,f2)
+        
+        #pop variable here:
+        def rasterpower(self,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,f1=30,f2=100,pop=net.pyr):#calculates band power of pyr population
+            #like a.power, but doesnt use pyr lfp, but uses spiketimes (specifically kernel density estimate for spike frequency)
+            datar=a.spikefreq(pop=pop)
+            
+            datac=datar[int(10*second*t1):int(10*second*t2)] #now cut to only measured time
+            f,p=signal.welch(datac,1e4,nperseg=len(datac))
+            return a.bandpower(f,p,f1,f2)
+
+        def spikefreq(self,pop=net.pyr):#similar to freqtrace, this is used for rasterpower
+            spikets=np.concatenate(pop.spiketimes())
+            xlength=len(data)#sets time length to full data in a.power()
+            datar=np.zeros(xlength)#initialize smoothened spike density
+            kernlen=50 #ms*10
+            for i in range(len(spikets)):
+                ri=int(10*spikets[i])
+                if ri+kernlen<xlength:
+                    datar[ri:ri+kernlen]+=1./kernlen
+            #datar represents avg number of spikes per millisecond, estimated by rectangular kernel convolution
+            return datar
+        
+        def binnedspikes(self,pop=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
+            #counts spikes per bin, over whole population
+            spikets=np.concatenate(pop.spiketimes())
+            spikets=spikets[(spikets>t1*1000.) & (spikets<t2*1000.)] #only count the spikes between t1 and t2
+            xlength=len(data)/binsize/10 #want only one entry per bin, not 50 (kernlen) like in spikefreq
+            datar=np.zeros(xlength) #initialize binned spikes
+            for i in range(len(spikets)):
+                ri=int(spikets[i]/binsize) #up to 5ms first bin, up to 10ms second bin etc. 
+                datar[ri]+=1
+            print("length is", len(datar))
+            return datar[int(t1*1000./5.):int(t2*1000./5.)] #only return the bins between t1 and t2
+        
+        def spec(self,datar,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            datac=datar[int(10*second*t1):int(10*second*t2)]
+            f,p=signal.welch(datac,1e4,nperseg=len(datac))
+            plt.grid(True)
+            plt.plot(f,p)
+            plt.text(10,0.1, r'theta power(3-12 Hz)='+str(round(a.bandpower(f,p,3,12),3)), color="red")
+            plt.text(40,0.1, r'gamma power(30-100 Hz)='+str(round(a.bandpower(f,p,30,100),3)),color="blue")
+            plt.legend()
+            plt.xlim((0,100))
+            plt.xlabel("f[Hz]")
+            plt.title("spectral power")
+            plt.show()
+        
+        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=4,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            #uses max lag only
+            X=a.binnedspikes(pop=pop1,t1=t1,t2=t2)
+            Y=a.binnedspikes(pop=pop2,t1=t1,t2=t2)
+            assert(len(X)==len(Y))
+            index=np.arange(len(X))
+            df=pd.DataFrame({"xt":X,"yt":Y},index=index)
+            causality = TransferEntropy(DF = df,
+                                        endog = 'yt',          # Dependent Variable
+                                        exog = 'xt',           # Independent Variable
+                                        lag = lag
+            )
+            TE = causality.nonlinear_TE(n_shuffles=n_shuffles)
+            print(causality.results)   
+            return {"TE":TE,"X":X,"Y":Y}
+        
+        def lagcurve(self,lag1=1,lag2=10,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=4,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            #plots TE dependent on lag
+            TEs=np.zeros((lag2-lag1,2))#each entry is [TE(XZ),TE(YX)] for the current lag
+            for i in range(lag2-lag1):
+                LAG=lag1+i
+                TEs[i]=a.te(lag=LAG,pop1=pop1,pop2=pop2,t1=t1,t2=t2,n_shuffles=n_shuffles)
+            plt.plot(TEs[:,0],label="X-->Y")
+            plt.plot(TEs[:,1],label="Y-->X")
+            plt.show()
+            return TEs
+
     a=A()#creates analysis instance
     import time
     timea=time.time()
@@ -313,8 +399,10 @@ if True:
         plt.figure(2)
         net.rasterplot()
         net.calc_lfp()
+        net.calc_soma_lfp()
         #times=np.arange(seconds*1e4)/1e4   
         data=net.vlfp.to_python() 
+        datasoma=net.vlfp_soma.to_python() 
         dataff=np.copy(data)
         #data=data[7000:]
         data1=data[int(10*second*(inittime+ltptime+resttime)):int(10*second*(inittime+ltptime+resttime+measuretime))]
@@ -324,8 +412,8 @@ if True:
         
         
         if multiplesims:#print to file
-            myfreq=a.freq(3,6)
-            mygamma=a.power(3,6)
+            myfreq=a.freq()
+            mygamma=a.power()
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
             print(myfreq,mygamma)
@@ -360,7 +448,9 @@ if True:
         myg.exec_menu("New Axis")
     else:
         net.calc_lfp()
+        net.calc_soma_lfp()
         data=net.vlfp.to_python() 
+        datasoma=net.vlfp_soma.to_python() 
         data1=data[int(10*second*(inittime+ltptime+resttime)):int(10*second*(inittime+ltptime+resttime+measuretime))]
         #data2=data[int((inittime+measuretime+ltptime)*10*second):int((inittime+measuretime+ltptime+measuretime)*10*second)]
         f1,p1=signal.welch(data1,1e4,nperseg=len(data1))
@@ -371,7 +461,12 @@ if True:
         if withspec:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         else:
-            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.freq(),a.bandpower(f1,p1,30,100)] 
+            myterminal=open('myterminal.txt', 'a')
+            sys.stdout=myterminal
+            print("at ",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "\nI measured freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
+            myterminal.close()
+            sys.stdout=sys.__stdout__
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)

@@ -26,6 +26,29 @@ jmax=len(dat2[0,0,0])
 kmax=len(dat2[0,0,0,0])
 import matplotlib.colors
 
+def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor krec or kext, for rec and ext
+    d=dat2[0,:,:,0,:,:]
+    sh=np.shape(d)
+    da=np.average(d,axis=0)
+    
+    #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
+    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+    for nn in range(2):
+        ax[1,nn].set_xlabel('factor')
+    ax[0,0].set_ylabel('frequency')
+    ax[1,0].set_ylabel('gamma power')
+
+    ax[0, 0].set_title('rec')
+    ax[0, 1].set_title('ext')
+    for i in range(sh[3]):
+        for j in range(sh[2]):
+            ax[i,j].plot(Car,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
+            for k in range(sh[0]):
+                ax[i,j].scatter(Car,d[k,:,j,i],color="black",s=1)
+    plt.show()        
+
+freqandgamma()
+
 def difs():
     dif2=dat2[1]-dat2[0]
     for i in range(imax):#rec, each a different figure
@@ -78,27 +101,28 @@ def allplots(boxplot=True):
     fig.tight_layout(pad=2.0)
     plt.show()
 
-allplots()
+#allplots()
 
 #transform into r readable format (CSV?)
+csvtrafo=False
+if csvtrafo:
+    gc=[]
+    gk=[]
+    rec=[]
+    ext=[]
+    for b in range(nB):#seed
+        for c in range(nC):#rec
+            for d in range(nD):#ext           check this again, questionable
+                gc.append(dat2[0,b,c,d,0][1])
+                gk.append(dat2[1,b,c,d,0][1])
+                rec.append(cpfp(c,d,1)[0])
+                ext.append(cpfp(c,d,1)[1])
 
-gc=[]
-gk=[]
-rec=[]
-ext=[]
-for b in range(nB):#seed
-    for c in range(nC):#rec
-        for d in range(nD):#ext           check this again, questionable
-            gc.append(dat2[0,b,c,d,0][1])
-            gk.append(dat2[1,b,c,d,0][1])
-            rec.append(cpfp(c,d,1)[0])
-            ext.append(cpfp(c,d,1)[1])
-
-import pandas as pd
-df=pd.DataFrame({})
-df["gammacontrol"]=gc
-df["gammaketamine"]=gk
-df["deltagamma"]=gk-gc
-df["rec"]=rec
-df["ext"]=ext
-df.to_csv('recfolder/oldData.csv', index=True)
+    import pandas as pd
+    df=pd.DataFrame({})
+    df["gammacontrol"]=gc
+    df["gammaketamine"]=gk
+    df["deltagamma"]=gk-gc
+    df["rec"]=rec
+    df["ext"]=ext
+    df.to_csv('oldData.csv', index=True)

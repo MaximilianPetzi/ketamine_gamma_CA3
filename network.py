@@ -284,7 +284,7 @@ class Network:#change seed, theseed
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
 		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)#w=6.5e-3
 		print "to BAS"			
 		rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -337,22 +337,23 @@ class Network:#change seed, theseed
 
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
-		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100
+		#print("PYR -> X , NMDA")
+		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100 ##############
 		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)#conv nr 10
 		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
 
 		#print("PYR -> X , AMPA")
-		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100
+		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100 #################
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
 		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
-		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
+		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 		
 
 		#print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
-		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)#60
+		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)
 		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#60
-		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#60
+		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#60 
 
 		#print("OLM -> PYR , GABA")
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
@@ -497,6 +498,12 @@ class Network:#change seed, theseed
 		self.vlfp.div(len(self.pyr.cell)) # normalize lfp by amount of pyr cells
 		self.lfp=numpy.array(self.vlfp.to_python()) # convert to python array (so can do PSD)
 
+	def calc_soma_lfp(self): #just soma lfp
+		self.vlfp_soma = h.Vector(self.pyr.cell[0].Adend3_volt.size()) #lfp in neuron Vector
+		for cell in self.pyr.cell: 
+			self.vlfp_soma.add(cell.soma_volt)
+		self.vlfp_soma.div(len(self.pyr.cell)) # normalize lfp by amount of pyr cells
+		self.lfp_soma=numpy.array(self.vlfp_soma.to_python()) # convert to python array (so can do PSD)
 
 	def calc_specgram(self,maxfreq,nsamp,dodraw,skipms=0):
 		self.calc_lfp()
@@ -564,7 +571,7 @@ except:
 		net = Network()
 	else: 
 		import numpy as np
-		net = Network(iseed=int(myparams[7]),wseed=int(myparams[7]))
+		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]))
 		print "we are in a simulation"
 
 #setup some variables in hoc
