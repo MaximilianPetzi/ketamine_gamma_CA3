@@ -1,0 +1,5 @@
+to run with new scipy version:
+remove the scipy imports that arent found, including the 2 paragraphs where they are used
+python2 specific: 
+remove windowing. windowing will not work
+p values are only 0,1 wrongly: convert something to float, where they are calculated in nonlinear_TE and mby linear_TE

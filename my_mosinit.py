@@ -8,6 +8,7 @@ import pandas as pd
 from scipy import signal
 import sys
 import os
+import pandas as pd
 myterminal=open('myterminal.txt', 'a')
 #sys.stdout=myterminal #set std output to file instead of terminal
 #sys.stdout=sys.__stdout__ #set std out to terminal again
@@ -39,21 +40,18 @@ if True:
 
     h.xopen("nrnoc.hoc")
     h.xopen("init.hoc")
-
     from pyinit import *
     from geom import *
     from network import *
-    
     from params import *
     from run import *
-
     # experiment setup
     import run as Run
     
-    inittime=1. #back to 3
+    inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=1. #should be fine ca
+    measuretime=9. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     #h.tstop = (inittime+2*measuretime+ltptime)*second
@@ -78,7 +76,7 @@ if True:
         #Run.pwwT3=10000
         Run.pwwext=1
         Run.pwwsom=1
-        Run.pwwrec=1         #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=1        #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2ext=2.7
         #Run.pww3ext=3.5
     else:
@@ -113,7 +111,6 @@ if True:
     Parr=[]
     net.nnn=0
     def myadvance():
-        
         #print('my advance, h.t = {}, rec= {}'.format(h.t,net.pyr.cell[0].somaAMPAf.syn.rec_k))
         #print('F={}'.format(net.pyr.cell[0].somaAMPAf.syn.F))
         for irec,recvar in enumerate(recvars):
@@ -268,6 +265,15 @@ if True:
             plt.plot(x,gp);plt.show()
             return x,gp
 
+        def trace(self,myfun,overlap=.5):
+            gp=[]
+            x=np.linspace(0,endtime,endtime*10)#times
+            for i in range(len(x)):
+                fr=myfun(x[i]-overlap,x[i]+overlap,pop)
+                gp.append(fr)
+            plt.plot(x,gp);plt.show()
+            return x,gp
+
         def freqtrace(self,overlap=.6,pop=net.pyr):
             gp=[]
             #default overlap is .25 in seconds, goes both ways
@@ -326,14 +332,47 @@ if True:
         def binnedspikes(self,pop=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
             #counts spikes per bin, over whole population
             spikets=np.concatenate(pop.spiketimes())
-            spikets=spikets[(spikets>t1*1000.) & (spikets<t2*1000.)] #only count the spikes between t1 and t2
+            spikets=spikets[(spikets>t1*second) & (spikets<t2*second)] #only count the spikes between t1 and t2
             xlength=len(data)/binsize/10 #want only one entry per bin, not 50 (kernlen) like in spikefreq
-            datar=np.zeros(xlength) #initialize binned spikes
+            datar=np.zeros(xlength+1) #initialize binned spikes
             for i in range(len(spikets)):
                 ri=int(spikets[i]/binsize) #up to 5ms first bin, up to 10ms second bin etc. 
                 datar[ri]+=1
-            print("length is", len(datar))
-            return datar[int(t1*1000./5.):int(t2*1000./5.)] #only return the bins between t1 and t2
+            datar=datar[int(t1*second/binsize):int(t2*second/binsize)] #only return the bins between t1 and t2
+            return datar
+        
+        def binnedspikes_unavg(self,location=net.pyr,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): 
+            #un-averaged version of a.binnedspikes(), returns 2d array instead of 1d
+            
+            if isinstance(location,str): #if location is a string (meaning it is a synapse)
+                pop=net.pyr  
+                spiketss=pop.spiketimes_ext(syn=location)
+            else:                        #if location is a population
+                pop=location
+                spiketss=pop.spiketimes()
+            xlength=len(data[int(t1*second/binsize):int(t2*second/binsize)])              #a.binnedspikes_unavg()
+            datarr=np.zeros((len(spiketss),xlength))
+            
+            for j in range(len(spiketss)):#for each neuron
+                spikets=spiketss[j] #instead of concatenate, like above
+                ###like above:##
+                spikets=spikets[(spikets>t1*second) & (spikets<t2*second)]
+                datar=np.zeros(len(data)/binsize/10+1) #i added one, because it sometimes tried accessing that index
+                for i in range(len(spikets)):
+                    ri=int(spikets[i]/binsize) 
+                    datar[ri]+=1
+                    # Traceback (most recent call last):
+                    # File "stdin", line 1, in <module>
+                    # File "my_mosinit.py", line 396, in te2
+                    #     Xs=a.binnedspikes_unavg(location="Adend3AMPAf",t1=t1,t2=t2)
+                    # File "my_mosinit.py", line 354, in binnedspikes_unavg
+                    #     datar[ri]+=1
+                    # IndexError: index 2133 is out of bounds for axis 0 with size 2133
+                datar=datar[int(t1*second/binsize):int(t2*second/binsize)] 
+                ################
+                datarr[j,:]=datar
+            return datarr
+          
         
         def spec(self,datar,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
             datac=datar[int(10*second*t1):int(10*second*t2)]
@@ -348,11 +387,15 @@ if True:
             plt.title("spectral power")
             plt.show()
         
-        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=4,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+
+
+        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
             #uses max lag only
-            X=a.binnedspikes(pop=pop1,t1=t1,t2=t2)
-            Y=a.binnedspikes(pop=pop2,t1=t1,t2=t2)
-            assert(len(X)==len(Y))
+            #from pop1 to pop2 I think
+            #switch X and Y
+            
+            X=a.binnedspikes(pop=pop2,t1=t1,t2=t2)
+            Y=a.binnedspikes(pop=pop1,t1=t1,t2=t2)
             index=np.arange(len(X))
             df=pd.DataFrame({"xt":X,"yt":Y},index=index)
             causality = TransferEntropy(DF = df,
@@ -361,17 +404,46 @@ if True:
                                         lag = lag
             )
             TE = causality.nonlinear_TE(n_shuffles=n_shuffles)
-            print(causality.results)   
-            return {"TE":TE,"X":X,"Y":Y}
+            return causality.results
         
-        def lagcurve(self,lag1=1,lag2=10,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=4,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+        def te2(self,n_shuffles=3,lag=1,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            tt=time.time()
+            #calculates individual tes and then averages
+            Xs=a.binnedspikes_unavg(location="Adend3AMPAf",t1=t1,t2=t2)
+            Ys=a.binnedspikes_unavg(location=net.pyr,t1=t1,t2=t2)
+            for i in range(800):#for each neuron
+                if i%10==0:print(i)
+                X=Xs[i]
+                Y=Ys[i]
+                index=np.arange(len(X))
+                df=pd.DataFrame({"xt":X,"yt":Y},index=index)
+                causality = TransferEntropy(DF = df,
+                                            endog = 'yt',          # Dependent Variable
+                                            exog = 'xt',           # Independent Variable
+                                            lag = lag
+                )
+                TE = causality.nonlinear_TE(n_shuffles=n_shuffles)
+                if i==0:rdf=pd.DataFrame(causality.results)
+                else:
+                    rdf=rdf.append(causality.results)
+            print("te2 ran for "+str(time.time()-tt)+"seconds")
+            return rdf
+            
+
+        def lagcurve(self,lag1=1,lag2=30,pop1=net.pyr,pop2=net.olm,n_shuffles=50,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
             #plots TE dependent on lag
             TEs=np.zeros((lag2-lag1,2))#each entry is [TE(XZ),TE(YX)] for the current lag
+            nTEs=np.zeros((lag2-lag1,2))#nTE
             for i in range(lag2-lag1):
                 LAG=lag1+i
-                TEs[i]=a.te(lag=LAG,pop1=pop1,pop2=pop2,t1=t1,t2=t2,n_shuffles=n_shuffles)
+                res=a.te(lag=LAG,pop1=pop1,pop2=pop2,t1=t1,t2=t2,n_shuffles=n_shuffles)
+                TEs[i,:]=res[["TE_XY","TE_YX"]]
+                #nTEs[i,:]=res["r"][["nTE_XY","nTE_YX"]]
             plt.plot(TEs[:,0],label="X-->Y")
             plt.plot(TEs[:,1],label="Y-->X")
+            #plt.plot(nTEs[:,0],label="X-->Y,normalized",alpha=.5)
+            #plt.plot(nTEs[:,1],label="Y-->X,normalized",alpha=.5)
+            plt.legend()
             plt.show()
             return TEs
 
@@ -461,7 +533,8 @@ if True:
         if withspec:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         else:
-            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-2,-3,a.freq(),a.bandpower(f1,p1,30,100)] 
+            r=a.te(pop1=net.bas,pop2=net.pyr)
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.freq(),a.power(location="difference"),a.power(location="soma"),a.rasterpower(),r] 
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
             print("at ",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "\nI measured freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))

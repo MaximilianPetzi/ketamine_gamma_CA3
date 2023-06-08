@@ -344,6 +344,7 @@ class TransferEntropy():
 
         ## Prepare lists for storing results
         TEs = []
+        nTEs = [] #normalized Transfer Entropies, like in Neymotin 2011
         shuffled_TEs = []
         p_values = []
         z_scores = []
@@ -358,6 +359,7 @@ class TransferEntropy():
 
             ## Initialise list to return TEs
             transfer_entropies = [0,0]
+            cei=[0,0]
 
             ## Require us to compare information transfer bidirectionally
             for i,(X,Y) in enumerate({self.exog:self.endog, self.endog:self.exog}.items()):
@@ -414,8 +416,12 @@ class TransferEntropy():
 
                 ### Directional Transfer Entropy is the difference between the conditional entropies
                 transfer_entropies[i] =  conditional_entropy_independent - conditional_entropy_joint
-            
+                #normalized TE = (TE - <TEshuffled>) / H(Yfuture|Ypast)
+                #H(Yfuture|Ypast)=H(Y|Y-t)=H(Y,Y-t)-H(Y-t)=H3-H4
+                #norm_transfer_entropy((H3-H4)-(H1-H2)-<TEshuffled>)/(H3-H4)
+                cei[i] = H3 - H4 #remember normalization factor to later apply
             TEs.append(transfer_entropies)
+            
 
             ## Calculate Significance of TE during this window
             if n_shuffles > 0:
@@ -429,11 +435,11 @@ class TransferEntropy():
                                         bins = self.bins,
                                         bandwidth = bandwidth,
                                         method='nonlinear')
-
+                
                 shuffled_TEs.append(TE_mean)
                 p_values.append(p)
                 z_scores.append(z)
-
+                nTEs.append(((transfer_entropies[0]-TE_mean[0])/cei[0],(transfer_entropies[1]-TE_mean[1])/cei[1])) #this line is where normalized TE is calculated
         ## Store Transfer Entropy from X(t)->Y(t) and from Y(t)->X(t)
         self.add_results({'TE_XY' : np.array(TEs)[:,0],
                           'TE_YX' : np.array(TEs)[:,1],
@@ -444,13 +450,14 @@ class TransferEntropy():
                           })
         if n_shuffles > 0:
             ## Store Significance Transfer Entropy from X(t)->Y(t) and from Y(t)->X(t)
-            
             self.add_results({'p_value_XY' : np.array(p_values)[:,0],
                               'p_value_YX' : np.array(p_values)[:,1],
                               'z_score_XY' : np.array(z_scores)[:,0],
                               'z_score_YX' : np.array(z_scores)[:,1],
                               'Ave_TE_XY'  : np.array(shuffled_TEs)[:,0],
-                              'Ave_TE_YX'  : np.array(shuffled_TEs)[:,1]
+                              'Ave_TE_YX'  : np.array(shuffled_TEs)[:,1], 
+                              'nTE_XY' : np.array(nTEs)[:,0], 
+                              'nTE_YX' : np.array(nTEs)[:,1]
                             })
 
         return transfer_entropies
@@ -514,7 +521,7 @@ def significance(df, TE, endog, exog, lag, n_shuffles, method, pdf_estimator=Non
 
         
         ## Calculate p-values for each direction
-        print(shuffled_TEs)
+        #print(shuffled_TEs)
         p_values = (np.count_nonzero(TE[0] < shuffled_TEs[0,:]) /float(n_shuffles) , \
                     np.count_nonzero(TE[1] < shuffled_TEs[1,:]) /float(n_shuffles))
 

@@ -77,6 +77,14 @@ class Population:
 			spikets.append(dings)
 		return spikets
 	
+	def spiketimes_ext(self, syn): #same as spiketimes, but for any (external?) input to pyr
+		#synapse eg. "Adend3AMPAf"
+		spikets=[]
+		for i in range(len(self.nc)): #just to count from 0 to 799, number of pyr neurons
+			dings=numpy.array(net.NCV[syn][i].to_python())#NCV just records PYR neurons 
+			spikets.append(dings)
+		return spikets
+
 
 class MSpec: # this class uses matlab to make a spectrogram
 
@@ -153,6 +161,7 @@ class Network:#change seed, theseed
 		if self.DoMakeNoise:#true
 			if self.UseNetStim:#true
 				self.make_all_NetStims(simdur,self.iseed)
+				self.RecPYRInputs() #set up pyr channels recordings, use for external input TransferEntropy
 			else:
 				self.make_all_noise(simdur,self.iseed)
 		else:
@@ -190,7 +199,7 @@ class Network:#change seed, theseed
 	#returns next useable value of sead
 	def make_NetStims(self,po,syn,w,ISI,time_limit,sead):
 		po.nssidx[syn] = len(self.nsl) #index into net.nsl
-		po.ncsidx[syn] = len(self.ncl) #index into net.ncl
+		po.ncsidx[syn] = len(self.ncl) #index into net.ncl #net con start index
 		for i in range(po.n):
 			cel = po.cell[i]
 
@@ -234,7 +243,7 @@ class Network:#change seed, theseed
 			sidx = self.pyr.ncsidx[s]
 			eidx = self.pyr.nceidx[s]
 			for i in xrange(sidx,eidx+1):
-				self.NCV[s].append(h.Vector())
+				self.NCV[s].append(h.Vector())  #access after calling function, by: net.NCV["Adend3AMPAf"][55].to_python(), 55 being the pyr idx 0-799
 				self.ncl[i].record(self.NCV[s][-1])
 
 	# make an NQS with pyramidal cell input times
