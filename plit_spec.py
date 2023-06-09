@@ -35,8 +35,8 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
     for nn in range(2):
         ax[1,nn].set_xlabel('factor')
-    ax[0,0].set_ylabel('frequency')
-    ax[1,0].set_ylabel('rasterpower')
+    ax[0,0].set_ylabel('1')
+    ax[1,0].set_ylabel('2')
 
     ax[0, 0].set_title('rec')
     ax[0, 1].set_title('ext')
