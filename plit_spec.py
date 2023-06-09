@@ -18,7 +18,7 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4:6]  #theta and gamma power and potentially so much more!
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][2:4] #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
 imax=len(dat2[0,0])
@@ -36,7 +36,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     for nn in range(2):
         ax[1,nn].set_xlabel('factor')
     ax[0,0].set_ylabel('frequency')
-    ax[1,0].set_ylabel('gamma power')
+    ax[1,0].set_ylabel('rasterpower')
 
     ax[0, 0].set_title('rec')
     ax[0, 1].set_title('ext')
