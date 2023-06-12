@@ -1,60 +1,58 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
-import numpy as np
-from PyCausality.TransferEntropy import TransferEntropy
-import pandas as pd
-from scipy import signal
-import sys
-import os
-import pandas as pd
+baronkenny=True
+if True: #imports:
+    import numpy as np
+    from PyCausality.TransferEntropy import TransferEntropy
+    import pandas as pd
+    from scipy import signal
+    import sys
+    import os
+    import pandas as pd
 myterminal=open('myterminal.txt', 'a')
 #sys.stdout=myterminal #set std output to file instead of terminal
 #sys.stdout=sys.__stdout__ #set std out to terminal again
-
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
-
-
 myparams[0]=True
 if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
     myparams[0]=False
 np.save("recfolder/myparams.npy", myparams)
-
 if True:
-    from neuron import *
-    h("strdef simname, allfiles, simfiles, output_file, datestr, uname, osname, comment")
-    h.simname=simname = "mtlhpc"
-    h.allfiles=allfiles = "geom.hoc pyinit.py geom.py network.py params.py run.py"
-    h.simfiles=simfiles = "pyinit.py geom.py network.py params.py run.py"
-    h("runnum=1")
-    runnum = 1.0
-    h.datestr=datestr = "11may20"
-    h.output_file=output_file = "data/11may20.05"
-    h.uname=uname = "x86_64"
-    h.osname=osname="linux"
-    h("templates_loaded=0")
-    templates_loaded=0
-    h("xwindows=1.0")
-    xwindows = 1.0
+    if True: #imports
 
-    h.xopen("nrnoc.hoc")
-    h.xopen("init.hoc")
-    from pyinit import *
-    from geom import *
-    from network import *
-    from params import *
-    from run import *
-    # experiment setup
-    import run as Run
+        from neuron import *
+        h("strdef simname, allfiles, simfiles, output_file, datestr, uname, osname, comment")
+        h.simname=simname = "mtlhpc"
+        h.allfiles=allfiles = "geom.hoc pyinit.py geom.py network.py params.py run.py"
+        h.simfiles=simfiles = "pyinit.py geom.py network.py params.py run.py"
+        h("runnum=1")
+        runnum = 1.0
+        h.datestr=datestr = "11may20"
+        h.output_file=output_file = "data/11may20.05"
+        h.uname=uname = "x86_64"
+        h.osname=osname="linux"
+        h("templates_loaded=0")
+        templates_loaded=0
+        h("xwindows=1.0")
+        xwindows = 1.0
+
+        h.xopen("nrnoc.hoc")
+        h.xopen("init.hoc")
+        from pyinit import *
+        from geom import *
+        from network import *
+        from params import *
+        from run import *
+        # experiment setup
+        import run as Run
     
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=9. #should be fine ca
+    measuretime=5. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
-    #h.tstop = (inittime+2*measuretime+ltptime)*second
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
     Run.basWash =  [1, 1]
@@ -66,19 +64,18 @@ if True:
     #Run.kout=2
     #Run.LTPonT=(inittime)*second  
     #Run.LTPoffT=(inittime+ltptime)*second
-
     myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
-    
+
     if myparams[0]:
         print("It's real!")
         Run.pwwT=0
-        #Run.pwwT2=8000
-        #Run.pwwT3=10000
+        #Run.pwwT2=6
+        #Run.pwwT3=8
         Run.pwwext=1
         Run.pwwsom=1
-        Run.pwwrec=1        #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
-        #Run.pww2ext=2.7
-        #Run.pww3ext=3.5
+        Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        #Run.pww2rec=1
+        #Run.pww3rec=1
     else:
         print("It's a simulation!")
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
@@ -255,46 +252,29 @@ if True:
                 if start<f[i] and f[i]<end: bpow+=p[i]*(f[1]-f[0])
             return bpow 
         
-        def gammatrace(self,overlap=.6):
+        def gammatrace(self,windowsize=.6):
             gp=[]
-            #default overlap is .25 in seconds, goes both ways
+            #default windowsize is .25 in seconds, goes both ways
 
-            x=np.linspace(overlap,endtime-overlap,endtime*10)#times
+            x=np.linspace(windowsize,endtime-windowsize,endtime*10)#times
             for i in range(len(x)):
-                gp.append(a.power(x[i]-overlap,x[i]+overlap))
+                gp.append(a.power(x[i]-windowsize,x[i]+windowsize))
             plt.plot(x,gp);plt.show()
             return x,gp
 
-        def trace(self,myfun,overlap=.5):
+        def freqtrace(self,windowsize=.6,pop=net.pyr):
             gp=[]
-            x=np.linspace(0,endtime,endtime*10)#times
+            #default windowsize is .25 in seconds, goes both ways
+
+            x=np.linspace(windowsize,endtime-windowsize,endtime*10)#times
             for i in range(len(x)):
-                fr=myfun(x[i]-overlap,x[i]+overlap,pop)
+                fr=a.freq(x[i]-windowsize,x[i]+windowsize,pop=pop)
                 gp.append(fr)
             plt.plot(x,gp);plt.show()
             return x,gp
-
-        def freqtrace(self,overlap=.6,pop=net.pyr):
-            gp=[]
-            #default overlap is .25 in seconds, goes both ways
-
-            x=np.linspace(overlap,endtime-overlap,endtime*10)#times
-            for i in range(len(x)):
-                fr=a.freq(x[i]-overlap,x[i]+overlap,pop=pop)
-                gp.append(fr)
-            plt.plot(x,gp);plt.show()
-            return x,gp
-        
-        def spectrum(self):
-            pass
-            #f, t, Sxx = signal.spectrogram(x, fs, return_onesided=False)
-            #plt.pcolormesh(t, fftshift(f), fftshift(Sxx, axes=0), shading='gouraud')
-            #plt.ylabel('Frequency [Hz]')
-            #plt.xlabel('Time [sec]')
-            #plt.show()
 
         #lfp-type variable here:
-        def power(self,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,f1=30,f2=100,location="difference"):
+        def power(self,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,f1=30,f2=100,location="difference",pop=net.pyr):
             #calculates band power of pyr population 
             #default: gamma power of Adend3-Bdend lfp during measuretime
             #location="soma" to use only soma potential instead of difference
@@ -389,7 +369,7 @@ if True:
         
 
 
-        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
             #from pop1 to pop2 I think
             #switch X and Y
@@ -403,15 +383,16 @@ if True:
                                         exog = 'xt',           # Independent Variable
                                         lag = lag
             )
-            TE = causality.nonlinear_TE(n_shuffles=n_shuffles)
-            return causality.results
+            TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
+            return causality.results,X,Y
         
-        def te2(self,n_shuffles=3,lag=1,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+        def te2(self,n_shuffles=3,lag=1,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+            #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
             tt=time.time()
             #calculates individual tes and then averages
             Xs=a.binnedspikes_unavg(location="Adend3AMPAf",t1=t1,t2=t2)
             Ys=a.binnedspikes_unavg(location=net.pyr,t1=t1,t2=t2)
-            for i in range(800):#for each neuron
+            for i in range(30):#for each neuron
                 if i%10==0:print(i)
                 X=Xs[i]
                 Y=Ys[i]
@@ -422,16 +403,16 @@ if True:
                                             exog = 'xt',           # Independent Variable
                                             lag = lag
                 )
-                TE = causality.nonlinear_TE(n_shuffles=n_shuffles)
+                TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
                 if i==0:rdf=pd.DataFrame(causality.results)
                 else:
                     rdf=rdf.append(causality.results)
             print("te2 ran for "+str(time.time()-tt)+"seconds")
-            return rdf
+            return rdf,Xs,Ys
             
 
         def lagcurve(self,lag1=1,lag2=30,pop1=net.pyr,pop2=net.olm,n_shuffles=50,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
-            #plots TE dependent on lag
+            #plots TE dependent on lag, to find best lag
             TEs=np.zeros((lag2-lag1,2))#each entry is [TE(XZ),TE(YX)] for the current lag
             nTEs=np.zeros((lag2-lag1,2))#nTE
             for i in range(lag2-lag1):
@@ -446,6 +427,66 @@ if True:
             plt.legend()
             plt.show()
             return TEs
+
+        def trace(self,myfun,windowsize=.5,plot=False,pop=net.pyr): #trace of function asynch. windowsize in seconds
+            gp=[]
+            ts=np.arange(inittime,endtime,windowsize)
+            startts=ts
+            endts=ts+windowsize
+            for i in range(len(ts)):
+                fr=myfun(t1=startts[i],t2=endts[i],pop=pop)    
+                gp.append(fr)
+            gp=np.array(gp).T
+
+            if plot:
+                plt.plot(startts+windowsize/2,gp)
+                plt.show()
+
+            return startts+windowsize/2,gp #returns centers of sliding windows, and corresponding value
+
+        #myfun:
+        def asynch(self,t1=0,t2=1,pop=net.pyr): #returns 4 measures of asynchrony
+            # to avoid nans,
+            # I do not add ISI of neurons that do not spike in the window
+            # and drop nans in the variance arrays
+            t1=float(t1)
+            t2=float(t2)
+            spiketss=pop.spiketimes()
+            
+            window=[]
+            for j in range(len(spiketss)):
+                spikets=spiketss[j]
+                spikets=spikets[(spikets>t1*second) & (spikets<t2*second)]
+                window.append(spikets)
+            #window complete
+            meanISIs=[] #mean of ISIs, then var
+            meanFREQs=[] #same more freqs
+            for j in range(len(window)):#for each neuron
+                #get mean(ISI_j)
+                num_spikes=len(window[j])
+                freq=num_spikes/(t2-t1)
+                if freq!=0:#avoid division by zero
+                    meanISIs.append(1/freq)
+                meanFREQs.append(freq)
+            varmeanISI=np.var(meanISIs)
+            varmeanFREQ=np.var(meanFREQs)
+
+            varISIs=[] #var of ISIs, then mean
+            varFREQs=[] #same for 1/ISIs
+            for j in range(len(window)):
+                ISIs=np.diff(window[j])
+                varISIs.append(np.var(ISIs))
+                varFREQs.append(np.var(1/ISIs))
+            varISIs=np.array(varISIs)
+            varFREQs=np.array(varFREQs) 
+            varISIs=varISIs[~np.isnan(varISIs)]#dop nans
+            varFREQs=varFREQs[~np.isnan(varFREQs)]
+            meanvarISI=np.mean(varISIs)
+            meanvarFREQ=np.mean(varFREQs) 
+            #return meanISIs,varISIs,meanFREQs,varFREQs
+            results=varmeanISI,meanvarISI,varmeanFREQ,meanvarFREQ
+            return results[3]
+
 
     a=A()#creates analysis instance
     import time
@@ -540,6 +581,26 @@ if True:
             print("at ",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "\nI measured freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
             myterminal.close()
             sys.stdout=sys.__stdout__
+        if baronkenny:
+            res1=a.trace(a.asynch)
+            res2=a.trace(a.power)
+            asynch_col=res1[1]
+            time_col=res1[0]
+            gamma_col=res2[1]
+            krec_col=np.ones(len(time_col))*Run.pwwrec
+            if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
+                run_col=np.ones(len(time_col))*1
+                mydf=pd.DataFrame({"gamma":gamma_col,"asynch":asynch_col,"krec":krec_col,"time":time_col,"run":run_col})
+                mydf.to_csv("recfolder/barondata",index=False)
+                print("saved first dataframe:")
+                print(mydf)
+            else: #consecutive iterations append data
+                prevdf=pd.read_csv("recfolder/barondata")
+                run_col=np.ones(len(time_col))*(prevdf["run"].iloc[-1]+1)
+                mydf=pd.DataFrame({"gamma":gamma_col,"asynch":asynch_col,"krec":krec_col,"time":time_col,"run":run_col})
+                
+                newdf=prevdf.append(mydf, ignore_index=True)
+                newdf.to_csv("recfolder/barondata",index=False)
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)
