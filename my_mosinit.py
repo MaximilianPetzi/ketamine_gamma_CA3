@@ -68,25 +68,20 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=0
+        Run.pwwT=0.
         #Run.pwwT2=6
         #Run.pwwT3=8
-        Run.pwwext=1
-        Run.pwwsom=1
-        Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwext=1.
+        Run.pwwsom=1.
+        Run.pwwrec=1.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2rec=1
         #Run.pww3rec=1
     else:
         print("It's a simulation!")
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
-            if myparams[5+5]==1:
-                Run.pwwrec=myparams[5+3]
-                Run.pwwext=1
-            if myparams[5+5]==2: #if D=2: change ext instead of rec
-                Run.pwwext=myparams[5+3]
-                Run.pwwrec=1 
-             
+            Run.pwwrec=myparams[5+3]/myparams[5+5]
+            Run.pwwext=1
             #Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail

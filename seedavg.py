@@ -6,10 +6,10 @@
 withspec=False
 
 nA=1 #control or not
-nB=2 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
-nE=2#Loc or extinsteadofrec
+Ear=[1,4,16,64]#Loc
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
 #stepsizeC=2.
@@ -21,12 +21,13 @@ stepsizeE=1.
 #Car=[0,1,2,6,11,16,21,26,31,36,36.5,37,37.5,38,38.5,39,39.5,40,41,42,43]
 Car=[1,10,20,31,36,40]
 nC=len(Car)
+nE=len(Ear)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
 
 
 #0 entry is a flag for simulation or not, indexes of parameters are given in addition to the actual parameters for easier saving:
 def calcparams(aa,bb,cc,dd,ee):#list of parameters calculated from indices
-    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 , Car[cc],1+dd*stepsizeD ,1+ee*stepsizeE ]  #1.75+cc*stepsizeC
+    pars=[None,aa,bb,cc,dd,ee,1+aa*stepsizeA ,1+bb*stepsizeB+cc*177+dd*178 , Car[cc]/Ear[ee],1+dd*stepsizeD ,Ear[ee] ]  #1.75+cc*stepsizeC
     return pars
 def cpfp(cc,dd,ee):#shorter list of parameters
     return [Car[cc] ,1+dd*stepsizeD ,1+ee*stepsizeE]
