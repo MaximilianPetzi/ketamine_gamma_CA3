@@ -24,7 +24,7 @@ class Synapseb:	#almost same as Synapse, but splitting them up makes it easier t
 		self.syn.pww	= pww
 		
 class SynapseNMDA:
-	def __init__(self, sect, loc, tau1, tau2, tau1NMDA, tau2NMDA, r, e):
+	def __init__(self, sect, loc, tau1, tau2, tau1NMDA, tau2NMDA, r, e, pww=1):
 		self.syn			= h.MyExp2SynNMDABB(loc, sec=sect)
 		self.syn.tau1		= tau1
 		self.syn.tau2		= tau2
@@ -32,7 +32,8 @@ class SynapseNMDA:
 		self.syn.tau2NMDA	= tau2NMDA 
 		self.syn.r			= r
 		self.syn.e			= e 
-		
+		self.syn.pww	= pww
+
 ###############################################################################
 #
 # General Cell
@@ -234,10 +235,11 @@ class PyrAdr(Cell):
 		pww=1
 		pf=0#60
 		#default Loc is 1.0
+		Loc=16
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)#tau1=0.07, tau2=9.1
 		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=0) #this one maybe too
-		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)
-		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+		self.BdendAMPA   = Synapse(    sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3*Loc,e=0, 		pf=pf, pww=pww)
+		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0, pww=1)
 		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,e=-80, 	pf=0)
 		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
 		self.Adend3AMPAf = Synapseb(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)#likely, LTP happens here

@@ -52,26 +52,27 @@ extern double hoc_Exp(double);
 #define r _p[5]
 #define smax _p[6]
 #define sNMDAmax _p[7]
-#define Vwt _p[8]
-#define i _p[9]
-#define iNMDA _p[10]
-#define s _p[11]
-#define sNMDA _p[12]
-#define A _p[13]
-#define B _p[14]
-#define A2 _p[15]
-#define B2 _p[16]
-#define mgblock _p[17]
-#define factor _p[18]
-#define factor2 _p[19]
-#define etime _p[20]
-#define DA _p[21]
-#define DB _p[22]
-#define DA2 _p[23]
-#define DB2 _p[24]
-#define v _p[25]
-#define _g _p[26]
-#define _tsav _p[27]
+#define pww _p[8]
+#define Vwt _p[9]
+#define i _p[10]
+#define iNMDA _p[11]
+#define s _p[12]
+#define sNMDA _p[13]
+#define A _p[14]
+#define B _p[15]
+#define A2 _p[16]
+#define B2 _p[17]
+#define mgblock _p[18]
+#define factor _p[19]
+#define factor2 _p[20]
+#define etime _p[21]
+#define DA _p[22]
+#define DB _p[23]
+#define DA2 _p[24]
+#define DB2 _p[25]
+#define v _p[26]
+#define _g _p[27]
+#define _tsav _p[28]
 #define _nd_area  *_ppvar[0]._pval
  
 #if MAC
@@ -209,6 +210,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "r",
  "smax",
  "sNMDAmax",
+ "pww",
  "Vwt",
  0,
  "i",
@@ -233,7 +235,7 @@ static void nrn_alloc(Prop* _prop) {
 	_p = nrn_point_prop_->param;
 	_ppvar = nrn_point_prop_->dparam;
  }else{
- 	_p = nrn_prop_data_alloc(_mechtype, 28, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 29, _prop);
  	/*initialize range parameters*/
  	tau1 = 0.1;
  	tau2 = 10;
@@ -243,10 +245,11 @@ static void nrn_alloc(Prop* _prop) {
  	r = 1;
  	smax = 1e+09;
  	sNMDAmax = 1e+09;
+ 	pww = 1;
  	Vwt = 0;
   }
  	_prop->param = _p;
- 	_prop->param_size = 28;
+ 	_prop->param_size = 29;
   if (!nrn_point_prop_) {
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 3, _prop);
   }
@@ -280,7 +283,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 28, 3);
+  hoc_register_prop_size(_mechtype, 29, 3);
   hoc_register_dparam_semantics(_mechtype, 0, "area");
   hoc_register_dparam_semantics(_mechtype, 1, "pntproc");
   hoc_register_dparam_semantics(_mechtype, 2, "cvodeieq");
@@ -289,7 +292,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  pnt_receive[_mechtype] = _net_receive;
  pnt_receive_size[_mechtype] = 1;
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 MyExp2SynNMDABB /home/maximilian/Desktop/work/neymotin/139421-master/MyExp2SynNMDABB.mod\n");
+ 	ivoc_help("help ?1 MyExp2SynNMDABB /home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynNMDABB.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -343,38 +346,38 @@ static void _net_receive (_pnt, _args, _lflag) Point_process* _pnt; double* _arg
        if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A;
-    double __primary = (A + factor * _lww) - __state;
+    double __primary = (A + factor * _lww * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau1 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau1 ) - __primary );
     A += __primary;
   } else {
- A = A + factor * _lww ;
+ A = A + factor * _lww * pww ;
        }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = B;
-    double __primary = (B + factor * _lww) - __state;
+    double __primary = (B + factor * _lww * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau2 ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau2 ) - __primary );
     B += __primary;
   } else {
- B = B + factor * _lww ;
+ B = B + factor * _lww * pww ;
        }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = A2;
-    double __primary = (A2 + factor2 * _lww * r) - __state;
+    double __primary = (A2 + factor2 * _lww * r * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau1NMDA ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau1NMDA ) - __primary );
     A2 += __primary;
   } else {
- A2 = A2 + factor2 * _lww * r ;
+ A2 = A2 + factor2 * _lww * r * pww ;
        }
    if (nrn_netrec_state_adjust && !cvode_active_){
     /* discon state adjustment for cnexp case (rate uses no local variable) */
     double __state = B2;
-    double __primary = (B2 + factor2 * _lww * r) - __state;
+    double __primary = (B2 + factor2 * _lww * r * pww) - __state;
      __primary += ( 1. - exp( 0.5*dt*( ( - 1.0 ) / tau2NMDA ) ) )*( - ( 0.0 ) / ( ( - 1.0 ) / tau2NMDA ) - __primary );
     B2 += __primary;
   } else {
- B2 = B2 + factor2 * _lww * r ;
+ B2 = B2 + factor2 * _lww * r * pww ;
        }
  }
    else {
@@ -622,13 +625,13 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/139421-master/MyExp2SynNMDABB.mod";
+static const char* nmodl_filename = "/home/maximilian/Desktop/work/neymotin/LTP_neymotin/MyExp2SynNMDABB.mod";
 static const char* nmodl_file_text = 
   ": $Id: MyExp2SynNMDABB.mod,v 1.4 2010/12/13 21:28:02 samn Exp $ \n"
   "NEURON {\n"
   ":  THREADSAFE\n"
   "  POINT_PROCESS MyExp2SynNMDABB\n"
-  "  RANGE tau1, tau2, e, i, iNMDA, s, sNMDA, r, tau1NMDA, tau2NMDA, Vwt, smax, sNMDAmax\n"
+  "  RANGE tau1, tau2, e, i, iNMDA, s, sNMDA, r, tau1NMDA, tau2NMDA, Vwt, smax, sNMDAmax, pww\n"
   "  NONSPECIFIC_CURRENT i, iNMDA\n"
   "}\n"
   "\n"
@@ -648,6 +651,7 @@ static const char* nmodl_file_text =
   "  r        = 1\n"
   "  smax     = 1e9 (1)\n"
   "  sNMDAmax = 1e9 (1)\n"
+  "  pww=1\n"
   "  \n"
   "  Vwt   = 0 : weight for inputs coming in from vector\n"
   "}\n"
@@ -720,10 +724,10 @@ static const char* nmodl_file_text =
   "  ww=w\n"
   "  :printf(\"NMDA Spike: %g\\n\", t)\n"
   "  if(r>=0){ : if r>=0, g = AMPA + NMDA*r\n"
-  "    A  = A  + factor *ww\n"
-  "    B  = B  + factor *ww\n"
-  "    A2 = A2 + factor2*ww*r\n"
-  "    B2 = B2 + factor2*ww*r\n"
+  "    A  = A  + factor *ww *pww\n"
+  "    B  = B  + factor *ww *pww\n"
+  "    A2 = A2 + factor2*ww*r *pww\n"
+  "    B2 = B2 + factor2*ww*r *pww\n"
   "  }else{\n"
   "    if(r>-1000){ : if r>-1, g = NMDA*r  \n"
   "      A2 = A2 - factor2*ww*r\n"

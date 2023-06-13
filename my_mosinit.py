@@ -50,7 +50,7 @@ if True:
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=5. #should be fine ca
+    measuretime=6. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
