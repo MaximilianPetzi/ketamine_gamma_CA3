@@ -19,7 +19,7 @@ for a in range(len(Data)):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
                     Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4:6] 
-                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
+                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["nTE_XY"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
 imax=len(dat2[0,0])
