@@ -4,10 +4,12 @@ from matplotlib import pyplot as plt
 from seedavg import *
 import seaborn as sns
 import scipy.stats
-
+nrows=3
 Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
-DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
+DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
+
+
 Dat=np.ones(DatShape)*-1      
 Dat2=np.ones(DatShape2)*-1 
 print(np.shape(Dat2))
@@ -18,7 +20,8 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][2],Data[a,b,c,d,e][3],Data[a,b,c,d,e][5]
+                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
 imax=len(dat2[0,0])
@@ -32,20 +35,21 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     da=np.average(d,axis=0)
     
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
-    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
-    for nn in range(2):
-        ax[1,nn].set_xlabel('factor')
-    ax[0,0].set_ylabel('nTE (Bas-->Pyr)')
-    ax[1,0].set_ylabel('gamma power')
-
-    ax[0, 0].set_title('rec')
-    ax[0, 1].set_title('ext')
+    fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10))
+    for nn in range(sh[2]):
+        ax[1,nn].set_xlabel('krec')
+    ax[0,0].set_ylabel('frequency')
+    ax[1,0].set_ylabel('lfp gamma')
+    ax[2,0].set_ylabel('raster gamma')
+    for j in range(sh[2]):          
+        ax[0, j].set_title(Ear[j])
 
     for i in range(sh[3]):
         for j in range(sh[2]):
             ax[i,j].plot(Car,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
             for k in range(sh[0]):
                 ax[i,j].scatter(Car,d[k,:,j,i],color="black",s=1)
+    fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
     plt.show()        
 
 freqandgamma()

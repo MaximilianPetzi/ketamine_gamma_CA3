@@ -50,7 +50,7 @@ if True:
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=5. #should be fine ca
+    measuretime=4. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -81,7 +81,7 @@ if True:
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
             Run.pwwrec=myparams[5+3]/myparams[5+5]
-            Run.pwwext=1
+            #Run.pwwext=1
             #Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail
@@ -573,7 +573,7 @@ if True:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.freq(),a.power(location="difference"),a.power(location="soma"),a.rasterpower(),r] 
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
-            print("at ",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "\nI measured freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
+            print("(my_mosinit.py) at",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "I have freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
             myterminal.close()
             sys.stdout=sys.__stdout__
         if baronkenny:
