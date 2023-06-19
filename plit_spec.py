@@ -20,7 +20,8 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][2],Data[a,b,c,d,e][3],Data[a,b,c,d,e][5]
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7]
+#[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)

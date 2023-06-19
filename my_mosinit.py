@@ -80,7 +80,7 @@ if True:
         print("It's a simulation!")
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
-            Run.pwwrec=myparams[5+3]/myparams[5+5]
+            Run.pwwrec=myparams[5+3]
             #Run.pwwext=1
             #Run.pwwsom=myparams[5+4]  
             pass
@@ -379,7 +379,7 @@ if True:
                                         lag = lag
             )
             TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
-            return causality.results,X,Y
+            return causality.results
         
         def te2(self,n_shuffles=3,lag=1,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
@@ -403,7 +403,7 @@ if True:
                 else:
                     rdf=rdf.append(causality.results)
             print("te2 ran for "+str(time.time()-tt)+"seconds")
-            return rdf,Xs,Ys
+            return rdf
             
 
         def lagcurve(self,lag1=1,lag2=30,pop1=net.pyr,pop2=net.olm,n_shuffles=50,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
@@ -570,10 +570,10 @@ if True:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         else:
             r=a.te(pop1=net.bas,pop2=net.pyr)
-            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.freq(),a.power(location="difference"),a.power(location="soma"),a.rasterpower(),r] 
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
-            print("(my_mosinit.py) at",myparams[3],myparams[5],"and ext/rec=",Run.pwwext,Run.pwwrec, "I have freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
+            print("(my_mosinit.py) at",myparams[1:6],"and ext/rec=",Run.pwwext,Run.pwwrec, "I have freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
             myterminal.close()
             sys.stdout=sys.__stdout__
         if baronkenny:
