@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=3 #back to 3
+    inittime=1 #back to 3
     ltptime=0
     resttime=0
-    measuretime=10.#should be fine ca
+    measuretime=1.#should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -68,13 +68,13 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=0
-        #Run.pwwT2=6
-        #Run.pwwT3=8
-        Run.pwwext=1
-        Run.pwwsom=1
+        Run.pwwT=.5
+        #Run.pwwT2=1
+        #Run.pwwT3=1.5
+        Run.pwwext=0
         Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
-        #Run.pww2rec=1
+        #Run.pwwsom=1
+        #Run.pww2ext=10
         #Run.pww3rec=1
     else:
         print("It's a simulation!")
@@ -317,9 +317,17 @@ if True:
             #datar represents avg number of spikes per millisecond, estimated by rectangular kernel convolution
             return datar
         
-        def binnedspikes(self,pop=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
+        def binnedspikes(self,location=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
             #counts spikes per bin, over whole population
-            spikets=np.concatenate(pop.spiketimes())
+            
+            if isinstance(location,str): #if location is a string (meaning it is a synapse)
+                pop=net.pyr  
+                spiketss=pop.spiketimes_ext(syn=location)
+            else:                        #if location is a population
+                pop=location
+                spiketss=pop.spiketimes()
+
+            spikets=np.concatenate(spiketss)
             spikets=spikets[(spikets>t1*second) & (spikets<t2*second)] #only count the spikes between t1 and t2
             xlength=len(data)/binsize/10 #want only one entry per bin, not 50 (kernlen) like in spikefreq
             datar=np.zeros(xlength+1) #initialize binned spikes
@@ -377,13 +385,13 @@ if True:
         
 
 
-        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=7,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=3,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
             #from pop1 to pop2 I think
             #switch X and Y
             
-            X=a.binnedspikes(pop=pop2,t1=t1,t2=t2,binsize=binsize)
-            Y=a.binnedspikes(pop=pop1,t1=t1,t2=t2,binsize=binsize)
+            X=a.binnedspikes(location=pop2,t1=t1,t2=t2,binsize=binsize)
+            Y=a.binnedspikes(location=pop1,t1=t1,t2=t2,binsize=binsize)
             index=np.arange(len(X))
             df=pd.DataFrame({"xt":X,"yt":Y},index=index)
             causality = TransferEntropy(DF = df,
@@ -392,15 +400,15 @@ if True:
                                         lag = lag
             )
             TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
-            return causality.results
+            return causality.results,X,Y
         
-        def te2(self,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        def te2(self,pop1="Adend3AMPAf",pop2=net.pyr,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
             tt=time.time()
             #calculates individual tes and then averages
-            Xs=a.binnedspikes_unavg(location="Adend3AMPAf",t1=t1,t2=t2,binsize=binsize)
-            Ys=a.binnedspikes_unavg(location=net.pyr,t1=t1,t2=t2,binsize=binsize)
-            for i in range(200):#for each neuron
+            Xs=a.binnedspikes_unavg(location=pop1,t1=t1,t2=t2,binsize=binsize)
+            Ys=a.binnedspikes_unavg(location=pop2,t1=t1,t2=t2,binsize=binsize)
+            for i in range(800):#for each neuron
                 if i%10==0:print(i)
                 X=Xs[i]
                 Y=Ys[i]
