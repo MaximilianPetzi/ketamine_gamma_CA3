@@ -10,13 +10,16 @@ library(purrr)
 #run for example with Rscript baron.R
 orig_data=read.csv("recfolder/barondata")
 data = orig_data
+
 data=aggregate(.~ run, data=data, FUN=mean)
 data=filter(data, krec < 35)
 #data=filter(data, kext < 27)
+View(data)
+plot(data$msgain,data$nTE)
 
-avgdata=aggregate(.~krec,data=data,FUN=mean)
-vardata=aggregate(.~krec,data=data,FUN=var)
-
+avgdata=aggregate(.~msgain,data=data,FUN=mean)
+vardata=aggregate(.~msgain,data=data,FUN=var)
+View(avgdata)
 #________________kext:_______________#
 
 data=filter(data, kext == 1)
