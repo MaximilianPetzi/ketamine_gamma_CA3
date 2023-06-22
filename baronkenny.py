@@ -14,7 +14,7 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 #Car=[1,1.5,2,3,4,5,8,11,14,17,20,24,28,32,36,40]
-Car=[0.,0.25,0.5,0.75,1.]
+Car=[0.,0.25,1.]
 nC=len(Car)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
 

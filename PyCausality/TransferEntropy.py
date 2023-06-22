@@ -434,8 +434,7 @@ class TransferEntropy():
                                         pdf_estimator = pdf_estimator, 
                                         bins = self.bins,
                                         bandwidth = bandwidth,
-                                        method='nonlinear', 
-                                        both=False)
+                                        method='nonlinear')
                 
                 shuffled_TEs.append(TE_mean)
                 p_values.append(p)
