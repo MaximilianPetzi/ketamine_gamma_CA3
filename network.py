@@ -133,7 +133,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:#change seed, theseed
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=np.random.randint(1,10000),UseNetStim=True,wseed=np.random.randint(1,10000),scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=np.random.randint(1,10000),UseNetStim=True,wseed=np.random.randint(1,10000),scale=1.0,MSGain=1.0,OLMGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
@@ -149,6 +149,7 @@ class Network:#change seed, theseed
 		self.UseNetStim = UseNetStim
 		self.wseed = wseed # seed for 'wiring'
 		self.MSGain = MSGain # gain for MS weights
+		self.OLMGain = OLMGain
 		self.RecPyr = False
 		self.SaveConn = SaveConn
 		
@@ -366,7 +367,7 @@ class Network:#change seed, theseed
 
 		#print("OLM -> PYR , GABA")
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
-		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 4.0  *  3*6.0e-3, 20)#20
+		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, self.OLMGain*4.0  *  3*6.0e-3, 20)#20
 
 	        #pyramidal to PSR cell -- for testing only
 		#print("PYR -> PSR, AMPA/NMDA")
@@ -572,15 +573,16 @@ try:
 		MSG = float(ls[2])
 	fp.close()
         #create the network
+	
 	net = Network(noise=True,connections=True,DoMakeNoise=True,iseed=ISEED,UseNetStim=True,wseed=WSEED,scale=1.0,MSGain=MSG) 
 	print "set network from rseed.txt : iseed=",ISEED,", WSEED=",WSEED,", MSG = ",MSG
 except:
 	myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 	if myparams[0]:#if name (mymosinit) ==main
-		net = Network()
+		net = Network(iseed=np.random.randint(10000),wseed=np.random.randint(10000))
 	else: 
 		import numpy as np
-		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]))
+		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]),MSGain=myparams[5+3],OLMGain=myparams[5+3])
 		print "we are in a simulation"
 
 #setup some variables in hoc

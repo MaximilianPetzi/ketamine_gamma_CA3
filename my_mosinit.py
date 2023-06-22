@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=1 #back to 3
+    inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=1.#should be fine ca
+    measuretime=10.#should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -68,10 +68,10 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=.5
+        Run.pwwT=0
         #Run.pwwT2=1
         #Run.pwwT3=1.5
-        Run.pwwext=0
+        Run.pwwext=1
         Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pwwsom=1
         #Run.pww2ext=10
@@ -86,13 +86,13 @@ if True:
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
             if myparams[5+5]==1:
-                Run.pwwrec=myparams[5+3]
+                Run.pwwrec=1#myparams[5+3] ###change back for kext krec sim
                 Run.pwwext=1
+                pass
                 
-            if myparams[5+5]==2: #if D=2: change ext instead of rec
+            if myparams[5+5]==2: #if E=2: change ext instead of rec
                 Run.pwwext=myparams[5+3]
                 Run.pwwrec=1 
-             
             #Run.pwwsom=myparams[5+4]  
             pass
         else: #control trail
@@ -385,9 +385,9 @@ if True:
         
 
 
-        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=3,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        def te(self,pop1=net.bas,pop2=net.pyr,n_shuffles=30,lag=3,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
-            #from pop1 to pop2 I think
+            #from pop1 to pop2 I think. default bas to pyr
             #switch X and Y
             
             X=a.binnedspikes(location=pop2,t1=t1,t2=t2,binsize=binsize)
@@ -400,7 +400,7 @@ if True:
                                         lag = lag
             )
             TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
-            return causality.results,X,Y
+            return causality.results
         
         def te2(self,pop1="Adend3AMPAf",pop2=net.pyr,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
@@ -423,6 +423,7 @@ if True:
                 if i==0:rdf=pd.DataFrame(causality.results)
                 else:
                     rdf=rdf.append(causality.results)
+                print(causality.results)
             print("te2 ran for "+str(time.time()-tt)+"seconds")
             return rdf,X,Y
             
@@ -612,17 +613,19 @@ if True:
             kext_col=np.ones(len(time_col))*Run.pwwext
             nTE_col=np.ones(len(time_col))*float(r["nTE_XY"])
             pval_col=np.ones(len(time_col))*float(r["p_value_XY"])
+            print("AA",net.MSGain)
+            msgain_col=np.ones(len(time_col))*float(net.MSGain)
             brasterpower_col=a.trace(a.rasterpower,pop=net.bas)[1]
             if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
                 run_col=np.ones(len(time_col))*1
-                mydf=pd.DataFrame({"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
+                mydf=pd.DataFrame({"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 mydf.to_csv("recfolder/barondata",index=False)
                 print("saved first dataframe:")
                 print(mydf)
             else: #consecutive iterations append data
                 prevdf=pd.read_csv("recfolder/barondata")
                 run_col=np.ones(len(time_col))*(prevdf["run"].iloc[-1]+1)
-                mydf=pd.DataFrame({"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
+                mydf=pd.DataFrame({"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 
                 newdf=prevdf.append(mydf, ignore_index=True)
                 newdf.to_csv("recfolder/barondata",index=False)
