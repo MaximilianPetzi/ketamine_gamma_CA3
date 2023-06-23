@@ -5,7 +5,8 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 nrows=3
-Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
+Data=Data[:,:5]#####delete
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
 
@@ -34,7 +35,6 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     d=dat2[0,:,:,0,:,:]
     sh=np.shape(d)
     da=np.average(d,axis=0)
-    
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
     fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10))
     for nn in range(sh[2]):

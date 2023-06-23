@@ -364,7 +364,7 @@ if True:
         
 
 
-        def te(self,pop1=net.pyr,pop2=net.olm,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        def te(self,pop1=net.bas,pop2=net.pyr,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
             #from pop1 to pop2 I think
             #switch X and Y
@@ -522,9 +522,10 @@ if True:
         if multiplesims:#print to file
             myfreq=a.freq()
             mygamma=a.power()
+            nte=a.te()["nTE_XY"]
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
-            print(myfreq,mygamma)
+            print(myfreq,mygamma,nte)
             myterminal.close()
             sys.stdout=sys.__stdout__
             sys.exit()
