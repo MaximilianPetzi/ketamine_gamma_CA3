@@ -385,7 +385,7 @@ if True:
         
 
 
-        def te(self,pop1=net.bas,pop2=net.pyr,n_shuffles=30,lag=3,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        def te(self,pop1=net.bas,pop2=net.pyr,n_shuffles=30,lag=7,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
             #from pop1 to pop2 I think. default bas to pyr
             #switch X and Y

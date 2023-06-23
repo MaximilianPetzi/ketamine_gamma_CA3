@@ -15,20 +15,17 @@ data=aggregate(.~ run, data=data, FUN=mean)
 data=filter(data, krec < 35)
 #data=filter(data, kext < 27)
 View(data)
-plot(data$msgain,data$nTE)
+plot(data$nTE,data$gamma)
 
 avgdata=aggregate(.~msgain,data=data,FUN=mean)
 vardata=aggregate(.~msgain,data=data,FUN=var)
-View(avgdata)
+
 #________________kext:_______________#
 
 data=filter(data, kext == 1)
 data=filter(data, run != 1) #because it is measured twice
-#View(data)
-#plot(data$nTE,data$gamma)
-#plot(avgdata$nTE,avgdata$gamma)
-#plot(data$krec,data$nTE)
-plot(data$gamma,data$nTE,  col=factor(data$krec))
+
+plot(data$nTE,data$gamma,  col=factor(data$msgain))
 
 #legend("topright", legend = unique(data$kext), col = unique(data$kext), pch = 1)
 
@@ -38,19 +35,19 @@ data$kext = scale(data$kext)
 data$nTE = scale(data$nTE)
 data$asynch = scale(data$asynch)
 
-firstmodel=lm(gamma~krec,data=data)
+firstmodel=lm(gamma~msgain,data=data)
 summary(firstmodel)
 #model <- mediate(modelY = y ~ x, modelM = m ~ x, treat = "x", mediator = "asynch", boot = TRUE, sims = 1000,data=data)
 
-mediate_model=lm(nTE~krec,data=data)
+mediate_model=lm(nTE~msgain,data=data)
 summary(mediate_model)
 
-full_model=lm(gamma~krec+nTE,data=data)
+full_model=lm(gamma~msgain+nTE,data=data)
 summary(full_model)
 
 tab_model(firstmodel, mediate_model, full_model)
 
 
-results=mediate(mediate_model,full_model,treat="krec",mediator="nTE")#,boot=TRUE,sims=500)
+results=mediate(mediate_model,full_model,treat="msgain",mediator="nTE")#,boot=TRUE,sims=500)
 summary(results)
 
