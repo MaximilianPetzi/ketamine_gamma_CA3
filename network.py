@@ -582,7 +582,7 @@ except:
 		net = Network(iseed=np.random.randint(10000),wseed=np.random.randint(10000))
 	else: 
 		import numpy as np
-		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]),MSGain=myparams[5+3],OLMGain=myparams[5+3])
+		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]),MSGain=1,OLMGain=myparams[5+3])
 		print "we are in a simulation"
 
 #setup some variables in hoc

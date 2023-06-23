@@ -614,7 +614,8 @@ if True:
             nTE_col=np.ones(len(time_col))*float(r["nTE_XY"])
             pval_col=np.ones(len(time_col))*float(r["p_value_XY"])
             print("AA",net.MSGain)
-            msgain_col=np.ones(len(time_col))*float(net.MSGain)
+            msgain_col=np.ones(len(time_col))*float(net.OLMGain)
+
             brasterpower_col=a.trace(a.rasterpower,pop=net.bas)[1]
             if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
                 run_col=np.ones(len(time_col))*1
