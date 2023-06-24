@@ -10,11 +10,7 @@ Location=1. #if real
 
 if not myparams[0]:#its a simulation
 	Loc=myparams[5+5] 
-	Taufac=Loc
-	Location=1.
-	if Loc<0.:
-		Location=1.
-		Taufac=1.
+	Location=Loc
 	
 	myterminal=open('myterminal.txt', 'a')
 	sys.stdout=myterminal
@@ -253,10 +249,12 @@ class PyrAdr(Cell):
 		#default Loc is 1.0
 		global Location
 		global Taufac
+		Location=1
 		#Location=0.001 #delete this
 		connection=self.Bdend 
 		if Location<0:connection=self.soma
 		Location=abs(Location)
+		
 		#Bdend AMPA is Bdend not soma
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)#tau1=0.07, tau2=9.1
 		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=0) #this one maybe too
