@@ -12,18 +12,15 @@ orig_data=read.csv("recfolder/barondata")
 data = orig_data
 
 data=aggregate(.~ run, data=data, FUN=mean)
-data=filter(data, krec < 35)
+#data=filter(data, krec < 35)
 #data=filter(data, kext < 27)
-View(data)
-plot(data$nTE,data$gamma)
-
 avgdata=aggregate(.~msgain,data=data,FUN=mean)
 vardata=aggregate(.~msgain,data=data,FUN=var)
 
 #________________kext:_______________#
 
-data=filter(data, kext == 1)
-data=filter(data, run != 1) #because it is measured twice
+#data=filter(data, kext == 1)
+#data=filter(data, run != 1) #because it is measured twice
 
 plot(data$nTE,data$gamma,  col=factor(data$msgain))
 
@@ -50,4 +47,5 @@ tab_model(firstmodel, mediate_model, full_model)
 
 results=mediate(mediate_model,full_model,treat="msgain",mediator="nTE")#,boot=TRUE,sims=500)
 summary(results)
+
 
