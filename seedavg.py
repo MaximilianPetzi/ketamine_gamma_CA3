@@ -6,7 +6,7 @@
 withspec=False
 
 nA=1 #control or not
-nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=10 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
 
@@ -27,7 +27,7 @@ stepsizeE=1.
 #Car=[0,3,6,10,15,20,30,45,60,70,80,90,100,110,120,130,150,175,200,250,300,350,400,500]
 #Ear=[.2,.4,.8,1.,2,5,12,30] #::tau=tau*taufac
 Car=[0,3,6,10,12,20,40,70,160,230]
-Ear=[1.0,0.66,0.33,0.001,-0.001,-0.16,-0.33,-0.5,-1] #Locations
+Ear=[1.0,0.75,0.50,0.25,0.001,-0.001,-0.125,-0.25,0.375,-0.5,0.75,-1] #Locations
 
 nC=len(Car)
 nE=len(Ear)

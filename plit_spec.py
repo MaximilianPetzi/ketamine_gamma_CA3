@@ -6,7 +6,8 @@ import seaborn as sns
 import scipy.stats
 nrows=3
 Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
-Data=Data[:,:5]#####delete
+
+
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
 
@@ -26,6 +27,9 @@ for a in range(len(Data)):
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
+
+
+
 imax=len(dat2[0,0])
 jmax=len(dat2[0,0,0])
 kmax=len(dat2[0,0,0,0])
@@ -47,9 +51,9 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
 
     for i in range(sh[3]):
         for j in range(sh[2]):
-            ax[i,j].plot(Car,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
+            ax[i,j].plot(Caro,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
             for k in range(sh[0]):
-                ax[i,j].scatter(Car,d[k,:,j,i],color="black",s=1)
+                ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
     fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
     plt.show()        
 
