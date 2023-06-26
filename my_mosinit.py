@@ -87,7 +87,7 @@ if True:
             Run.pwwT=0 #pww changed from beginning
             if myparams[5+5]==1:
                 Run.pwwrec=1#myparams[5+3] ###change back for kext krec sim
-                Run.pwwext=1
+                Run.pwwext=myparams[5+3]
                 pass
                 
             if myparams[5+5]==2: #if E=2: change ext instead of rec
