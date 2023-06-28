@@ -249,8 +249,6 @@ class PyrAdr(Cell):
 		#default Loc is 1.0
 		global Location
 		global Taufac
-		Taufac=1
-		Location=-0.5 #delete this
 		connection=self.Bdend 
 		if Location<0:connection=self.soma
 		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma

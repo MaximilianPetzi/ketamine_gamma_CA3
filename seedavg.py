@@ -30,8 +30,8 @@ stepsizeE=1.
 #Car=[0,3,6,10,12,20,40,70,160,230]
 #Ear=[1.0,0.75,0.50,0.25,0.001,-0.001,-0.125,-0.25,0.375,-0.5,0.75,-1] #Locations
 
-Car=[0,3,6,10,12,20,40,70]
-Ear=[0.001,0.125,0.25,0.375,0.5,0.75,1] #Locations
+Car=[0,6,12,20,40,70]
+Ear=[-0.001,-0.125,-0.25,-0.375,-0.5,-0.75,-1] #Locations
 nC=len(Car)
 nE=len(Ear)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
