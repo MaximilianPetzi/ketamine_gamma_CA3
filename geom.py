@@ -249,10 +249,11 @@ class PyrAdr(Cell):
 		#default Loc is 1.0
 		global Location
 		global Taufac
-		#Location=0.001 #delete this
+		Taufac=1
+		Location=-0.5 #delete this
 		connection=self.Bdend 
 		if Location<0:connection=self.soma
-		Location=abs(Location)
+		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma
 		
 		#Bdend AMPA is Bdend not soma
 		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)#tau1=0.07, tau2=9.1

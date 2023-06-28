@@ -5,7 +5,8 @@ FROM python:2.7
 RUN pip install neuron && pip install termcolor && pip install scipy && pip install matplotlib && pip install statsmodels==0.10
 RUN pip install pandas
 RUN pip install seaborn 
-COPY . . 
+#RUN mkdir contt
+#COPY . contt
 #WTF it doesnt know all the new modules from seaborn, statsmodels and pandas???
 
 RUN apt update

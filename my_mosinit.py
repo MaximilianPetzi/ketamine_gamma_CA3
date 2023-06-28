@@ -1,6 +1,6 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
+multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=True
 if True: #imports:
     import numpy as np
@@ -73,7 +73,7 @@ if True:
         #Run.pwwT3=8
         Run.pwwext=1.
         Run.pwwsom=1.
-        Run.pwwrec=1.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=40.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2rec=1
         #Run.pww3rec=1
     else:
@@ -522,10 +522,11 @@ if True:
         if multiplesims:#print to file
             myfreq=a.freq()
             mygamma=a.power()
+            raspow=a.rasterpower()
             nte=a.te()["nTE_XY"]
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
-            print(myfreq,mygamma,nte)
+            print(myfreq,mygamma,raspow,nte)
             myterminal.close()
             sys.stdout=sys.__stdout__
             sys.exit()
