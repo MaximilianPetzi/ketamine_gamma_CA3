@@ -212,3 +212,2360 @@ Name: nTE_XY, dtype: float64)
 Name: nTE_XY, dtype: float64)
 (2.7671875, 2.1224477927174568, 0.06936482049604523, 0   -0.002274
 Name: nTE_XY, dtype: float64)
+
+multiplesims starting...
+
+
+multiplesims starting...
+
+
+multiplesims starting...
+
+
+multiplesims starting...
+
+(2.809375, 0.6090095197091198, 0.03342110804445687, 0   -0.008461
+Name: nTE_XY, dtype: float64)
+(3.2725, 1.9581982153993145, 0.22572515642567226, 0    0.014953
+Name: nTE_XY, dtype: float64)
+(4.1084375, 4.337941037673044, 0.6489688696968051, 0    0.029075
+Name: nTE_XY, dtype: float64)
+(3.4203125, 3.515349596110306, 0.5818094528206554, 0    0.016955
+Name: nTE_XY, dtype: float64)
+(3.256875, 3.498995943286045, 0.4932283567826362, 0    0.013361
+Name: nTE_XY, dtype: float64)
+(2.8809375, 0.5056225362472327, 0.04621981525658358, 0   -0.005364
+Name: nTE_XY, dtype: float64)
+(2.8103125, 0.43955112190512385, 0.031007928977731882, 0   -0.009403
+Name: nTE_XY, dtype: float64)
+
+multiplesims starting...
+
+(5.99625, 12.103835836159519, 1.9258873292118337, 0    0.001961
+Name: nTE_XY, dtype: float64)
+(6.4759375, 15.594535382003528, 3.175071940117135, 0    0.02944
+Name: nTE_XY, dtype: float64)
+(6.2728125, 16.519470485638454, 3.338642707601275, 0    0.017433
+Name: nTE_XY, dtype: float64)
+(6.08, 15.952041540278094, 3.243834798520158, 0    0.009086
+Name: nTE_XY, dtype: float64)
+(6.33, 16.798558744020983, 3.2702818337184, 0   -0.003021
+Name: nTE_XY, dtype: float64)
+(5.6675, 13.802250046588695, 2.5926709647954844, 0    0.039528
+Name: nTE_XY, dtype: float64)
+(6.6003125, 15.938418704898236, 3.2856436663592437, 0    0.0303
+Name: nTE_XY, dtype: float64)
+(6.25875, 15.492906216438936, 3.0867383702749347, 0    0.006945
+Name: nTE_XY, dtype: float64)
+(6.6103125, 16.161955911786336, 3.3410280489208315, 0    0.005251
+Name: nTE_XY, dtype: float64)
+(6.0090625, 15.506364516551834, 3.0586300911217106, 0    0.024613
+Name: nTE_XY, dtype: float64)
+
+I seedavg.py: ______________new simulation at time 2023-06-29 17:16:05.498074___________
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.315625, 2.8743400462688853)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.268125, 3.16065438137788)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.275, 2.5385415318107145)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2340625, 3.1511734896868453)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.23, 2.7762192861844546)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.199375, 3.0206483673180564)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.26625, 2.4062927033383184)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.291875, 2.948129898549862)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2690625, 3.3024974820147914)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2565625, 1.8796917911439657)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3078125, 2.975937945631897)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.39, 2.477035607645714)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.228125, 3.04094212268024)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.255, 2.732912310570959)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.265, 2.959084420369569)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.27125, 2.7384124694791327)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.388125, 2.979324940742746)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.5221875, 3.0019507351786814)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.293125, 3.000882484247871)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.323125, 3.1708130644903885)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.25875, 3.2218769010435757)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3459375, 3.417101685249447)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4240625, 3.446980399724266)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.961875, 3.1804077882923427)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3278125, 3.5065931093767664)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.310625, 3.192233204818861)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.36, 3.199540476353301)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.465625, 3.5995547707569067)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.8609375, 3.163338214648722)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.7559375, 0.0073504639630762765)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.375625, 2.967733316052616)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4653125, 4.056278141603235)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.49625, 3.5073790252955357)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.7171875, 0.8597699690858831)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.619375, 36.91249233428413)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 22.0171875, 0.007462723055255402)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4434375, 2.5149760373754075)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.53875, 2.1818877091361526)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.250625, 4.410084939892353)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 6.6040625, 2.7004814399560955)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.0971875, 7.097075444849707)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.13875, 0.007923757811505745)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 0, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.623125, 3.645504210514577)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 0, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.526875, 3.7472781985296315)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 0, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.2940625, 3.1885865796883217)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 0, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.110625, 2.552783850378048)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 0, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 23.0759375, 11.053676232527536)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 0, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.715625, 0.0085954313744402)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2228125, 2.772536241235379)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.21375, 1.8783955299977035)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.235, 2.8404513262883038)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.3, 2.635314997876707)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2246875, 2.5623772846871598)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2440625, 3.210491309423798)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2846875, 3.194804413387301)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2709375, 3.206449727458726)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2715625, 3.0124098441787237)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2490625, 3.3099908984496955)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3146875, 2.7048559137694825)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3621875, 2.8286673578814803)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.20375, 3.14221897813213)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2890625, 2.7786623775707704)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.32875, 3.4372400578587827)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3003125, 2.432496607509188)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3434375, 3.0796246592253533)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.7465625, 2.084830622760246)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2521875, 3.1032807152688964)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.311875, 3.681794241217279)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3209375, 3.4717303778265296)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3253125, 2.738289486892746)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.445, 3.6418201965718398)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.978125, 4.726816199507323)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2990625, 3.1597218677099215)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3540625, 3.0868243890682288)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.39625, 3.7928245875249993)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4578125, 3.6206429417583013)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.845625, 0.31549400214626666)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.7646875, 0.005992785151621941)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.375625, 3.1439305678182308)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.460625, 2.886497356018395)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.564375, 2.5851533319112314)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.00125, 1.5806954178675632)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.930625, 36.036207985415736)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.888125, 0.00672397339625039)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.42625, 2.1641265508722567)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.6503125, 2.1204021047897466)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.6034375, 4.783541367316838)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 10.3134375, 3.1233566920190055)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.495, 7.165145848033208)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.1309375, 0.007295499397303514)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 1, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.6653125, 3.6792261993458344)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 1, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.465, 3.6254305167621546)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 1, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.7915625, 3.663199259339591)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 1, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.1109375, 2.5334604370777427)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 1, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 21.681875, 12.491631857433406)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 1, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.7496875, 0.008879466802078701)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2603125, 2.3217391276014383)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.243125, 3.11355059365263)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2546875, 2.749816347740347)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.199375, 2.698460781908056)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2490625, 3.0329640946877343)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2678125, 2.9515610511791164)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.218125, 3.328496149562367)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2621875, 2.5753852887658013)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2903125, 2.8139068529377975)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2528125, 2.666053097290642)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.309375, 3.5087421206271237)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3884375, 3.317656849494949)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.28375, 3.415774154432624)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.320625, 2.8272703697433017)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2671875, 3.3802532732976514)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2978125, 2.834816866017459)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3846875, 2.7809906048322057)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6215625, 2.4262005142469905)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2828125, 2.852701020177921)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3159375, 3.656821844601334)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.254375, 3.0879862971321232)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.348125, 3.42183066706327)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.458125, 3.28436274101254)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.0225, 4.4915411261004765)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2353125, 1.8985923813242191)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.331875, 3.051833556184871)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.410625, 3.608979383155378)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4953125, 2.697738852455217)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.905, 3.4631201130893854)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.650625, 0.006852437048575332)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.378125, 4.032446171719655)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4365625, 3.6590909014466115)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.5278125, 3.891154443316809)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.644375, 4.246131743093518)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.963125, 36.40785158643964)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.855, 0.007554842489705297)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4809375, 2.8830779991107263)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.653125, 3.096869605705547)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.6975, 5.2215287690355785)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.7365625, 2.5274037764999457)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.0240625, 7.386615076509917)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 21.3403125, 13.764896433462779)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 2, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.7128125, 2.397995108546347)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 2, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.205, 2.4434178457895563)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 2, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.82875, 3.670677105586062)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 2, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.0709375, 2.5238896350401747)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 2, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 23.008125, 12.34826323204674)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 2, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.751875, 0.011092645389522322)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.219375, 2.826906091706855)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.26, 2.9295656020091694)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.240625, 2.4725158391300623)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2084375, 2.897782958951802)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2321875, 3.0048041061493156)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2775, 2.743801858299265)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2628125, 3.4338228816258964)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2396875, 2.7728316490107376)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2928125, 3.35201051443132)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2671875, 2.737066681401217)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3040625, 3.211960183954447)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.4409375, 3.8503660571003473)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2478125, 3.4661350613799655)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2675, 3.375965292173735)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2740625, 3.0570143576393622)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2684375, 2.902516321042732)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.379375, 3.1536621505047675)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6278125, 4.116991980762862)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2765625, 3.3069731541276557)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3103125, 3.5158577340940034)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3121875, 3.208186359235002)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.37125, 3.3792777200753172)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4015625, 2.069983085209608)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.8746875, 4.763632704287268)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.313125, 2.54833465553767)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2884375, 2.047511584034507)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3415625, 3.551704262260839)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.5225, 3.8323298783045727)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.6865625, 2.6029831022412377)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.761875, 0.006816678324538116)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3434375, 1.8061743822107144)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.458125, 2.472272692594738)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4775, 3.6580778904852225)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.7365625, 0.3111202423598897)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.2771875, 37.33067352109118)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.9384375, 0.00787429212178246)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.473125, 4.52830241452984)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.7584375, 3.0188104973577325)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.9240625, 0.6316232228889149)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 12.1475, 2.6173516602739944)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4221875, 7.182675843598686)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 21.2846875, 13.905308930530442)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 3, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5703125, 3.219661131621093)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 3, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.306875, 4.1637747642769245)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 3, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.5515625, 3.11211780647677)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 3, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.07, 2.6331849157590015)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 3, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 25.0646875, 11.04628690979868)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 3, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.735, 0.011135239297997973)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2315625, 2.461032021090937)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.183125, 2.9053052278997984)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2575, 1.7104975530794004)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.255625, 3.0174377879597603)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.250625, 2.432308993748265)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2296875, 2.993939955358542)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2709375, 3.4361177140143795)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2775, 3.0755011394309415)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2534375, 3.3838756031813277)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.28875, 2.5220823760161077)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2625, 2.3551202942095917)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.4234375, 3.0843539438984524)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2815625, 3.272607259089325)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.288125, 3.1893011178963353)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2725, 3.4877232331043047)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2646875, 3.653104183816947)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3615625, 1.3812420032885042)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6778125, 3.61271908444778)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2840625, 2.660789785148402)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.268125, 2.3470247759884124)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.305625, 3.1306757208814475)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3621875, 3.247166509354)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.5059375, 2.4791325459529148)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.97125, 4.628164754743527)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2565625, 2.902344824568072)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3490625, 2.5254009097876167)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.408125, 3.596417197638892)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.5234375, 3.712575290006259)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.8765625, 0.5157893170283958)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.878125, 0.007142472814145909)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.39375, 3.8447403166645904)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.455625, 3.6716507688013147)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4371875, 1.538878281823054)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.745625, 1.5056320906750689)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.3125, 4.956314367119231)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.834375, 0.007278133538536692)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.420625, 3.2713075783671237)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5925, 3.9684669478478876)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.2796875, 4.74548259193321)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 8.914375, 2.842219944825299)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.46125, 7.016075265222327)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.210625, 0.009141804043077224)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 4, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.7815625, 4.031429390932234)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 4, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.3959375, 3.784060577442789)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 4, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.2025, 3.733933608493912)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 4, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.1321875, 2.585295027868448)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 4, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 25.138125, 7.719801993092592)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 4, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.7784375, 0.01076924073460687)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.228125, 3.2586267457929754)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.273125, 2.5482827741158993)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2665625, 3.008128749948616)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.236875, 2.87576482719471)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2896875, 3.2784420143351216)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.221875, 2.7424167567017066)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2115625, 2.044517308281548)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.258125, 2.3908902669564114)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.271875, 3.0980924170602937)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.286875, 1.9092852186683562)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2978125, 3.2975153614654)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3821875, 2.589086868811022)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2946875, 2.5295735054998816)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2903125, 2.7776117548323733)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.23875, 2.7692042598921924)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3025, 3.2670056496708004)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.335625, 3.4978965976865863)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.74125, 4.304167696511048)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2740625, 3.478278328562203)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2771875, 2.6297932818560463)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.28875, 3.252122696200973)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.321875, 2.6728049822823787)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.43, 2.71505717486082)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.82375, 3.897434873570032)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.32375, 3.1587489771673356)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3621875, 3.4274912951285383)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3934375, 2.630781854775317)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4296875, 3.477478869293478)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.735625, 1.5567752813686135)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 33.1190625, 0.006947213886709432)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3428125, 3.775341782996499)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4584375, 4.252389884713394)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4825, 1.7893508646097378)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.6503125, 0.8137009317978119)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.3159375, 5.073131075981416)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.7990625, 0.00873715412221824)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4975, 3.941261557544372)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.503125, 1.1768093048099217)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.978125, 1.7882019250032455)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.489375, 3.1168385525896727)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4928125, 7.366365894040753)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.098125, 0.008738454991726279)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 5, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.475625, 1.5616847898469706)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 5, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.8090625, 4.616320707543216)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 5, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.51, 3.9567861000879994)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 5, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.080625, 2.6376208773519996)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 5, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 24.4996875, 13.234680610208938)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 5, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.8465625, 0.009913457564543274)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.273125, 3.1099825179597445)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2321875, 2.658434037710721)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2059375, 2.8087388186259017)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.25, 3.1353136701196735)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2421875, 3.2821128043366192)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2440625, 3.070446795039373)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.255625, 3.320292196358023)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.25, 2.968149922510884)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2440625, 2.6223204366397628)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.29125, 2.0437867747342593)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2959375, 3.3334609698661435)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3590625, 2.5063022561889747)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2615625, 3.071963814130279)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.23625, 2.739689316656816)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2515625, 2.961656222193383)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3146875, 2.619695973159001)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3025, 3.184752867826258)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6609375, 3.4057464900817203)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.26125, 3.0909521449830906)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.259375, 2.8414221546837233)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.27625, 3.391190536299696)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.32375, 2.6453072703625984)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3796875, 2.0071889433950174)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.9725, 5.327945915889385)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.265625, 2.8840510052644674)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.36, 2.8874102316900894)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3384375, 2.9439029952353524)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.44375, 3.5675665034154442)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.8346875, 1.2717046826659804)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.5509375, 0.0061290355590953565)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3553125, 3.031696720187457)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4659375, 3.4211751080573185)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.44875, 2.1090157605362427)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.1053125, 3.824525755050343)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.328125, 5.07872315679823)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.9015625, 0.007599402693638864)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4625, 2.5693944943669287)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.535625, 2.4348395934430527)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.895625, 0.8630266340663914)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.6540625, 3.1047068587169115)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4534375, 7.327725540351068)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 21.3153125, 14.40550555894371)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 6, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.7465625, 4.108013910925746)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 6, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.5271875, 3.64483495342625)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 6, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.845, 3.6834501251838896)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 6, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.0921875, 2.57088901264189)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 6, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 24.6278125, 7.439443792231807)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 6, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.81625, 0.008989357900148372)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.243125, 2.7399312026314484)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.264375, 3.1820069022915174)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.27125, 3.1321993611581784)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2234375, 2.6293069770736364)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.193125, 3.0777758531503947)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2046875, 2.7027734276367736)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2796875, 2.5490580089152832)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2625, 2.799297778449483)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2253125, 2.4848379535779634)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.325625, 3.2157526902486113)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2428125, 2.3501216770810536)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.405625, 3.431663205985424)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.300625, 2.890544185027058)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2334375, 3.2712206090646627)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.279375, 3.60648734680997)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.241875, 2.265063750127475)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3628125, 2.259600756801146)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.7159375, 4.591065783500841)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2925, 2.7085501039985176)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2975, 3.026636063737083)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2796875, 2.5790409277291135)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.310625, 2.9593920770783626)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4409375, 2.1265201192561674)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.026875, 4.814787710604136)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.279375, 2.809282398987494)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.340625, 3.3608182889630904)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3471875, 3.42609593883169)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4828125, 3.548906381569285)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.7025, 2.329136605023937)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.5521875, 0.007338254844150384)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3759375, 3.083025681513645)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.47125, 1.334624042615726)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.586875, 3.237092551871964)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.28875, 3.0451426201648535)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.323125, 5.040848267889105)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.895625, 0.006672291905281909)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.48625, 3.505652476400232)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5340625, 3.263720230304837)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.6775, 5.2161188815939)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.67625, 2.846847910737285)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.050625, 7.159465542102796)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.190625, 0.007357470063149447)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 7, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5840625, 1.3170606603133832)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 7, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.1634375, 4.19812981329284)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 7, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.093125, 3.5740668365190307)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 7, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.0815625, 2.607878674719282)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 7, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 21.3615625, 9.463722080513188)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 7, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.6965625, 0.009790407639932648)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.270625, 3.169207165752899)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2809375, 3.2006837687686396)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.246875, 2.5607205491226708)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.255625, 3.0757165453082522)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.245, 1.4430226975085265)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2834375, 2.753367437194573)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.236875, 3.323160880643584)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2421875, 2.79411643750094)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.270625, 2.3216610923141987)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2475, 3.2084942488373374)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.34375, 2.712597550929547)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.33875, 3.1439081063659895)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.265625, 1.7082033237526535)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2565625, 2.650206359235652)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2309375, 2.351376503737735)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.291875, 3.4325949363880888)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.355625, 2.9612234866579175)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.5578125, 1.2891696067785676)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.301875, 3.097272236779704)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.261875, 3.3609521051534266)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3196875, 2.930641944512899)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.358125, 3.737130315581612)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4428125, 3.180137999625775)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.1621875, 5.74121692846915)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.24875, 3.010711550110123)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4084375, 3.190670044165895)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.359375, 2.867373329962586)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4478125, 2.0693627990462544)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.89875, 0.7397240057934719)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.5928125, 0.006277278823819481)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4075, 3.3923347667331876)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4540625, 3.7567016446261707)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.52125, 3.444126230664617)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.1925, 3.4510041659959807)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.524375, 35.88792880509233)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.964375, 0.00773098885564951)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.448125, 3.172638787663462)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5596875, 1.4337287657389401)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.799375, 5.112188868755287)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 8.63625, 2.7910834976211545)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.85625, 7.1693991548039655)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 21.301875, 13.912822354227359)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 8, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.810625, 3.2492922831493174)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 8, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.825, 4.322011248789276)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 8, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.4421875, 3.3872552485222718)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 8, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.099375, 2.5571609395272135)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 8, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 26.360625, 9.921494962348307)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 8, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.6534375, 0.009305359135940975)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2584375, 3.172115892003633)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2684375, 2.2367958959148204)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.238125, 2.3692119195755765)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.229375, 3.1093736791374886)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2025, 1.8586461426230214)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2325, 2.80818346826594)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2371875, 3.3647889359723404)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.225, 2.928973357793712)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.265, 3.146006817370239)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.228125, 3.243622780564845)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.286875, 1.7100032835911378)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3971875, 3.383026174589054)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2565625, 2.277731870015778)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.216875, 1.6285033830732538)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3296875, 3.062263356597858)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.329375, 3.0325919534724015)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3765625, 3.3032053479880696)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6671875, 3.0883789670118875)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2784375, 2.9452688476630238)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.291875, 3.867897947280712)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3196875, 3.4864145944957765)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3821875, 3.4930845989271586)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4109375, 3.1581556297524216)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.8975, 4.49566001695653)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2846875, 1.7653627808485373)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3325, 3.526562329325132)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.446875, 2.9882222921093233)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.443125, 3.070979663001647)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.814375, 0.9384329761306657)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.5984375, 0.007349132051238243)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3178125, 2.1133251206319326)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.461875, 3.172327328133723)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.5046875, 3.2351819273834796)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.7209375, 1.088157564740669)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.3334375, 5.0310709127835676)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.87625, 0.008499188047852674)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4396875, 4.023865339231381)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.8315625, 4.8098303476714275)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.35375, 4.061577516847995)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.395625, 2.9790864907297205)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.38875, 7.199230882303491)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.010625, 0.0085537875335582)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 9, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5459375, 0.6036657509023463)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 9, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.0228125, 4.342443974329933)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 9, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.3584375, 3.3489974419234194)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 9, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.0934375, 2.4456050784712304)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 9, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 24.0590625, 12.297415531758343)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 9, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.7821875, 0.009672542841861724)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.196875, 2.635764502804814)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2709375, 2.935299341843733)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.24, 2.6637177117388156)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.24625, 2.620150603962153)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2134375, 2.7195940178891185)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.20875, 2.243815530149543)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2825, 3.4123760366037463)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2415625, 3.1342772236154355)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2259375, 3.0259272602810166)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.23875, 2.2808801070851055)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.30375, 3.2159485720096197)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.4059375, 2.4761913010094414)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2396875, 2.684673481834103)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2775, 2.8811895882708836)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2815625, 3.136665990179177)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2496875, 1.9095411418807966)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3915625, 3.6159287032789424)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6540625, 4.14901519936848)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.238125, 3.6045969153640014)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.26625, 2.747900374018798)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.314375, 3.4831261299217267)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.328125, 3.1335056168073723)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4634375, 2.003589682380493)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.0790625, 5.2530857887519815)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.321875, 2.688021450419251)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3034375, 1.9597461760655075)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3659375, 3.8617157065340697)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4884375, 1.9706085633833408)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.730625, 2.409500770804321)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.8184375, 0.006868816996354469)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.355, 3.674387726601975)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.385, 3.0768858449193712)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.5453125, 3.295111162209588)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.71875, 0.2841604118704422)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.64, 37.109497752837946)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.941875, 0.007611837975327315)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4409375, 1.846078904328515)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5853125, 2.762916379412776)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.888125, 1.1294256639235196)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 6.365625, 2.846988965524459)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.3765625, 7.241007037216308)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.1321875, 0.008913899743853291)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 10, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5171875, 2.7993941992347793)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 10, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.67875, 0.3701258477711)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 10, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.4915625, 3.751278316072244)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 10, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.11, 2.613282375721079)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 10, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 24.756875, 8.291517314881974)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 10, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.8390625, 0.010409197854274476)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.1978125, 2.260443879338036)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2659375, 3.1191430639892714)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2, 2.563423797581754)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2471875, 3.3571331653585084)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2728125, 3.3197744146045802)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.24875, 1.8950547150636372)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2409375, 2.1252644927512048)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2465625, 2.6569440727431144)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.295, 2.2595262850211832)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2725, 3.213872480381201)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2971875, 2.287370328757819)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3740625, 2.7595784734780873)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2453125, 3.0141071863639666)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2659375, 3.058374161201368)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.250625, 2.5968431123365527)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.32125, 2.946399857884494)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2934375, 2.886899789298393)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6409375, 4.0589433976333416)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3053125, 3.4253382328998576)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2896875, 3.0698514930197143)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.305625, 2.7491135820213453)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.366875, 2.9328845691420415)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4175, 3.4205655246780706)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.2796875, 5.021248668450848)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.294375, 3.26775739653687)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3146875, 3.1981715696218114)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3996875, 3.5534471053141528)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.451875, 3.518774187239972)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.8178125, 0.2794332066141806)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.7615625, 0.006201136345553788)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3746875, 4.011397372787438)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.449375, 2.120142317690118)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4734375, 2.8782650924578985)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.73375, 0.43047406746936767)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 62.1990625, 35.87782359153486)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.9925, 0.0061293148128796805)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4725, 2.8063262034162606)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.51375, 1.588220754001842)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.5665625, 4.801986815362896)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 12.19625, 2.7158703859115225)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4571875, 7.253403238447195)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.0596875, 0.008700117338052444)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 11, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5503125, 3.503846846837902)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 11, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.9434375, 1.022655230766125)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 11, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.5709375, 3.7822291132475816)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 11, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.1040625, 2.6110832693486885)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 11, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 25.40625, 9.370741695981023)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 11, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.805, 0.008550458441486553)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2378125, 3.281374744352692)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2575, 2.7991212897908517)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2071875, 3.0226756956321443)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2584375, 3.2208224280017923)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2803125, 2.596079425215855)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.29125, 2.901582605555471)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.254375, 3.091363252939126)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.26875, 3.2543956979091693)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2659375, 2.6449269743599353)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3084375, 2.9121017668099984)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.27625, 2.676080226635735)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.416875, 2.639491960815771)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.28125, 2.536211877900782)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.246875, 2.5463751073073855)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2996875, 3.316928295251471)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.283125, 3.4825244863645874)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3896875, 2.4144674861100692)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6396875, 3.7771629147305523)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2975, 2.62462428074868)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.283125, 3.1490137960891085)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.313125, 3.446156983157371)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3303125, 2.7441656860813346)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4390625, 2.777252379761947)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.090625, 5.055447293227489)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3284375, 2.8311140321317994)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2925, 3.551642381252525)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.339375, 3.1338467088433006)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4721875, 3.8434993570126736)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 3.039375, 2.2219131470692997)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.633125, 0.007111058584409935)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.38, 3.7528841233412664)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.441875, 2.9757745455703)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4915625, 3.599373762581848)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.888125, 0.8875680695836291)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 61.3446875, 36.96841108440506)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.8909375, 0.008190644011170324)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4984375, 3.8571413907799443)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.55375, 2.495386357567729)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5684375, 0.6872223518206074)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.355625, 2.7449291742659057)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.419375, 7.0371187950437415)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.0940625, 0.008349943683669599)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 12, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.7309375, 2.008262706114553)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 12, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.7621875, 0.691162335751511)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 12, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.530625, 3.3262113200598344)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 12, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.101875, 2.5918733400193306)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 12, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 25.748125, 11.351815642073868)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 12, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.7309375, 0.009922371093708273)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.3428125, 2.3867746876155405)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.273125, 2.293303549925923)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.28, 2.7365307615445977)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2821875, 3.6429956125931686)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.250625, 3.2178348587173446)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.275625, 3.4083358579528107)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3078125, 3.1969147866514724)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.274375, 3.368866345056238)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2575, 2.355573536678635)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.269375, 2.8052673775376777)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3628125, 3.0727627096388113)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.41625, 3.3460077835518494)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2765625, 3.3356746797746513)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.293125, 3.274919100221312)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.305, 3.219930383845665)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.27875, 2.3580618260758)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.366875, 2.253820891769465)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6103125, 2.941136732165191)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3003125, 3.3367690281794635)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2746875, 3.3779258791439197)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.28625, 2.374663692292783)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.343125, 3.5723747948671685)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.4253125, 1.3254730879707812)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.054375, 5.46521693986695)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3221875, 2.9715876251043127)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.354375, 3.217357696165187)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3546875, 2.3792436831767674)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4690625, 2.165005396999633)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.7903125, 0.4079039743600532)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.6384375, 0.006427280849745925)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3778125, 4.131363089367736)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4534375, 3.13336664010908)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.5259375, 4.0824052044375225)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.6584375, 3.920978349373572)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.6103125, 5.026067026205788)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.8609375, 0.007878723622519861)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.5084375, 2.5113277161064484)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.7125, 3.6947969161939267)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.836875, 2.7831838008388208)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 12.1234375, 2.5246723843421264)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4390625, 7.314419264068822)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.1996875, 0.00866542243138033)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 13, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.6725, 4.285713250300441)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 13, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.7159375, 4.358700987495785)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 13, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.370625, 2.462589746269286)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 13, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.0653125, 2.6370656179116696)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 13, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 23.306875, 11.993782354817936)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 13, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.733125, 0.00857092066197466)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.266875, 3.525527137545751)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.246875, 2.7182206719796693)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.24875, 2.551092227899779)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2565625, 2.8753196720567105)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2803125, 3.1888985686730518)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.231875, 3.1014000154235912)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2259375, 3.197089747687368)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.278125, 3.0968655995840852)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.26375, 2.359265097747104)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2615625, 1.8746365745239795)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.3065625, 3.034788974631445)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.364375, 3.348197721067446)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2915625, 3.455970002102675)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3753125, 2.63868676406096)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2284375, 3.2734130072487795)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2853125, 3.342988081221007)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.3346875, 3.1227226310084926)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.6425, 3.5360265900569896)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.315, 2.773644061844579)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.258125, 3.1163826609498124)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3009375, 2.4641299429636776)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3234375, 2.0861969297723832)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.43, 1.259476356520315)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 3.123125, 5.021124664686786)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3115625, 3.136812623003957)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3259375, 3.176499904394509)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.313125, 3.1915573887700592)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.449375, 2.3681857864905225)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.776875, 0.7321720836655902)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.88375, 0.00818606121999476)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.38625, 3.464513876753451)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4284375, 2.431740438776985)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4884375, 2.8310363945947548)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.320625, 3.8829190899794837)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.3328125, 4.937418012279834)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.8465625, 0.00765149033513222)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.4775, 2.1903077243249442)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.67, 3.3227976007193583)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.871875, 5.196467098794101)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 8.045625, 2.3018437166179497)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.86625, 7.190431211872234)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 17.0415625, 0.007560237486007737)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 14, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 3.0378125, 4.689372527746954)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 14, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.645, 0.3846212890548215)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 14, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.5096875, 3.8927622437996723)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 14, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.085, 2.601030938699901)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 14, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 22.6334375, 11.201966694193533)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 14, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.6384375, 0.010202135037002605)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 0, 0, 0], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.276875, 3.6034100660479367)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 0, 0, 1], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.245, 2.8488663506229175)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 0, 0, 2], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.3175, 2.6593290163037677)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 0, 0, 3], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.2159375, 3.0415821133517222)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 0, 0, 4], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.27125, 2.3331391548881286)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 0, 0, 5], dtype=object), 'and ext/rec=', 1, 0.0, 'I have freq/gamma=', 2.23375, 2.0989465595937293)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 1, 0, 0], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.230625, 2.779674699482052)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 1, 0, 1], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2546875, 3.234239337516497)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 1, 0, 2], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.31625, 3.1043410201666015)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 1, 0, 3], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.2259375, 1.880417196065673)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 1, 0, 4], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.295625, 3.004180444163456)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 1, 0, 5], dtype=object), 'and ext/rec=', 1, 6.0, 'I have freq/gamma=', 2.42125, 3.9319222124870254)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 2, 0, 0], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.28125, 3.09253787843471)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 2, 0, 1], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2846875, 2.6896885793381755)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 2, 0, 2], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.2734375, 3.587818352766283)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 2, 0, 3], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.316875, 2.605911655219644)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 2, 0, 4], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.319375, 2.2583658308527177)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 2, 0, 5], dtype=object), 'and ext/rec=', 1, 12.0, 'I have freq/gamma=', 2.7059375, 4.310121582394716)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 3, 0, 0], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.26625, 3.6956901420675763)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 3, 0, 1], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.2921875, 2.8003820320214006)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 3, 0, 2], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.330625, 2.7536605264021388)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 3, 0, 3], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.3125, 3.0064571133908222)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 3, 0, 4], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.418125, 2.706562867103493)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 3, 0, 5], dtype=object), 'and ext/rec=', 1, 20.0, 'I have freq/gamma=', 2.970625, 4.128611520538404)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 4, 0, 0], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.29625, 3.368334672891732)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 4, 0, 1], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.3725, 3.510543167483856)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 4, 0, 2], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.2934375, 2.117523088356275)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 4, 0, 3], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.4365625, 1.6038377569568512)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 4, 0, 4], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 2.7875, 1.58016575900896)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 4, 0, 5], dtype=object), 'and ext/rec=', 1, 40.0, 'I have freq/gamma=', 32.7109375, 0.0070452057748751394)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 5, 0, 0], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.3978125, 3.9516821987753863)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 5, 0, 1], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.4440625, 3.5749537814916716)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 5, 0, 2], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 2.5315625, 3.2100740932603875)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 5, 0, 3], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 3.611875, 4.119291017753992)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 5, 0, 4], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 12.31125, 5.073331329878395)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 5, 0, 5], dtype=object), 'and ext/rec=', 1, 70.0, 'I have freq/gamma=', 21.7446875, 0.007473551480308602)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 6, 0, 0], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.44875, 4.292861838386338)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 6, 0, 1], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 2.635, 3.9992666358369764)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 6, 0, 2], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 3.03625, 4.083612218720546)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 6, 0, 3], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 4.8353125, 3.057277455978127)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 6, 0, 4], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 11.4346875, 7.226559086595145)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 6, 0, 5], dtype=object), 'and ext/rec=', 1, 100.0, 'I have freq/gamma=', 21.23625, 13.84644228894674)
+
+I am geom.py and Location is 1.0 and Taufac is 0.1
+('(my_mosinit.py) at', array([0, 15, 7, 0, 0], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.5559375, 4.512219630113897)
+
+I am geom.py and Location is 1.0 and Taufac is 0.15
+('(my_mosinit.py) at', array([0, 15, 7, 0, 1], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 2.8615625, 0.5962239069707951)
+
+I am geom.py and Location is 1.0 and Taufac is 0.2
+('(my_mosinit.py) at', array([0, 15, 7, 0, 2], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 4.82, 3.1999146375619136)
+
+I am geom.py and Location is 1.0 and Taufac is 0.4
+('(my_mosinit.py) at', array([0, 15, 7, 0, 3], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 11.1071875, 2.527769739349659)
+
+I am geom.py and Location is 1.0 and Taufac is 1
+('(my_mosinit.py) at', array([0, 15, 7, 0, 4], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 26.1103125, 8.013854461828785)
+
+I am geom.py and Location is 1.0 and Taufac is 5
+('(my_mosinit.py) at', array([0, 15, 7, 0, 5], dtype=object), 'and ext/rec=', 1, 140.0, 'I have freq/gamma=', 13.6884375, 0.009965418842442267)
+(12.2840625, 5.101268448689594, 5.191635478909693, 0    0.015021
+Name: nTE_XY, dtype: float64)

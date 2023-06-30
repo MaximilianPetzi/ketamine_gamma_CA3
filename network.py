@@ -354,7 +354,7 @@ class Network:#change seed, theseed
 		#print("PYR -> X , AMPA")
 		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100 #################
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
-		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",1, 0.5*0.04e-3, 25)#conv nr 25
+		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
 		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 		
 

@@ -10,7 +10,7 @@ Location=1. #if real
 
 if not myparams[0]:#its a simulation
 	Loc=myparams[5+5] 
-	Location=Loc
+	Taufac=Loc
 	
 	myterminal=open('myterminal.txt', 'a')
 	sys.stdout=myterminal
@@ -245,10 +245,10 @@ class PyrAdr(Cell):
 		
 	def set_synapses(self):
 		pww=1
-		pf=0#60
-		#default Loc is 1.0
+		pf=0
 		global Location
 		global Taufac
+		Location=-.5
 		connection=self.Bdend 
 		if Location<0:connection=self.soma
 		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma
