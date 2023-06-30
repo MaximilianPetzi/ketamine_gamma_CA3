@@ -5,8 +5,8 @@ import numpy as np
 import sys
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 
-Taufac=1. #if real
-Location=1. #if real
+Taufac=.1 #if real
+Location=-.5 #if real
 
 if not myparams[0]:#its a simulation
 	Loc=myparams[5+5] 
@@ -248,7 +248,6 @@ class PyrAdr(Cell):
 		pf=0
 		global Location
 		global Taufac
-		Location=-.5
 		connection=self.Bdend 
 		if Location<0:connection=self.soma
 		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma

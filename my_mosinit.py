@@ -1,6 +1,6 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
+multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=False
 if True: #imports:
     import numpy as np
@@ -73,7 +73,7 @@ if True:
         #Run.pwwT3=8
         Run.pwwext=1.
         Run.pwwsom=1.
-        Run.pwwrec=70.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=90.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2rec=1
         #Run.pww3rec=1
     else:

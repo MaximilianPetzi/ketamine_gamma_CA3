@@ -7,6 +7,6 @@ print("multiplesims starting...\n")
 myterminal.close()
 sys.stdout=sys.__stdout__
 
-for i in range(10):
+for i in range(20):
     os.system(commandstring)
 
