@@ -6,7 +6,7 @@
 withspec=False
 
 nA=1 #control or not
-nB=16 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=32 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
 
@@ -15,22 +15,8 @@ stepsizeB=1002 #Seed
 #stepsizeC=2.
 stepsizeD=1.
 stepsizeE=1.
-#Car=[1,6,11,16,21,26,31,36,36.5,37,37.5,38,38.5,39,39.5,40,41,42,43] #THIS OVERWRITES stepsize
-#Car=[0,1,2,3,4,5,7,10,15]
-#Car=[15,20]
-#Car=[0,1,2,6,11,16,21,26,31,36,36.5,37,37.5,38,38.5,39,39.5,40,41,42,43]
 
-
-#Car=[1,11,21,31,36,41]
-#Ear=[1,4,16,64]#Loc (Taufac)
-
-#Car=[0,3,6,10,15,20,30,45,60,70,80,90,100,110,120,130,150,175,200,250,300,350,400,500]
-#Ear=[.2,.4,.8,1.,2,5,12,30] #::tau=tau*taufac
-
-#Car=[0,3,6,10,12,20,40,70,160,230]
-#Ear=[1.0,0.75,0.50,0.25,0.001,-0.001,-0.125,-0.25,0.375,-0.5,0.75,-1] #Locations
-
-Car=[0,6,12,20,40,70]
+Car=[0,6,12,20,40,70,90,110,130,180,220,300]
 Ear=[-0.001,-0.125,-0.25,-0.375,-0.5,-0.75,-1] #Locations
 nC=len(Car)
 nE=len(Ear)

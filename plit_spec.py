@@ -56,7 +56,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             ax[i,j].plot(Caro,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
             for k in range(sh[0]):
                 ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
-    fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
+    #fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
     plt.show()        
 
 freqandgamma()
