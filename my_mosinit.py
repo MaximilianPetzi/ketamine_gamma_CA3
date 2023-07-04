@@ -399,16 +399,18 @@ if True:
                                         exog = 'xt',           # Independent Variable
                                         lag = lag
             )
-            TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
+            #TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
+            TE = causality.linear_TE(n_shuffles=n_shuffles)
             return causality.results
         
-        def te2(self,pop1="Adend3AMPAf",pop2=net.pyr,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        #a.te2(pop1="somaAMPAf",pop2=net.pyr,n_shuffles=30,lag=1,nneurons=10,binsize=5)
+        def te2(self,pop1="Adend3AMPAf",pop2=net.pyr,nneurons=800,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
             tt=time.time()
             #calculates individual tes and then averages
             Xs=a.binnedspikes_unavg(location=pop1,t1=t1,t2=t2,binsize=binsize)
             Ys=a.binnedspikes_unavg(location=pop2,t1=t1,t2=t2,binsize=binsize)
-            for i in range(800):#for each neuron
+            for i in range(nneurons):#for each neuron
                 if i%10==0:print(i)
                 X=Xs[i]
                 Y=Ys[i]

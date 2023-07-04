@@ -128,3 +128,5 @@ if csvtrafo:
     df["rec"]=rec
     df["ext"]=ext
     df.to_csv('oldData.csv', index=True)
+
+print("heyho")

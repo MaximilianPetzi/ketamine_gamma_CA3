@@ -10,20 +10,21 @@ library(purrr)
 #run for example with Rscript baron.R
 orig_data=read.csv("recfolder/barondata")
 data = orig_data
-
+View(data)
 data=aggregate(.~ run, data=data, FUN=mean)
 #data=filter(data, krec < 35)
-#data=filter(data, kext < 27)
-avgdata=aggregate(.~msgain,data=data,FUN=mean)
-vardata=aggregate(.~msgain,data=data,FUN=var)
+#data=filter(data, kext < 21)
+avgdata=aggregate(.~kext,data=data,FUN=mean)
+vardata=aggregate(.~kext,data=data,FUN=var)
 
 #________________kext:_______________#
 
 #data=filter(data, kext == 1)
 #data=filter(data, run != 1) #because it is measured twice
 
-plot(data$nTE,data$gamma,  col=factor(data$msgain))
-
+plot(data$kext,data$nTE,  col=factor(data$kext))
+plot(data$kext,data$asynch)
+plot(data$kext,data$gamma)
 #legend("topright", legend = unique(data$kext), col = unique(data$kext), pch = 1)
 
 data$gamma = scale(data$gamma)
@@ -32,20 +33,23 @@ data$kext = scale(data$kext)
 data$nTE = scale(data$nTE)
 data$asynch = scale(data$asynch)
 
-firstmodel=lm(gamma~msgain,data=data)
+firstmodel=lm(gamma~kext,data=data)
 summary(firstmodel)
 #model <- mediate(modelY = y ~ x, modelM = m ~ x, treat = "x", mediator = "asynch", boot = TRUE, sims = 1000,data=data)
 
-mediate_model=lm(nTE~msgain,data=data)
+mediate_model=lm(nTE~kext,data=data)
 summary(mediate_model)
 
-full_model=lm(gamma~msgain+nTE,data=data)
+full_model=lm(gamma~kext+nTE,data=data)
 summary(full_model)
 
 tab_model(firstmodel, mediate_model, full_model)
 
 
-results=mediate(mediate_model,full_model,treat="msgain",mediator="nTE")#,boot=TRUE,sims=500)
+results=mediate(mediate_model,full_model,treat="kext",mediator="nTE")#,boot=TRUE,sims=500)
 summary(results)
+
+
+
 
 
