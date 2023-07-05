@@ -44,19 +44,22 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
     fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10))
     for nn in range(sh[2]):
-        ax[1,nn].set_xlabel('krec')
+        ax[2,nn].set_xlabel(r'$k_{rec}$')
     ax[0,0].set_ylabel('frequency')
-    ax[1,0].set_ylabel('lfp gamma')
-    ax[2,0].set_ylabel('raster gamma')
+    ax[1,0].set_ylabel(r'LFP $\gamma$')
+    ax[2,0].set_ylabel(r'raster $\gamma$')
     for j in range(sh[2]):          
-        ax[0, j].set_title(Ear[j])
+        ax[0, j].set_title(str(5.3*Ear[j])+"ms")
+    ax[0,0].set_title(r'$\tau_2=$ '+str(5.3*Ear[0])+"ms")
 
     for i in range(sh[3]):
         for j in range(sh[2]):
             ax[i,j].plot(Caro,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
             for k in range(sh[0]):
                 ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
-    fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
+            if i==0:
+                ax[i,j].set_yscale('log')
+    #fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
     plt.show()        
 
 freqandgamma()

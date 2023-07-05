@@ -73,7 +73,7 @@ if True:
         #Run.pwwT3=8
         Run.pwwext=1.
         Run.pwwsom=1.
-        Run.pwwrec=90.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=1.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2rec=1
         #Run.pww3rec=1
     else:
