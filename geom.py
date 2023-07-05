@@ -5,8 +5,8 @@ import numpy as np
 import sys
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 
-Taufac=1.0 #if real
-Location=-.5 #if real
+Taufac=1.0 
+Location=1
 
 if not myparams[0]:#its a simulation
 	Loc=myparams[5+5] 
