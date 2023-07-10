@@ -55,6 +55,7 @@ pww3som = 1
 pwwT =10000000000
 pwwT2=10000000000
 pwwT3=10000000000
+n2=0
 
 pfrec = 0
 pfext = 0
@@ -63,6 +64,17 @@ pfsom = 0
 #kout = 4
 #krec = 1
 kT=100000000
+
+def doSpike():
+	n1=0
+	spikeT=500
+	con="pyr_pyr_AM" #send spikes to netcons n1 to n2 (but idk if they are ordered)
+	print "watch out! SPIKES!"
+	n=0
+	for nc in net.__dict__[con]:
+		if n<n2 and n>=n1:
+			nc.event(spikeT)
+		n+=1
 
 def doLTPon():
 	print "LTP on at ", LTPonT, " = ", h.t, " to ", pfout , "(and rec)", pfrec
@@ -118,12 +130,13 @@ def setwash():
 
 
 def myevent_eventcallingfunction():
-    h.CVode().event(LTPonT,doLTPon)
-    h.CVode().event(LTPoffT,doLTPoff)
-    h.CVode().event(pwwT,dopww)
-    h.CVode().event(pwwT2,dopww2)
-    h.CVode().event(pwwT3,dopww3)
-    h.CVode().event(kT,dok)
+	h.CVode().event(0,doSpike)
+	h.CVode().event(LTPonT,doLTPon)
+	h.CVode().event(LTPoffT,doLTPoff)
+	h.CVode().event(pwwT,dopww)
+	h.CVode().event(pwwT2,dopww2)
+	h.CVode().event(pwwT3,dopww3)
+	h.CVode().event(kT,dok)
     
     
     #h.CVode().event(3000,my_event)

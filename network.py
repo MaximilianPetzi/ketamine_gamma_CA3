@@ -4,7 +4,8 @@ from pyinit import *
 from geom import *
 import random
 import sys
-
+pyr_gain=0
+rec_gain=1
 gGID = 0 # global ID for cells
 
 class Population:
@@ -290,11 +291,11 @@ class Network:#change seed, theseed
 		print "Making Noise"
 		print "to PYR"
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
-		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
-		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)#w=6.5e-3
+		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3*pyr_gain,  ISI=1,  time_limit=simdur, sead=rdtmp) 
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3*pyr_gain,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
+		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3*pyr_gain, ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3*pyr_gain, ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3*pyr_gain,   ISI=100,time_limit=simdur, sead=rdtmp)#w=6.5e-3
 		print "to BAS"			
 		rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
 		rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
@@ -350,12 +351,12 @@ class Network:#change seed, theseed
 		#print("PYR -> X , NMDA")
 		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100 ##############
 		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)#conv nr 10
-		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
+		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3*rec_gain,  25)#conv nr 25
 	
 		#print("PYR -> X , AMPA")
 		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100 #################
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
-		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
+		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3*rec_gain, 25)#conv nr 25
 		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 		
 
@@ -363,11 +364,11 @@ class Network:#change seed, theseed
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)
 		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#60
-		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#60 
+		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3*pyr_gain, 50)#60 
 
 		#print("OLM -> PYR , GABA")
 		#self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, 3*6.0e-3, 20)#original weight value
-		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, self.OLMGain*4.0  *  3*6.0e-3, 20)#20
+		self.olm_pyr_GA=self.set_connections(self.olm,self.pyr, "Adend2GABAs",2, self.OLMGain*4.0  *  3*6.0e-3*pyr_gain, 20)#20
 
 	        #pyramidal to PSR cell -- for testing only
 		#print("PYR -> PSR, AMPA/NMDA")
