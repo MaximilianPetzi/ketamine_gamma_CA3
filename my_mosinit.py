@@ -47,7 +47,7 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=10 #back to 3
+    inittime=1 #back to 3
     ltptime=0
     resttime=0
     measuretime=0.#should be fine ca
@@ -72,7 +72,7 @@ if True:
         #Run.pwwT2=1
         #Run.pwwT3=1.5
         Run.pwwext=1
-        Run.pwwrec=38       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=37       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pwwsom=1
         #Run.pww2ext=10
         #Run.pww3rec=1
