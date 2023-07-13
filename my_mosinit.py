@@ -8,10 +8,12 @@
 solo=True
 
 ##############################################################################################
-stimdur=150 
-stepsize=.05 #stepsize of stimulus amplitudes
+stimdur=150 #150 
+stepsize=.6 #stepsize of stimulus amplitudes
 celltypes=["pyr","pyr","pyr","pyr","pyr","bas","olm"]
 comps=["soma","Adend1","Adend2","Adend3","Bdend","soma","soma"]
+celltypes=["olm","pyr"]
+comps=["soma","Adend3"]
 if __name__ == "__main__":
     import os
     import string
@@ -113,8 +115,8 @@ if __name__ == "__main__":
     plt.style.use("seaborn-darkgrid")
     import numpy as np
     if solo:
-        stimamp=20.
-        celltype="olm"
+        stimamp=.1
+        celltype="pyr"
         comp="soma"
     
     else: #if simulation
@@ -126,7 +128,13 @@ if __name__ == "__main__":
     
     net.celltype=celltype
     
-    stim = h.IClamp(getattr(getattr(net,celltype).cell[0],comp)(.5)) #PAY ATTENTION TO WHERE IN THE SEGMENT YOU INJECT (.5??)
+    if comp=="Bdend":
+        injloc=1
+    else:
+        injloc=0.5
+
+    stim = h.IClamp(getattr(getattr(net,celltype).cell[0],comp)(injloc)) 
+
     stim.delay = 50
     stim.dur = stimdur
     h.tstop = stim.dur+stim.delay+50
