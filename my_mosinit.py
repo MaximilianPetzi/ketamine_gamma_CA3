@@ -47,7 +47,7 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=1 #back to 3
+    inittime=2 #back to 3
     ltptime=0
     resttime=0
     measuretime=0.#should be fine ca
@@ -72,12 +72,12 @@ if True:
         #Run.pwwT2=1
         #Run.pwwT3=1.5
         Run.pwwext=1
-        Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwrec=.1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pwwsom=1
         #Run.pww2ext=10
         #Run.pww3rec=1
         #Run.doSpike(n1=0,n2=400,spikeT=.5)
-        Run.n2=8000
+        Run.n2=float("inf")
     else:
         print("It's a simulation!")
         myterminal=open('myterminal.txt', 'a')
@@ -142,7 +142,7 @@ if True:
 
 
     from matplotlib import pyplot as plt
-    plt.style.use("seaborn-darkgrid")
+    plt.style.use("seaborn-whitegrid")
     import numpy as np
 
     class A:#methods that can be used after net is run. some may be used internally too. 
@@ -157,14 +157,41 @@ if True:
             if plot:plt.plot(voltage_trace);plt.show()
             return voltage_trace
         
-        def volt(self,pop=net.pyr,comp="soma",plot=False,i=0):#trace of population average membrane potential at specific compartment. not sure if useful, but hey
+        #instructions for creating the 3 delay-voltage traces into one plot:
+        #with normal settings (taufac=1,con=Bdend), krec=.1, n2=float("inf"), spikes to AMPARs (in def doSpike)
+        # run sim and then a.volt(plot=True,plotstart=17900,plotend=18300,timeshift=10,savename="normal")
+        #then, with taufac=10 (change Loc in geom at the bottom), 
+        # run sim and then a.volt(plot=True,plotstart=17900,plotend=18300,timeshift=10,savename="taufac_8")
+        #then, with taufac=.2, and BdendAMPA set to soma (also in geom), 
+        # run sim and then a.volt(plot=True,plotstart=17900,plotend=18300,timeshift=10,savename="taufac_0-2_soma")
+        #(continue below)
+        def volt(self,pop=net.pyr,comp="soma",plot=False,i=0, plotstart=0, plotend=-1, timeshift=0, savename="normal"):#trace of population average membrane potential at specific compartment. not sure if useful, but hey
             #returns voltage trace to plot with matplotlib
             volts = h.Vector(pop.cell[i].soma_volt.size())
             volts.add(getattr(pop.cell[i],comp+"_volt"))
             voltage_trace=numpy.array(volts.to_python())
-            if plot:plt.plot(voltage_trace);plt.show()
+            if plot:
+                voltage_trace=voltage_trace[plotstart:plotend]
+                t_axis=np.arange(len(voltage_trace))/10.-timeshift
+                np.save("recfolder/voltage_"+savename,[t_axis,voltage_trace])
+                plt.plot(t_axis,voltage_trace,color="black")
+                plt.xlabel("time [ms]")
+                plt.ylabel("voltage [mV]")
+                plt.show()
             return voltage_trace
-        
+        #(continue here:)
+        def tvp(self):
+            [ta,va]=np.load("recfolder/voltage_normal.npy")    
+            [tb,vb]=np.load("recfolder/voltage_taufac_8.npy")   
+            [tc,vc]=np.load("recfolder/voltage_taufac_0-2_soma.npy") 
+            plt.plot(ta,va,"k--",linewidth=.8,label="1")
+            plt.plot(tb,vb,"k:",markersize=.4,label="2")
+            plt.plot(tc,vc,"k",markersize=.4,label="3")
+            plt.xlabel("time [ms]")
+            plt.ylabel("voltage [mV]")
+            plt.legend()
+            plt.show()
+
         def volts(self,pop=net.pyr,comp="soma",i1=0,i2=7,linewidth=.5,offset=20):
             #plots a bunch of voltage traces at once, from index i1 to i2
             for i in range(i1,i2):

@@ -67,7 +67,7 @@ kT=100000000
 
 def doSpike():
 	n1=0
-	spikeT=500
+	spikeT=1800
 	con="pyr_pyr_AM" #send spikes to netcons n1 to n2 (but idk if they are ordered)
 	print "watch out! SPIKES!"
 	n=0
