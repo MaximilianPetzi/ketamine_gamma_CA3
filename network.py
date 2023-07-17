@@ -348,12 +348,14 @@ class Network:#change seed, theseed
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
 		#print("PYR -> X , NMDA")
-		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100 ##############
+		Bgain=1
+		PtoBgain=1
+		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, PtoBgain*1.15*1.2e-3, 100)#conv nr 100 ##############
 		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)#conv nr 10
 		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
 	
 		#print("PYR -> X , AMPA")
-		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100 #################
+		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, PtoBgain*0.3*1.2e-3,  100)#conv nr 100 #################
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
 		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
 		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
@@ -362,7 +364,7 @@ class Network:#change seed, theseed
 		#print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)
-		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#60
+		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, Bgain* 3  *  1.5*1.0e-3, 60)#60
 		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#60 
 
 		#print("OLM -> PYR , GABA")
@@ -579,7 +581,7 @@ try:
 except:
 	myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 	if myparams[0]:#if name (mymosinit) ==main
-		net = Network(iseed=np.random.randint(10000),wseed=np.random.randint(10000))
+		net = Network(iseed=1121+0*np.random.randint(10000),wseed=1121+0*np.random.randint(10000))
 	else: 
 		import numpy as np
 		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]),MSGain=1,OLMGain=1)

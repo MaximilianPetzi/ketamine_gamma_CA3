@@ -76,15 +76,23 @@ def doLTPoff():
 	net.pyr.set_pf("Adend3AMPAf",0)
 
 def dopww():
-	print "pww changed at ", pwwT, " = ", h.t
+	# print "pww changed at ", pwwT, " = ", h.t
+	# net.bas.set_pww("somaAMPAf", pwwrec)
+	# net.bas.set_pww("somaNMDA", pwwext)
+	# net.pyr.set_pww("somaAMPAf", pwwsom)
+	
 	net.pyr.set_pww("BdendAMPA", pwwrec)
 	net.pyr.set_pww("Adend3AMPAf", pwwext)
 	net.pyr.set_pww("somaAMPAf", pwwsom)
 def dopww2():
 	print "pww changed at ", pwwT2, " = ", h.t
-	net.pyr.set_pww("BdendAMPA", pww2rec)
-	net.pyr.set_pww("Adend3AMPAf", pww2ext)
-	net.pyr.set_pww("somaAMPAf", pww2som)
+	# net.bas.set_pww("somaAMPAf", pww2rec)
+	# net.bas.set_pww("somaNMDA", pww2ext)
+	# net.pyr.set_pww("somaAMPAf", pww2som)
+	
+	net.pyr.set_pww("BdendAMPA", pwwrec)
+	net.pyr.set_pww("Adend3AMPAf", pwwext)
+	net.pyr.set_pww("somaAMPAf", pwwsom)
 def dopww3():
 	print "pww changed at ", pwwT3, " = ", h.t
 	net.pyr.set_pww("BdendAMPA", pww3rec)

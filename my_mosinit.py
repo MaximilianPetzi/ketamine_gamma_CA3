@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=2 #back to 3
+    inittime=0 #back to 3
     ltptime=0
     resttime=0
-    measuretime=0.#should be fine ca
+    measuretime=2#should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -58,7 +58,7 @@ if True:
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 80*second  #default 1e3
+    Run.washinT  = 1111*second  #default 1e3
     Run.washoutT = 90*second  #2e3
     #Run.kT=(inittime)*second  
     #Run.kout=2
@@ -68,14 +68,15 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=0
-        #Run.pwwT2=1
+        Run.pwwT=1.020
+        Run.pwwT2=1.040
         #Run.pwwT3=1.5
-        Run.pwwext=0
-        Run.pwwrec=1      #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwext=1                
+        Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
         #Run.pwwsom=1
         #Run.pww2ext=10
-        #Run.pww3rec=1
+        #Run.pww2ext=1
+        #Run.pww2rec=1  
     else:
         print("It's a simulation!")
         myterminal=open('myterminal.txt', 'a')
