@@ -16,7 +16,7 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 
-Car=[0,3,6,9,12,20,30,50]
+Car=[0,3,6,9,12,15,20,40,80,160,320]
 Ear=[1,3,8,30] #Taufacs
 nC=len(Car)
 nE=len(Ear)
