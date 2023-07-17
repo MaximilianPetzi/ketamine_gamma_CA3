@@ -54,11 +54,19 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
 
     for i in range(sh[3]):
         for j in range(sh[2]):
-            ax[i,j].plot(Caro,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
-            for k in range(sh[0]):
-                ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
+            ax[i,j].plot(Caro,da[:,j,i],'-o', color="black", alpha=0.5, linewidth=1, markersize=4)
+            #for k in range(sh[0]):
+            #    ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
+            ax[i,j].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
             if i==0:
                 ax[i,j].set_yscale('log')
+                ax[i,j].set_ylim([1,300])
+            if i==1:
+                ax[i,j].set_ylim([-0.1,4])
+            if i==2:
+                ax[i,j].set_yscale('log')
+                ax[i,j].set_ylim([0.0001,1.0])
+            ax[i,j].set_xscale('log')
     #fig.suptitle("influence of applying different factors to tau_2 at P-P AMPARs")
     plt.show()        
 
