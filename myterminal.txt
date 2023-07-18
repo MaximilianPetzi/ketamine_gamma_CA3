@@ -5990,3 +5990,31 @@ I seedavg.py: ______________new simulation___________________________________
 ('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.1835, 13.712220712932382)
 [0 31 11 0 0]
 ('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.476375000000001, 14.828154947789667)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.31, 0.6709626116833188)
+[0 0 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.485, 0.586914573163267)
+[0 0 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.73, 1.0555844368332727)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.27625, 0.4756226186695341)
+[0 1 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.365, 1.3446445180221773)
+[0 1 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.6275, 1.6901578792373873)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.24625, 2.3739725968641894)
+[0 0 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.345625, 3.0293746087229034)
+[0 0 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.64375, 3.916764401268688)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.27125, 1.60786585440158)
+[0 1 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.339375, 3.15476429990382)
+[0 1 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.640625, 4.076017010888718)

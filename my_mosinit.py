@@ -68,9 +68,7 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=1.020
-        Run.pwwT2=1.040
-        #Run.pwwT3=1.5
+        Run.pwwT=0
         Run.pwwext=1                
         Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
         #Run.pwwsom=1
@@ -507,6 +505,34 @@ if True:
             results=varmeanISI,meanvarISI,varmeanFREQ,meanvarFREQ
             return results[3]
 
+        def binvolts(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #puts voltages of neurons in bins, returns matrix, for synch
+            bar=np.zeros((len(pop.cell),int(len(a.volt(pop=pop,comp=comp,plot=False,i=0)[int(10000.0*t1):int(10000.0*t2)])/binsize)))
+            for i in range(len(net.pyr.cell)):#over all 800 pyr cells
+                volt=a.volt(i=i)
+                volt=volt[int(10000.0*t1):int(10000.0*t2)]
+                for j in range(np.shape(bar)[1]):
+                    bar[i,j]=np.mean(volt[binsize*j:(j+1)*binsize])
+            return bar
+        
+        def synch(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            bar=a.binvolts(pop=pop,comp=comp,binsize=binsize,t1=t1,t2=t2)
+            squaredsynch=np.var(np.mean(bar,axis=0))/np.mean(np.var(bar,axis=1))
+            synch=squaredsynch**.5
+            return synch
+        
+        def synchcurve(self,plot=False,bs1=10,bs2=50,pop=net.pyr,comp="soma",t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            xar=[5,10,20,40] #if you change that, change also the columns saved into dataframe in baronkenny part below
+            Nsteps=len(xar)
+            yar=np.ones(Nsteps)
+            for i in range(Nsteps):
+                yar[i]=a.synch(binsize=int(xar[i]),pop=pop,comp=comp,t1=t1,t2=t2)
+            if plot==True:
+                plt.plot(xar,yar,"b.")
+                plt.xlabel(r"bin size (in $10^{-4}$s)")
+                plt.ylabel("Synchrony")
+                plt.show()
+            return xar,yar
+
 
     a=A()#creates analysis instance
     import time
@@ -616,13 +642,18 @@ if True:
             kext_col=np.ones(len(time_col))*Run.pwwext
             nTE_col=np.ones(len(time_col))*float(r["nTE_XY"])
             pval_col=np.ones(len(time_col))*float(r["p_value_XY"])
+            synchx,synchy=a.synchcurve()        
+            synch0_col=np.ones(len(time_col))*synchy[0]     #gotta change that every time you change bins
+            synch1_col=np.ones(len(time_col))*synchy[1]
+            synch2_col=np.ones(len(time_col))*synchy[2]
+            synch3_col=np.ones(len(time_col))*synchy[3]
             print("AA",net.MSGain)
             msgain_col=np.ones(len(time_col))*float(net.OLMGain)
 
             brasterpower_col=a.trace(a.rasterpower,pop=net.bas)[1]
             if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
                 run_col=np.ones(len(time_col))*1
-                mydf=pd.DataFrame({"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
+                mydf=pd.DataFrame({"synch0":synch0_col,"synch1":synch1_col,"synch2":synch2_col,"synch3":synch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 mydf.to_csv("recfolder/barondata",index=False)
                 print("saved first dataframe:")
                 print(mydf)
