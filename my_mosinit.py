@@ -1,6 +1,6 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
+multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=False
 if True: #imports:
     import numpy as np
@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=3 #back to 3
+    inittime=0 #back to 3
     ltptime=0
     resttime=0
-    measuretime=4. #should be fine ca
+    measuretime=2. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -68,12 +68,15 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=0.
-        #Run.pwwT2=6
-        #Run.pwwT3=8
-        Run.pwwext=1.
-        Run.pwwsom=1.
-        Run.pwwrec=40.       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
+        Run.pwwT=0
+        ##Run.pwwT2=1000
+        ##Run.pwwT3=2000
+        Run.pwwext=1
+        ##Run.pww2ext=5
+        ##Run.pww3ext=10
+
+        Run.pwwsom=1
+        Run.pwwrec=1       #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always
         #Run.pww2rec=1
         #Run.pww3rec=1
     else:
@@ -481,7 +484,35 @@ if True:
             #return meanISIs,varISIs,meanFREQs,varFREQs
             results=varmeanISI,meanvarISI,varmeanFREQ,meanvarFREQ
             return results[3]
-
+    
+    
+        def binvolts(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #puts voltages of neurons in bins, returns matrix, for synch
+            bar=np.zeros((len(pop.cell),int(len(a.volt(pop=pop,comp=comp,plot=False,i=0)[int(10000.0*t1):int(10000.0*t2)])/binsize)))
+            for i in range(len(net.pyr.cell)):#over all 800 pyr cells
+                volt=a.volt(i=i)
+                volt=volt[int(10000.0*t1):int(10000.0*t2)]
+                for j in range(np.shape(bar)[1]):
+                    bar[i,j]=np.mean(volt[binsize*j:(j+1)*binsize])
+            return bar
+        
+        def synch(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            bar=a.binvolts(pop=pop,comp=comp,binsize=binsize,t1=t1,t2=t2)
+            squaredsynch=np.var(np.mean(bar,axis=0))/np.mean(np.var(bar,axis=1))
+            synch=squaredsynch**.5
+            return synch
+        
+        def synchcurve(self,plot=False,bs1=10,bs2=50,pop=net.pyr,comp="soma",t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            Nsteps=5
+            xar=np.linspace(bs1,bs2,Nsteps)
+            yar=np.ones(Nsteps)
+            for i in range(Nsteps):
+                yar[i]=a.synch(binsize=int(xar[i]),pop=pop,comp=comp,t1=t1,t2=t2)
+            if plot==True:
+                plt.plot(xar,yar,"b.")
+                plt.xlabel(r"bin size (in $10^{-4}$s)")
+                plt.ylabel("Synchrony")
+                plt.show()
+            return xar,yar
 
     a=A()#creates analysis instance
     import time
