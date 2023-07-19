@@ -249,7 +249,7 @@ class PyrAdr(Cell):
 		global Location
 		global Taufac
 		connection=self.Bdend 
-		if Location<0:connection=self.soma
+		if Location<0:connection=self.soma #this actually happens, so soma is targeted
 		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma
 		
 		#Bdend AMPA is Bdend not soma
