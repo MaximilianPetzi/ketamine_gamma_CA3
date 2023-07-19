@@ -69,10 +69,12 @@ if True:
     if myparams[0]:
         print("It's real!")
         Run.pwwT=0
-        ##Run.pwwT2=1000
+        #Run.pwwT2=398
         ##Run.pwwT3=2000
-        Run.pwwext=1
-        ##Run.pww2ext=5
+        Run.pwwext=3
+        #Run.pww2ext=3
+        #Run.pww2rec=1
+        #Run.pww2som=1
         ##Run.pww3ext=10
 
         Run.pwwsom=1

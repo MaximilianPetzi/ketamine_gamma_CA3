@@ -80,11 +80,19 @@ def dopww():
 	net.pyr.set_pww("BdendAMPA", pwwrec)
 	net.pyr.set_pww("Adend3AMPAf", pwwext)
 	net.pyr.set_pww("somaAMPAf", pwwsom)
+
+	# net.bas.set_pww("somaAMPAf", pwwrec)
+	# net.pyr.set_pww("Adend3AMPAf", pwwext)
+	# net.bas.set_pww("somaNMDA", pwwsom)
 def dopww2():
 	print "pww changed at ", pwwT2, " = ", h.t
 	net.pyr.set_pww("BdendAMPA", pww2rec)
 	net.pyr.set_pww("Adend3AMPAf", pww2ext)
 	net.pyr.set_pww("somaAMPAf", pww2som)
+
+	#net.bas.set_pww("somaAMPAf", pww2rec)
+	#net.pyr.set_pww("Adend3AMPAf", pww2ext)
+	#net.bas.set_pww("somaNMDA", pww2som)
 def dopww3():
 	print "pww changed at ", pwwT3, " = ", h.t
 	net.pyr.set_pww("BdendAMPA", pww3rec)

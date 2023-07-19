@@ -133,7 +133,7 @@ class MSpec: # this class uses matlab to make a spectrogram
 		return h.vjnk
 
 class Network:#change seed, theseed
-	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=np.random.randint(1,10000),UseNetStim=True,wseed=np.random.randint(1,10000),scale=1.0,MSGain=1.0,SaveConn=False):
+	def __init__(self,noise=True,connections=True,DoMakeNoise=True,iseed=101+0*np.random.randint(1,10000),UseNetStim=True,wseed=101+0*np.random.randint(1,10000),scale=1.0,MSGain=1.0,SaveConn=False):
 		import math
 		print "Setting Cells"
 		self.pyr = Population(cell_type=PyrAdr,n=int(math.ceil(800*scale)), x= 0, y=0, z=0, dx=50, amp= 50e-3, dur=1e9, delay=2*h.dt)
