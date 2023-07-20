@@ -6018,3 +6018,444 @@ I seedavg.py: ______________new simulation___________________________________
 ('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.339375, 3.15476429990382)
 [0 1 2 0 0]
 ('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.640625, 4.076017010888718)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.271875, 1.548795976583307)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.3475, 2.8133145831358792)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.34625, 1.7446739905480717)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.3775, 2.3905361412973347)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.345625, 0.8037192978546125)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.379375, 1.6185941223536133)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.3, 2.6760680486767776)
+[0 0 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 2, 1, '\nI measured freq/gamma=', 2.32875, 3.1619964559468254)
+[0 0 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.680625, 4.349488584948309)
+[0 0 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.228125, 5.021661088257939)
+[0 0 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.05125, 7.502131595536975)
+[0 0 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 6.32875, 9.460849942648323)
+[0 0 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.424375, 10.714229983316278)
+[0 0 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.66, 13.53867570148218)
+[0 0 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.5025, 13.734376112233573)
+[0 0 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.286875, 13.324572983971255)
+[0 0 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.66875, 13.590005963960893)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.27625, 2.4725016696360904)
+[0 0 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.44875, 5.83990260395917)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.268125, 1.7349874675986936)
+[0 1 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.945625, 6.222375426034496)
+
+I seedavg.py: ______________new simulation___________________________________
+[0 0 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.267678571428571, 3.0973492099766022)
+[0 0 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.5517857142857143, 6.549943818941995)
+[0 0 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.6083928571428565, 4.4870421264094364)
+[0 0 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.9278571428571434, 5.442251405366552)
+[0 0 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.901428571428571, 8.065670253719185)
+[0 0 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.93625, 9.663562074120152)
+[0 0 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.226964285714286, 10.621856733414926)
+[0 0 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.868214285714285, 13.289876152742657)
+[0 0 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.364464285714286, 13.234900405415535)
+[0 0 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.4991071428571425, 14.635770661979137)
+[0 0 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.248214285714287, 14.016450455667647)
+[0 0 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.542321428571429, 16.16889420136131)
+[0 1 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.288928571428572, 2.473015303682813)
+[0 1 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.325, 6.118203653271025)
+[0 1 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5692857142857144, 4.19220913566205)
+[0 1 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.083928571428572, 5.548873471515749)
+[0 1 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.4541071428571435, 7.585940806792785)
+[0 1 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.941428571428571, 9.590398856791982)
+[0 1 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.242321428571429, 10.732265579613413)
+[0 1 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.868750000000001, 11.623268753122094)
+[0 1 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.08, 13.052284222122728)
+[0 1 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.327857142857144, 13.8719746958377)
+[0 1 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.126785714285714, 13.872587403878057)
+[0 1 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.39625, 14.183312510701908)
+[0 2 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2685714285714282, 2.6734254569773612)
+[0 2 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.454821428571429, 6.555704824854366)
+[0 2 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5830357142857143, 4.285890625858255)
+[0 2 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.9971428571428573, 5.424735832021066)
+[0 2 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 3.9760714285714287, 6.728627256857159)
+[0 2 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.945892857142858, 9.527064332032323)
+[0 2 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.242857142857142, 10.63313860857607)
+[0 2 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.890357142857144, 11.624693625323799)
+[0 2 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.209642857142858, 13.686781719153458)
+[0 2 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.383928571428571, 15.05430969499157)
+[0 2 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.197142857142857, 14.434048580620685)
+[0 2 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.474285714285713, 15.597726469082701)
+[0 3 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.25625, 3.492779030708958)
+[0 3 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.6001785714285712, 6.7526935845601335)
+[0 3 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5532142857142857, 4.399837979896782)
+[0 3 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.970178571428571, 5.900097950582009)
+[0 3 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.898035714285714, 8.411549665855233)
+[0 3 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.939821428571429, 9.58616178306934)
+[0 3 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.227857142857143, 10.605071611747269)
+[0 3 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.0825, 12.75661161411645)
+[0 3 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.2112500000000015, 13.143084551193674)
+[0 3 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.126428571428571, 13.950106148723735)
+[0 3 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.2717857142857145, 13.675260756535337)
+[0 3 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.3025, 15.176668088106698)
+[0 4 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2542857142857144, 3.146143665942267)
+[0 4 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.315892857142858, 6.53051476229668)
+[0 4 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5775, 3.9087151706235512)
+[0 4 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.05125, 5.774599670293288)
+[0 4 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.921785714285715, 8.17024406614406)
+[0 4 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.941071428571429, 9.64824430991227)
+[0 4 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.237678571428571, 10.673271539511195)
+[0 4 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.981071428571429, 12.424291562811925)
+[0 4 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 5.871071428571429, 12.166357127670127)
+[0 4 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.312142857142858, 13.87211199603924)
+[0 4 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.2751785714285715, 14.07270691685797)
+[0 4 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.056964285714286, 14.01356545884216)
+[0 5 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2592857142857143, 2.424676040277513)
+[0 5 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.5571428571428565, 6.139559613358778)
+[0 5 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.61375, 4.688545161760469)
+[0 5 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.9505357142857145, 5.5467780749237585)
+[0 5 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.914642857142857, 7.9568034176099625)
+[0 5 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.934642857142858, 9.60019574722729)
+[0 5 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.239821428571429, 10.582411758514919)
+[0 5 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.185, 12.459839117268423)
+[0 5 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.222321428571429, 12.962536384298339)
+[0 5 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 5.930357142857142, 13.194990451700491)
+[0 5 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.175892857142858, 14.55790374345323)
+[0 5 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.231785714285715, 14.225491539969585)
+[0 6 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2528571428571427, 2.474296899877363)
+[0 6 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.3807142857142853, 7.096478164661146)
+[0 6 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.556964285714286, 4.2258154317161605)
+[0 6 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.987857142857143, 5.932649225669964)
+[0 6 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.905178571428571, 7.995295701393668)
+[0 6 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.945178571428571, 9.693044383979759)
+[0 6 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.237678571428571, 10.732490584206204)
+[0 6 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.8307142857142855, 12.20941757718065)
+[0 6 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.210535714285715, 12.76278503287083)
+[0 6 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.279464285714286, 13.388911949781964)
+[0 6 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.268750000000001, 13.044297960263236)
+[0 6 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.1866071428571425, 13.571631189552663)
+[0 7 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2791071428571428, 3.0891795587701205)
+[0 7 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.390892857142857, 6.954249688703934)
+[0 7 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5692857142857144, 4.577163579797927)
+[0 7 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.945, 5.196965750882276)
+[0 7 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.025714285714286, 7.079243182904843)
+[0 7 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.9471428571428575, 9.657254353427124)
+[0 7 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.238571428571429, 10.697730768318987)
+[0 7 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.0532142857142865, 12.366900093093227)
+[0 7 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.1258928571428575, 12.900207898267373)
+[0 7 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.3758928571428575, 13.95097536675824)
+[0 7 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 5.976785714285714, 14.393615711126714)
+[0 7 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 5.95875, 13.639526041100444)
+[0 8 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2860714285714288, 3.127646952926344)
+[0 8 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.419821428571429, 6.961415955797645)
+[0 8 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.529642857142857, 4.3591459157507115)
+[0 8 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.017142857142858, 5.420049260288436)
+[0 8 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.9296428571428565, 8.097515950769322)
+[0 8 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.947321428571429, 9.727305879923621)
+[0 8 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.241607142857142, 10.737686732979927)
+[0 8 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.793571428571429, 11.868912135091188)
+[0 8 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.008571428571429, 13.75856583906082)
+[0 8 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.087321428571427, 13.900523163893798)
+[0 8 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.40125, 15.337899254840554)
+[0 8 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.230357142857142, 14.462528929556886)
+[0 9 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.3094642857142857, 3.2169924304401074)
+[0 9 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.5994642857142853, 6.872068466115119)
+[0 9 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5675, 4.333989541363895)
+[0 9 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.0185714285714287, 5.830825935716788)
+[0 9 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.426428571428571, 7.610823874140961)
+[0 9 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.942678571428571, 9.66212433997639)
+[0 9 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.239285714285713, 10.68373104401396)
+[0 9 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.286071428571429, 12.81740462289081)
+[0 9 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 5.844464285714286, 11.679803232364572)
+[0 9 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.370178571428571, 13.407245845877677)
+[0 9 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.293035714285715, 13.545132615668013)
+[0 9 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.3707142857142856, 15.265654593366698)
+[0 10 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.26625, 3.116020833145367)
+[0 10 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.3007142857142857, 6.449078231524209)
+[0 10 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5826785714285716, 4.48093091632034)
+[0 10 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.0344642857142854, 5.3182622996485565)
+[0 10 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.714285714285714, 7.984700134690056)
+[0 10 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.947321428571429, 9.684720453659311)
+[0 10 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.228928571428571, 10.747708588460254)
+[0 10 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.013571428571429, 12.40437255392893)
+[0 10 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 5.946607142857142, 13.748504191702478)
+[0 10 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.306964285714286, 14.32932752687682)
+[0 10 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.163214285714287, 13.394291966017944)
+[0 10 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.390178571428571, 15.105772124084677)
+[0 11 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2408928571428572, 2.836192405369198)
+[0 11 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.4123214285714285, 6.601688610291114)
+[0 11 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.582321428571429, 4.718159585111487)
+[0 11 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.0007142857142863, 5.331227141983719)
+[0 11 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.929107142857142, 7.984190683785826)
+[0 11 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.9471428571428575, 9.676146828955034)
+[0 11 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.097321428571429, 10.658089575307427)
+[0 11 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.76875, 12.334323831287298)
+[0 11 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.265357142857144, 13.594499233961997)
+[0 11 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.071428571428571, 12.867278056785022)
+[0 11 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.25482142857143, 13.767584313556648)
+[0 11 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.476785714285714, 16.082269702917177)
+[0 12 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2744642857142856, 2.3988444642890365)
+[0 12 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.4242857142857144, 7.059260710343221)
+[0 12 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.555357142857143, 4.546621811160562)
+[0 12 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.9028571428571426, 5.542056552899306)
+[0 12 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.9035714285714285, 8.39784900167634)
+[0 12 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.951071428571429, 9.670578015814993)
+[0 12 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.127142857142858, 10.667027420673154)
+[0 12 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.04875, 11.764072664480372)
+[0 12 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.317857142857142, 14.085044496699213)
+[0 12 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.3225, 13.781850344994819)
+[0 12 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.3794642857142865, 15.567176458223594)
+[0 12 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.463214285714286, 15.768094176132497)
+[0 13 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.2932142857142854, 3.0175709817194125)
+[0 13 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.3642857142857143, 6.515719401368955)
+[0 13 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.5994642857142853, 4.650379656876748)
+[0 13 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 2.9526785714285713, 5.58589667145429)
+[0 13 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.919107142857143, 8.014290478224117)
+[0 13 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.948928571428571, 9.698782121566605)
+[0 13 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.238928571428571, 10.660690641776526)
+[0 13 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 5.8846428571428575, 12.11317329845107)
+[0 13 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.26125, 13.767758232612556)
+[0 13 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.274285714285714, 13.298226465313029)
+[0 13 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.112321428571429, 14.405981964161189)
+[0 13 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.509107142857142, 15.270133689299005)
+[0 14 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.290892857142857, 2.623053132952803)
+[0 14 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.4969642857142857, 6.396852691260386)
+[0 14 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.566607142857143, 4.3032504639637335)
+[0 14 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.02375, 5.770164170810463)
+[0 14 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.917321428571429, 8.366522895013969)
+[0 14 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.934464285714285, 9.63887257949631)
+[0 14 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.229821428571429, 10.683075893283142)
+[0 14 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.1707142857142845, 12.284777285788486)
+[0 14 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.418392857142857, 14.404662468507833)
+[0 14 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.293035714285713, 13.1213669256302)
+[0 14 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.2351785714285715, 13.867089639831915)
+[0 14 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.378035714285716, 15.326275344232211)
+[0 15 0 0 0]
+('at ', 0, 0, 'and ext/rec=', 1, 1, '\nI measured freq/gamma=', 2.24875, 3.10018468283677)
+[0 15 1 0 0]
+('at ', 1, 0, 'and ext/rec=', 10, 1, '\nI measured freq/gamma=', 3.353392857142857, 6.506728403978842)
+[0 15 2 0 0]
+('at ', 2, 0, 'and ext/rec=', 4, 1, '\nI measured freq/gamma=', 2.591607142857143, 4.134066936250512)
+[0 15 3 0 0]
+('at ', 3, 0, 'and ext/rec=', 8, 1, '\nI measured freq/gamma=', 3.079821428571429, 5.911323507815226)
+[0 15 4 0 0]
+('at ', 4, 0, 'and ext/rec=', 12, 1, '\nI measured freq/gamma=', 4.360892857142857, 8.138751800009064)
+[0 15 5 0 0]
+('at ', 5, 0, 'and ext/rec=', 16, 1, '\nI measured freq/gamma=', 5.945714285714287, 9.56506902408938)
+[0 15 6 0 0]
+('at ', 6, 0, 'and ext/rec=', 20, 1, '\nI measured freq/gamma=', 6.228928571428571, 10.674583847648519)
+[0 15 7 0 0]
+('at ', 7, 0, 'and ext/rec=', 24, 1, '\nI measured freq/gamma=', 6.217142857142858, 12.72946187489389)
+[0 15 8 0 0]
+('at ', 8, 0, 'and ext/rec=', 28, 1, '\nI measured freq/gamma=', 6.240892857142858, 13.41348216058436)
+[0 15 9 0 0]
+('at ', 9, 0, 'and ext/rec=', 32, 1, '\nI measured freq/gamma=', 6.267857142857142, 13.51282984690433)
+[0 15 10 0 0]
+('at ', 10, 0, 'and ext/rec=', 36, 1, '\nI measured freq/gamma=', 6.060535714285713, 13.707469008651977)
+[0 15 11 0 0]
+('at ', 11, 0, 'and ext/rec=', 40, 1, '\nI measured freq/gamma=', 6.394464285714285, 15.070583377085953)

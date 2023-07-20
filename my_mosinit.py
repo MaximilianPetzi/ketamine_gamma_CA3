@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=0 #back to 3
+    inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=2#should be fine ca
+    measuretime=7#should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -59,7 +59,7 @@ if True:
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
     Run.washinT  = 1111*second  #default 1e3
-    Run.washoutT = 90*second  #2e3
+    Run.washoutT = 1111*second  #2e3
     #Run.kT=(inittime)*second  
     #Run.kout=2
     #Run.LTPonT=(inittime)*second  
@@ -507,7 +507,7 @@ if True:
 
         def binvolts(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #puts voltages of neurons in bins, returns matrix, for synch
             bar=np.zeros((len(pop.cell),int(len(a.volt(pop=pop,comp=comp,plot=False,i=0)[int(10000.0*t1):int(10000.0*t2)])/binsize)))
-            for i in range(len(net.pyr.cell)):#over all 800 pyr cells
+            for i in range(len(pop.cell)):#over all 800 pyr cells
                 volt=a.volt(i=i)
                 volt=volt[int(10000.0*t1):int(10000.0*t2)]
                 for j in range(np.shape(bar)[1]):
@@ -520,7 +520,7 @@ if True:
             synch=squaredsynch**.5
             return synch
         
-        def synchcurve(self,plot=False,bs1=10,bs2=50,pop=net.pyr,comp="soma",t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+        def synchcurve(self,plot=False,pop=net.pyr,comp="soma",t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
             xar=[5,10,20,40] #if you change that, change also the columns saved into dataframe in baronkenny part below
             Nsteps=len(xar)
             yar=np.ones(Nsteps)
@@ -642,28 +642,34 @@ if True:
             kext_col=np.ones(len(time_col))*Run.pwwext
             nTE_col=np.ones(len(time_col))*float(r["nTE_XY"])
             pval_col=np.ones(len(time_col))*float(r["p_value_XY"])
-            synchx,synchy=a.synchcurve()        
-            synch0_col=np.ones(len(time_col))*synchy[0]     #gotta change that every time you change bins
-            synch1_col=np.ones(len(time_col))*synchy[1]
-            synch2_col=np.ones(len(time_col))*synchy[2]
-            synch3_col=np.ones(len(time_col))*synchy[3]
-            print("AA",net.MSGain)
+
+            psynchx,psynchy=a.synchcurve(pop=net.pyr)
+            psynch0_col=np.ones(len(time_col))*psynchy[0]     #gotta change that every time you change bins
+            psynch1_col=np.ones(len(time_col))*psynchy[1]
+            psynch2_col=np.ones(len(time_col))*psynchy[2]
+            psynch3_col=np.ones(len(time_col))*psynchy[3]
+
+            bsynchx,bsynchy=a.synchcurve(pop=net.bas)
+            bsynch0_col=np.ones(len(time_col))*bsynchy[0]     #gotta change that every time you change bins
+            bsynch1_col=np.ones(len(time_col))*bsynchy[1]
+            bsynch2_col=np.ones(len(time_col))*bsynchy[2]
+            bsynch3_col=np.ones(len(time_col))*bsynchy[3]
             msgain_col=np.ones(len(time_col))*float(net.OLMGain)
 
             brasterpower_col=a.trace(a.rasterpower,pop=net.bas)[1]
             if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
                 run_col=np.ones(len(time_col))*1
-                mydf=pd.DataFrame({"synch0":synch0_col,"synch1":synch1_col,"synch2":synch2_col,"synch3":synch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
+                mydf=pd.DataFrame({"bsynch0":bsynch0_col,"bsynch1":bsynch1_col,"bsynch2":bsynch2_col,"bsynch3":bsynch3_col,"psynch0":psynch0_col,"psynch1":psynch1_col,"psynch2":psynch2_col,"psynch3":psynch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 mydf.to_csv("recfolder/barondata",index=False)
                 print("saved first dataframe:")
                 print(mydf)
             else: #consecutive iterations append data
                 prevdf=pd.read_csv("recfolder/barondata")
                 run_col=np.ones(len(time_col))*(prevdf["run"].iloc[-1]+1)
-                mydf=pd.DataFrame({"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
-                
+                mydf=pd.DataFrame({"bsynch0":bsynch0_col,"bsynch1":bsynch1_col,"bsynch2":bsynch2_col,"bsynch3":bsynch3_col,"psynch0":psynch0_col,"psynch1":psynch1_col,"psynch2":psynch2_col,"psynch3":psynch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 newdf=prevdf.append(mydf, ignore_index=True)
                 newdf.to_csv("recfolder/barondata",index=False)
+                print(newdf)
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)
