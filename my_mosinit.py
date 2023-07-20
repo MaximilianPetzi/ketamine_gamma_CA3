@@ -85,12 +85,12 @@ if True:
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
             if myparams[5+5]==1:
-                Run.pwwrec=1#myparams[5+3] ###change back for kext krec sim
-                Run.pwwext=myparams[5+3]
+                Run.pwwrec=myparams[5+3] ###change back for kext krec sim
+                Run.pwwext=1#myparams[5+3]
                 pass
                 
             if myparams[5+5]==2: #if E=2: change ext instead of rec
-                Run.pwwext=myparams[5+3]
+                Run.pwwext=1#myparams[5+3]
                 Run.pwwrec=1 
             #Run.pwwsom=myparams[5+4]  
             pass
