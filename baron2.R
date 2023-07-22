@@ -22,11 +22,11 @@ vardata=aggregate(.~kext,data=data,FUN=var)
 #data=filter(data, kext == 1)
 #data=filter(data, run != 1) #because it is measured twice
 
-plot(data$kext,data$gamma,  col=factor(data$kext))
+plot(data$krec,data$gamma,  col=factor(data$kext))
 #plot(data$gamma,data$asynch)
-#par(mfrow=c(1,2)) 
-#plot(data$kext,data$psynch0)
-#plot(data$kext,data$bsynch0)
+par(mfrow=c(1,2)) 
+plot(data$kext,data$gamma)
+plot(data$kext,data$bsynch0)
 #legend("topright", legend = unique(data$kext), col = unique(data$kext), pch = 1)
 
 data$gamma = scale(data$gamma)
