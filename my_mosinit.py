@@ -1,3 +1,4 @@
+#look at me!
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
