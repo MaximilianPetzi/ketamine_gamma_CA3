@@ -1,4 +1,4 @@
-#install.packages("mediation")
+install.packages("mediation")
 #install.packages("lme4")###
 #install.packages("sjPlot")
 #install.packages("purrr")
@@ -20,13 +20,15 @@ vardata=aggregate(.~kext,data=data,FUN=var)
 #________________kext:_______________#
 
 #data=filter(data, kext == 1)
-#data=filter(data, run != 1) #because it is measured twice
+data=filter(data, krec<40) #because it is measured twice
 
-plot(data$krec,data$gamma,  col=factor(data$kext))
+plot(data$rasterpower,data$psynch0,  col=factor(data$kext))
 #plot(data$gamma,data$asynch)
-par(mfrow=c(1,2)) 
-plot(data$kext,data$gamma)
-plot(data$kext,data$bsynch0)
+par(mfrow=c(1,1)) 
+plot(data$krec,data$gamma)
+plot(data$krec,data$psynch0)
+plot(data$krec,data$pfreq)
+plot(data$krec,data$rasterpower)
 #legend("topright", legend = unique(data$kext), col = unique(data$kext), pch = 1)
 
 data$gamma = scale(data$gamma)
@@ -43,20 +45,20 @@ data$bsynch1 = scale(data$bsynch1)
 data$bsynch2 = scale(data$bsynch2)
 data$bsynch3 = scale(data$bsynch3)
 
-firstmodel=lm(gamma~kext,data=data)
+firstmodel=lm(gamma~krec,data=data)
 summary(firstmodel)
 #model <- mediate(modelY = y ~ x, modelM = m ~ x, treat = "x", mediator = "asynch", boot = TRUE, sims = 1000,data=data)
 
-mediate_model=lm(psynch0~kext,data=data)
+mediate_model=lm(psynch0~krec,data=data)
 summary(mediate_model)
 
-full_model=lm(gamma~kext+psynch0,data=data)
+full_model=lm(gamma~krec+psynch0,data=data)
 summary(full_model)
 
 tab_model(firstmodel, mediate_model, full_model)
 
 
-results=mediate(mediate_model,full_model,treat="kext",mediator="psynch0")#,boot=TRUE,sims=500)
+results=mediate(mediate_model,full_model,treat="krec",mediator="psynch0")#,boot=TRUE,sims=500)
 summary(results)
 
 
