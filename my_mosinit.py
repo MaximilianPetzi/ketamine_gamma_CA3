@@ -1,6 +1,6 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
+multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=False
 if True: #imports:
     import numpy as np
@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=3 #back to 3
+    inittime=0 #back to 3
     ltptime=0
     resttime=0
-    measuretime=4. #should be fine ca
+    measuretime=2. #4
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second

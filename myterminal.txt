@@ -2156,3 +2156,5 @@ I am geom.py and Location is -0.5 and Taufac is 0.4
 
 I am geom.py and Location is -0.5 and Taufac is 1
 ('(my_mosinit.py) at', array([0, 15, 10, 0, 3], dtype=object), 'and ext/rec=', 1, 320.0, 'I have freq/gamma=', 51.1475, 28.93527760653753)
+(2.335625, 2.5304984656983027, 0.031032240595449106, 0    0.015555
+Name: nTE_XY, dtype: float64)

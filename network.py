@@ -279,6 +279,7 @@ class Network:#change seed, theseed
 		snq.verbose=1
 
 	def make_all_NetStims(self,simdur,rdmseed):
+		
 		print "Making NetStims"
 		# h.mcell_ran4_init(self.iseed)
 		self.nsl = [] #NetStim List
@@ -288,19 +289,24 @@ class Network:#change seed, theseed
 		# numpy.random.seed(rdmseed) # initialize random # generator
 		print "Making Noise"
 		print "to PYR"
+		
+		alpha_PP=1
+		alpha_rest=1
+		alpha=1
+		beta=1
 		rdtmp = rdmseed # starting sead value - incremented in make_NetStims
-		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp) 
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=0.05e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)#LTP happens here
-		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=0.012e-3, ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=6.5e-3,   ISI=100,time_limit=simdur, sead=rdtmp)#w=6.5e-3
+		rdtmp=self.make_NetStims(po=self.pyr, syn="somaAMPAf",   w=alpha*alpha_rest*0.05e-3,  ISI=beta*1,  time_limit=simdur, sead=rdtmp) 
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3AMPAf", w=alpha*alpha_rest*0.05e-3,  ISI=beta*1,  time_limit=simdur, sead=rdtmp)#LTP happens here
+		rdtmp=self.make_NetStims(po=self.pyr, syn="somaGABAf",   w=alpha*0.012e-3, ISI=beta*1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3GABAf", w=alpha*0.012e-3, ISI=beta*1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.pyr, syn="Adend3NMDA",  w=alpha_PP*alpha*6.5e-3,   ISI=beta*100,time_limit=simdur, sead=rdtmp)#w=6.5e-3
 		print "to BAS"			
-		rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.bas, syn="somaAMPAf",   w=alpha*0.02e-3,  ISI=beta*1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.bas, syn="somaGABAf",   w=alpha*0.2e-3,   ISI=beta*1,  time_limit=simdur, sead=rdtmp)
 		print "to OLM"
 		#rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=0.02e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=0.0625e-3,  ISI=1,  time_limit=simdur, sead=rdtmp)
-		rdtmp=self.make_NetStims(po=self.olm, syn="somaGABAf",   w=0.2e-3,   ISI=1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="somaAMPAf",   w=alpha*0.0625e-3,  ISI=beta*1,  time_limit=simdur, sead=rdtmp)
+		rdtmp=self.make_NetStims(po=self.olm, syn="somaGABAf",   w=alpha*0.2e-3,   ISI=beta*1,  time_limit=simdur, sead=rdtmp)
 		#setup medial septal inputs to OLM and BASKET cells, note that MSGain can be 0 == no effect
 		ns = h.NetStim()
 		ns.interval = 150
@@ -347,21 +353,23 @@ class Network:#change seed, theseed
 	def set_all_conns(self):
 		random.seed(self.wseed) # initialize random # generator for wiring
 		#print("PYR -> X , NMDA")
+		alpha_pyrpyr=1
+		alpha_basbas=1
 		self.pyr_bas_NM=self.set_connections(self.pyr,self.bas, "somaNMDA", 2, 1.15*1.2e-3, 100)#conv nr 100 ##############
 		self.pyr_olm_NM=self.set_connections(self.pyr,self.olm, "somaNMDA", 2, 1.0*0.7e-3, 10)#conv nr 10
-		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, 1*0.004e-3,  25)#conv nr 25
+		self.pyr_pyr_NM=self.set_connections(self.pyr,self.pyr, "BdendNMDA",2, alpha_pyrpyr*1*0.004e-3,  25)#conv nr 25
 
 		#print("PYR -> X , AMPA")
 		self.pyr_bas_AM=self.set_connections(self.pyr,self.bas, "somaAMPAf",2, 0.3*1.2e-3,  100)#conv nr 100 #################
 		self.pyr_olm_AM=self.set_connections(self.pyr,self.olm, "somaAMPAf",2, 0.3*1.2e-3,  10)#conv nr 10
-		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)#conv nr 25
+		self.pyr_pyr_AM=self.set_connections(self.pyr,self.pyr, "BdendAMPA",2, alpha_pyrpyr*0.5*0.04e-3, 25)#conv nr 25
 		#self.pyr_pyr_AM=self.set_ring_connections(self.pyr,self.pyr, "BdendAMPA",2, 0.5*0.04e-3, 25)
 		
 
 		#print("BAS -> X , GABA")
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 1.0e-3, 60)#orig 1
 		#self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 2  *  1.5*1.0e-3, 60)
-		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, 3  *  1.5*1.0e-3, 60)#60
+		self.bas_bas_GA=self.set_connections(self.bas,self.bas, "somaGABAf",2, alpha_basbas*3  *  1.5*1.0e-3, 60)#60
 		self.bas_pyr_GA=self.set_connections(self.bas,self.pyr, "somaGABAf",2, 2  *  2*0.18e-3, 50)#60 
 
 		#print("OLM -> PYR , GABA")

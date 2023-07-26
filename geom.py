@@ -4,7 +4,7 @@ from pyinit import *
 import numpy as np
 import sys
 myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
-
+gamma=1
 Taufac=1.0 #if real
 Location=-.5 #if real
 
@@ -128,8 +128,8 @@ class Bwb(Cell):
 		self.soma.insert('Kdrbwb')
 	   
 	def set_synapses(self):
-		self.somaAMPAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0, pf=0)
-		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80, pf=0)
+		self.somaAMPAf 	= Synapse(sect=self.soma, loc=0.5, tau1=gamma*0.05, tau2=gamma*5.3, e=0, pf=0)
+		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=gamma*0.07, tau2=gamma*9.1, e=-80, pf=0)
 		self.somaGABAss	= Synapse(sect=self.soma, loc=0.5, tau1=20,   tau2=40, e=-80, pf=0)#only for septal input
 		self.somaNMDA 	= SynapseNMDA(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		
@@ -166,8 +166,8 @@ class Ow(Cell):
 		self.soma.insert('KCaolmw')
 
 	def set_synapses(self):
-		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=0.07, tau2=9.1, e=-80, pf=0)
-		self.somaAMPAf 	= Synapse(    sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, e=0, pf=0)#here 1?
+		self.somaGABAf 	= Synapse(sect=self.soma, loc=0.5, tau1=gamma*0.07, tau2=gamma*9.1, e=-80, pf=0)
+		self.somaAMPAf 	= Synapse(    sect=self.soma, loc=0.5, tau1=gamma*0.05, tau2=gamma*5.3, e=0, pf=0)#here 1?
 		self.somaGABAss	= Synapse(    sect=self.soma, loc=0.5, tau1=20,	  tau2=40, e=-80, pf=0)#only for septal input
 		self.somaNMDA 	= SynapseNMDA(sect=self.soma, loc=0.5, tau1=0.05, tau2=5.3, tau1NMDA=15, tau2NMDA=150, r=1, e=0)
 		
@@ -253,14 +253,14 @@ class PyrAdr(Cell):
 		Location=abs(Location)				#change back. also change line 260 back to connection instead of self.soma
 		
 		#Bdend AMPA is Bdend not soma
-		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)#tau1=0.07, tau2=9.1
-		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=0) #this one maybe too
-		self.BdendAMPA   = Synapse(    sect=connection,  loc=Location, tau1=0.05, tau2=5.3*Taufac,e=0, 		pf=pf, pww=pww)
-		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
-		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, tau1=0.2,  tau2=20,e=-80, 	pf=0)
-		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5, tau1=0.07, tau2=9.1,e=-80, 	pf=0)
-		self.Adend3AMPAf = Synapseb(	   sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,e=0, 		pf=pf, pww=pww)#likely, LTP happens here
-		self.Adend3NMDA  = SynapseNMDA(sect=self.Adend3, loc=0.5, tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+		self.somaGABAf 	 = Synapse(    sect=self.soma,   loc=0.5, 		tau1=0.07, tau2=9.1,e=-80, 	pf=0)#tau1=0.07, tau2=9.1
+		self.somaAMPAf 	 = Synapse(    sect=self.soma,   loc=0.5, 		tau1=gamma*0.05, tau2=gamma*5.3,e=0, 		pf=0) #this one maybe too
+		self.BdendAMPA   = Synapse(    sect=connection,  loc=Location,	tau1=0.05, tau2=.3*Taufac,e=0, 		pf=pf, pww=pww)
+		self.BdendNMDA   = SynapseNMDA(sect=self.Bdend,  loc=1, 		tau1=0.05, tau2=5.3,tau1NMDA=15, tau2NMDA=150, r=1, e=0)
+		self.Adend2GABAs = Synapse(	   sect=self.Adend2, loc=0.5, 		tau1=0.2,  tau2=20,e=-80, 	pf=0)
+		self.Adend3GABAf = Synapse(	   sect=self.Adend3, loc=0.5,		tau1=gamma*0.07, tau2=gamma*9.1,e=-80, 	pf=0)
+		self.Adend3AMPAf = Synapseb(	   sect=self.Adend3, loc=0.5, 	tau1=gamma*0.05, tau2=gamma*5.3,e=0, 		pf=pf, pww=pww)#likely, LTP happens here
+		self.Adend3NMDA  = SynapseNMDA(sect=self.Adend3, loc=0.5, 		tau1=gamma*0.05, tau2=gamma*5.3,tau1NMDA=gamma*15, tau2NMDA=gamma*150, r=1, e=0)
 
 
 
