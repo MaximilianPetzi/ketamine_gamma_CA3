@@ -50,7 +50,7 @@ if True:
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=4. #should be fine ca
+    measuretime=7. #should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -80,9 +80,9 @@ if True:
         print("It's a simulation!")
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
-            Run.pwwrec=myparams[5+3]
-            #Run.pwwext=1
-            #Run.pwwsom=myparams[5+4]  
+            Run.pwwrec=1#myparams[5+3]
+            Run.pwwext=myparams[5+3]
+            Run.pwwsom=myparams[5+3]  
             pass
         else: #control trail
             pass #change nothing

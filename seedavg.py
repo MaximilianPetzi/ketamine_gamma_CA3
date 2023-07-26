@@ -16,8 +16,8 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 
-Car=[0,3,6,9,12,15,20,40,80,160,320]
-Ear=[1,3,8,30] #Taufacs
+Car=[1,2,4,7,10,15,20,25,30,35,40]
+Ear=[1] #Taufacs
 nC=len(Car)
 nE=len(Ear)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
