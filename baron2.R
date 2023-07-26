@@ -47,16 +47,16 @@ firstmodel=lm(gamma~kext,data=data)
 summary(firstmodel)
 #model <- mediate(modelY = y ~ x, modelM = m ~ x, treat = "x", mediator = "asynch", boot = TRUE, sims = 1000,data=data)
 
-mediate_model=lm(psynch0~kext,data=data)
+mediate_model=lm(bsynch0~kext,data=data)
 summary(mediate_model)
 
-full_model=lm(gamma~kext+psynch0,data=data)
+full_model=lm(gamma~kext+bsynch0,data=data)
 summary(full_model)
 
 tab_model(firstmodel, mediate_model, full_model)
 
 
-results=mediate(mediate_model,full_model,treat="kext",mediator="psynch0")#,boot=TRUE,sims=500)
+results=mediate(mediate_model,full_model,treat="kext",mediator="bsynch0")#,boot=TRUE,sims=500)
 summary(results)
 
 
