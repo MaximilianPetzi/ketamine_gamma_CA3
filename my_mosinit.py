@@ -47,10 +47,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=0 #back to 3
+    inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=2#should be fine ca
+    measuretime=10#should be fine ca
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -68,8 +68,8 @@ if True:
 
     if myparams[0]:
         print("It's real!")
-        Run.pwwT=1.020
-        Run.pwwT2=1.040
+        Run.pwwT=0
+        #Run.pwwT2=1.040
         #Run.pwwT3=1.5
         Run.pwwext=1                
         Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
