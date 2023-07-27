@@ -1,7 +1,7 @@
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
-baronkenny=True
+baronkenny=False
 if True: #imports:
     import numpy as np
     from PyCausality.TransferEntropy import TransferEntropy
@@ -50,7 +50,7 @@ if True:
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=7#should be fine ca
+    measuretime=4 #4 or 7
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -71,7 +71,7 @@ if True:
         Run.pwwT=0
         Run.pwwext=1                
         Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
-        #Run.pwwsom=1
+        Run.pwwsom=1
         #Run.pww2ext=10
         #Run.pww2ext=1
         #Run.pww2rec=1  
@@ -87,6 +87,7 @@ if True:
             if myparams[5+5]==1:
                 Run.pwwrec=1#myparams[5+3] ###change back for kext krec sim
                 Run.pwwext=myparams[5+3]
+                Run.pwwsom=myparams[5+3]
                 pass
                 
             if myparams[5+5]==2: #if E=2: change ext instead of rec
@@ -621,7 +622,9 @@ if True:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         else:
             r=a.te(pop1=net.bas,pop2=net.pyr)
-            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(pop=net.pyr),a.rasterpower(pop=net.bas),r["nTE_XY"],r] 
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),
+                a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(pop=net.pyr),a.rasterpower(pop=net.bas),r["nTE_XY"],
+                a.synch(pop=net.pyr),a.synch(pop=net.bas),r] 
             
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
