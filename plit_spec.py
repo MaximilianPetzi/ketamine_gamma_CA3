@@ -31,23 +31,33 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     d=dat2[0,:,:,0,:,:]
     sh=np.shape(d)
     da=np.average(d,axis=0)
-    
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
-    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
-    for nn in range(2):
-        ax[1,nn].set_xlabel('factor')
-    ax[0,0].set_ylabel('nTE (Bas-->Pyr)')
-    ax[1,0].set_ylabel('gamma power')
-
-    ax[0, 0].set_title('rec')
-    ax[0, 1].set_title('ext')
+    fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10))
+    for nn in range(sh[2]):
+        ax[2,nn].set_xlabel(r'$k_{rec}$')
+    ax[0,0].set_ylabel('frequency')
+    ax[1,0].set_ylabel(r'LFP $\gamma$')
+    ax[2,0].set_ylabel(r'raster $\gamma$')
+    for j in range(sh[2]):          
+        ax[0, j].set_title(str(5.3*Ear[j])+"ms")
+    ax[0,0].set_title(r'$\tau_2=$ '+str(5.3*Ear[0])+"ms")
 
     for i in range(sh[3]):
         for j in range(sh[2]):
-            ax[i,j].plot(Car,da[:,j,i],'-o', color="red", alpha=0.5, linewidth=1, markersize=4)
-            for k in range(sh[0]):
-                ax[i,j].scatter(Car,d[k,:,j,i],color="black",s=1)
-    plt.show()        
+            ax[i,j].plot(Caro,da[:,j,i],'-o', color="black", alpha=0.5, linewidth=1, markersize=4)
+            #for k in range(sh[0]):
+            #    ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
+            ax[i,j].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
+            if i==0:
+                ax[i,j].set_yscale('log')
+                ax[i,j].set_ylim([1,300])
+            if i==1:
+                ax[i,j].set_ylim([-0.1,4.5])
+            if i==2:
+                ax[i,j].set_yscale('log')
+                ax[i,j].set_ylim([0.00001,1.0])
+            #ax[i,j].set_xscale('log')
+    plt.show()
 
 freqandgamma()
 
