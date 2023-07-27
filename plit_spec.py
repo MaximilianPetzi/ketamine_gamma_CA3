@@ -51,6 +51,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     ax[0].set_ylabel('frequency')
     ax[1].set_ylabel(r'LFP $\gamma$')
     ax[2].set_ylabel(r'raster $\gamma$')
+    ax[3].set_ylabel(r'$\chi$')
     #for j in range(sh[2]):          
     #    ax[0].set_title(str(5.3*Ear[j])+"ms")
     #ax[0].set_title(r'$\tau_2=$ '+str(5.3*Ear[0])+"ms")
@@ -69,6 +70,11 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             if i==2:
                 ax[i].set_yscale('log')
                 ax[i].set_ylim([0.00001,1.0])
+            if i==3:
+                pass
+                #ax[i].set_yscale('log')
+                #ax[i].set_ylim([0.00001,1.0])
+
             #ax[i,j].set_xscale('log')
     plt.show()
 
