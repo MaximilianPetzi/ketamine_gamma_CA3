@@ -11,3 +11,6 @@ COPY . .
 RUN apt update
 RUN apt install build-essential -y
 RUN apt install vim -y
+RUN git config --global user.email maximilianpetzi@gmx.de
+RUN git config --global user.name MaximilianPetzi
+
