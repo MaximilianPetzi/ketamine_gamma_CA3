@@ -5,9 +5,15 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 
-Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
+nrows=3
+Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
+Caro=Car[:-3]
+Data=Data[:,:,:-3]
+
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
-DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],2
+DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
+
+
 Dat=np.ones(DatShape)*-1      
 Dat2=np.ones(DatShape2)*-1 
 print(np.shape(Dat2))
@@ -18,10 +24,14 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4:6] 
-                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["nTE_XY"]]  #theta and gamma power and potentially so much more!
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7]
+#[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
+                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
+
+
+
 imax=len(dat2[0,0])
 jmax=len(dat2[0,0,0])
 kmax=len(dat2[0,0,0,0])
@@ -138,5 +148,3 @@ if csvtrafo:
     df["rec"]=rec
     df["ext"]=ext
     df.to_csv('oldData.csv', index=True)
-
-print("heyho")

@@ -6,7 +6,7 @@
 withspec=False
 
 nA=1 #control or not
-nB=16 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=2 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
 nE=1#Loc or extinsteadofrec
@@ -21,7 +21,7 @@ stepsizeE=1.
 #Car=[0,1,2,6,11,16,21,26,31,36,36.5,37,37.5,38,38.5,39,39.5,40,41,42,43]
 #Car=[1,10,20,31,36,40]
 
-Car=[1,2,4,8,12,16,20,24,28,32,36,40]
+Car=[1,2]#,4,8,12,16,20,24,28,32,36,40]
 nC=len(Car)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
 
