@@ -8,7 +8,7 @@ import seaborn as sns
 import scipy.stats
 
 nrows=4
-Data=np.load("recfolder/oldData.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
 
@@ -26,7 +26,7 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][9] 
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][10] 
 #[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
@@ -59,17 +59,17 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     for i in range(sh[3]):
         for j in range(sh[2]):
             ax[i].plot(Caro,da[:,j,i],'-o', color="black", alpha=0.5, linewidth=1, markersize=4)
-            #for k in range(sh[0]):
-            #    ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
+            for k in range(sh[0]):
+                ax[i].scatter(Caro,d[k,:,j,i],color="black",s=1)
             ax[i].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
             if i==0:
                 ax[i].set_yscale('log')
                 ax[i].set_ylim([1,300])
             if i==1:
-                ax[i].set_ylim([-0.1,4.5])
+                ax[i].set_ylim([-0.1,20])
             if i==2:
                 ax[i].set_yscale('log')
-                ax[i].set_ylim([0.00001,1.0])
+                ax[i].set_ylim([0.00001,5])
             if i==3:
                 pass
                 #ax[i].set_yscale('log')

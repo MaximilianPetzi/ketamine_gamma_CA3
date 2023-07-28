@@ -50,7 +50,7 @@ if True:
     inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=7 #4 or 7
+    measuretime=4 #4 or 7
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -547,7 +547,7 @@ if True:
     #uncomment for multiplesims.py:
     
 
-    if myparams[0]: #if name==main
+    if myparams[0]:#and os.environ.get("mydisplay")) #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
         if False:
             plt.figure(1)
@@ -624,7 +624,7 @@ if True:
             r=a.te(pop1=net.bas,pop2=net.pyr)
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),
                 a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(pop=net.pyr),a.rasterpower(pop=net.bas),
-                a.synch(pop=net.pyr),a.synch(pop=net.bas),r["nTE_XY"],r] 
+                a.synch(pop=net.pyr),a.synch(pop=net.pyr,binsize=10),a.synch(pop=net.pyr,binsize=20),a.synch(pop=net.bas),r["nTE_XY"],r] 
             
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
