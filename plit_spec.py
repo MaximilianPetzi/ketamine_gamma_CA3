@@ -6,12 +6,11 @@ from matplotlib import pyplot as plt
 from seedavg import *
 import seaborn as sns
 import scipy.stats
-
 nrows=4
-Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data_soma.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
-
+print(Car,len(Car))
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
 

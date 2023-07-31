@@ -1,4 +1,5 @@
 import seedavg
+headless=False
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=True
@@ -47,10 +48,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=3 #back to 3
+    inittime=0 #back to 3
     ltptime=0
     resttime=0
-    measuretime=4 #4 or 7
+    measuretime=2 #4 or 7
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -138,6 +139,9 @@ if True:
     Run.mystuff = h.FInitializeHandler(1,myevent_eventcallingfunction) #(see run.py, myevent)
 
 
+    if headless:
+        import matplotlib as mpl
+        mpl.use('Agg')
 
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
@@ -169,7 +173,7 @@ if True:
                 plt.plot(offset*(i-i1)+np.clip(a.volt(pop=pop,comp=comp,plot=False,i=i),-110,-40),linewidth=linewidth) #add different number to each trace
             plt.show()
 
-        def raster(self,pop=net.pyr,maxtick=20,my_s=.5):
+        def raster(self,pop=net.pyr,maxtick=20,my_s=.5,headless=headless):
             spikets=pop.spiketimes()
             for i in range(len(spikets)):
                 if len(spikets)>0:  
@@ -179,12 +183,14 @@ if True:
             plt.ylabel("neuron index")
             plt.title("my rasterplot")
             ax = plt.gca()#gets current axis
-            
             ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
             # enable the horizontal grid
             plt.grid(axis='y', linestyle='-')
-
-            plt.show()
+            if not headless:
+                plt.show()
+            if headless:
+                fig = plt.gcf()#gets current figure
+                fig.savefig('recfolder/raster'+str(np.random.randint(100))+'.png') 
             return spikets #list of lists of spikes
     
         def count(self,pop=net.pyr,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,idx=None):
