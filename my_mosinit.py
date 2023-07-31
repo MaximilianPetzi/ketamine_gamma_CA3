@@ -1,5 +1,8 @@
-import seedavg
 headless=False
+if headless:
+        import matplotlib as mpl
+        mpl.use('Agg')
+import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=True
@@ -139,9 +142,6 @@ if True:
     Run.mystuff = h.FInitializeHandler(1,myevent_eventcallingfunction) #(see run.py, myevent)
 
 
-    if headless:
-        import matplotlib as mpl
-        mpl.use('Agg')
 
     from matplotlib import pyplot as plt
     plt.style.use("seaborn-darkgrid")
