@@ -175,21 +175,20 @@ if True:
 
         def raster(self,pop=net.pyr,maxtick=20,my_s=.5,headless=headless):
             spikets=pop.spiketimes()
+            fig, ax = plt.subplots()
             for i in range(len(spikets)):
                 if len(spikets)>0:  
                     idxar=np.ones(len(spikets[i]))*i
-                    plt.scatter(spikets[i],idxar,s=my_s,color="red")
-            plt.xlabel("time")
-            plt.ylabel("neuron index")
-            plt.title("my rasterplot")
-            ax = plt.gca()#gets current axis
+                    ax.scatter(spikets[i],idxar,s=my_s,color="red")
+            ax.xlabel("time")
+            ax.ylabel("neuron index")
+            ax.title("my rasterplot")
             ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
             # enable the horizontal grid
-            plt.grid(axis='y', linestyle='-')
+            ax.grid(axis='y', linestyle='-')
             if not headless:
-                plt.show()
+                ax.show()
             if headless:
-                fig = plt.gcf()#gets current figure
                 fig.savefig('recfolder/raster'+str(np.random.randint(100))+'.png') 
             return spikets #list of lists of spikes
     
