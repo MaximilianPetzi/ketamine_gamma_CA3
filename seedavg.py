@@ -17,8 +17,8 @@ stepsizeD=1.
 stepsizeE=1.
 
 #Car=[1,1.25,1.5,1.75,2.5,4,5.5,8,12,16,20,28,32,36,40] #kext soma+dend
-#Car=[1,2.5,4,5.5,8,12,16,20,28,32,36,40] #krec 
-Car=[1,1.25,1.5,1.75,2.5,4,5.5,8,12,20,32,40,60,100] #kext soma cpsylab2
+Car=[1,2.5,4,5.5,8,12,16,20,28,32,36,40] #krec 
+#Car=[1,1.25,1.5,1.75,2.5,4,5.5,8,12,20,32,40,60,100] #kext soma cpsylab2
 #Car=[1,1.25,1.5,1.75,2.5,4,5.5,8,12,20,28,36,40,60,100] #kext dend cpsylab4
 nC=len(Car)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well

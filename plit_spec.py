@@ -7,7 +7,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 nrows=4
-Data=np.load("recfolder/Data_soma.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data_rec.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
 print(Car,len(Car))
@@ -25,7 +25,7 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][10] 
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][13],Data[a,b,c,d,e][10] 
 #[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
@@ -49,7 +49,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
         ax[2].set_xlabel(r'$k_{rec}$')
     ax[0].set_ylabel('frequency')
     ax[1].set_ylabel(r'LFP $\gamma$')
-    ax[2].set_ylabel(r'raster $\gamma$')
+    ax[2].set_ylabel(r'$\chi$ (Basket)')#raster $\gamma$')
     ax[3].set_ylabel(r'$\chi$')
     #for j in range(sh[2]):          
     #    ax[0].set_title(str(5.3*Ear[j])+"ms")
@@ -67,8 +67,9 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             if i==1:
                 ax[i].set_ylim([-0.1,20])
             if i==2:
-                ax[i].set_yscale('log')
-                ax[i].set_ylim([0.00001,5])
+                pass
+                #ax[i].set_yscale('log')
+                #ax[i].set_ylim([0.00001,5])
             if i==3:
                 pass
                 #ax[i].set_yscale('log')

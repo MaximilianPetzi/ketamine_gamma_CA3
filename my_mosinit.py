@@ -1,4 +1,4 @@
-headless=False
+headless=True
 if headless:
         import matplotlib as mpl
         mpl.use('Agg')
@@ -51,10 +51,10 @@ if True:
         # experiment setup
         import run as Run
     
-    inittime=0 #back to 3
+    inittime=3 #back to 3
     ltptime=0
     resttime=0
-    measuretime=2 #4 or 7
+    measuretime=7 #4 or 7
     second=1000.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
@@ -180,14 +180,14 @@ if True:
                 if len(spikets)>0:  
                     idxar=np.ones(len(spikets[i]))*i
                     ax.scatter(spikets[i],idxar,s=my_s,color="red")
-            ax.xlabel("time")
-            ax.ylabel("neuron index")
-            ax.title("my rasterplot")
+            ax.set_xlabel("time")
+            ax.set_ylabel("neuron index")
+            ax.set_title("my rasterplot")
             ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
             # enable the horizontal grid
             ax.grid(axis='y', linestyle='-')
             if not headless:
-                ax.show()
+                plt.show()
             if headless:
                 fig.savefig('recfolder/raster'+str(np.random.randint(100))+'.png') 
             return spikets #list of lists of spikes
