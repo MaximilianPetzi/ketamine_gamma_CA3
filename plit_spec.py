@@ -7,7 +7,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 nrows=4
-Data=np.load("recfolder/Data_rec.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
 print(Car,len(Car))
@@ -25,7 +25,7 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][13],Data[a,b,c,d,e][10] 
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][12],Data[a,b,c,d,e][9] 
 #[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)

@@ -8,12 +8,12 @@ library(mediation)
 library(purrr)
 #warning: the nTE are not windowed, but just copied for each window
 #run for example with Rscript baron.R
-orig_data=read.csv("recfolder/barondata")
+orig_data=read.csv("recfolder/barondata_ext")
 data = orig_data
-View(data)
+#View(data)
 data=aggregate(.~ run, data=data, FUN=mean)
-#data=filter(data, krec < 35)
-#data=filter(data, kext < 21)
+
+data=filter(data, kext < 10)
 avgdata=aggregate(.~kext,data=data,FUN=mean)
 vardata=aggregate(.~kext,data=data,FUN=var)
 
@@ -22,7 +22,9 @@ vardata=aggregate(.~kext,data=data,FUN=var)
 #data=filter(data, kext == 1)
 #data=filter(data, run != 1) #because it is measured twice
 
-plot(data$kext,data$psynch,  col=factor(data$kext))
+#plot(data$kext,data$pfreq,  col=factor(data$kext))
+#plot(data$pfreq,data$gamma,  col=factor(data$kext))
+
 #plot(data$gamma,data$asynch)
 #par(mfrow=c(1,2)) 
 #plot(data$kext,data$psynch0)
@@ -42,27 +44,27 @@ data$bsynch0 = scale(data$bsynch0)
 data$bsynch1 = scale(data$bsynch1)
 data$bsynch2 = scale(data$bsynch2)
 data$bsynch3 = scale(data$bsynch3)
+data$pfreq = scale(data$pfreq)
+data$bfreq = scale(data$bfreq)
+
+mediator=data$pfreq
+
 
 firstmodel=lm(gamma~kext,data=data)
 summary(firstmodel)
 #model <- mediate(modelY = y ~ x, modelM = m ~ x, treat = "x", mediator = "asynch", boot = TRUE, sims = 1000,data=data)
 
-mediate_model=lm(bsynch0~kext,data=data)
+mediate_model=lm(mediator~kext,data=data)
 summary(mediate_model)
 
-full_model=lm(gamma~kext+bsynch0,data=data)
+full_model=lm(gamma~kext+mediator,data=data)
 summary(full_model)
 
 tab_model(firstmodel, mediate_model, full_model)
 
 
-results=mediate(mediate_model,full_model,treat="kext",mediator="bsynch0")#,boot=TRUE,sims=500)
+results=mediate(mediate_model,full_model,treat="kext",mediator="mediator")#,boot=TRUE,sims=500)
 summary(results)
-
-
-
-
-
 
 
 
