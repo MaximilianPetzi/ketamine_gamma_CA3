@@ -6,7 +6,7 @@
 withspec=False
 
 nA=1 #control or not
-nB=16 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
 
@@ -16,8 +16,8 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 
-Car=[0,3,6,9,12,15,20,40,80,160,320]
-Ear=[1,3,8,30] #Taufacs
+Car=[1,1.25,1.5,1.75,4,8,15,40,80]
+Ear=[0,5,10,15,20,25,30,35,40,45,60] #added delay times
 nC=len(Car)
 nE=len(Ear)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well

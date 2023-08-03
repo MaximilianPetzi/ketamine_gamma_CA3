@@ -9,7 +9,7 @@ Taufac=1.0
 Location=1
 
 if not myparams[0]:#its a simulation
-	Loc=myparams[5+5] 
+	Loc=0.5
 	Taufac=Loc
 	
 	myterminal=open('myterminal.txt', 'a')
