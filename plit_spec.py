@@ -7,7 +7,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 nrows=4
-Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data_rec.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
 print(Car,len(Car))

@@ -8,12 +8,12 @@ library(mediation)
 library(purrr)
 #warning: the nTE are not windowed, but just copied for each window
 #run for example with Rscript baron.R
-orig_data=read.csv("recfolder/barondata_ext")
+orig_data=read.csv("recfolder/barondata_rec")
 data = orig_data
 #View(data)
 data=aggregate(.~ run, data=data, FUN=mean)
 
-data=filter(data, kext < 10)
+data=filter(data, kext < 20)
 avgdata=aggregate(.~kext,data=data,FUN=mean)
 vardata=aggregate(.~kext,data=data,FUN=var)
 
@@ -23,7 +23,7 @@ vardata=aggregate(.~kext,data=data,FUN=var)
 #data=filter(data, run != 1) #because it is measured twice
 
 #plot(data$kext,data$pfreq,  col=factor(data$kext))
-#plot(data$pfreq,data$gamma,  col=factor(data$kext))
+plot(data$gamma,data$pfreq,  col=factor(data$kext))
 
 #plot(data$gamma,data$asynch)
 #par(mfrow=c(1,2)) 
@@ -47,7 +47,7 @@ data$bsynch3 = scale(data$bsynch3)
 data$pfreq = scale(data$pfreq)
 data$bfreq = scale(data$bfreq)
 
-mediator=data$pfreq
+mediator=data$psynch0
 
 
 firstmodel=lm(gamma~kext,data=data)
@@ -65,6 +65,7 @@ tab_model(firstmodel, mediate_model, full_model)
 
 results=mediate(mediate_model,full_model,treat="kext",mediator="mediator")#,boot=TRUE,sims=500)
 summary(results)
+
 
 
 
