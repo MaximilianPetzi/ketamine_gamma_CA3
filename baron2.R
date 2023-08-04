@@ -8,7 +8,7 @@ library(mediation)
 library(purrr)
 #warning: the nTE are not windowed, but just copied for each window
 #run for example with Rscript baron.R
-orig_data=read.csv("recfolder/barondata_rec")
+orig_data=read.csv("recfolder/barondata_ext_2")
 data = orig_data
 #View(data)
 data=aggregate(.~ run, data=data, FUN=mean)
