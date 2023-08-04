@@ -76,6 +76,9 @@ if True:
         Run.pwwext=1                
         Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
         Run.pwwsom=1
+        pwwsom_const=0
+        pwwdend_const=0
+
         #Run.pww2ext=10
         #Run.pww2ext=1
         #Run.pww2rec=1  
@@ -539,10 +542,33 @@ if True:
                 plt.show()
             return xar,yar
 
-
+        def set_input(self,t1=0,t2=999999999,pop=net.pyr,comp="soma",loc=.5,amplitude=0):#makes const inputs
+            if comp=="soma":
+                stim1=[]
+                global stim1
+                for i, mycell in enumerate(pop.cell):
+                    stimm=h.IClamp(getattr(mycell,comp)(loc))
+                    stim1.append(stimm)
+                    stim1[i].delay=t1
+                    stim1[i].dur=t2
+                    stim1[i].amp=amplitude
+            if comp=="soma":
+                stim2=[]
+                global stim2
+                for i, mycell in enumerate(pop.cell):
+                    stimm=h.IClamp(getattr(mycell,comp)(loc))
+                    stim2.append(stimm)
+                    stim2[i].delay=t1
+                    stim2[i].dur=t2
+                    stim2[i].amp=amplitude
+            
     a=A()#creates analysis instance
     import time
     timea=time.time()
+
+    stimsom=a.set_input(t1=0,t2=999999999,pop=net.pyr,comp="soma",loc=.5,amplitude=pwwsom_const)
+    stimsom=a.set_input(t1=0,t2=999999999,pop=net.pyr,comp="Adend3",loc=.5,amplitude=pwwdend_const)
+
     h.run()
     timeb=time.time()
     print("simulation time: ",timeb-timea)

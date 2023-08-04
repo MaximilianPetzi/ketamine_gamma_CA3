@@ -581,7 +581,7 @@ try:
 except:
 	myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
 	if myparams[0]:#if name (mymosinit) ==main
-		net = Network(iseed=1121+0*np.random.randint(10000),wseed=1121+0*np.random.randint(10000))
+		net = Network(iseed=np.random.randint(10000),wseed=np.random.randint(10000))
 	else: 
 		import numpy as np
 		net = Network(iseed=np.random.randint(10000)+int(myparams[7]),wseed=np.random.randint(100000)+int(myparams[7]),MSGain=1,OLMGain=1)
