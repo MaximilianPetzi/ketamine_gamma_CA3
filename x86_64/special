@@ -15,7 +15,11 @@ else
     NRNIV="${NRNBIN}/nrniv"
 fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 "${NRNIV}" -dll "/home/maximilian/Desktop/work/neymotin/Loc/x86_64/.libs/libnrnmech.so" "$@"
+=======
+"${NRNIV}" -dll "/conn/x86_64/.libs/libnrnmech.so" "$@"
+>>>>>>> somasynch
 =======
 "${NRNIV}" -dll "/conn/x86_64/.libs/libnrnmech.so" "$@"
 >>>>>>> somasynch

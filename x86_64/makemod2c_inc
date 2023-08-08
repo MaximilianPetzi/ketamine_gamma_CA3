@@ -2,7 +2,11 @@
 ./CA1ih.c: ../CA1ih.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ih.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ih.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ih.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -14,7 +18,11 @@
 ./CA1ika.c: ../CA1ika.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ika.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ika.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ika.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -26,7 +34,11 @@
 ./CA1ikdr.c: ../CA1ikdr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ikdr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ikdr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ikdr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -38,7 +50,11 @@
 ./CA1ina.c: ../CA1ina.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ina.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ina.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) CA1ina.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -106,7 +122,11 @@
 ./caolmw.c: ../caolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) caolmw.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) caolmw.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) caolmw.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -118,7 +138,11 @@
 ./capr.c: ../capr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) capr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) capr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) capr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -130,7 +154,11 @@
 ./icaolmw.c: ../icaolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icaolmw.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icaolmw.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icaolmw.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -142,7 +170,11 @@
 ./icapr.c: ../icapr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icapr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icapr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) icapr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -154,7 +186,11 @@
 ./iholmkop.c: ../iholmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -166,7 +202,11 @@
 ./iholmw.c: ../iholmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmw.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmw.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) iholmw.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -178,7 +218,11 @@
 ./ihpyrkop.c: ../ihpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ihpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ihpyrkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ihpyrkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -190,7 +234,11 @@
 ./kahppr.c: ../kahppr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kahppr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kahppr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kahppr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -202,7 +250,11 @@
 ./kaolmkop.c: ../kaolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kaolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kaolmkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kaolmkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -214,7 +266,11 @@
 ./kapyrkop.c: ../kapyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kapyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kapyrkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kapyrkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -226,7 +282,11 @@
 ./kcaolmw.c: ../kcaolmw.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcaolmw.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcaolmw.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcaolmw.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -238,7 +298,11 @@
 ./kcpr.c: ../kcpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcpr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcpr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kcpr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -250,7 +314,11 @@
 ./kdrbwb.c: ../kdrbwb.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrbwb.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrbwb.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrbwb.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -262,7 +330,11 @@
 ./kdrolmkop.c: ../kdrolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrolmkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrolmkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -274,7 +346,11 @@
 ./kdrpr.c: ../kdrpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -286,7 +362,11 @@
 ./kdrpyrkop.c: ../kdrpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpyrkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrpyrkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -298,7 +378,11 @@
 ./ltp_template.c: ../ltp_template.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ltp_template.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ltp_template.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) ltp_template.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -310,7 +394,11 @@
 ./misc.c: ../misc.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) misc.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -319,6 +407,7 @@
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
 	$(COMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ./MyExp2SynAlpha.c: ../MyExp2SynAlpha.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
@@ -384,6 +473,11 @@
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafbwb.mod -o "/conn/x86_64")
 >>>>>>> somasynch
+=======
+./nafbwb.c: ../nafbwb.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafbwb.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 
 ./nafbwb.o: ./nafbwb.c
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
@@ -392,7 +486,11 @@
 ./nafolmkop.c: ../nafolmkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafolmkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafolmkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafolmkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -404,7 +502,11 @@
 ./nafpr.c: ../nafpr.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpr.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpr.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpr.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -416,7 +518,11 @@
 ./nafpyrkop.c: ../nafpyrkop.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpyrkop.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpyrkop.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) nafpyrkop.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -428,7 +534,11 @@
 ./stats.c: ../stats.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) stats.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) stats.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) stats.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -440,7 +550,11 @@
 ./vecst.c: ../vecst.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) vecst.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) vecst.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) vecst.mod -o "/conn/x86_64")
 >>>>>>> somasynch
@@ -452,7 +566,11 @@
 ./wrap.c: ../wrap.mod
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) wrap.mod -o "/home/maximilian/Desktop/work/neymotin/Loc/x86_64")
+=======
+	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) wrap.mod -o "/conn/x86_64")
+>>>>>>> somasynch
 =======
 	(cd ".."; MODLUNIT=$(NRNUNITS) $(NOCMODL) wrap.mod -o "/conn/x86_64")
 >>>>>>> somasynch
