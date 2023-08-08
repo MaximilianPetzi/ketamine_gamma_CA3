@@ -17,7 +17,12 @@ if True: #imports:
 myterminal=open('myterminal.txt', 'a')
 #sys.stdout=myterminal #set std output to file instead of terminal
 #sys.stdout=sys.__stdout__ #set std out to terminal again
-myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+try:
+    myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+except:
+    np.save("recfolder/myparams.npy", seedavg.calcparams(0,0,0,0,0))
+    myparams=np.load("recfolder/myparams.npy", allow_pickle=True)
+    
 myparams[0]=True
 if len(sys.argv)>1 and sys.argv[1]=="SIMUL":
     myparams[0]=False
@@ -544,8 +549,8 @@ if True:
 
         def set_input(self,t1=0,t2=999999999,pop=net.pyr,comp="soma",loc=.5,amplitude=0):#makes const inputs
             if comp=="soma":
-                stim1=[]
                 global stim1
+                stim1=[]
                 for i, mycell in enumerate(pop.cell):
                     stimm=h.IClamp(getattr(mycell,comp)(loc))
                     stim1.append(stimm)
@@ -553,8 +558,8 @@ if True:
                     stim1[i].dur=t2
                     stim1[i].amp=amplitude
             if comp=="soma":
-                stim2=[]
                 global stim2
+                stim2=[]
                 for i, mycell in enumerate(pop.cell):
                     stimm=h.IClamp(getattr(mycell,comp)(loc))
                     stim2.append(stimm)
