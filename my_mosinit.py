@@ -482,6 +482,25 @@ if True:
             results=varmeanISI,meanvarISI,varmeanFREQ,meanvarFREQ
             return results[3]
 
+        def synch(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            bar=a.binvolts(pop=pop,comp=comp,binsize=binsize,t1=t1,t2=t2)
+            squaredsynch=np.var(np.mean(bar,axis=0))/np.mean(np.var(bar,axis=1))
+            synch=squaredsynch**.5
+            return synch
+        
+        def synchcurve(self,plot=False,pop=net.pyr,comp="soma",t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
+            xar=[5,10,20,40] #if you change that, change also the columns saved into dataframe in baronkenny part below
+            Nsteps=len(xar)
+            yar=np.ones(Nsteps)
+            for i in range(Nsteps):
+                yar[i]=a.synch(binsize=int(xar[i]),pop=pop,comp=comp,t1=t1,t2=t2)
+            if plot==True:
+                plt.plot(xar,yar,"b.")
+                plt.xlabel(r"bin size (in $10^{-4}$s)")
+                plt.ylabel("Synchrony")
+                plt.show()
+            return xar,yar
+
 
     a=A()#creates analysis instance
     import time
