@@ -5,10 +5,10 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 
-nrows=3
+nrows=4
 Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
-Caro=Car[:-3]
-Data=Data[:,:,:-3]
+Caro=Car[:-1]
+Data=Data[:,:,:-1]
 
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
 DatShape2=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],nrows
@@ -24,7 +24,7 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7]
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][8]
 #[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
                     #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
 dat=np.array(Dat,dtype=float)
@@ -48,9 +48,10 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     ax[0,0].set_ylabel('frequency')
     ax[1,0].set_ylabel(r'LFP $\gamma$')
     ax[2,0].set_ylabel(r'raster $\gamma$')
+    ax[3,0].set_ylabel(r'P synchrony')
     for j in range(sh[2]):          
-        ax[0, j].set_title(str(5.3*Ear[j])+"ms")
-    ax[0,0].set_title(r'$\tau_2=$ '+str(5.3*Ear[0])+"ms")
+        ax[0, j].set_title(str(Ear[j])+"ms")
+    ax[0,0].set_title(r'$delay=$'+str(Ear[0])+"ms")
 
     for i in range(sh[3]):
         for j in range(sh[2]):
@@ -60,12 +61,13 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             ax[i,j].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
             if i==0:
                 ax[i,j].set_yscale('log')
-                ax[i,j].set_ylim([1,300])
+                ax[i,j].set_ylim([2,3])
             if i==1:
-                ax[i,j].set_ylim([-0.1,4.5])
+                pass    
+                #ax[i,j].set_ylim([-0.1,14])
             if i==2:
                 ax[i,j].set_yscale('log')
-                ax[i,j].set_ylim([0.00001,1.0])
+                ax[i,j].set_ylim([0.02,0.3])
             #ax[i,j].set_xscale('log')
     plt.show()
 
