@@ -4,16 +4,18 @@
 withspec=False
 
 nA=1 #control or not
-nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=16 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
-nE=1#Loc or extinsteadofrec
+nE=1#Loc or extinsteadofrec or Lesion
 stepsizeA=1 #0 for control, 1 for LTP
 stepsizeB=1002 #Seed
 #stepsizeC=2.
 stepsizeD=1.
 stepsizeE=1.
-Car=[1,11,21,31]
+Car=[1,2,4,8,12,16,20,24,28,32,36,40]
+
+#Car=[0.,0.25,0.5,0.75,1.]
 nC=len(Car)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
 
@@ -54,7 +56,7 @@ if __name__=="__main__":
                             print("after number")
                             print(a,b,c,d,e)
         Data=pd.read_csv("recfolder/barondata")
-        pd.to_csv("recfolder/oldbarondata",Data)#keeps the old data until new sim is finished
+        Data.to_csv("recfolder/oldbarondata")#keeps the old data until new sim is finished
 
     #to automatically push after running the code
     #import os 

@@ -2,7 +2,7 @@
 NEURON {
 :  THREADSAFE
   POINT_PROCESS MyExp2SynNMDABB
-  RANGE tau1, tau2, e, i, iNMDA, s, sNMDA, r, tau1NMDA, tau2NMDA, Vwt, smax, sNMDAmax
+  RANGE tau1, tau2, e, i, iNMDA, s, sNMDA, r, tau1NMDA, tau2NMDA, Vwt, smax, sNMDAmax, pww
   NONSPECIFIC_CURRENT i, iNMDA
 }
 
@@ -22,6 +22,7 @@ PARAMETER {
   r        = 1
   smax     = 1e9 (1)
   sNMDAmax = 1e9 (1)
+  pww=1
   
   Vwt   = 0 : weight for inputs coming in from vector
 }
@@ -94,10 +95,10 @@ NET_RECEIVE(w (uS)) {LOCAL ww
   ww=w
   :printf("NMDA Spike: %g\n", t)
   if(r>=0){ : if r>=0, g = AMPA + NMDA*r
-    A  = A  + factor *ww
-    B  = B  + factor *ww
-    A2 = A2 + factor2*ww*r
-    B2 = B2 + factor2*ww*r
+    A  = A  + factor *ww *pww
+    B  = B  + factor *ww *pww
+    A2 = A2 + factor2*ww*r *pww
+    B2 = B2 + factor2*ww*r *pww
   }else{
     if(r>-1000){ : if r>-1, g = NMDA*r  
       A2 = A2 - factor2*ww*r

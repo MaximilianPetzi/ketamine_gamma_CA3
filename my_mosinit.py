@@ -1,3 +1,7 @@
+headless=True
+if headless:
+        import matplotlib as mpl
+        mpl.use('Agg')
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
@@ -58,8 +62,8 @@ if True:
     Run.basWash =  [1, 1]
     Run.pyrWashA = [1, 1]
     Run.pyrWashB = [1, 1]
-    Run.washinT  = 80*second  #default 1e3
-    Run.washoutT = 90*second  #2e3
+    Run.washinT  = 1111*second  #default 1e3
+    Run.washoutT = 1111*second  #2e3
     #Run.kT=(inittime)*second  
     #Run.kout=2
     #Run.LTPonT=(inittime)*second  
@@ -78,6 +82,11 @@ if True:
         #Run.pww3rec=1
     else:
         print("It's a simulation!")
+        myterminal=open('myterminal.txt', 'a')
+        sys.stdout=myterminal
+        print(myparams[1:6])
+        myterminal.close()
+        sys.stdout=sys.__stdout__
         if myparams[1]==1 or seedavg.nA==1:#ketamine trial  bit of a weird way of fixing accidentally only doing control trials
             Run.pwwT=0 #pww changed from beginning
             Run.pwwrec=myparams[5+3]
@@ -158,22 +167,23 @@ if True:
                 plt.plot(offset*(i-i1)+np.clip(a.volt(pop=pop,comp=comp,plot=False,i=i),-110,-40),linewidth=linewidth) #add different number to each trace
             plt.show()
 
-        def raster(self,pop=net.pyr,maxtick=20,my_s=.5):
+        def raster(self,pop=net.pyr,maxtick=20,my_s=.5,headless=headless):
             spikets=pop.spiketimes()
+            fig, ax = plt.subplots()
             for i in range(len(spikets)):
                 if len(spikets)>0:  
                     idxar=np.ones(len(spikets[i]))*i
-                    plt.scatter(spikets[i],idxar,s=my_s,color="red")
-            plt.xlabel("time")
-            plt.ylabel("neuron index")
-            plt.title("my rasterplot")
-            ax = plt.gca()#gets current axis
-            
+                    ax.scatter(spikets[i],idxar,s=my_s,color="red")
+            ax.set_xlabel("time")
+            ax.set_ylabel("neuron index")
+            ax.set_title("my rasterplot")
             ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
             # enable the horizontal grid
-            plt.grid(axis='y', linestyle='-')
-
-            plt.show()
+            ax.grid(axis='y', linestyle='-')
+            if not headless:
+                plt.show()
+            if headless:
+                fig.savefig('recfolder/raster'+str(np.random.randint(100))+'.png') 
             return spikets #list of lists of spikes
     
         def count(self,pop=net.pyr,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,idx=None):
@@ -275,6 +285,8 @@ if True:
             #location="soma" to use only soma potential instead of difference
             #t1,t2: start and end time of LFP
             #f1,f2: frequency limit of power spectrum integration
+            if not pop==net.pyr:
+                print("watch out, pyr used")
             if location=="difference":
                 ddata=data    
             if location=="soma":
@@ -304,9 +316,17 @@ if True:
             #datar represents avg number of spikes per millisecond, estimated by rectangular kernel convolution
             return datar
         
-        def binnedspikes(self,pop=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
+        def binnedspikes(self,location=net.pyr,binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #for Transfer Entropy, similar to spikefreq
             #counts spikes per bin, over whole population
-            spikets=np.concatenate(pop.spiketimes())
+            
+            if isinstance(location,str): #if location is a string (meaning it is a synapse)
+                pop=net.pyr  
+                spiketss=pop.spiketimes_ext(syn=location)
+            else:                        #if location is a population
+                pop=location
+                spiketss=pop.spiketimes()
+
+            spikets=np.concatenate(spiketss)
             spikets=spikets[(spikets>t1*second) & (spikets<t2*second)] #only count the spikes between t1 and t2
             xlength=len(data)/binsize/10 #want only one entry per bin, not 50 (kernlen) like in spikefreq
             datar=np.zeros(xlength+1) #initialize binned spikes
@@ -366,11 +386,11 @@ if True:
 
         def te(self,pop1=net.bas,pop2=net.pyr,n_shuffles=30,lag=7,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #uses max lag only
-            #from pop1 to pop2 I think
+            #from pop1 to pop2 I think. default bas to pyr
             #switch X and Y
             
-            X=a.binnedspikes(pop=pop2,t1=t1,t2=t2)
-            Y=a.binnedspikes(pop=pop1,t1=t1,t2=t2)
+            X=a.binnedspikes(location=pop2,t1=t1,t2=t2,binsize=binsize)
+            Y=a.binnedspikes(location=pop1,t1=t1,t2=t2,binsize=binsize)
             index=np.arange(len(X))
             df=pd.DataFrame({"xt":X,"yt":Y},index=index)
             causality = TransferEntropy(DF = df,
@@ -381,13 +401,14 @@ if True:
             TE = causality.nonlinear_TE(n_shuffles=n_shuffles,bins=bins)
             return causality.results
         
-        def te2(self,n_shuffles=3,lag=1,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
+        #a.te2(pop1="somaAMPAf",pop2=net.pyr,n_shuffles=30,lag=1,nneurons=10,binsize=5)
+        def te2(self,pop1="Adend3AMPAf",pop2=net.pyr,nneurons=800,n_shuffles=3,lag=1,binsize=15,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,bins=None):
             #supposed to calculate te from external inputs, for each neuron. not sure if it detects anything
             tt=time.time()
             #calculates individual tes and then averages
-            Xs=a.binnedspikes_unavg(location="Adend3AMPAf",t1=t1,t2=t2)
-            Ys=a.binnedspikes_unavg(location=net.pyr,t1=t1,t2=t2)
-            for i in range(30):#for each neuron
+            Xs=a.binnedspikes_unavg(location=pop1,t1=t1,t2=t2,binsize=binsize)
+            Ys=a.binnedspikes_unavg(location=pop2,t1=t1,t2=t2,binsize=binsize)
+            for i in range(nneurons):#for each neuron
                 if i%10==0:print(i)
                 X=Xs[i]
                 Y=Ys[i]
@@ -402,6 +423,7 @@ if True:
                 if i==0:rdf=pd.DataFrame(causality.results)
                 else:
                     rdf=rdf.append(causality.results)
+                print(causality.results)
             print("te2 ran for "+str(time.time()-tt)+"seconds")
             return rdf
             
@@ -482,6 +504,15 @@ if True:
             results=varmeanISI,meanvarISI,varmeanFREQ,meanvarFREQ
             return results[3]
 
+        def binvolts(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime): #puts voltages of neurons in bins, returns matrix, for synch
+            bar=np.zeros((len(pop.cell),int(len(a.volt(pop=pop,comp=comp,plot=False,i=0)[int(10000.0*t1):int(10000.0*t2)])/binsize)))
+            for i in range(len(pop.cell)):#over all 800 pyr cells
+                volt=a.volt(i=i)
+                volt=volt[int(10000.0*t1):int(10000.0*t2)]
+                for j in range(np.shape(bar)[1]):
+                    bar[i,j]=np.mean(volt[binsize*j:(j+1)*binsize])
+            return bar
+        
         def synch(self,pop=net.pyr,comp="soma",binsize=5,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime):
             bar=a.binvolts(pop=pop,comp=comp,binsize=binsize,t1=t1,t2=t2)
             squaredsynch=np.var(np.mean(bar,axis=0))/np.mean(np.var(bar,axis=1))
@@ -514,7 +545,7 @@ if True:
     #uncomment for multiplesims.py:
     
 
-    if myparams[0]: #if name==main
+    if myparams[0]:#and os.environ.get("mydisplay")) #if name==main
         #plt.plot(myrec[1,1:]-myrec[1,:-1],color="blue")
         if False:
             plt.figure(1)
@@ -591,7 +622,10 @@ if True:
             Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[f1,p1,a.bandpower(f1,p1,3,12),a.bandpower(f1,p1,30,100)]
         else:
             r=a.te(pop1=net.bas,pop2=net.pyr)
-            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
+            Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),
+                a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(pop=net.pyr),a.rasterpower(pop=net.bas),
+                a.synch(pop=net.pyr),a.synch(pop=net.pyr,binsize=10),a.synch(pop=net.pyr,binsize=20),a.synch(pop=net.bas),r["nTE_XY"],r] 
+            
             myterminal=open('myterminal.txt', 'a')
             sys.stdout=myterminal
             print("(my_mosinit.py) at",myparams[1:6],"and ext/rec=",Run.pwwext,Run.pwwrec, "I have freq/gamma=",a.freq(),a.bandpower(f1,p1,30,100))
@@ -603,20 +637,42 @@ if True:
             asynch_col=res1[1]
             time_col=res1[0]
             gamma_col=res2[1]
+            pfreq_col=a.trace(a.freq,pop=net.pyr)[1]
+            bfreq_col=a.trace(a.freq,pop=net.bas)[1]
+            ofreq_col=a.trace(a.freq,pop=net.olm)[1]
+            rasterpower_col=a.trace(a.rasterpower,pop=net.pyr)[1]
             krec_col=np.ones(len(time_col))*Run.pwwrec
+            kext_col=np.ones(len(time_col))*Run.pwwext
+            nTE_col=np.ones(len(time_col))*float(r["nTE_XY"])
+            pval_col=np.ones(len(time_col))*float(r["p_value_XY"])
+
+            psynchx,psynchy=a.synchcurve(pop=net.pyr)
+            psynch0_col=np.ones(len(time_col))*psynchy[0]     #gotta change that every time you change bins
+            psynch1_col=np.ones(len(time_col))*psynchy[1]
+            psynch2_col=np.ones(len(time_col))*psynchy[2]
+            psynch3_col=np.ones(len(time_col))*psynchy[3]
+
+            bsynchx,bsynchy=a.synchcurve(pop=net.bas)
+            bsynch0_col=np.ones(len(time_col))*bsynchy[0]     #gotta change that every time you change bins
+            bsynch1_col=np.ones(len(time_col))*bsynchy[1]
+            bsynch2_col=np.ones(len(time_col))*bsynchy[2]
+            bsynch3_col=np.ones(len(time_col))*bsynchy[3]
+            msgain_col=np.ones(len(time_col))*float(net.OLMGain)
+
+            brasterpower_col=a.trace(a.rasterpower,pop=net.bas)[1]
             if not os.path.exists("recfolder/barondata"):#first iteration creates new data file
                 run_col=np.ones(len(time_col))*1
-                mydf=pd.DataFrame({"gamma":gamma_col,"asynch":asynch_col,"krec":krec_col,"time":time_col,"run":run_col})
+                mydf=pd.DataFrame({"bsynch0":bsynch0_col,"bsynch1":bsynch1_col,"bsynch2":bsynch2_col,"bsynch3":bsynch3_col,"psynch0":psynch0_col,"psynch1":psynch1_col,"psynch2":psynch2_col,"psynch3":psynch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 mydf.to_csv("recfolder/barondata",index=False)
                 print("saved first dataframe:")
                 print(mydf)
             else: #consecutive iterations append data
                 prevdf=pd.read_csv("recfolder/barondata")
                 run_col=np.ones(len(time_col))*(prevdf["run"].iloc[-1]+1)
-                mydf=pd.DataFrame({"gamma":gamma_col,"asynch":asynch_col,"krec":krec_col,"time":time_col,"run":run_col})
-                
+                mydf=pd.DataFrame({"bsynch0":bsynch0_col,"bsynch1":bsynch1_col,"bsynch2":bsynch2_col,"bsynch3":bsynch3_col,"psynch0":psynch0_col,"psynch1":psynch1_col,"psynch2":psynch2_col,"psynch3":psynch3_col,"msgain":msgain_col,"nTE":nTE_col,"pval":pval_col,"pfreq":pfreq_col,"bfreq":bfreq_col,"ofreq":ofreq_col,"gamma":gamma_col,"rasterpower":rasterpower_col,"asynch":asynch_col,"kext":kext_col,"krec":krec_col,"time":time_col,"run":run_col,"brasterpower":brasterpower_col})
                 newdf=prevdf.append(mydf, ignore_index=True)
                 newdf.to_csv("recfolder/barondata",index=False)
+                print(newdf)
         #print("now dataij became",Data[myparams[1],myparams[2]])
         #Data[1,myparams[2]]=[f2,p2,bandpower(f2,p2,3,12),bandpower(f2,p2,30,100)]
         np.save("recfolder/Data.npy",Data)

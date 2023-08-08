@@ -1,4 +1,6 @@
+
 #plots data from seedavg.py simulation
+
 import numpy as np
 from matplotlib import pyplot as plt
 from seedavg import *
@@ -24,9 +26,10 @@ for a in range(len(Data)):
             for d in range(len(Data[0,0,0])):
                 for e in range(len(Data[0,0,0,0])):     #build proper Tensor
                     Dat[a,b,c,d,e]=Data[a,b,c,d,e][1]      #full recordings, not saved anymore    
-                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][8]
-#[-1,-1,a.power(location="difference"),a.power(location="soma"),a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(),r["nTE_XY"],r] 
-                    #Dat2[a,b,c,d,e,:]=[Data[a,b,c,d,e][6]["p_value_XY"],Data[a,b,c,d,e][6]["p_value_YX"]]  #theta and gamma power and potentially so much more!
+                    Dat2[a,b,c,d,e,:]=Data[a,b,c,d,e][4],Data[a,b,c,d,e][2],Data[a,b,c,d,e][7],Data[a,b,c,d,e][9]
+#Data[myparams[1],myparams[2],myparams[3],myparams[4],myparams[5]]=[-1,-1,a.power(location="difference"),a.power(location="soma"),
+#                a.freq(pop=net.pyr),a.freq(pop=net.bas),a.freq(pop=net.olm),a.rasterpower(pop=net.pyr),a.rasterpower(pop=net.bas),
+#                a.synch(pop=net.pyr),a.synch(pop=net.pyr,binsize=10),a.synch(pop=net.pyr,binsize=20),a.synch(pop=net.bas),r["nTE_XY"],r] 
 dat=np.array(Dat,dtype=float)
 dat2=np.array(Dat2,dtype=float)
 
@@ -40,6 +43,7 @@ import matplotlib.colors
 def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor krec or kext, for rec and ext
     d=dat2[0,:,:,0,:,:]
     sh=np.shape(d)
+    print(sh)
     da=np.average(d,axis=0)
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
     fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10))

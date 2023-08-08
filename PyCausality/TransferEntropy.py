@@ -250,7 +250,6 @@ class TransferEntropy():
 
             ## Initialise list to return TEs
             transfer_entropies = [0,0]
-
         
             ## Require us to compare information transfer bidirectionally
             for i,(X,Y) in enumerate({self.exog:self.endog, self.endog:self.exog}.items()):
@@ -288,23 +287,24 @@ class TransferEntropy():
 
 
         ## Store Linear Transfer Entropy from X(t)->Y(t) and from Y(t)->X(t)
-        self.add_results({'TE_linear_XY' : np.array(TEs)[:,0],
-                          'TE_linear_YX' : np.array(TEs)[:,1],
-                          'p_value_linear_XY' : None,
-                          'p_value_linear_YX' : None,
-                          'z_score_linear_XY' : 0,
-                          'z_score_linear_YX' : 0
+        self.add_results({'TE_XY' : np.array(TEs)[:,0],
+                          'TE_YX' : np.array(TEs)[:,1],
+                          'p_value_XY' : None,
+                          'p_value_YX' : None,
+                          'z_score_XY' : 0,
+                          'z_score_YX' : 0, 
+                          'nTE_XY' : np.array(TEs)[:,0]
                           })
 
         if n_shuffles > 0:
             ## Store Significance Transfer Entropy from X(t)->Y(t) and from Y(t)->X(t)
             
-            self.add_results({'p_value_linear_XY' : np.array(p_values)[:,0],
-                              'p_value_linear_YX' : np.array(p_values)[:,1],
-                              'z_score_linear_XY' : np.array(z_scores)[:,0],
-                              'z_score_linear_YX' : np.array(z_scores)[:,1],
-                              'Ave_TE_linear_XY'  : np.array(shuffled_TEs)[:,0],
-                              'Ave_TE_linear_YX'  : np.array(shuffled_TEs)[:,1]
+            self.add_results({'p_value_XY' : np.array(p_values)[:,0],
+                              'p_value_YX' : np.array(p_values)[:,1],
+                              'z_score_XY' : np.array(z_scores)[:,0],
+                              'z_score_YX' : np.array(z_scores)[:,1],
+                              'Ave_TE_XY'  : np.array(shuffled_TEs)[:,0],
+                              'Ave_TE_YX'  : np.array(shuffled_TEs)[:,1]
                               })
 
         return transfer_entropies
