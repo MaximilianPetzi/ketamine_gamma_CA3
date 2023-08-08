@@ -16,7 +16,7 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 
-Car=[1,1.25,1.5,1.75,4,8,15,40,80]
+Car=[1,10,24,32]
 Ear=[0,5,10,15,20,25,30,35,40,45,60] #added delay times
 nC=len(Car)
 nE=len(Ear)
