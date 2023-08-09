@@ -557,7 +557,7 @@ if True:
                     stim1[i].delay=t1
                     stim1[i].dur=t2
                     stim1[i].amp=amplitude
-            if comp=="soma":
+            if comp=="Adend3":
                 global stim2
                 stim2=[]
                 for i, mycell in enumerate(pop.cell):
