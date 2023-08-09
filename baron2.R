@@ -13,10 +13,10 @@ data = orig_data
 #View(data)
 data=aggregate(.~ run, data=data, FUN=mean)
 
-data=filter(data, kext < 20)
+data=filter(data, kext < 2)
 avgdata=aggregate(.~kext,data=data,FUN=mean)
 vardata=aggregate(.~kext,data=data,FUN=var)
-
+View(data)
 #________________kext:_______________#
 
 #data=filter(data, kext == 1)
