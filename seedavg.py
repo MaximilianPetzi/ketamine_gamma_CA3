@@ -18,6 +18,9 @@ stepsizeE=1.
 
 Car=[1,10,24,32]
 Ear=[0,5,10,15,20,25,30,35,40,45,60] #added delay times
+#for big2_delay_simulation: (8 seeds)
+#Car=[1,10,24,32]
+#Ear=[0,5,10,15,20,25,30,35,40,45,60]
 nC=len(Car)
 nE=len(Ear)
 #Loc goes from 1 .5 0 -.5 where -.5 changes tau1 and tau2 NMDAR as well
