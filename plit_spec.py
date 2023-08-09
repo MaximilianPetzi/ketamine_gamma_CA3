@@ -7,7 +7,7 @@ from seedavg import *
 import seaborn as sns
 import scipy.stats
 nrows=4
-Data=np.load("recfolder/Data_rec.npy",allow_pickle=True)      #change back to oldData.npy
+Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
 Caro=Car[:]
 Data=Data[:,:,:]
 print(Car,len(Car))
@@ -46,7 +46,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     #now you have shape(da)=(seeds,Ca,rec/ext,f/gamma)
     fig, ax = plt.subplots(nrows=nrows, ncols=sh[2], figsize=(10, 10)) #if Car is len 1, ax has to be 1 modal
     for nn in range(sh[2]):
-        ax[2].set_xlabel(r'$k_{rec}$')
+        ax[2].set_xlabel(r'$I_{dend}')
     ax[0].set_ylabel('frequency')
     ax[1].set_ylabel(r'LFP $\gamma$')
     ax[2].set_ylabel(r'$\chi$ (Basket)')#raster $\gamma$')

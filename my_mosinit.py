@@ -98,12 +98,14 @@ if True:
             Run.pwwT=0 #pww changed from beginning
             if myparams[5+5]==1:
                 Run.pwwrec=1#myparams[5+3] ###change back for kext krec sim
-                Run.pwwext=myparams[5+3]
-                Run.pwwsom=myparams[5+3]
+                Run.pwwext=1
+                Run.pwwsom=1
+                pwwsom_const=myparams[5+3]
+                pwwdend_const=0
                 pass
                 
             if myparams[5+5]==2: #if E=2: change ext instead of rec
-                Run.pwwext=myparams[5+3]
+                Run.pwwext=1
                 Run.pwwrec=1 
             #Run.pwwsom=myparams[5+4]  
             pass
@@ -557,7 +559,7 @@ if True:
                     stim1[i].delay=t1
                     stim1[i].dur=t2
                     stim1[i].amp=amplitude
-            if comp=="soma":
+            if comp=="Adend3":
                 global stim2
                 stim2=[]
                 for i, mycell in enumerate(pop.cell):
