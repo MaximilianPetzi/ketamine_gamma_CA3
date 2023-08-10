@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from seedavg import *
 import seaborn as sns
 import scipy.stats
+import statsmodels.api as sm
 
 nrows=4
 Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
@@ -50,9 +51,11 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     ax.set_ylabel(r'LFP $\gamma$')
     ax.set_xlabel(r'$k_{rec}$')
     for i in range(sh[2]):#=E=delay times
-        color = cmap(float(Ear[i]) / Ear[-1-1])#HERE
         #ax.scatter(Caro,da[:,i,1], s=2, c=color)
-        ax.plot(Caro,da[:,i,1], marker='o',markersize=2, color=color)
+        #ax.plot(Caro,da[:,i,1], marker='o',markersize=2, color=color)
+        mod = sm.OLS(Ear[i],da[:,i,1])
+        res = mod.fit()
+        print(res.)
     norm = mpl.colors.Normalize(vmin=0, vmax=45)#HERE
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
