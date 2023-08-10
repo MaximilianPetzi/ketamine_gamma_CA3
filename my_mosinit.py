@@ -1,3 +1,7 @@
+headless=True
+if headless:
+        import matplotlib as mpl
+        mpl.use('Agg')
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
@@ -180,7 +184,7 @@ if True:
                 plt.show()
             return voltage_trace
         #(continue here:)
-        def tvp(self):
+        def tvp(self,headless=headless):    #plots voltage traces for all 3 conditions
             [ta,va]=np.load("recfolder/voltage_normal.npy")    
             [tb,vb]=np.load("recfolder/voltage_taufac_8.npy")   
             [tc,vc]=np.load("recfolder/voltage_taufac_0-2_soma.npy") 
@@ -191,7 +195,26 @@ if True:
             ax.set_xlabel("time [ms]")
             ax.set_ylabel("voltage [mV]")
             ax.legend()
-            plt.show()
+            if not headless:
+                plt.show()
+            if headless:
+                fig.savefig("voltages2")
+        
+        def tvp2(self,headless=headless): #do this to plot just the voltage trace for default conditions
+            [ta,va]=np.load("recfolder/voltage_normal.npy")    
+            [tb,vb]=np.load("recfolder/voltage_taufac_8.npy")   
+            [tc,vc]=np.load("recfolder/voltage_taufac_0-2_soma.npy") 
+            fig, ax = plt.subplots()
+            ax.plot(ta,va,"k--",linewidth=.8,label="1")
+            #ax.plot(tb,vb,"k:",markersize=.4,label="2")
+            #ax.plot(tc,vc,"k",markersize=.4,label="3")
+            ax.set_xlabel("time [ms]")
+            ax.set_ylabel("voltage [mV]")
+            #ax.legend()
+            if not headless:
+                plt.show()
+            if headless:
+                fig.savefig("voltages2")
 
         def volts(self,pop=net.pyr,comp="soma",i1=0,i2=7,linewidth=.5,offset=20):
             #plots a bunch of voltage traces at once, from index i1 to i2
