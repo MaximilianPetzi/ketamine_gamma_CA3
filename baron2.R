@@ -16,7 +16,7 @@ data=aggregate(.~ run, data=data, FUN=mean)
 data=filter(data, kext < 2)
 avgdata=aggregate(.~kext,data=data,FUN=mean)
 vardata=aggregate(.~kext,data=data,FUN=var)
-View(data)
+#View(data)
 #________________kext:_______________#
 
 #data=filter(data, kext == 1)
@@ -47,7 +47,7 @@ data$bsynch3 = scale(data$bsynch3)
 data$pfreq = scale(data$pfreq)
 data$bfreq = scale(data$bfreq)
 
-mediator=data$psynch0
+mediator=data$pfreq
 
 
 firstmodel=lm(gamma~kext,data=data)
