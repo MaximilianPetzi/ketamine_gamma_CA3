@@ -55,7 +55,7 @@ if True:
     ltptime=0
     resttime=0
     measuretime=0.#should be fine ca
-    second=1000.
+    second=100.
     endtime=inittime+ltptime+resttime+measuretime
     h.tstop = (inittime+ltptime+resttime+measuretime)*second
     Run.olmWash =  [0, 1]
@@ -214,7 +214,7 @@ if True:
             if not headless:
                 plt.show()
             if headless:
-                fig.savefig("voltages2")
+                fig.savefig("recfolder/voltages2")
 
         def volts(self,pop=net.pyr,comp="soma",i1=0,i2=7,linewidth=.5,offset=20):
             #plots a bunch of voltage traces at once, from index i1 to i2
