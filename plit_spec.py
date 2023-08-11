@@ -75,7 +75,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             #ax[i,j].set_xscale('log')
     plt.show()
 
-freqandgamma()
+#freqandgamma()
 
 def difs():
     dif2=dat2[1]-dat2[0]
@@ -100,10 +100,15 @@ def difs():
     plt.show()
 
 def allplots(boxplot=True):
+    pdata=dat[0,:,0,0,0,0]
+    pows=np.average(pdata,axis=0)
+    #pows should be array of arrays of ps, ( Nseeds X len(freqs) ) 
+    freqs=Data[0,0,0,0,0][0]
+    #freqs should be one array of frequencies
 
-    pows=np.average(dat2,axis=1)
-    pows_std=np.std(dat2,axis=1)/(len(dat2[0])-1)**.5 #sample error estimate or whatever
-    x=np.arange(len(pows))/1.
+    pows_std=np.std(pdata,axis=0)/(len(pows[0])-1)**.5 #sample error estimate or whatever
+    fig,ax=plt.subplots()
+    ax.plot(freqs,pows)
     for k in range(kmax):#rec, each a different figure #E
         fig, ax = plt.subplots(nrows=4, ncols=4, figsize=(10, 10))
         for nn in range(4):
@@ -129,7 +134,7 @@ def allplots(boxplot=True):
     fig.tight_layout(pad=2.0)
     plt.show()
 
-#allplots()
+allplots()
 
 #transform into r readable format (CSV?)
 csvtrafo=False
