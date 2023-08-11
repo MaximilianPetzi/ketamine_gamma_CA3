@@ -6,7 +6,7 @@
 withspec=True
 
 nA=1 #control or not
-nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
+nB=20 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
 #nC=8#REC    
 nD=1#EXT and SOMA
 

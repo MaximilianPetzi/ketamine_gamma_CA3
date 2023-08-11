@@ -1,6 +1,8 @@
 
 #plots data from seedavg.py simulation
-
+import sys
+print("no you have to run fourier to plot the spectrum. sorry, i made a different file. this plit_spec.py is actually broken")
+sys.exit()
 import numpy as np
 from matplotlib import pyplot as plt
 from seedavg import *

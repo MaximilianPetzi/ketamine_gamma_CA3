@@ -15,9 +15,10 @@ pows=np.array(pows)
 
 fig,ax=plt.subplots()
 y=np.average(pows,axis=0)
-ax.plot(freqs,y,color="black",linewidth=.3)
-error=np.std(pows,axis=0)/(len(pows)-1)
-ax.fill_between(freqs, -error, y+error,color="pink",alpha=.2)
+ax.plot(freqs,y,color="black",linewidth=.5)
+print(len(pows))
+error=np.std(pows,axis=0)/(len(pows)-1)**.5
+ax.fill_between(freqs, y-error, y+error,color="black",alpha=.3)
 ax.set_xlim(0,100)
 
 plt.show()
