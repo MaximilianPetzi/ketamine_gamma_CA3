@@ -7,8 +7,8 @@ import scipy.stats
 
 nrows=3
 Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
-Caro=Car[:-2]
-Data=Data[:,:,:-2,:,:1]
+Caro=Car[:-1]
+Data=Data[:,:,:-1,:,:1]
 print("here",np.shape(Data))
 
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
