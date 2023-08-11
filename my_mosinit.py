@@ -4,8 +4,8 @@ if headless:
         mpl.use('Agg')
 import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
-multiplesims=True #set to True, if this is to be called by multiplesims.py, otherwise False
-baronkenny=True
+multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
+baronkenny=False
 if True: #imports:
     import numpy as np
     from PyCausality.TransferEntropy import TransferEntropy

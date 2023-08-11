@@ -3,7 +3,7 @@
 
 #for Car freq gamma test, change Car, nC, stepsizeC, calcparams.Car(cc), cpfp.Car(cc) 
 #                                and in my_mosinit: line 374 write to file a.freq()
-withspec=False
+withspec=True
 
 nA=1 #control or not
 nB=8 #seed    #if you change the number of parameters, also change the myparams seed index in net = Network... line accordingly 
@@ -16,8 +16,8 @@ stepsizeB=1002 #Seed
 stepsizeD=1.
 stepsizeE=1.
 
-Car=[1,10,24,32]
-Ear=[0,5,10,15,20,25,30,35,40,45,60] #added delay times
+Car=[1]
+Ear=[1] #added delay times
 #for big2_delay_simulation: (8 seeds)
 #Car=[1,10,24,32]
 #Ear=[0,5,10,15,20,25,30,35,40,45,60]
