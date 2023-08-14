@@ -6,9 +6,9 @@ import seaborn as sns
 import scipy.stats
 
 nrows=3
-Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
-Caro=Car[:-1]
-Data=Data[:,:,:-1,:,:1]
+Data=np.load("recfolder/Data_ext.npy",allow_pickle=True)      #change back to oldData.npy
+Caro=Car[:]
+Data=Data[:,:,:,:,:1]
 print("here",np.shape(Data))
 
 DatShape=np.shape(Data)[0],np.shape(Data)[1],np.shape(Data)[2],np.shape(Data)[3],np.shape(Data)[4],1
@@ -62,14 +62,14 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             #for k in range(sh[0]):
             #    ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
             ax[i].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
-            if i==0:
-                ax[i].set_yscale('log')
-                ax[i].set_ylim([1,300])
-            if i==1:
-                ax[i].set_ylim([-0.1,4.5])
-            if i==2:
-                ax[i].set_yscale('log')
-                ax[i].set_ylim([0.00001,1.0])
+            #if i==0:
+            #    ax[i].set_yscale('log')
+            #    ax[i].set_ylim([1,300])
+            #if i==1:
+            #    ax[i].set_ylim([-0.1,4.5])
+            #if i==2:
+            #    ax[i].set_yscale('log')
+            #    ax[i].set_ylim([0.00001,1.0])
             #ax[i,j].set_xscale('log')
     plt.show()
 
