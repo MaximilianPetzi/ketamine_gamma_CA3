@@ -51,7 +51,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     # ax[2,0].set_ylabel(r'raster $\gamma$')
 
     for nn in range(sh[2]):
-        ax[-1].set_xlabel(r'$k_{rec}$')
+        ax[-1].set_xlabel(r'$k_{ext}$')
     ax[0].set_ylabel('frequency')
     ax[1].set_ylabel(r'LFP $\gamma$')
     ax[2].set_ylabel(r'raster $\gamma$')
@@ -62,9 +62,9 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
             #for k in range(sh[0]):
             #    ax[i,j].scatter(Caro,d[k,:,j,i],color="black",s=1)
             ax[i].errorbar(Caro,np.mean(d[:,:,j,i],axis=0),np.var(d[:,:,j,i],axis=0),color="black",linewidth=.4)
-            #if i==0:
-            #    ax[i].set_yscale('log')
-            #    ax[i].set_ylim([1,300])
+            if i==0:
+                ax[i].set_yscale('log')
+                #ax[i].set_ylim([1,300])
             #if i==1:
             #    ax[i].set_ylim([-0.1,4.5])
             #if i==2:
