@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 from seedavg import *
-import seaborn as sns
-import scipy.stats
+import pandas as pd
 
 nrows=4
 Data=np.load("recfolder/Data.npy",allow_pickle=True)      #change back to oldData.npy
@@ -57,8 +56,22 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
     plt.colorbar(sm, ticks=Ear[:-1],label="delay [ms]")#HERE
-    plt.show()
+    #plt.show()
 
 freqandgamma()
 
+d=dat2[0,:,:,0,:,:] #seed, car/krec, ear/delay, observable
+da=np.average(d,axis=0)
+sh=np.shape(d)
+print("shape")
+print(sh)
+df=[]
+for i in range(sh[1]): #krec, Cars
+    for j in range(sh[2]): #delay, Ears
+        df.append([Car[i], Ear[j], da[i,j,1]])
+
+
+mydf=pd.DataFrame(df,columns=["krec","delay","gamma"])
+print(mydf)
+mydf.to_csv("recfolder/slopedata",index=False)
 
