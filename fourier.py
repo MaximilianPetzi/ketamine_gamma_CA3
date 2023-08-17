@@ -19,6 +19,7 @@ ax.plot(freqs,y,color="black",linewidth=.5)
 print(len(pows))
 error=np.std(pows,axis=0)/(len(pows)-1)**.5
 ax.fill_between(freqs, y-error, y+error,color="black",alpha=.3)
-ax.set_xlim(0,100)
-
+ax.set_xlim(0,50)
+ax.set_xlabel("frequency [Hz]")
+ax.set_ylabel("power")
 plt.show()
