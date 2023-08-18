@@ -3,8 +3,8 @@
 library(sjPlot)
 library(lme4)
 data=read.csv("recfolder/slopedata")
-delaylevels=[0,5,10,15,20,25,30,35,40,45,60]
-data$delay=factor(data,levels=delaylevels)
+delaylevels= c(0,5,10,15,20,25,30,35,40,45)
+data$delay=factor(data$delay,levels=delaylevels)
 View(data)
 m<-lmer(gamma~krec+(1+krec|delay),data) #this fits a 
 #mixed effects model with krec as fixed effect, 
@@ -18,5 +18,8 @@ m<-lmer(gamma~krec+(1+krec|delay),data) #this fits a
 random_effect_slopes=ranef(m)$delay$krec  #this are the
 #delay-dependent krec effects. 1d array
 
-plot(random_effect_slopes,data$delaylevel,xlab="delay",ylab="effect")
-
+pdf("myplot.pdf", width=6, height=6)
+plot(delaylevels,y=random_effect_slopes, type="l",
+    xlab="Delay [ms]", 
+    ylab="Recurrent Scaling Effect on Gamma")
+dev.off()
