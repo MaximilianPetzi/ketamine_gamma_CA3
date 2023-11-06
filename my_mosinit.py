@@ -2,14 +2,19 @@ import seedavg
 withspec=seedavg.withspec #with or without saving f and p for full spectrum
 multiplesims=False #set to True, if this is to be called by multiplesims.py, otherwise False
 baronkenny=True
+headless=True
 if True: #imports:
+    import matplotlib
+    matplotlib.use("Agg")
+    print("backend for matplotlib is",matplotlib.get_backend())
+    from matplotlib import pyplot as plt
+    #plt.style.use("seaborn-darkgrid")
     import numpy as np
     from PyCausality.TransferEntropy import TransferEntropy
     import pandas as pd
     from scipy import signal
     import sys
     import os
-    import pandas as pd
 myterminal=open('myterminal.txt', 'a')
 #sys.stdout=myterminal #set std output to file instead of terminal
 #sys.stdout=sys.__stdout__ #set std out to terminal again
@@ -71,9 +76,9 @@ if True:
         Run.pwwT=0
         #Run.pwwT2=1.040
         #Run.pwwT3=1.5
-        Run.pwwext=1.75                
+        Run.pwwext=1                
         Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
-        Run.pwwsom=1.75
+        Run.pwwsom=1
         #Run.pww2ext=10
         #Run.pww2ext=1
         #Run.pww2rec=1  
@@ -140,9 +145,7 @@ if True:
 
 
 
-    from matplotlib import pyplot as plt
-    plt.style.use("seaborn-darkgrid")
-    import numpy as np
+
 
     class A:#methods that can be used after net is run. some may be used internally too. 
 
@@ -170,24 +173,62 @@ if True:
                 plt.plot(offset*(i-i1)+np.clip(a.volt(pop=pop,comp=comp,plot=False,i=i),-110,-40),linewidth=linewidth) #add different number to each trace
             plt.show()
 
-        def raster(self,pop=net.pyr,maxtick=20,my_s=.5):
+        def raster(self,pop=net.pyr,maxtick=20,my_s=.5, headless=headless):
             spikets=pop.spiketimes()
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
             for i in range(len(spikets)):
                 if len(spikets)>0:  
                     idxar=np.ones(len(spikets[i]))*i
-                    plt.scatter(spikets[i],idxar,s=my_s,color="red")
-            plt.xlabel("time")
-            plt.ylabel("neuron index")
-            plt.title("my rasterplot")
-            ax = plt.gca()#gets current axis
+                    ax.scatter(spikets[i],idxar,s=my_s,color="red")
+            ax.set_xlabel("time")
+            ax.set_ylabel("neuron index")
+            ax.set_title("my rasterplot")
             
             ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
             # enable the horizontal grid
             plt.grid(axis='y', linestyle='-')
-
-            plt.show()
+            
+            if headless==False:
+                plt.show()
+            if headless==True:
+                plt.savefig("rasterplot.png")
             return spikets #list of lists of spikes
-    
+        
+        def fullraster(self, my_s=.5,headless=headless):
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            ##olm
+            spikets=net.olm.spiketimes()
+            for i in range(len(spikets)):
+                if len(spikets)>0:  
+                    idxar=np.ones(len(spikets[i]))*i
+                    ax.scatter(spikets[i],idxar+200+800,s=my_s,color="blue")
+            ##bas
+            spikets=net.bas.spiketimes()
+            for i in range(len(spikets)):
+                if len(spikets)>0:  
+                    idxar=np.ones(len(spikets[i]))*i
+                    ax.scatter(spikets[i],idxar+800,s=my_s,color="green")
+            ##pyr
+            spikets=net.pyr.spiketimes()
+            for i in range(len(spikets)):
+                if len(spikets)>0:  
+                    idxar=np.ones(len(spikets[i]))*i
+                    ax.scatter(spikets[i],idxar,s=my_s,color="red")
+
+            ax.set_xlabel("time")
+            #ax.set_ylabel("neuron index")
+            #ax.set_title("rasterplot")
+            
+            #ax.yaxis.set_ticks(range(0,maxtick))#set ticks at every integer (every neuron id)
+            # enable the horizontal grid
+            #plt.grid(axis='y', linestyle='-')
+            if headless==False:
+                plt.show()
+            if headless==True:
+                plt.savefig("full_rasterplot.pdf")
+
         def count(self,pop=net.pyr,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,idx=None):
             #counts number of spikes between times, almost superfluous because of freq
             #BUT note, that they calculate slightly different things, hence the difference in results
@@ -529,8 +570,9 @@ if True:
             plt.legend()
             plt.xlabel("timestep")
             plt.title("records")
-        plt.figure(2)
-        net.rasterplot()
+        if not headless:
+            plt.figure(2)
+            net.rasterplot()
         net.calc_lfp()
         net.calc_soma_lfp()
         #times=np.arange(seconds*1e4)/1e4   
