@@ -40,6 +40,8 @@ cmap = plt.get_cmap('jet')
 
 
 def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor krec or kext, for rec and ext
+    matplotlib.rcParams.update({'font.size': 16})
+    #to increase label font size
     d=dat2[0,:,:,0,:,:]
     sh=np.shape(d)
     print(sh)
@@ -56,7 +58,7 @@ def freqandgamma(): #plots avg over seeds, freq and gamma dependent on factor kr
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
     plt.colorbar(sm, ticks=Ear[:-1],label="delay [ms]")#HERE
-    #plt.show()
+    plt.show()
 
 freqandgamma()
 
