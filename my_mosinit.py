@@ -76,9 +76,9 @@ if True:
         Run.pwwT=0
         #Run.pwwT2=1.040
         #Run.pwwT3=1.5
-        Run.pwwext=1                
-        Run.pwwrec=1     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
-        Run.pwwsom=1
+        Run.pwwext=1.75                
+        Run.pwwrec=1.     #was: 25 normal, 28 seizure   is: 38: breaks 20% of the time- 39: breaks always  
+        Run.pwwsom=1.75
         #Run.pww2ext=10
         #Run.pww2ext=1
         #Run.pww2rec=1  
@@ -227,7 +227,7 @@ if True:
             if headless==False:
                 plt.show()
             if headless==True:
-                plt.savefig("full_rasterplot.pdf")
+                plt.savefig("kext_1-75_raster.pdf")
 
         def count(self,pop=net.pyr,t1=inittime+ltptime+resttime,t2=inittime+ltptime+resttime+measuretime,idx=None):
             #counts number of spikes between times, almost superfluous because of freq
