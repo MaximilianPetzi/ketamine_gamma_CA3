@@ -1,4 +1,3 @@
-
 # CA3 model 
 Network mostly the same as in Neymotin et al. (2011)
 
@@ -26,3 +25,5 @@ graphs for different synaptic delays: checkout Taufac_dend_delay. (a): execute s
 to recreate voltage curve: run checkout delay, then ./x86_64/special -python my_mosinit.py , a.tvp2(). Look above definitions of functions volt and tvp in my_mosinit for instructions. 
 
 The rasterplots are done with neurons plotting functions. should work on any branch, as long as my_mosinit doesn't have these function calls uncommented. 
+
+
